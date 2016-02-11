@@ -1,0 +1,18 @@
+{
+  "name": "Take Me Home Tonight",
+  "version": "0.0.1",
+  "description": "RPI Ride Sharing Service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "takemehometonight",
+    ""
+  ],
+  "author": "takemehometonight team",
+  "license": "RPI",
+  "engines": {
+    "node": "5.5.0"
+  }
+}
