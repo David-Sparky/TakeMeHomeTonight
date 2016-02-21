@@ -4,12 +4,20 @@
   "description": "RPI Ride Sharing Service",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "takemehometonight",
     ""
   ],
+  "dependencies": {
+    "ejs": "2.3.3",
+    "express": "4.13.3"
+  },
+  "engines": {
+    "node": "0.12.7"
+  },
   "author": "takemehometonight team",
   "license": "RPI",
   "engines": {
