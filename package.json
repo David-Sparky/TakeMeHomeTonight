@@ -1,0 +1,25 @@
+{
+  "name": "takemehometonight",
+  "version": "0.0.1",
+  "description": "RPI Ride Sharing Service",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "ejs": "2.3.3",
+    "express": "4.13.3"
+  },
+  "engines": {
+    "node": "0.12.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/David-Sparky/TakeMeHomeTonight"
+  },
+  "author": "takemehometonight team",
+  "license": "RPI",
+  "engines": {
+    "node": "5.5.0"
+  }
+}
