@@ -8,5 +8,6 @@
 <body>
   <h1> You logged in with CAS!</h1>
   <a href='logout.php'>Logout</a>
+  
 </body>
 </html>

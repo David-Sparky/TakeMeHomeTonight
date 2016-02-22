@@ -8,7 +8,7 @@
     if (phpCAS::isAuthenticated()) {
         // echo "User: " . phpCAS::getUser();
         // echo "<a href='./logout.php'>Logout</a>";
-      header( 'Location: landing.php' );
+      header('Location: landing.php');
     } else{
         // echo "<a href='./login.php'>Login</a>";
     }
