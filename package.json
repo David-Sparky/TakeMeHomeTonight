@@ -9,8 +9,10 @@
   "dependencies": {
     "angular": "^1.5.0",
     "angular-route": "^1.5.0",
+    "cas-authentication": "0.0.8",
     "ejs": "2.3.3",
-    "express": "4.13.3"
+    "express": "4.13.3",
+    "express-session": "^1.13.0"
   },
   "engines": {
     "node": "5.5.0"
