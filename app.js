@@ -7,7 +7,8 @@ app.config(['$routeProvider', function($routeProvider){
 		controller: 'loginCtrl'
 	}).
 	when('/landing', {
-		templateUrl: 'client/views/landing.html'
+		templateUrl: 'client/views/landing.html',
+		controller: 'logoutCtrl'
 	}).
 	otherwise({
 		redirectTo: '/'
