@@ -7,19 +7,18 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "angular": "^1.5.0",
+    "angular-route": "^1.5.0",
     "ejs": "2.3.3",
     "express": "4.13.3"
   },
   "engines": {
-    "node": "0.12.7"
+    "node": "5.5.0"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/David-Sparky/TakeMeHomeTonight"
   },
   "author": "takemehometonight team",
-  "license": "RPI",
-  "engines": {
-    "node": "5.5.0"
-  }
+  "license": "RPI"
 }
