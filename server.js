@@ -6,7 +6,7 @@ var routes = require('./server/routes/index'),
 	CASAuthentication = require('cas-authentication'),
 	session = require('express-session');
 var express = require('express'),
-    port = 8005,
+    port = process.env.PORT || 8005,
     app = express();
 
 app.use(bodyParser.json());
