@@ -38,7 +38,7 @@ app.get('/login', cas.bounce, function (req, res) {
         res.redirect('/');
     }
     console.log(req.session);
-    res.redirect('/landing');
+    res.redirect('/#/landing');
 });
 
 app.get('/logout', cas.logout);
