@@ -8,7 +8,7 @@ angular.module('tmht')
 		})
 		.then(function(data){
 			console.log(data);
-			$window.location = data.data;
+			$window.location = "https://cas-auth.rpi.edu/cas/logout";
 		},
 		function(err){
 			console.log(err);
