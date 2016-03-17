@@ -1,0 +1,41 @@
+<div ng-controller="rideFormCtrl" class="container" style="background-color: rgba(0,0,0,.5)">
+	<h1>{{title}}</h1>
+	<form name="rideForm" class="form-horizontal">
+		<div class="form-group">
+			<label class="control-label">Departure Location</label>
+			<input type="string" class="form-control"/>
+		</div>
+		<div class="form-group">
+			<label>Departure Time</label>
+			<input type="time" class="form-control"/>
+		</div>
+		<div class="form-group">
+			<label>Destination</label>
+			<input type="string" class="form-control"/>
+		</div>
+		<div class="form-group">
+			<label>Cost</label>
+			<input type="string"class="form-control"/>
+		</div>
+		<div class="form-group">
+			<label>Available Seats</label>
+			<input type="Number"class="form-control"/>
+		</div>
+		<h3>Car Information</h3>
+		<div class="form-group">
+			<label>Make</label>
+			<input type="string" class="form-control"/>
+		</div>
+		<div class="form-group">
+			<label>Model</label>
+			<input type="string" class="form-control"/>
+		</div>
+		<div class="form-group">
+			<label>Color</label>
+			<input type="string" class="form-control"/>
+		</div>
+	</form>
+	<button type="button" class="btn btn-success btn-xlarge pull-right" ng-click="submit()">Submit</button>
+
+
+</div>

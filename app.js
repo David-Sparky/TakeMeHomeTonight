@@ -10,6 +10,14 @@ app.config(['$routeProvider', function($routeProvider){
 		templateUrl: 'client/views/landing.html',
 		controller: 'logoutCtrl'
 	}).
+	when('/requestRide', {
+		templateUrl: 'client/views/ridesForm.html',
+		controller: 'rideFormCtrl'
+	}).
+	when('/addRide', {
+		templateUrl: 'client/views/ridesForm.html',
+		controller: 'rideFormCtrl'
+	}).
 	otherwise({
 		redirectTo: '/'
 	})
