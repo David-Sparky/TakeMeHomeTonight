@@ -65,3 +65,11 @@ body {
   height: 20%;
   margin-left: 10px;
 }
+
+.btn-xl{
+    height: 100px;
+    width: 300px;
+    font-family: "Fjalla One";
+    font-weight: bold;
+    font-size: 30pt;
+}
