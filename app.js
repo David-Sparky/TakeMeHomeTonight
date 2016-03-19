@@ -14,6 +14,10 @@ app.config(['$routeProvider', function($routeProvider){
 		templateUrl: 'client/views/rides.html',
 		controller: 'offerRides'
 	}).
+	when('/ridesneeded', {
+		templateUrl: 'client/views/riders.html',
+		controller: 'needRides'
+	}).
 	otherwise({
 		redirectTo: '/'
 	})
