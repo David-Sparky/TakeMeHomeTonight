@@ -65,3 +65,22 @@ body {
   height: 20%;
   margin-left: 10px;
 }
+
+
+
+
+/*Rides */
+.rides {
+  background-color: rgba(0,0,0,0.5);
+  margin: auto;
+  margin-top: 2px; 
+  border: 1px solid black;
+  width: 80%;
+}
+
+.ridea a{
+  color: white;
+}
+.rides:hover{
+  background-color: rgba(0,0,0,0.75);
+}

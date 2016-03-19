@@ -10,6 +10,10 @@ app.config(['$routeProvider', function($routeProvider){
 		templateUrl: 'client/views/landing.html',
 		controller: 'logoutCtrl'
 	}).
+	when('/rides', {
+		templateUrl: 'client/views/rides.html',
+		controller: 'offerRides'
+	}).
 	otherwise({
 		redirectTo: '/'
 	})
