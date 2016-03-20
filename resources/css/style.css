@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Fjalla+One);
+@import url(https://fonts.googleapis.com/css?family=Fjalla+One);
 
 /*webpage*/
 html {
@@ -87,7 +87,7 @@ body {
 }
 .rides:hover{
   background-color: rgba(0,0,0,0.75);
-
+}
 .custom-btn {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
