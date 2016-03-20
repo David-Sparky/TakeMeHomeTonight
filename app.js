@@ -8,7 +8,7 @@ app.config(['$routeProvider', function($routeProvider){
 	}).
 	when('/landing', {
 		templateUrl: 'client/views/landing.html',
-		controller: 'logoutCtrl'
+		controller: 'landingCtrl'
 	}).
 	when('/ridesoffered', {
 		templateUrl: 'client/views/rides.html',

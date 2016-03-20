@@ -9,14 +9,16 @@
 
 
 </head>
-<body>
+<body ng-controller="indexCtrl">
   <!-- Header -->
   <div class="page-header">
 
-    <a href="#/"><img class="logo" src="resources/imgs/TMHT.png"></a>
+    <a href="#/landing"><img class="logo" src="resources/imgs/TMHT.png"></a>
     <div class="header-right pull-right">
+      <a href="#/ridesoffered">Find a Ride</a>
+      <a href="#/ridesneeded">Give a Ride</a>
       <a href="#/aboutUs">About Us</a>
-      <a href="#/">Logout</a>
+      <a ng-click="logout()">Logout</a>
     </div>
   </div>
   <!-- /Header -->
@@ -54,7 +56,8 @@
 <script type="text/javascript" src="node_modules/angular-route/angular-route.min.js"></script>
 <script type="text/javascript" src="app.js"></script>
 <script type="text/javascript" src="client/controllers/loginCtrl.js"></script>
-<script type="text/javascript" src="client/controllers/logoutCtrl.js"></script>
+<script type="text/javascript" src="client/controllers/landingCtrl.js"></script>
 <script type="text/javascript" src="client/controllers/rides.js"></script>
 <script type="text/javascript" src="client/controllers/rideFormCtrl.js"></script>
+<script type="text/javascript" src="client/controllers/indexCtrl.js"></script>
 </html>
