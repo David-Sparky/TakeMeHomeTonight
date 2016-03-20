@@ -88,6 +88,10 @@ body {
 .rides:hover{
   background-color: rgba(0,0,0,0.75);
 }
+
+/*End Rides*/
+
+
 .custom-btn {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
