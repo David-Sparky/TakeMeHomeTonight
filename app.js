@@ -17,6 +17,7 @@ app.config(['$routeProvider', function($routeProvider){
 	when('/ridesneeded', {
 		templateUrl: 'client/views/riders.html',
 		controller: 'needRides'
+	}).
 	when('/requestRide', {
 		templateUrl: 'client/views/ridesForm.html',
 		controller: 'rideFormCtrl'
