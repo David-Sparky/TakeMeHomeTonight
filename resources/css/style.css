@@ -37,6 +37,7 @@ body {
   -moz-border-radius: 8px;
   border-radius: 8px;
 }
+
 .container-fluid{
   height:90%;
   display:table;
@@ -56,10 +57,29 @@ body {
 }
 
 .page-header {
-  padding: 10px 0 10px 0;
+  padding: 10px 10px 10px 0;
   margin: 0px;
   border-bottom: 0px;
   background-color: rgba(0,0,0,0.7);
+  font-family: "Fjalla One";
+}
+
+/*For when screen is smaller than medium size*/
+@media (max-width: 992px) {
+  .header-right {
+    font-size: 1.5em;
+  }
+}
+
+/*For when screen is bigger than medium size*/
+@media (min-width: 992px) {
+  .header-right {
+    font-size: 2em;
+  }
+}
+
+.header-right a {
+  padding-right: 20px;
 }
 
 .logo {
@@ -122,7 +142,7 @@ body {
 
 #footer {
     background: #333;
-    padding-top: 15px;
+    padding-top: 7px;
     padding-bottom: 15px;
     color: #666;
     position: fixed;
