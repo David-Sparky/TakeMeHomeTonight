@@ -6,7 +6,7 @@ var routes = require('./server/routes/index'),
 	CASAuthentication = require('cas-authentication'),
 	session = require('express-session');
 var express = require('express'),
-    port = 8005,
+    port = process.env.PORT || 8005,
     app = express();
 
 app.use(bodyParser.json());
@@ -25,7 +25,7 @@ app.use(session({
 // Create a new instance of CASAuthentication.
 var cas = new CASAuthentication({
     cas_url: 'https://cas-auth.rpi.edu/cas',
-    service_url: 'http://localhost:' + port,
+    service_url: 'https://takemehometonight.herokuapp.com:', // trying with the herokuapp url
     cas_version: '2.0'
 });
 

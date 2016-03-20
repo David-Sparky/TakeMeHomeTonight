@@ -1,0 +1,29 @@
+<div class="container-fluid" ng-controller="offerRides">
+	<div class="row-fluid">
+	  <div class="centering text-center">
+			<h3> Rides Available </h3>
+			<div class="ridecontainer" ng-repeat="t in [1,2,3,4,5,6,7,8,9,10] track by $index">
+				<a href="ride{{$index}}">
+					<div class="rides row">
+						<div class="col-md-4">
+							<img src="/resources/imgs/carimg.png" alt="Car Image" height="100" width="130">
+						</div>
+						<div class="col-md-4">
+							<p> Details: </p>
+							<p> Going to: {{destination[$index]}} </p>
+							<p> Leaving {{locations[$index]}} at or around: {{times[$index]}}</p>
+							<p> Seats Remaining: {{seats[$index]}} / {{totalseats[$index]}} </p>
+							<p> Cost if any: {{cost[$index]}}</p>
+						</div>
+						<div class="col-md-4">
+							<p> Info :</p>
+							<p> Driver: {{names[$index]}}</p>
+							<p> Car Make & Model: {{cars[$index]}}</p>
+							<p> Car Color: {{colors[$index]}} </p>
+						</div>
+					</div>
+				</a>
+			</div>	  
+		</div>
+	</div>
+</div>
