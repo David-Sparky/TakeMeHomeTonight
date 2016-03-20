@@ -2,7 +2,7 @@
   "name": "takemehometonight",
   "version": "0.0.1",
   "description": "RPI Ride Sharing Service",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
     "start": "node server.js"
   },
@@ -15,7 +15,9 @@
     "ejs": "2.3.3",
     "express": "4.13.3",
     "express-session": "^1.13.0",
-    "path": "^0.12.7"
+    "body-parser":"^1.15.0",
+    "cookie-parser":"^1.4.1",
+    "path":"^0.12.7"
   },
   "engines": {
     "node": "5.5.0"
