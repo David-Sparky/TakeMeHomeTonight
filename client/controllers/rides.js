@@ -19,16 +19,11 @@ angular.module('tmht')
 	else{
 		$scope.needed = true;
 		$scope.ridesavail = false;
-		$scope.needarray =[{Person:'name',Time:'time',DateToGo:'date',PlaceToGo:'place',Offer:'nothing'},
-											 {Person:'name',Time:'time',DateToGo:'date',PlaceToGo:'place',Offer:'nothing'},
-											 {Person:'name',Time:'time',DateToGo:'date',PlaceToGo:'place',Offer:'nothing'},
-											 {Person:'name',Time:'time',DateToGo:'date',PlaceToGo:'place',Offer:'nothing'},
-											 {Person:'name',Time:'time',DateToGo:'date',PlaceToGo:'place',Offer:'nothing'},
-											 {Person:'name',Time:'time',DateToGo:'date',PlaceToGo:'place',Offer:'nothing'},
-											 {Person:'name',Time:'time',DateToGo:'date',PlaceToGo:'place',Offer:'nothing'},
-											 {Person:'name',Time:'time',DateToGo:'date',PlaceToGo:'place',Offer:'nothing'},
-											 {Person:'name',Time:'time',DateToGo:'date',PlaceToGo:'place',Offer:'nothing'},
-											 {Person:'name',Time:'time',DateToGo:'date',PlaceToGo:'place',Offer:'nothing'},
+		$scope.needarray =[{Person:'Jack',Time:'2:00pm',DateToGo:'3/20',PlaceToGo:'Price Chopper',Offer:'Food'},
+											 {Person:'Laura',Time:'9:30am',DateToGo:'3/22',PlaceToGo:'Walmart',Offer:'$10'},
+											 {Person:'Saul',Time:'7:30pm',DateToGo:'3/26',PlaceToGo:'Amtrak Station',Offer:'Gas Money'},
+											 {Person:'Erik',Time:'11:00am',DateToGo:'3/25',PlaceToGo:'Testing Center - New Horizons',Offer:''},
+											 {Person:'Linda',Time:'10:00am',DateToGo:'3/28',PlaceToGo:'Target',Offer:''}
 											]
 	}
 }]);	
