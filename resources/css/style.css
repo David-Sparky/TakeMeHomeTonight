@@ -154,3 +154,9 @@ ul.social > li > a {
 ul.social > li > a:hover {
     color: #999
 }
+
+.title {
+    background: #2dcc70;
+    color: #fff;
+    padding: 20px 0
+}
