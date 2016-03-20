@@ -14,6 +14,15 @@ body {
   height:100%; 
   margin:0;
   padding:0;
+  font-family: "Fjalla One";
+}
+
+a, a:visited { 
+  color: white;
+}
+
+a:hover {
+  color: #2dcc70;
 }
 
 .btn-default {
@@ -61,7 +70,6 @@ body {
   margin: 0px;
   border-bottom: 0px;
   background-color: rgba(0,0,0,0.7);
-  font-family: "Fjalla One";
 }
 
 /*For when screen is smaller than medium size*/
@@ -89,8 +97,6 @@ body {
 }
 
 
-
-
 /*Rides */
 .rides {
   background-color: rgba(0,0,0,0.5);
@@ -113,100 +119,109 @@ body {
 
 
 .custom-btn {
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 5px;
-    border: 0;
-    background-image: none;
-    text-shadow: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 5px;
+  border: 0;
+  background-image: none;
+  text-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  margin: 5px;
 }
 
 .btn-primary {
-    background-color: #2dcc70
+  background-color: #2dcc70
 }
 
 .btn-primary:hover {
-    background-color: #24a259
+  background-color: #24a259
 }
 
 .btn-xl{
-    height: 100px;
-    width: 300px;
-    font-family: "Fjalla One";
-    font-weight: bold;
-    font-size: 30pt;
+  height: 100px;
+  width: 300px;
+  font-weight: bold;
+  font-size: 30pt;
 }
 
 #footer {
-    background: #333;
-    padding-top: 7px;
-    padding-bottom: 15px;
-    color: #666;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-}
-
-#footer a {
-    color: #666
-}
-
-#footer a:hover {
-    color: #2dcc70
+  background: #333;
+  padding-top: 7px;
+  padding-bottom: 15px;
+  color: #666;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
 }
 
 #footer #gototop {
-    height: 40px;
-    line-height: 40px;
-    width: 40px;
-    text-align: center;
-    display: inline-block;
-    background: #1d1d1d;
-    font-size: 24px;
-    color: #fff
+  height: 40px;
+  line-height: 40px;
+  width: 40px;
+  text-align: center;
+  display: inline-block;
+  background: #1d1d1d;
+  font-size: 24px;
+  color: #fff
 }
 
 #footer #gototop:hover {
-    background: #2b2b2b;
-    text-decoration: none
+  background: #2b2b2b;
+  text-decoration: none
 }
 
 #footer .cp {
-    margin-top: 11px
+  margin-top: 11px
 }
 
 ul.social {
-    list-style: none;
-    margin: 10px 0 0;
-    padding: 0;
-    display: inline-block
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: inline-block
 }
 
 ul.social > li {
-    display: inline-block;
-    margin: 0 5px
+  display: inline-block;
+  margin: 0 5px
 }
 
 ul.social > li > a {
-    font-size: 24px;
-    color: #666
+  font-size: 24px;
+  color: #666
 }
 
 ul.social > li > a:hover {
-    color: #999
+  color: #999
 }
 
 .title {
-    background: #2dcc70;
-    color: #fff;
-    padding: 20px 0
+  background: #2dcc70;
+  color: #fff;
+  padding: 10px 0;
+
 }
 
-#about-us{
-  .well, .progress{
-    background-color: rgba(0,0,0, .7); 
-  }
+.about {
+  background: #2dcc70;
+  color: #fff;
+  padding-top: 10px;
+  padding-bottom: 3px;
+  text-align: center;
+  margin-top: 100px;
+  width:80%;
+}
+
+.about p {
+  font-size: 1.4em;
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-bottom: 3px;
+}
+
+#mainButtons {
+  margin-top: 30px;
+  text-align: center;
 }
