@@ -64,8 +64,18 @@ body {
   font-family: "Fjalla One";
 }
 
-.header-right {
-  font-size: 1.5em;
+/*For when screen is smaller than medium size*/
+@media (max-width: 992px) {
+  .header-right {
+    font-size: 1.5em;
+  }
+}
+
+/*For when screen is bigger than medium size*/
+@media (min-width: 992px) {
+  .header-right {
+    font-size: 2em;
+  }
 }
 
 .header-right a {
@@ -108,7 +118,7 @@ body {
 
 #footer {
     background: #333;
-    padding-top: 15px;
+    padding-top: 7px;
     padding-bottom: 15px;
     color: #666;
     position: fixed;
