@@ -10,16 +10,16 @@
 						</div>
 						<div class="col-md-4">
 							<p> Details: </p>
-							<p> Going to: {{destination[$index]}} </p>
-							<p> Leaving {{locations[$index]}} at or around: {{times[$index]}}</p>
-							<p> Seats Remaining: {{seats[$index]}} / {{totalseats[$index]}} </p>
-							<p> Cost if any: {{cost[$index]}}</p>
+							<p> Going to: {{offerarray[$index]['Destination']}} </p>
+							<p> Leaving {{offerarray[$index]['Pickup']}} at or around: {{offerarray[$index]['Time']}}</p>
+							<p> Seats Remaining: {{offerarray[$index]['Seats']}} / {{offerarray[$index]['TotalSeats']}} </p>
+							<p> Cost if any: {{offerarray[$index]['Cost']}}</p>
 						</div>
 						<div class="col-md-4">
 							<p> Info :</p>
-							<p> Driver: {{names[$index]}}</p>
-							<p> Car Make & Model: {{cars[$index]}}</p>
-							<p> Car Color: {{colors[$index]}} </p>
+							<p> Driver: {{offerarray[$index]['Name']}}</p>
+							<p> Car Make & Model: {{offerarray[$index]['Car']}}</p>
+							<p> Car Color: {{offerarray[$index]['CarColor']}} </p>
 						</div>
 					</div>
 				</a>
@@ -30,6 +30,17 @@
 	  <div class="centering text-center">
 			<h3> Rides Needed </h3>
 			<div class="ridecontainer" ng-repeat="t in [1,2,3,4,5,6,7,8,9,10] track by $index">
+				<a href="ride{{$index}}">
+					<div class="rides row">
+						<div class="col-md-4">
+							<p> Details: </p>
+							<p> Person: {{needarray[$index]['Person']}} </p>
+						</div>
+						<div class="col-md-4">
+							<p> Info :</p>
+						</div>
+					</div>
+				</a>
 			</div>	  
 		</div>
 	</div>
