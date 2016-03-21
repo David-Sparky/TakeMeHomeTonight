@@ -6,7 +6,7 @@ var routes = require('./server/routes/index'),
 	CASAuthentication = require('cas-authentication'),
 	session = require('express-session');
 var express = require('express'),
-    port = process.env.PORT || 8005,
+    port = 8005,
     app = express();
 
 app.use(bodyParser.json());
@@ -14,12 +14,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', express.static(path.join(__dirname, '/')));
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "*");
-    res.header("Access-Control-Allow-Headers", "format, Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
 
 // Set up an Express session, which is required for CASAuthentication.
 app.use(session({
@@ -31,7 +25,7 @@ app.use(session({
 // Create a new instance of CASAuthentication.
 var cas = new CASAuthentication({
     cas_url: 'https://cas-auth.rpi.edu/cas',
-    service_url: 'https://takemehometonight.herokuapp.com:', // trying with the herokuapp url
+    service_url: 'http://localhost:' + port,
     cas_version: '2.0'
 });
 

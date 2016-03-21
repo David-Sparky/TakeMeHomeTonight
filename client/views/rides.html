@@ -1,7 +1,16 @@
 <div class="container-fluid" ng-controller="rides">
-	<div ng-show="ridesavail" class="row-fluid"> <!-- Only show rides available on ridesoffered -->
+	<section class="title row-">
+        <div class="container">
+            <div class="row-fluid">
+                <div class="span6">
+                    <h1>{{title}}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+	<div ng-show="ridesavail" class=""> <!-- Only show rides available on ridesoffered -->
 	  <div class="centering text-center">
-			<h3> Rides Available </h3>
+			<!--<h3> Rides Available </h3>-->
 			<div class="ridecontainer" ng-repeat="offer in offerarray">
 				<a href="ride{{$index}}">
 					<div class="rides row">
@@ -26,9 +35,9 @@
 			</div>	  
 		</div>
 	</div>
-	<div ng-show='needed' class="row-fluid needrides"><!-- Only show rides needed on ridesneeded -->
+	<div ng-show='needed' class="needrides"><!-- Only show rides needed on ridesneeded -->
 	  <div class="centering text-center">
-			<h3> Rides Needed </h3>
+			<!--<h3> Rides Needed </h3>-->
 			<div class="ridecontainer" ng-repeat="needed in needarray">
 				<a href="ride{{$index}}">
 					<div class="rides row">

@@ -1,7 +1,8 @@
 angular.module('tmht')
 .controller('rides', ['$scope','$location', function($scope, $location){
 
-	if($location.path() == '/ridesoffered'){
+	if($location.path() == '/ridesOffered'){
+		$scope.title = 'Rides Available';
 		$scope.needed = false;
 		$scope.ridesavail = true;
 		$scope.offerarray = [{Time:'10:00pm',Pickup:'Quad',Seats:'2',TotalSeats:'3',Cost:'Free',Name:'Stephanie',Car:'2015 Honda Civic',CarColor:'Blue',Destination:"Price Chopper"},
@@ -17,6 +18,7 @@ angular.module('tmht')
 												]
 	}
 	else{
+		$scope.title = "Rides Needed";
 		$scope.needed = true;
 		$scope.ridesavail = false;
 		$scope.needarray =[{Person:'Jack',Time:'2:00pm',DateToGo:'3/20',PlaceToGo:'Price Chopper',Offer:'Food'},
