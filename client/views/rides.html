@@ -1,0 +1,59 @@
+<div class="container-fluid" ng-controller="rides">
+	<section class="title row-">
+        <div class="container">
+            <div class="row-fluid">
+                <div class="span6">
+                    <h1>{{title}}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+	<div ng-show="ridesavail" class=""> <!-- Only show rides available on ridesoffered -->
+	  <div class="centering text-center">
+			<!--<h3> Rides Available </h3>-->
+			<div class="ridecontainer" ng-repeat="offer in offerarray">
+				<a href="ride{{$index}}">
+					<div class="rides row">
+						<div class="col-md-4">
+							<img src="/resources/imgs/carimg.png" alt="Car Image" height="100" width="130">
+						</div>
+						<div class="col-md-4">
+							<p> Details: </p>
+							<p> Going to: {{offer['Destination']}} </p>
+							<p> Leaving {{offer['Pickup']}} at or around: {{offer['Time']}}</p>
+							<p> Seats Remaining: {{offer['Seats']}} / {{offer['TotalSeats']}} </p>
+							<p> Cost if any: {{offer['Cost']}}</p>
+						</div>
+						<div class="col-md-4">
+							<p> Info :</p>
+							<p> Driver: {{offer['Name']}}</p>
+							<p> Car Make & Model: {{offer['Car']}}</p>
+							<p> Car Color: {{offer['CarColor']}} </p>
+						</div>
+					</div>
+				</a>
+			</div>	  
+		</div>
+	</div>
+	<div ng-show='needed' class="needrides"><!-- Only show rides needed on ridesneeded -->
+	  <div class="centering text-center">
+			<!--<h3> Rides Needed </h3>-->
+			<div class="ridecontainer" ng-repeat="needed in needarray">
+				<a href="ride{{$index}}">
+					<div class="rides row">
+						<div class="col-md-4">
+							<p> Details: </p>
+							<p> Person: {{needed['Person']}} </p>
+							<p> Time: {{needed['DateToGo']}} / {{needed['Time']}} </p>
+						</div>
+						<div class="col-md-4">
+							<p> Info :</p>
+							<p> Destination: {{needed['PlaceToGo']}} </p>
+							<p> Offer: {{needed['Offer']}} </p>
+						</div>
+					</div>
+				</a>
+			</div>	  
+		</div>
+	</div>
+</div>

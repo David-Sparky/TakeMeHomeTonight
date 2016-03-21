@@ -1,10 +1,63 @@
-<!--Added to test commit-->
-<html>
+
+<!doctype html>
+<html ng-app="tmht">
 <head>
-	<title> Take Me Home Tonight </title>
+  <title>Take Me Home Tonight</title>
+  <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css">
+  <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+  <link rel='stylesheet' type='text/css' href='resources/css/style.css'/>
+
+
 </head>
-<body>
-	TESTING!!
+<body ng-controller="indexCtrl">
+  <!-- Header -->
+  <div class="page-header">
+
+    <a href="#/landing"><img class="logo" src="resources/imgs/TMHT.png"></a>
+    <div class="header-right pull-right">
+      <a href="#/ridesOffered">Find a Ride</a>
+      <a href="#/ridesNeeded">Give a Ride</a>
+      <a href="#/aboutUs">About Us</a>
+      <a ng-click="logout()">Logout</a>
+    </div>
+  </div>
+  <!-- /Header -->
+
+  <div>
+    <div id="content" ng-view></div>
+  </div>
+
+</div>
+<!--Footer-->
+<footer id="footer">
+    <div class="container">
+        <div class="row-fluid">
+            <!--/Copyright-->
+            <div class="span5 cp">
+                &copy; 2016 Take Me Home Tonight</a>. All Rights Reserved.
+            </div>
+            
+            <!-- Goto Top -->
+            <!-- <div class="span1">
+                <a id="gototop" class="gototop pull-right" href="#"><i class="icon-angle-up"></i></a>
+            </div> -->
+            <!--
+            <div class="span1">
+                <a id="gototop" class="gototop pull-right" href="#"><i class="icon-angle-up"></i></a>
+            </div>-->
+            <!--/Goto Top-->
+        </div>
+    </div>
+</footer>
+<!--/Footer-->
 </body>
 
+<script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+<script type="text/javascript" src="node_modules/angular-route/angular-route.min.js"></script>
+<script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="client/controllers/loginCtrl.js"></script>
+<script type="text/javascript" src="client/controllers/landingCtrl.js"></script>
+<script type="text/javascript" src="client/controllers/rides.js"></script>
+<script type="text/javascript" src="client/controllers/rideFormCtrl.js"></script>
+<script type="text/javascript" src="client/controllers/indexCtrl.js"></script>
 </html>
