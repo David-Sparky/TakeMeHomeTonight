@@ -10,11 +10,11 @@ app.config(['$routeProvider', function($routeProvider){
 		templateUrl: 'client/views/landing.html',
 		controller: 'landingCtrl'
 	}).
-	when('/ridesoffered', {
+	when('/ridesOffered', {
 		templateUrl: 'client/views/rides.html',
 		controller: 'rides'
 	}).
-	when('/ridesneeded', {
+	when('/ridesNeeded', {
 		templateUrl: 'client/views/rides.html',
 		controller: 'rides'
 	}).
