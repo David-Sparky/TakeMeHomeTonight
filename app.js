@@ -1,4 +1,4 @@
-var app = angular.module('tmht', ['ngRoute']);
+var app = angular.module('tmht', ['ngRoute', 'ngFileUpload']);
 
 app.config(['$routeProvider', function($routeProvider){
 	$routeProvider.
@@ -10,19 +10,19 @@ app.config(['$routeProvider', function($routeProvider){
 		templateUrl: 'client/views/landing.html',
 		controller: 'landingCtrl'
 	}).
-	when('/ridesOffered', {
+	when('/rides/ridesOffered', {
 		templateUrl: 'client/views/rides.html',
 		controller: 'rides'
 	}).
-	when('/ridesNeeded', {
+	when('/rides/ridesNeeded', {
 		templateUrl: 'client/views/rides.html',
 		controller: 'rides'
 	}).
-	when('/requestRide', {
+	when('/rides/requestRide', {
 		templateUrl: 'client/views/ridesForm.html',
 		controller: 'rideFormCtrl'
 	}).
-	when('/addRide', {
+	when('/rides/addRide', {
 		templateUrl: 'client/views/ridesForm.html',
 		controller: 'rideFormCtrl'
 	}).

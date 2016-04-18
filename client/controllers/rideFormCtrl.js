@@ -1,9 +1,7 @@
 angular.module('tmht')
-.controller('rideFormCtrl', ['$scope','$location', function($scope, $location){
-	
-	
+.controller('rideFormCtrl', ['$scope','$location', 'rideService', function($scope, $location, rideService){
 
-	if($location.path() == '/addRide'){
+	if($location.path() == '/rides/addRide'){
 		$scope.title = 'Add A Ride';
 		$scope.add = true;
 	}
@@ -11,10 +9,16 @@ angular.module('tmht')
 		$scope.title = 'Request A Ride';
 		$scope.add = false;
 	}
-	console.log($scope.rideForm);
 
 	$scope.submit = function(){
 		console.log($scope.rideInfo);
+		console.log($location.path());
+		rideService.rideFormSubmit($scope.rideInfo, $location.path()).then(function(data){
+			console.log(data);
+		},
+		function(err){
+			console.log(err);
+		});
 	}
 
 	

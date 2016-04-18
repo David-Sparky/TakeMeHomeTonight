@@ -1,5 +1,6 @@
 //testing a js file for heroku
 var routes = require('./server/routes/index'),
+    rides = require('./server/routes/rides'),
 	bodyParser = require('body-parser'),
 	cookieParser = require('cookie-parser'),
 	path = require('path'),
@@ -30,7 +31,7 @@ var cas = new CASAuthentication({
 });
 
 app.use('/', routes);
-
+app.use('/rides', rides);
 
 //CAS route handlers
 app.get('/login', cas.bounce, function (req, res) {
