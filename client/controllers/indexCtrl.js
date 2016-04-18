@@ -1,5 +1,5 @@
 angular.module('tmht')
-.controller('logoutCtrl', ['$scope', '$http', '$window', function($scope, $http, $window){
+.controller('indexCtrl', ['$scope', '$http', '$window', function($scope, $http, $window){
 	
 	$scope.logout = function(){
 		$http({
@@ -14,4 +14,5 @@ angular.module('tmht')
 			console.log(err);
 		});
 	};
+	
 }]);

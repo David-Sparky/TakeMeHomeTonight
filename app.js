@@ -8,13 +8,13 @@ app.config(['$routeProvider', function($routeProvider){
 	}).
 	when('/landing', {
 		templateUrl: 'client/views/landing.html',
-		controller: 'logoutCtrl'
+		controller: 'landingCtrl'
 	}).
-	when('/ridesoffered', {
+	when('/ridesOffered', {
 		templateUrl: 'client/views/rides.html',
 		controller: 'rides'
 	}).
-	when('/ridesneeded', {
+	when('/ridesNeeded', {
 		templateUrl: 'client/views/rides.html',
 		controller: 'rides'
 	}).
@@ -25,6 +25,9 @@ app.config(['$routeProvider', function($routeProvider){
 	when('/addRide', {
 		templateUrl: 'client/views/ridesForm.html',
 		controller: 'rideFormCtrl'
+	}).
+	when('/aboutUs', {
+		templateUrl: 'client/views/about-us.html'
 	}).
 	otherwise({
 		redirectTo: '/'
