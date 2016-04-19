@@ -29,7 +29,7 @@ app.config(['$routeProvider', function($routeProvider){
 	when('/aboutUs', {
 		templateUrl: 'client/views/about-us.html'
 	}).
-	when('/publicTransit', {
+	when('/publicTrans', {
 		templateUrl: 'client/views/publicTrans.html',
 		controller: 'publicTransitCtrl'
 	}).
