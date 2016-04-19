@@ -1,0 +1,58 @@
+<div ng-controller="publicTransitCtrl">
+    <section class="title">
+        <div class="container">
+            <div class="row-fluid">
+                <div class="span6">
+                    <h1>Public Transit</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- / .title -->
+
+
+    <section id="transit" class="container main">
+        <div class="col-lg-6">
+            <div class="well">
+                <h3>CDTA Options</h3>
+                <form id="angular" name="btn_form" method="post" novalidate>
+                    <div class="row">
+                        <div class="col-lg-5 search">
+                            <div class="input-group">
+                                <input type="text" class="form-control" ng-model="searchbar" placeholder="Search for...">
+                            </div>
+                        </div>
+                        <button class="btn btn-success" type="submit" ng-click="search()" ng-disabled="!loaded">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="well">
+                <h3>Amtrak Options</h3>
+                <h4>Popular Trains</h4>
+                <ul>
+                    <li>Empire Service</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="well">
+                <h3>Taxi Companies</h3>
+                <ul>
+                    <li>Black and White Taxi</li>
+                    <li>Capitaland Taxi</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="well">
+                <h3>RPI Shuttles</h3>
+            </div>
+        </div>
+
+
+
+    </section>
+
+</div>

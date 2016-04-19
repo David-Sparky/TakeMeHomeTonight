@@ -12,7 +12,8 @@ var routes = require('./server/routes/index'),
     port = 8005,
     app = express();
 
-app.use(cookieParser());
+var cdta= require('./client/controllers/api_info.js');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
@@ -89,6 +90,17 @@ app.get('/logout',function(req, res, next){
     next();
   }
 }, cas.logout);
+
+app.get('/cdta', function (req, res) {
+
+    var search = req.query.search_b;
+
+    console.log(search);
+
+    http.get(cdta.api_ping + '?request=search/' + search + '/3', function (callback) {
+        console.log(callback);
+    });
+} );
 
 db.connect('mongodb://' + process.env.tmhtDBUser + ':' + process.env.tmhtDBPassword + '@ds023418.mlab.com:23418/tmht', function(err) {
   if (err) {
