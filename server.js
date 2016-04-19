@@ -10,6 +10,8 @@ var express = require('express'),
     port = process.env.PORT || 8005,
     app = express();
 
+var cdta= require('./client/controllers/api_info.js');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
@@ -43,6 +45,19 @@ app.get('/login', cas.bounce, function (req, res) {
 });
 
 app.get('/logout', cas.logout);
+
+app.get('/cdta', function (req, res) {
+
+    var search = req.query.search_b;
+
+    console.log(search);
+
+    http.get(cdta.api_ping + '?request=search/' + search + '/3', function (callback) {
+        console.log(callback);
+    });
+} );
+
+
 
 app.listen(port);
 console.log('Server running on port ' + port + '.');
