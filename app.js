@@ -67,7 +67,7 @@ app.config(['$routeProvider', function($routeProvider){
 	when('/shuttle', {
 		templateUrl: 'client/views/shuttle.html'
 	}).
-	when('/publicTransit', {
+	when('/publicTrans', {
 		templateUrl: 'client/views/publicTrans.html',
 		controller: 'publicTransitCtrl'
 	}).
