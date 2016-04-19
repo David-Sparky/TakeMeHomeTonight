@@ -1,7 +1,7 @@
 angular.module('tmht')
 .controller('rides', ['$scope','$location', function($scope, $location){
 
-	if($location.path() == '/ridesOffered'){
+	if($location.path() == '/rides/ridesOffered'){
 		$scope.title = 'Rides Available';
 		$scope.needed = false;
 		$scope.ridesavail = true;
