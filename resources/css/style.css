@@ -230,3 +230,7 @@ ul.social > li > a:hover {
 input{
   color: #555;
 }
+
+.modal-dialog{
+  color: #555;
+}

@@ -1,4 +1,4 @@
-var app = angular.module('tmht', ['ngRoute', 'ngFileUpload']);
+var app = angular.module('tmht', ['ui.bootstrap', 'ngRoute', 'ngFileUpload']);
 
 app.config(['$routeProvider', function($routeProvider){
 	$routeProvider.
