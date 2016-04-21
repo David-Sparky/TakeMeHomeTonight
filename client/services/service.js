@@ -8,4 +8,20 @@ angular.module('tmht')
 		});
 	};
 
+	this.getUserSettingInfo = function(){
+		return $http({
+			method: "GET",
+			url: 'user/getUserSettingsInfo'
+		});
+	};
+
+	this.editUserSettings = function(userInfo){
+		console.log(userInfo);
+		return $http({
+			method: "PUT",
+			url: 'user/editUserSettings',
+			data: userInfo
+		});
+	};
+
 }]);

@@ -10,6 +10,10 @@ app.config(['$routeProvider', function($routeProvider){
 		templateUrl: 'client/views/signUp.html',
 		controller: 'signUpCtrl'
 	}).
+	when('/userSettings', {
+		templateUrl: 'client/views/userSettings.html',
+		controller: 'userSettingsCtrl'
+	}).
 	when('/landing', {
 		templateUrl: 'client/views/landing.html',
 		controller: 'landingCtrl'

@@ -24,4 +24,38 @@ router.post('/signUp', function(req, res){
 });
 
 
+router.get('/getUserSettingsInfo', function(req, res){
+	var collection = db.get().collection('users');
+	if(!req.session && !req.session.cas_user){
+		//user does not exist
+	}
+	else{
+		collection.find({rcs: req.session.cas_user}).toArray(function(err, docs){
+			if(err) throw err;
+			if(docs.length == 0){
+				//user not found
+				console.log('user not found');
+			}
+			else{
+				res.send(docs[0]);
+			}
+		})
+	}
+});
+
+router.put('/editUserSettings', function(req, res){
+	console.log(req.body);
+	var collection = db.get().collection('users');
+	if(!req.session && !req.session.cas_user){
+		//user does not exist
+	}
+	else{
+		collection.update({rcs: req.session.cas_user}, {$set: {firstName: req.body.firstName, lastName: req.body.lastName, car: req.body.car}}, function(err, results){
+			if(err) throw err;
+			res.status(200).send();
+		});
+	}
+
+});
+
 module.exports = router;
