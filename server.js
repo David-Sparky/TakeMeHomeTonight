@@ -46,7 +46,7 @@ app.get('/login', cas.bounce, function (req, res) {
 app.get('/logout', cas.logout);
 
 
-db.connect('mongodb://localhost:27017/tmht', function(err) {
+db.connect('mongodb://' + process.env.tmhtDBUser + ':' + process.env.tmhtDBPassword + '@ds023418.mlab.com:23418/tmht', function(err) {
   if (err) {
     console.log('Unable to connect to Mongo.')
     process.exit(1)
