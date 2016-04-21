@@ -41,8 +41,18 @@ app.get('/login', cas.bounce, function (req, res) {
   	if (!req.session || !req.session.cas_user) {
         res.send('/#/');
     }
-    console.log(req.session);
-    res.send('/#/landing');
+    var collection = db.get().collection('users');
+    collection.find({rcs: req.session.cas_user}).toArray(function(err, docs){
+      if(err) throw err;
+      if(docs.length == 1){
+        res.send('/#/landing');
+      }
+      else{
+        console.log('user does not exist');
+        //logic to notify user and tell them to sign up
+        res.send('/#/');
+      }
+    })
 });
 
 app.get('/signUp', cas.bounce, function(req,res){
