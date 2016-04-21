@@ -1,6 +1,6 @@
 var express = require('express'),
 	router = express.Router(),
-	app = express();
+	db = require('../db');
 
 
 router.post('/requestRide', function(req, res){

@@ -1,12 +1,13 @@
 //testing a js file for heroku
 var routes = require('./server/routes/index'),
     rides = require('./server/routes/rides'),
+    db = require('./server/db');
 	bodyParser = require('body-parser'),
 	cookieParser = require('cookie-parser'),
 	path = require('path'),
 	CASAuthentication = require('cas-authentication'),
-	session = require('express-session');
-var express = require('express'),
+	session = require('express-session'),
+    express = require('express'),
     port = 8005,
     app = express();
 
@@ -44,5 +45,14 @@ app.get('/login', cas.bounce, function (req, res) {
 
 app.get('/logout', cas.logout);
 
-app.listen(port);
-console.log('Server running on port ' + port + '.');
+
+db.connect('mongodb://localhost:27017/tmht', function(err) {
+  if (err) {
+    console.log('Unable to connect to Mongo.')
+    process.exit(1)
+  } else {
+    app.listen(port, function() {
+      console.log('Server running on port ' + port + '.')
+    })
+  }
+});
