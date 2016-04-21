@@ -4,7 +4,7 @@ angular.module('tmht')
 	$scope.login = function(){
 		$http({
 			method: 'GET',
-			url: 'login'
+			url: 'login?returnTo=/%23/landing'
 		}).then(function(data){
 			console.log(data);
 			$window.location = data.data;
@@ -13,5 +13,16 @@ angular.module('tmht')
 			console.log(err);
 		});
 	};
+	$scope.signUp = function(){
+		$http({
+			method: 'GET',
+			url: 'signUp?returnTo=/%23/signUp'
+		}).then(function(data){
+			console.log(data);
+			$window.location = data.data;
+		}).catch(function(err){
+			alert(err);
+		});
+	}
 
 }]);

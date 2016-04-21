@@ -1,12 +1,13 @@
 //testing a js file for heroku
 var routes = require('./server/routes/index'),
     rides = require('./server/routes/rides'),
+    users = require('./server/routes/users'),
     db = require('./server/db');
-	bodyParser = require('body-parser'),
-	cookieParser = require('cookie-parser'),
-	path = require('path'),
-	CASAuthentication = require('cas-authentication'),
-	session = require('express-session'),
+  	bodyParser = require('body-parser'),
+  	cookieParser = require('cookie-parser'),
+  	path = require('path'),
+  	CASAuthentication = require('cas-authentication'),
+  	session = require('express-session'),
     express = require('express'),
     port = 8005,
     app = express();
@@ -33,14 +34,36 @@ var cas = new CASAuthentication({
 
 app.use('/', routes);
 app.use('/rides', rides);
+app.use('/user', users);
 
 //CAS route handlers
 app.get('/login', cas.bounce, function (req, res) {
   	if (!req.session || !req.session.cas_user) {
-        res.redirect('/');
+        res.send('/#/');
     }
     console.log(req.session);
-    res.redirect('/#/landing');
+    res.send('/#/landing');
+});
+
+app.get('/signUp', cas.bounce, function(req,res){
+    if(!req.session || !req.session.cas_user) {
+      res.send('/#/');
+    }
+    var collection = db.get().collection('users');
+    collection.find({rcs: req.session.cas_user}).toArray(function(err, docs){
+      if(err) throw err;
+      console.log(docs.length);
+      if(docs.length > 0){
+        console.log("User already exists");
+        //notify user that account alrady exists and log them in
+        res.send('/#/landing');
+      }
+      else{
+        res.send('/#/signUp');
+        console.log('signUp');
+      }
+    })
+
 });
 
 app.get('/logout', cas.logout);

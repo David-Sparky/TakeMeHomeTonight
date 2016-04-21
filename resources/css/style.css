@@ -226,3 +226,7 @@ ul.social > li > a:hover {
   margin-top: 30px;
   text-align: center;
 }
+
+input{
+  color: #555;
+}
