@@ -6,19 +6,20 @@ angular.module('tmht')
 	if($location.path() == '/rides/addRide'){
 		$scope.title = 'Add A Ride';
 		$scope.add = true;
+		rideService.getUserSettingInfo().then(function(data){
+			console.log(data);
+			$scope.rideInfo.car = data.data.car;
+		}).catch(function(err){
+			//alertModal(err.status, err.data);
+			console.log(err);
+		});
 	}
 	else{
 		$scope.title = 'Request A Ride';
 		$scope.add = false;
 	}
 
-	rideService.getUserSettingInfo().then(function(data){
-		console.log(data);
-		$scope.rideInfo.car = data.data.car;
-	}).catch(function(err){
-		alertModal(err.status, err.data);
-		console.log(err);
-	});
+
 
 	$scope.submit = function(){
 		console.log($scope.rideInfo);
