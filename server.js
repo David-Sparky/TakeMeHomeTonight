@@ -12,6 +12,7 @@ var routes = require('./server/routes/index'),
     port = 8005,
     app = express();
 
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
@@ -22,7 +23,7 @@ app.use('/', express.static(path.join(__dirname, '/')));
 app.use(session({
     secret: 'super secret key',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: false
 }));
 
 // Create a new instance of CASAuthentication.
@@ -39,19 +40,19 @@ app.use('/user', users);
 //CAS route handlers
 app.get('/login', cas.bounce, function (req, res) {
   	if (!req.session || !req.session.cas_user) {
-        res.send('/#/');
+        res.redirect('/#/');
     }
+    res.cookie('user', req.session.cas_user);
     var collection = db.get().collection('users');
-    console.log('shit');
     collection.find({rcs: req.session.cas_user}).toArray(function(err, docs){
       if(err) throw err;
       if(docs.length == 1){
-        res.send('/#/landing');
+        res.redirect('/#/landing');
       }
       else{
         console.log('user does not exist');
         //logic to notify user and tell them to sign up
-        res.send('/#/');
+        res.redirect('/#/');
       }
     })
 });
