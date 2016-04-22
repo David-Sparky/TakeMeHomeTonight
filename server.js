@@ -42,6 +42,7 @@ app.get('/login', cas.bounce, function (req, res) {
         res.send('/#/');
     }
     var collection = db.get().collection('users');
+    console.log('shit');
     collection.find({rcs: req.session.cas_user}).toArray(function(err, docs){
       if(err) throw err;
       if(docs.length == 1){
@@ -59,6 +60,7 @@ app.get('/signUp', cas.bounce, function(req,res){
     if(!req.session || !req.session.cas_user) {
       res.send('/#/');
     }
+    console.log("here");
     var collection = db.get().collection('users');
     collection.find({rcs: req.session.cas_user}).toArray(function(err, docs){
       if(err) throw err;

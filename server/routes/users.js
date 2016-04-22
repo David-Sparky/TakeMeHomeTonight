@@ -2,6 +2,15 @@ var express = require('express'),
 	router = express.Router(),
 	db = require('../db');
 
+router.use('*', function(req, res, next){
+	if(!req.session || !req.session.cas_user){
+		res.status(401).send('Unauthorized access');
+	}
+	else{
+		next();
+	}
+
+});
 
 router.post('/signUp', function(req, res){
 	console.log(req.body);
@@ -52,7 +61,7 @@ router.put('/editUserSettings', function(req, res){
 	else{
 		collection.update({rcs: req.session.cas_user}, {$set: {firstName: req.body.firstName, lastName: req.body.lastName, car: req.body.car}}, function(err, results){
 			if(err) throw err;
-			res.status(200).send();
+			res.status(200).send('User changes saved');
 		});
 	}
 

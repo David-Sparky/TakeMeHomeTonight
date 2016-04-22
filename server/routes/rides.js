@@ -2,11 +2,20 @@ var express = require('express'),
 	router = express.Router(),
 	db = require('../db');
 
+router.use('*', function(req, res, next){
+	if(!req.session || !req.session.cas_user){
+		res.status(401).send('Unauthorized access');
+	}
+	else{
+		next();
+	}
+
+});
 
 router.post('/requestRide', function(req, res){
-	console.log(req.body);
-	if(!req.session && !req.session.cas_user){
-
+	if(!req.session || !req.session.cas_user){
+		//no user logged in
+		console.log('no user');
 	}
 	else{
 		req.body.rcs = req.session.cas_user;
@@ -27,6 +36,7 @@ router.post('/requestRide', function(req, res){
 
 router.post('/addRide', function(req,res){
 	console.log(req.body);
+
 });
 
 module.exports = router;
