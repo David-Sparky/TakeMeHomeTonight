@@ -1,4 +1,4 @@
-<div class="container-fluid" ng-controller="rides">
+<div class="container-fluid">
 	<section class="title row-">
         <div class="container">
             <div class="row-fluid">
@@ -12,7 +12,7 @@
 	  <div class="centering text-center">
 			<!--<h3> Rides Available </h3>-->
 			<div class="ridecontainer" ng-repeat="offer in offerarray">
-				<a href="ride{{$index}}">
+				<a href="rides/offered/ride{{$index}}">
 					<div class="rides row">
 						<div class="col-md-4">
 							<img src="/resources/imgs/carimg.png" alt="Car Image" height="100" width="130">
@@ -43,13 +43,13 @@
 					<div class="rides row">
 						<div class="col-md-4">
 							<p> Details: </p>
-							<p> Person: {{needed['Person']}} </p>
-							<p> Time: {{needed['DateToGo']}} / {{needed['Time']}} </p>
+							<p> Person: {{needed.rcs}} </p>
+							<p> Time: {{needed['DateToGo']}} / {{needed.departTime | date:'shortTime'}} </p>
 						</div>
 						<div class="col-md-4">
 							<p> Info :</p>
-							<p> Destination: {{needed['PlaceToGo']}} </p>
-							<p> Offer: {{needed['Offer']}} </p>
+							<p> Destination: {{needed.destination}} </p>
+							<p> Offer: {{needed.cost}} </p>
 						</div>
 					</div>
 				</a>

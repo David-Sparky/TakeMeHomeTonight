@@ -24,4 +24,10 @@ angular.module('tmht')
 		});
 	};
 
+	this.getAllRequestedRides = function(){
+		return $http({
+			method: 'GET',
+			url: 'rides/allRequestedRides'
+		});
+	};
 }]);
