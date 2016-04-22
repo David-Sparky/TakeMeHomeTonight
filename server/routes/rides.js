@@ -36,7 +36,23 @@ router.post('/requestRide', function(req, res){
 
 router.post('/addRide', function(req,res){
 	console.log(req.body);
+});
 
+
+router.get('/allRequestedRides', function(req, res){
+	var collection = db.get().collection('requested');
+	collection.find().toArray(function(err, docs){
+		if(err) throw err;
+		res.send(docs);
+	});
+});
+
+router.get('/allOfferedRides', function(req,res){
+	var collection = db.get().collection('offered');
+	collection.find().toArray(function(err, docs){
+		if(err) throw err;
+		res.send(docs);
+	});
 });
 
 module.exports = router;
