@@ -250,3 +250,9 @@ ul.social > li > a:hover {
 .center {
   text-align: center
 }
+
+.profile_img{
+  width: 200px;
+  padding-left: 5px;
+  border-radius: 20px;
+}
