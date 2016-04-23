@@ -3,12 +3,13 @@ var express = require('express'),
 	db = require('../db');
 
 router.use('*', function(req, res, next){
-	if(!req.session || !req.session.cas_user){
-		res.status(401).send('Unauthorized access');
-	}
-	else{
-		next();
-	}
+  console.log(req);
+  if(!req.session || !req.session.cas_user){
+    res.status(401).send('Unauthorized access');
+  }
+  else{
+    next();
+  }
 
 });
 

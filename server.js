@@ -79,7 +79,14 @@ app.get('/signUp', cas.bounce, function(req,res){
 
 });
 
-app.get('/logout', cas.logout);
+app.get('/logout',function(req, res, next){
+  if(!req.session || !req.session.cas_user){
+    res.status(400).send('No user signed in');
+  }
+  else{
+    next();
+  }
+}, cas.logout);
 
 
 db.connect('mongodb://' + process.env.tmhtDBUser + ':' + process.env.tmhtDBPassword + '@ds023418.mlab.com:23418/tmht', function(err) {

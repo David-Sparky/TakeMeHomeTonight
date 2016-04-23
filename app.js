@@ -68,10 +68,8 @@ app.run(function ($rootScope, $location, $route, AuthService) {
 */
 app.run(['$rootScope', '$location', '$route', 'AuthService', function ($rootScope, $location, $route, AuthService) {
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
-  	console.log(next.$$route);
-    if (next.$$route != undefined && next.$$route.access.restricted && AuthService.getUserStatus() == undefined) {
+    if (next.$$route != undefined && next.$$route.access.restricted && (AuthService.getUserStatus() == undefined || AuthService.getUserStatus() == '')) {
       $location.path('/');
-      console.log('shit');
     }
   });
 }]);

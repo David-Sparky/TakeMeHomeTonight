@@ -3,13 +3,15 @@ var express = require('express'),
 	db = require('../db');
 
 router.use('*', function(req, res, next){
-	if(!req.session || !req.session.cas_user){
-		res.status(401).send('Unauthorized access');
-	}
-	else{
-		next();
-	}
-
+  console.log(req.path);
+  if(req.path == '/user/logout')
+    next();
+  else if(!req.session || !req.session.cas_user){
+    res.status(401).send('Unauthorized access');
+  }
+  else{
+    next();
+  }
 });
 
 router.post('/signUp', function(req, res){

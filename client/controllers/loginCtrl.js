@@ -13,6 +13,7 @@ angular.module('tmht')
 			console.log(err);
 		});
 	};
+	
 	$scope.signUp = function(){
 		$http({
 			method: 'GET',
