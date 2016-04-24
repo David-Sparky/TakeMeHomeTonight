@@ -1,14 +1,5 @@
 //testing a js file for heroku
 var routes = require('./server/routes/index'),
-<<<<<<< HEAD
-	bodyParser = require('body-parser'),
-	cookieParser = require('cookie-parser'),
-	path = require('path'),
-	CASAuthentication = require('cas-authentication'),
-	session = require('express-session');
-var express = require('express'),
-    port = process.env.PORT || 8005,
-=======
     rides = require('./server/routes/rides'),
     users = require('./server/routes/users'),
     db = require('./server/db');
@@ -19,7 +10,6 @@ var express = require('express'),
   	session = require('express-session'),
     express = require('express'),
     port = 8005,
->>>>>>> dev
     app = express();
 
 app.use(cookieParser());
@@ -99,10 +89,6 @@ app.get('/logout',function(req, res, next){
 }, cas.logout);
 
 
-<<<<<<< HEAD
-app.listen(port);
-console.log('Server running on port ' + port + '.');
-=======
 db.connect('mongodb://' + process.env.tmhtDBUser + ':' + process.env.tmhtDBPassword + '@ds023418.mlab.com:23418/tmht', function(err) {
   if (err) {
     console.log('Unable to connect to Mongo.')
@@ -113,4 +99,3 @@ db.connect('mongodb://' + process.env.tmhtDBUser + ':' + process.env.tmhtDBPassw
     })
   }
 });
->>>>>>> dev
