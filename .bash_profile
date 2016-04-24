@@ -1,0 +1,2 @@
+tmhtDBUser: tmht
+tmhtDBPassword: webscience
