@@ -11,6 +11,7 @@ var express = require('express'),
     app = express();
 
 var cdta= require('./client/controllers/api_info.js');
+var http= require('http');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -52,10 +53,28 @@ app.get('/cdta', function (req, res) {
 
     console.log(search);
 
-    http.get(cdta.api_ping + '?request=search/' + search + '/3', function (callback) {
-        console.log(callback);
-    });
-} );
+    // http.get(cdta.api_time + '/' + search + cdta.api_key, function (callback) {
+    //
+    //     callback.on('data', function(d) {
+    //         console.log(d);
+    //     })
+    //
+    //
+    // });
+
+    var x = '';
+        http.get({
+            host: 'api.cdta.org',
+            path: '/api/v1/' + cdta.api_time + '/' + search + cdta.api_key
+        }, function (res) {
+            res.on('data', function (d) {
+                x += d.toString();
+                console.log(d.toString());
+            });
+
+        });
+
+});
 
 
 
