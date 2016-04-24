@@ -6,7 +6,7 @@ var routes = require('./server/routes/index'),
   	bodyParser = require('body-parser'),
   	cookieParser = require('cookie-parser'),
   	path = require('path'),
-  	CASAuthentication = require('./cas-authentication'),
+  	CASAuthentication = require('cas-authentication'),
   	session = require('express-session'),
     express = require('express'),
     port = 8005,
@@ -59,7 +59,7 @@ app.get('/login', cas.bounce, function (req, res) {
 
 app.get('/signUp', cas.bounce, function(req,res){
     if(!req.session || !req.session.cas_user) {
-      res.send('/#/');
+      res.redirect('/#/');
     }
     console.log("here");
     var collection = db.get().collection('users');
@@ -68,11 +68,12 @@ app.get('/signUp', cas.bounce, function(req,res){
       console.log(docs.length);
       if(docs.length > 0){
         console.log("User already exists");
+        res.cookie('user', req.session.cas_user);
         //notify user that account alrady exists and log them in
-        res.send('/#/landing');
+        res.redirect('/#/landing');
       }
       else{
-        res.send('/#/signUp');
+        res.redirect('/#/signUp');
         console.log('signUp');
       }
     })
