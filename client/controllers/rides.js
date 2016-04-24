@@ -1,7 +1,7 @@
 angular.module('tmht')
-.controller('rides', ['$scope','$location', function($scope, $location){
+.controller('rides', ['$scope','$location', 'rideService', function($scope, $location, rideService){
 
-	if($location.path() == '/ridesOffered'){
+	if($location.path() == '/rides/ridesOffered'){
 		$scope.title = 'Rides Available';
 		$scope.needed = false;
 		$scope.ridesavail = true;
@@ -21,11 +21,12 @@ angular.module('tmht')
 		$scope.title = "Rides Needed";
 		$scope.needed = true;
 		$scope.ridesavail = false;
-		$scope.needarray =[{Person:'Jack',Time:'2:00pm',DateToGo:'3/20',PlaceToGo:'Price Chopper',Offer:'Food'},
-											 {Person:'Laura',Time:'9:30am',DateToGo:'3/22',PlaceToGo:'Walmart',Offer:'$10'},
-											 {Person:'Saul',Time:'7:30pm',DateToGo:'3/26',PlaceToGo:'Amtrak Station',Offer:'Gas Money'},
-											 {Person:'Erik',Time:'11:00am',DateToGo:'3/25',PlaceToGo:'Testing Center - New Horizons',Offer:''},
-											 {Person:'Linda',Time:'10:00am',DateToGo:'3/28',PlaceToGo:'Target',Offer:''}
-											]
+		rideService.getAllRequestedRides().then(function(data){
+			console.log(data);
+			$scope.needarray = data.data;
+		}).catch(function(err){
+			console.log(err);
+		})
+		
 	}
 }]);	

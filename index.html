@@ -6,6 +6,7 @@
   <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css">
   <link rel="stylesheet" href="resources/css/font-awesome.min.css">
   <link rel='stylesheet' type='text/css' href='resources/css/style.css'/>
+  <link rel="sytlesheet" type="text/css" href="node_modules/angular-ui-bootstrap/dist/ui-boostrap.csp.css"/>
 
 
 </head>
@@ -15,10 +16,13 @@
 
     <a href="#/landing"><img class="logo" src="resources/imgs/TMHT.png"></a>
     <div class="header-right pull-right">
-      <a href="#/ridesOffered">Find a Ride</a>
-      <a href="#/ridesNeeded">Give a Ride</a>
+      <a ng-show="checkForUser()" href="#/rides/ridesOffered">Find a Ride</a>
+      <a ng-show="checkForUser()" href="#/rides/ridesNeeded">Give a Ride</a>
+      <a ng-show="checkForUser()" href="#/rides/addRide">Add a Ride</a>
+      <a ng-show="checkForUser()" href="#/rides/requestRide">Request a Ride</a>
       <a href="#/aboutUs">About Us</a>
-      <a ng-click="logout()">Logout</a>
+      <a ng-show="checkForUser()" href="#/userSettings">Settings</a>
+      <a ng-show="checkForUser()" ng-click="logout()">Logout</a>
     </div>
   </div>
   <!-- /Header -->
@@ -53,11 +57,21 @@
 </body>
 
 <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+<script type="text/javascript" src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+<script type="text/javascript" src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
 <script type="text/javascript" src="node_modules/angular-route/angular-route.min.js"></script>
+<script src="node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
+<script src="node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js"></script>
+<script type="text/javascript" src="node_modules/angular-cookies/angular-cookies.min.js"></script>
+
 <script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="client/services/AuthService.js"></script>
+<script type="text/javascript" src="client/services/service.js"></script>
 <script type="text/javascript" src="client/controllers/loginCtrl.js"></script>
 <script type="text/javascript" src="client/controllers/landingCtrl.js"></script>
 <script type="text/javascript" src="client/controllers/rides.js"></script>
 <script type="text/javascript" src="client/controllers/rideFormCtrl.js"></script>
 <script type="text/javascript" src="client/controllers/indexCtrl.js"></script>
+<script type="text/javascript" src="client/controllers/signUpCtrl.js"></script>
+<script type="text/javascript" src="client/controllers/userSettingsCtrl.js"></script>
 </html>

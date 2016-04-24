@@ -1,0 +1,19 @@
+<div>
+  <form name="signUpForm" class="form-horizontal">
+    <div class="form-group">
+      <label class="col-sm-3 control-label form-text">First Name:</label>
+      <div class="col-sm-9">
+        <input  type="text" ng-model="newUser.firstName" placeholder="First Name" required>
+      </div> 
+    </div> 
+    <div class="form-group">
+      <label class="col-sm-3 control-label form-text">Last Name:</label>
+      <div class="col-sm-9">
+        <input type="text" ng-model="newUser.lastName" placeholder="Last Name" required>
+      </div>
+    </div>
+  </form>
+  <button class="btn btn-success pull-left"  ng-click="signUp(newUser)" ng-disabled="signUpForm.$invalid">
+    <span class="glyphicon glyphicon-save"></span>Sign Up!
+  </button>
+</div>
