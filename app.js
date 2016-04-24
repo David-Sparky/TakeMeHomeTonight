@@ -37,7 +37,8 @@ app.config(['$routeProvider', function($routeProvider){
 		controller: 'taxiCtrl'
 	}).
 	when('/plane', {
-		templateUrl: 'client/views/plane.html'
+		templateUrl: 'client/views/plane.html',
+		controller: 'planeCtrl'
 	}).
 	when('/bus', {
 		templateUrl: 'client/views/bus.html'
