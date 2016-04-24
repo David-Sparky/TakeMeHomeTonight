@@ -389,3 +389,10 @@ input{
 #main {
   padding-bottom: 50px;
 }
+
+.profile_img{
+  width: 200px;
+  padding-left: 5px;
+  border-radius: 20px;
+  padding-bottom: 10px;
+}
