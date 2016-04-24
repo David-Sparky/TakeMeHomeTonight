@@ -12,7 +12,7 @@ angular.module('tmht')
 	}).catch(function(err){
 		alert(err);
 	});
-
+	
 	$scope.signUp = function(userData) {
 		console.log(userData);
 		$http({
@@ -22,6 +22,7 @@ angular.module('tmht')
 		})
 		.then(function(data){
 			console.log(data);
+			
 			$window.location = data.data;
 		},
 		function(err){

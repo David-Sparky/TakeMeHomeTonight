@@ -26,7 +26,8 @@ router.post('/signUp', function(req, res){
 			collection.insert({rcs: req.session.cas_user, firstName: req.body.firstName, lastName: req.body.lastName}, function(err, results){
 				if(err) throw err;
 				console.log(results);
-				if(results.result.insertedCount == 1){
+				if(results.insertedCount == 1){
+					res.cookie('user', req.session.cas_user);
 					res.status(200).send('/#/landing');
 				}
 			});

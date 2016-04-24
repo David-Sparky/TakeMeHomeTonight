@@ -5,6 +5,7 @@ angular.module('tmht')
       return $cookies.get('user');//user;
     }
 
+
     /*
     function login(userInput) {
 
