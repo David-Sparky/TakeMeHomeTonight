@@ -29,7 +29,7 @@ app.use(session({
 // Create a new instance of CASAuthentication.
 var cas = new CASAuthentication({
     cas_url: 'https://cas-auth.rpi.edu/cas',
-    service_url: 'http://localhost:' + port,
+    service_url: 'https://takemehometonight.herokuapp.com',
     cas_version: '2.0'
 });
 
@@ -93,6 +93,8 @@ app.get('/logout',function(req, res, next){
 db.connect('mongodb://' + process.env.tmhtDBUser + ':' + process.env.tmhtDBPassword + '@ds023418.mlab.com:23418/tmht', function(err) {
   if (err) {
     console.log('Unable to connect to Mongo.')
+    console.log(process.env);
+    console.log(process.env);
     process.exit(1)
   } else {
     app.listen(port, function() {

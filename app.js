@@ -47,6 +47,23 @@ app.config(['$routeProvider', function($routeProvider){
 		templateUrl: 'client/views/about-us.html',
 		access: {restricted: false}
 	}).
+	when('/publicTransit', {
+		templateUrl: 'client/views/publicTransit.html'
+	}).
+	when('/taxi', {
+		templateUrl: 'client/views/taxi.html',
+		controller: 'taxiCtrl'
+	}).
+	when('/plane', {
+		templateUrl: 'client/views/plane.html',
+		controller: 'planeCtrl'
+	}).
+	when('/bus', {
+		templateUrl: 'client/views/bus.html'
+	}).
+	when('/train', {
+		templateUrl: 'client/views/train.html'
+	}).
 	otherwise({
 		redirectTo: '/'
 	})

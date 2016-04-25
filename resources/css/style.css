@@ -103,6 +103,7 @@ a:hover {
   margin-top: 2px; 
   border: 1px solid black;
 }
+
 .ridecontainer{
   width: 80%;
   margin: auto;
@@ -111,8 +112,12 @@ a:hover {
 .ridecontainer a{
   color: white;
 }
-.rides:hover{
+.rides:hover {
   background-color: rgba(0,0,0,0.75);
+}
+
+.rides {
+  padding-top: 2px;
 }
 
 /*End Rides*/
@@ -227,10 +232,16 @@ ul.social > li > a:hover {
   text-align: center;
 }
 
+<<<<<<< HEAD
+#home {
+  position: relative;
+  transform: translateY(150%);
+=======
 input{
   color: #555;
 }
 
 .modal-dialog{
   color: #555;
+>>>>>>> dev
 }
