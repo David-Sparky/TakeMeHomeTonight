@@ -232,16 +232,19 @@ ul.social > li > a:hover {
   text-align: center;
 }
 
-<<<<<<< HEAD
 #home {
   position: relative;
-  transform: translateY(150%);
-=======
+  transform: translateY(50%);
+}
+
 input{
   color: #555;
 }
 
 .modal-dialog{
   color: #555;
->>>>>>> dev
+}
+
+.team {
+  padding-left: 100px;
 }

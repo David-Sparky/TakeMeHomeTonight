@@ -43,9 +43,9 @@ app.config(['$routeProvider', function($routeProvider){
 		controller: 'rideFormCtrl',
 		access: {restricted: true}
 	}).
-	when('/aboutUs', {
-		templateUrl: 'client/views/about-us.html',
-		access: {restricted: false}
+	when('/team', {
+		templateUrl: 'client/views/team.html',
+		controller: 'teamCtrl'
 	}).
 	when('/publicTransit', {
 		templateUrl: 'client/views/publicTransit.html'
