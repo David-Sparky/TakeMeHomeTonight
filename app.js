@@ -64,6 +64,9 @@ app.config(['$routeProvider', function($routeProvider){
 	when('/train', {
 		templateUrl: 'client/views/train.html'
 	}).
+	when('/shuttle', {
+		templateUrl: 'client/views/shuttle.html'
+	}).
 	otherwise({
 		redirectTo: '/'
 	})
