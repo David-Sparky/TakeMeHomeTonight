@@ -29,7 +29,7 @@ app.use(session({
 // Create a new instance of CASAuthentication.
 var cas = new CASAuthentication({
     cas_url: 'https://cas-auth.rpi.edu/cas',
-    service_url: 'https://takemehometonight.herokuapp.com',
+    service_url: 'http://localhost:' + port,
     cas_version: '2.0'
 });
 
@@ -59,7 +59,8 @@ app.get('/login', cas.bounce, function (req, res) {
 
 app.get('/signUp', cas.bounce, function(req,res){
     if(!req.session || !req.session.cas_user) {
-      res.redirect('/#/');
+      res.r
+edirect('/#/');
     }
     console.log("here");
     var collection = db.get().collection('users');
