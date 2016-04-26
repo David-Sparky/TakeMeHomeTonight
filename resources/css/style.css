@@ -72,22 +72,61 @@ a:hover {
   background-color: rgba(0,0,0,0.7);
 }
 
+.navbar-default {
+  background-color: rgba(0,0,0,0.7);
+  border: none;
+}
+
+.navbar-header img {
+  padding-top: 5px;
+  margin-bottom: -50px;
+}
+
+.nav.navbar-nav li a,
+.nav.navbar-nav li a:visited {
+    color: white;
+}
+
+.nav.navbar-nav li a:hover {
+    color: #2dcc70;
+}
+
+@media (max-width: 768px) {
+  .navbar-header img {
+    margin-bottom: 0px;
+    padding-top: 15px;
+  }
+}
+
 /*For when screen is smaller than medium size*/
 @media (max-width: 992px) {
-  .header-right {
-    font-size: 1.5em;
+  .nav.navbar-nav li a {
+    font-size: 1.05em;
   }
 }
 
 /*For when screen is bigger than medium size*/
 @media (min-width: 992px) {
-  .header-right {
-    font-size: 2em;
+  .nav.navbar-nav li a {
+    font-size: 1.3em;
   }
 }
 
-.header-right a {
-  padding-right: 20px;
+.navbar-default .navbar-nav .open .dropdown-menu,
+.navbar-default .navbar-nav .open .dropdown-menu>li>a,
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
+  color: #2dcc70;
+}
+
+.navbar .nav > li.dropdown.open.active > a:hover, 
+.navbar .nav > li.dropdown.open > a {
+  background-color: transparent;
+  color: white;
 }
 
 .logo {
@@ -270,7 +309,7 @@ input{
   border-radius: 4px
 }
 
-.profile_img{
+.profile_img {
   width: 100px;
   border-radius: 20px;
   padding-bottom: 10px;

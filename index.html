@@ -6,27 +6,52 @@
   <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css" />
   <link rel="stylesheet" type='text/css' href="resources/css/font-awesome.min.css" />
   <link rel='stylesheet' type='text/css' href='resources/css/style.css'/>
+  <!-- <link rel='stylesheet' type='text/css' href='resources/css/bootstrap.css'/> -->
   <link rel="sytlesheet" type="text/css" href="node_modules/angular-ui-bootstrap/dist/ui-boostrap.csp.css" />
   <link rel="stylesheet" type="text/css" href="node_modules/sweetalert/dist/sweetalert.css" />
 
 
 </head>
 <body ng-controller="indexCtrl">
-  <!-- Header -->
-  <div class="page-header">
 
-    <a href="#/landing"><img class="logo" src="resources/imgs/TMHT.png"></a>
-    <div class="header-right pull-right">
-      <a ng-show="checkForUser()" href="#/rides/ridesOffered">Find a Ride</a>
-      <a ng-show="checkForUser()" href="#/rides/ridesNeeded">Give a Ride</a>
-      <a ng-show="checkForUser()" href="#/rides/addRide">Add a Ride</a>
-      <a ng-show="checkForUser()" href="#/rides/requestRide">Request a Ride</a>
-      <a ng-show="checkForUser()" href="#/publicTransit">Public Transit</a>
-      <a ng-show="checkForUser()" href="#/userSettings">Settings</a>
-      <a ng-show="checkForUser()" ng-click="logout()">Logout</a>
-    </div>
-  </div>
-  <!-- /Header -->
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="#/landing"><img class="logo" src="resources/imgs/TMHT.png"></a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav pull-right">
+          <li><a ng-show="checkForUser()" href="#/rides/ridesOffered">Rides Available </a></li>
+          
+          <li><a ng-show="checkForUser()" href="#/rides/ridesNeeded">Rides Needed</a></li>
+
+          <li><a ng-show="checkForUser()" href="#/rides/addRide">Add a Ride</a></li>
+
+          <li><a ng-show="checkForUser()" href="#/rides/requestRide">Request a Ride</a></li>
+
+          <li><a ng-show="checkForUser()" href="#/publicTransit">Public Transit</a></li>
+
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a ng-show="checkForUser()" href="#/userSettings">Settings</a></li>
+              <li><a ng-show="checkForUser()" ng-click="logout()">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
 
   <div>
     <div id="content" ng-view></div>
@@ -36,26 +61,14 @@
 <!--Footer-->
 <footer id="footer">
     <div class="container">
-        <!-- <div class="row-fluid"> -->
-            <!--/Copyright-->
-            <div class="col-md-10">
-              &copy; 2016 Take Me Home Tonight</a>. All Rights Reserved.
-            </div>
+      <!--/Copyright-->
+      <div class="col-md-10">
+        &copy; 2016 Take Me Home Tonight</a>. All Rights Reserved.
+      </div>
 
-            <div class="col-md-2">
-                <a href="#/team">Meet The Team</a>
-            </div>
-            
-            <!-- Goto Top -->
-            <!-- <div class="span1">
-                <a id="gototop" class="gototop pull-right" href="#"><i class="icon-angle-up"></i></a>
-            </div>
-            
-            <div class="span1">
-                <a id="gototop" class="gototop pull-right" href="#"><i class="icon-angle-up"></i></a>
-            </div> -->
-            <!--/Goto Top-->
-        <!-- </div> -->
+      <div class="col-md-2">
+          <a href="#/team">Meet The Team</a>
+      </div>
     </div>
 </footer>
 <!--/Footer-->
@@ -70,6 +83,9 @@
 <script type="text/javascript" src="node_modules/angular-cookies/angular-cookies.min.js"></script>
 <script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
 <script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript" src="app.js"></script>
 <script type="text/javascript" src="client/services/AuthService.js"></script>
