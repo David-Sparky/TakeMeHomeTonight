@@ -283,6 +283,17 @@ ul.social > li > a:hover {
   text-align: center;
 }
 
+/*For when screen is smaller than medium size*/
+@media (max-width: 992px) {
+  #mainButtons button{
+    font-size: 1.5em;
+  }
+  .btn-xl{
+    height: 75px;
+    width: 200px;
+  }
+}
+
 .well{
   border-radius: 5px;
   background-color: rgba(69,69,69,.7);
