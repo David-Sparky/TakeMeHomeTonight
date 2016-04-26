@@ -3,10 +3,11 @@
 <html ng-app="tmht">
 <head>
   <title>Take Me Home Tonight</title>
-  <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css">
-  <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css" />
+  <link rel="stylesheet" type='text/css' href="resources/css/font-awesome.min.css" />
   <link rel='stylesheet' type='text/css' href='resources/css/style.css'/>
-  <link rel="sytlesheet" type="text/css" href="node_modules/angular-ui-bootstrap/dist/ui-boostrap.csp.css"/>
+  <link rel="sytlesheet" type="text/css" href="node_modules/angular-ui-bootstrap/dist/ui-boostrap.csp.css" />
+  <link rel="stylesheet" type="text/css" href="node_modules/sweetalert/dist/sweetalert.css" />
 
 
 </head>
@@ -21,7 +22,6 @@
       <a ng-show="checkForUser()" href="#/rides/addRide">Add a Ride</a>
       <a ng-show="checkForUser()" href="#/rides/requestRide">Request a Ride</a>
       <a ng-show="checkForUser()" href="#/publicTransit">Public Transit</a>
-      <a href="#/aboutUs">About Us</a>
       <a ng-show="checkForUser()" href="#/userSettings">Settings</a>
       <a ng-show="checkForUser()" ng-click="logout()">Logout</a>
     </div>
@@ -49,11 +49,11 @@
             <!-- Goto Top -->
             <!-- <div class="span1">
                 <a id="gototop" class="gototop pull-right" href="#"><i class="icon-angle-up"></i></a>
-            </div> -->
-            <!--
+            </div>
+            
             <div class="span1">
                 <a id="gototop" class="gototop pull-right" href="#"><i class="icon-angle-up"></i></a>
-            </div>-->
+            </div> -->
             <!--/Goto Top-->
         <!-- </div> -->
     </div>
@@ -68,6 +68,8 @@
 <script src="node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
 <script src="node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js"></script>
 <script type="text/javascript" src="node_modules/angular-cookies/angular-cookies.min.js"></script>
+<script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
+<script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
 
 <script type="text/javascript" src="app.js"></script>
 <script type="text/javascript" src="client/services/AuthService.js"></script>

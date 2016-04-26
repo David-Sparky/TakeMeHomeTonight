@@ -89,7 +89,6 @@ app.get('/logout',function(req, res, next){
   }
 }, cas.logout);
 
-
 db.connect('mongodb://' + process.env.tmhtDBUser + ':' + process.env.tmhtDBPassword + '@ds023418.mlab.com:23418/tmht', function(err) {
   if (err) {
     console.log('Unable to connect to Mongo.')
