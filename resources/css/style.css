@@ -55,9 +55,20 @@ a:hover {
 }
 
 .row-fluid {
-  height: 90%; 
+  height: 80%; 
   display:table-cell; 
   vertical-align: middle;
+}
+
+@media (max-width: 992px) {
+  h1 {
+    font-size: 2.2em;
+  }
+
+  .page-header {
+    height: 30px;
+  }
+
 }
 
 .centering {
@@ -66,15 +77,16 @@ a:hover {
 }
 
 .page-header {
-  padding: 10px 10px 10px 0;
-  margin: 0px;
+  margin-top: -15px;
+  margin-bottom: 0px;
   border-bottom: 0px;
-  background-color: rgba(0,0,0,0.7);
+  height: 40px;
 }
 
 .navbar-default {
   background-color: rgba(0,0,0,0.7);
   border: none;
+  margin-bottom: 0px;
 }
 
 .navbar-header img {
