@@ -10,7 +10,6 @@ router.use('*', function(req, res, next){
   else{
     next();
   }
-
 });
 
 router.post('/requestRide', function(req, res){

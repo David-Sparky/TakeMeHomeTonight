@@ -10,7 +10,7 @@
 	  <div class="centering text-center">
 			<!--<h3> Rides Available </h3>-->
 			<div class="ridecontainer" ng-repeat="offer in offerarray">
-				<a href="rides/offer?id={{offer['_id']}}">
+				<a href="#/rides/offer?id={{offer['_id']}}">
 					<div class="rides row">
 						<div class="col-md-4">
 							<img src="/resources/imgs/carimg.png" alt="Car Image" height="100" width="130">
@@ -38,7 +38,7 @@
 	  <div class="centering text-center">
 			<!--<h3> Rides Needed </h3>-->
 			<div class="ridecontainer" ng-repeat="needed in needarray">
-				<a href="rides/ride?id={{needed['_id']}}">
+				<a href="#/rides/ride?id={{needed['_id']}}">
 					<div class="rides row">
 						<div class="col-md-4">
 							<p> Details: </p>

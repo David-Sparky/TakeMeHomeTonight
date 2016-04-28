@@ -40,7 +40,7 @@ app.config(['$routeProvider', function($routeProvider){
 	}).
 	when('/rides/addRide', {
 		templateUrl: 'client/views/ridesForm.html',
-		controller: 'rides',
+		controller: 'rideFormCtrl',
 		access: {restricted: true}
 	}).
 	when('/rides/ride', {
