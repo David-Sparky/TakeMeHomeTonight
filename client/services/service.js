@@ -37,4 +37,19 @@ angular.module('tmht')
 			url: 'rides/allOfferedRides'
 		});
 	};
+
+	this.getOfferRide = function(id){
+		console.log(id);
+		return $http({
+			method: "GET",
+			url: 'rides/get_offer?id='+id,
+		});
+	};
+	this.getRide = function(id){
+		console.log(id);
+		return $http({
+			method: "GET",
+			url: 'rides/get_ride?id='+id,
+		});
+	};
 }]);

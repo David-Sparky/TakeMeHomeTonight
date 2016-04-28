@@ -7,7 +7,7 @@ angular.module('tmht')
 			$scope.needed = false;
 			$scope.ridesavail = true;
 			rideService.getAllOfferedRides().then(function(data){
-				console.log(data);
+				//console.log(data);
 				$scope.offerarray = data.data;
 			}).catch(function(err){
 				console.log(err);
@@ -26,9 +26,25 @@ angular.module('tmht')
 			break;
 		case "/rides/ride":
 			$scope.title = "Ride";
+			var id = $location.search();
+			//id = id['id'];
+			rideService.getRide(id.id).then(function(data){
+				console.log(data);
+				//$scope.needarray = data.data;
+			}).catch(function(err){
+				console.log(err);
+			});
 			break;
 		case "/rides/offer":
 			$scope.title = "Offer";
+			var id = $location.search();
+			//id = id['id'];
+			rideService.getOfferRide(id.id).then(function(data){
+				console.log(data);
+				//$scope.needarray = data.data;
+			}).catch(function(err){
+				console.log(err);
+			});
 			break;
 	}
 }]);	

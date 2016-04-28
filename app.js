@@ -1,4 +1,4 @@
-var app = angular.module('tmht', ['ui.bootstrap', 'ngRoute', 'ngFileUpload', 'ngCookies']);
+	var app = angular.module('tmht', ['ui.bootstrap', 'ngRoute', 'ngFileUpload', 'ngCookies']);
 
 app.config(['$routeProvider', function($routeProvider){
 	$routeProvider.

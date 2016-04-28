@@ -73,23 +73,37 @@ router.get('/allOfferedRides', function(req,res){
 });
 
 router.get('/get_ride', function(req,res){
-	var id = req.query['id'];
-	var collection = db.get().collection('requested');
-	collection.find({_id:ObjectID.createFromHexString(id)}).toArray(function(err, docs){
-		if(err) throw err;
-		res.send(docs);
-	});
+	var id = req.query.id;
+	//console.log(id);
+	if(!req.session && !req.session.cas_user){
+		//user does not exist
+		console.log("User does not exist");
+	}
+	else{
+		var collection = db.get().collection('requested');
+		collection.find({_id:ObjectID.createFromHexString(id)}).toArray(function(err, docs){
+			if(err) throw err;
+			res.send(docs);
+		});
+	}
 });
 
 
 router.get('/get_offer', function(req,res){
-	var id = req.query['id'];
-	var collection = db.get().collection('offered');
-	collection.find({_id:ObjectID.createFromHexString(id)}).toArray(function(err, docs){
-		if(err) throw err;
-		res.send(docs);
-	});
+	var id = req.query.id;
+	//console.log(id);
+	if(!req.session && !req.session.cas_user){
+		//user does not exist
+		console.log("User does not exist");
+	}
+	else{
+		var collection = db.get().collection('offered');
+		collection.find({_id:ObjectID.createFromHexString(id)}).toArray(function(err, docs){
+			if(err) throw err;
+			res.send(docs);
+		});
 
+	}
 });
 
 
