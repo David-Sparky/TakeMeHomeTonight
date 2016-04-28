@@ -55,9 +55,20 @@ a:hover {
 }
 
 .row-fluid {
-  height: 90%; 
+  height: 80%; 
   display:table-cell; 
   vertical-align: middle;
+}
+
+@media (max-width: 992px) {
+  h1 {
+    font-size: 2.2em;
+  }
+
+  .page-header {
+    height: 30px;
+  }
+
 }
 
 .centering {
@@ -66,28 +77,68 @@ a:hover {
 }
 
 .page-header {
-  padding: 10px 10px 10px 0;
-  margin: 0px;
+  margin-top: -15px;
+  margin-bottom: 0px;
   border-bottom: 0px;
+  height: 40px;
+}
+
+.navbar-default {
   background-color: rgba(0,0,0,0.7);
+  border: none;
+  margin-bottom: 0px;
+}
+
+.navbar-header img {
+  padding-top: 5px;
+  margin-bottom: -50px;
+}
+
+.nav.navbar-nav li a,
+.nav.navbar-nav li a:visited {
+    color: white;
+}
+
+.nav.navbar-nav li a:hover {
+    color: #2dcc70;
+}
+
+@media (max-width: 768px) {
+  .navbar-header img {
+    margin-bottom: 0px;
+    padding-top: 15px;
+  }
 }
 
 /*For when screen is smaller than medium size*/
 @media (max-width: 992px) {
-  .header-right {
-    font-size: 1.5em;
+  .nav.navbar-nav li a {
+    font-size: 1.05em;
   }
 }
 
 /*For when screen is bigger than medium size*/
 @media (min-width: 992px) {
-  .header-right {
-    font-size: 2em;
+  .nav.navbar-nav li a {
+    font-size: 1.3em;
   }
 }
 
-.header-right a {
-  padding-right: 20px;
+.navbar-default .navbar-nav .open .dropdown-menu,
+.navbar-default .navbar-nav .open .dropdown-menu>li>a,
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
+  color: #2dcc70;
+}
+
+.navbar .nav > li.dropdown.open.active > a:hover, 
+.navbar .nav > li.dropdown.open > a {
+  background-color: transparent;
+  color: white;
 }
 
 .logo {
@@ -103,6 +154,7 @@ a:hover {
   margin-top: 2px; 
   border: 1px solid black;
 }
+
 .ridecontainer{
   width: 80%;
   margin: auto;
@@ -111,8 +163,12 @@ a:hover {
 .ridecontainer a{
   color: white;
 }
-.rides:hover{
+.rides:hover {
   background-color: rgba(0,0,0,0.75);
+}
+
+.rides {
+  padding-top: 2px;
 }
 
 /*End Rides*/
@@ -227,10 +283,57 @@ ul.social > li > a:hover {
   text-align: center;
 }
 
+/*For when screen is smaller than medium size*/
+@media (max-width: 992px) {
+  #mainButtons button{
+    font-size: 1.5em;
+  }
+  .btn-xl{
+    height: 75px;
+    width: 200px;
+  }
+}
+
+.well{
+  border-radius: 5px;
+  background-color: rgba(69,69,69,.7);
+}
+
+.well h3{
+  margin-top: 0px;
+  text-align: center;
+}
+
+#home {
+  position: relative;
+  transform: translateY(50%);
+}
+
 input{
   color: #555;
 }
 
 .modal-dialog{
   color: #555;
+}
+
+.team {
+  padding-left: 100px;
+}
+
+.box {
+  background-color: #999 ;
+  border-top: 1px solid #f0f0f0;
+  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px
+}
+
+.profile_img {
+  width: 100px;
+  border-radius: 20px;
+  padding-bottom: 10px;
 }

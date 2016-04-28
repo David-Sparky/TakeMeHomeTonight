@@ -59,7 +59,8 @@ app.get('/login', cas.bounce, function (req, res) {
 
 app.get('/signUp', cas.bounce, function(req,res){
     if(!req.session || !req.session.cas_user) {
-      res.send('/#/');
+      res.r
+edirect('/#/');
     }
     console.log("here");
     var collection = db.get().collection('users');
@@ -68,11 +69,12 @@ app.get('/signUp', cas.bounce, function(req,res){
       console.log(docs.length);
       if(docs.length > 0){
         console.log("User already exists");
+        res.cookie('user', req.session.cas_user);
         //notify user that account alrady exists and log them in
-        res.send('/#/landing');
+        res.redirect('/#/landing');
       }
       else{
-        res.send('/#/signUp');
+        res.redirect('/#/signUp');
         console.log('signUp');
       }
     })
@@ -88,10 +90,11 @@ app.get('/logout',function(req, res, next){
   }
 }, cas.logout);
 
-
 db.connect('mongodb://' + process.env.tmhtDBUser + ':' + process.env.tmhtDBPassword + '@ds023418.mlab.com:23418/tmht', function(err) {
   if (err) {
     console.log('Unable to connect to Mongo.')
+    console.log(process.env);
+    console.log(process.env);
     process.exit(1)
   } else {
     app.listen(port, function() {

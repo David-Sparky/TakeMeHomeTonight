@@ -43,9 +43,29 @@ app.config(['$routeProvider', function($routeProvider){
 		controller: 'rideFormCtrl',
 		access: {restricted: true}
 	}).
-	when('/aboutUs', {
-		templateUrl: 'client/views/about-us.html',
-		access: {restricted: false}
+	when('/team', {
+		templateUrl: 'client/views/team.html',
+		controller: 'teamCtrl'
+	}).
+	when('/publicTransit', {
+		templateUrl: 'client/views/publicTransit.html'
+	}).
+	when('/taxi', {
+		templateUrl: 'client/views/taxi.html',
+		controller: 'taxiCtrl'
+	}).
+	when('/plane', {
+		templateUrl: 'client/views/plane.html',
+		controller: 'planeCtrl'
+	}).
+	when('/bus', {
+		templateUrl: 'client/views/bus.html'
+	}).
+	when('/train', {
+		templateUrl: 'client/views/train.html'
+	}).
+	when('/shuttle', {
+		templateUrl: 'client/views/shuttle.html'
 	}).
 	otherwise({
 		redirectTo: '/'
