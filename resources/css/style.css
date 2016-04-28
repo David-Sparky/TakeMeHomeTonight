@@ -337,3 +337,55 @@ input{
   border-radius: 20px;
   padding-bottom: 10px;
 }
+
+.signup {
+  padding-top: 50px;
+
+}
+
+.signup button {
+  margin-top: 75px;
+}
+
+.signup .well {
+  width: 100%;
+}
+
+#signupButton {
+  margin-top: -30px;
+}
+
+@media (min-width: 992px) {
+  .form-horizontal {
+    margin-left: -50px;
+  }
+}
+
+/*For when screen is smaller than medium size*/
+@media (max-width: 700px) {
+  .signup .well {
+    width: 40%;
+    text-align: center;
+    margin-left: 30%; 
+  }
+}
+
+/*medium*/
+@media (min-width: 700px) and (max-width: 768px) {
+  .signup .well {
+    width: 50%;
+    text-align: center;
+    margin-left: 30%; 
+    padding-left: -10px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .form-horizontal {
+    margin-left: -100px; 
+  }
+}
+
+#main {
+  padding-bottom: 50px;
+}
