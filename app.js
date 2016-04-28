@@ -71,6 +71,10 @@ app.config(['$routeProvider', function($routeProvider){
 		templateUrl: 'client/views/publicTrans.html',
 		controller: 'publicTransitCtrl'
 	}).
+	when('/publicTrans', {
+		templateUrl: 'client/views/publicTrans.html',
+		controller: 'publicTransitCtrl'
+	}).
 	otherwise({
 		redirectTo: '/'
 	})

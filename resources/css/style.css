@@ -390,6 +390,10 @@ input{
   padding-bottom: 50px;
 }
 
+.center {
+  text-align: center
+}
+
 .profile_img{
   width: 200px;
   padding-left: 5px;
