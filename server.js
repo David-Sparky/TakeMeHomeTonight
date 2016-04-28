@@ -12,7 +12,9 @@ var routes = require('./server/routes/index'),
     port = 8005,
     app = express();
 
-app.use(cookieParser());
+var cdta= require('./client/controllers/api_info.js');
+var http= require('http');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
@@ -89,6 +91,87 @@ app.get('/logout',function(req, res, next){
     next();
   }
 }, cas.logout);
+
+app.get('/cdta', function (req, resp) {
+
+    var search = req.query.search_b;
+
+    console.log(search);
+
+    // http.get(cdta.api_time + '/' + search + cdta.api_key, function (callback) {
+    //
+    //     callback.on('data', function(d) {
+    //         console.log(d);
+    //     })
+    //
+    //
+    // });
+
+    var x = '';
+        http.get({
+            host: 'api.cdta.org',
+            path: '/api/v1/' + cdta.api_stops + '/' + search + cdta.api_key
+        }, function (res) {
+            res.on('data', function (d) {
+                x += d.toString();
+                console.log(d.toString());
+                res.destroy();
+                return resp.send(x);
+            });
+
+        });
+
+});
+
+app.get('/cdta_dir', function (req, resp) {
+
+    var search = req.query.search_b;
+
+    console.log(search);
+
+    // http.get(cdta.api_time + '/' + search + cdta.api_key, function (callback) {
+    //
+    //     callback.on('data', function(d) {
+    //         console.log(d);
+    //     })
+    //
+    //
+    // });
+
+    var x = '';
+    http.get({
+        host: 'api.cdta.org',
+        path: '/api/v1/' + cdta.api_directions + search + cdta.api_key
+    }, function (res) {
+        res.on('data', function (d) {
+            x += d.toString();
+            console.log(d.toString());
+            res.destroy();
+            return resp.send(x);
+        });
+
+    });
+
+});
+
+app.get('/get_route', function (req, resp) {
+
+    console.log("This stuff: " + req.query.info);
+    var x= '';
+    http.get({
+        host: 'api.cdta.org',
+        path: '/api/v1/' + cdta.api_sched + req.query.bus_num + '/weekday/' + req.query.info + cdta.api_key
+    }, function (res) {
+        res.on('data', function (d) {
+            x += d.toString();
+            console.log(d.toString());
+            res.destroy();
+            return resp.send(x);
+        });
+
+    });
+
+});
 
 db.connect('mongodb://' + process.env.tmhtDBUser + ':' + process.env.tmhtDBPassword + '@ds023418.mlab.com:23418/tmht', function(err) {
   if (err) {
