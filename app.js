@@ -1,4 +1,4 @@
-var app = angular.module('tmht', ['ui.bootstrap', 'ngRoute', 'ngFileUpload', 'ngCookies']);
+	var app = angular.module('tmht', ['ui.bootstrap', 'ngRoute', 'ngFileUpload', 'ngCookies']);
 
 app.config(['$routeProvider', function($routeProvider){
 	$routeProvider.
@@ -41,6 +41,16 @@ app.config(['$routeProvider', function($routeProvider){
 	when('/rides/addRide', {
 		templateUrl: 'client/views/ridesForm.html',
 		controller: 'rideFormCtrl',
+		access: {restricted: true}
+	}).
+	when('/rides/ride', {
+		templateUrl: 'client/views/rides.html',
+		controller: 'rides',
+		access: {restricted: true}
+	}).
+	when('/rides/offer', {
+		templateUrl: 'client/views/rides.html',
+		controller: 'rides',
 		access: {restricted: true}
 	}).
 	when('/team', {
