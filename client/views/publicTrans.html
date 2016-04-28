@@ -19,12 +19,38 @@
                     <div class="row">
                         <div class="col-lg-5 search">
                             <div class="input-group">
-                                <input type="text" class="form-control" ng-model="searchbar" placeholder="Search for...">
+                                <label for="stops">Search for stops:</label>
+                                <input id="stops" type="text" class="form-control" ng-model="searchbar"
+                                       placeholder="Search for...">
                             </div>
                         </div>
-                        <button class="btn btn-success" type="submit" ng-click="search()" ng-disabled="!loaded">Submit</button>
+                        <button class="btn btn-success" type="submit" ng-click="search()" ng-disabled="!loaded">Submit
+                        </button>
                     </div>
                 </form>
+                <form>
+                    <div class="row">
+                        <div class="col-lg-5 search">
+                            <div class="input-group">
+                                <label for="busses">Search for busses:</label>
+                                <input id="busses" type="text" class="form-control" ng-model="searchbar_d"
+                                       placeholder="Search for...">
+                                <label for="direction"></label>
+                            </div>
+                        </div>
+                        <button id="direction" class="btn btn-success" type="submit" ng-click="directions()" ng-disabled="!loaded">Submit
+                        </button>
+                    </div>
+                </form>
+                <h4>{{bus.stops[0].name}}</h4>
+                <ul>
+                    Serviced by:
+                    <li>{{bus.stops[0].serviced_by[87].route_id}} &mdash; {{bus.stops[0].serviced_by[87].direction}}
+                    </li>
+                    Look up route stops:
+                    <button class="btn btn-primary" ng-click="checkRoute('1')">{{bus.directions[0].direction}}</button>
+                    <button class="btn btn-primary" ng-click="checkRoute('2')">{{bus.directions[1].direction}}</button>
+                </ul>
             </div>
         </div>
         <div class="col-lg-6">
@@ -48,10 +74,9 @@
         <div class="col-lg-6">
             <div class="well">
                 <h3>RPI Shuttles</h3>
-                <iframe src="http://shuttles.rpi.edu" style="width: 500px; height: 450px;"></iframe>
+                <!--<iframe src="http://shuttles.rpi.edu" style="width: 500px; height: 450px;"></iframe>-->
             </div>
         </div>
-
 
 
     </section>
