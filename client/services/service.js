@@ -30,4 +30,11 @@ angular.module('tmht')
 			url: 'rides/allRequestedRides'
 		});
 	};
+
+	this.getAllOfferedRides = function(){
+		return $http({
+			method: 'GET',
+			url: 'rides/allOfferedRides'
+		});
+	};
 }]);

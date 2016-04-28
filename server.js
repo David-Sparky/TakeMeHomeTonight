@@ -3,6 +3,7 @@ var routes = require('./server/routes/index'),
     rides = require('./server/routes/rides'),
     users = require('./server/routes/users'),
     db = require('./server/db');
+    ObjectID = require('mongodb').ObjectID,
   	bodyParser = require('body-parser'),
   	cookieParser = require('cookie-parser'),
   	path = require('path'),
@@ -59,8 +60,7 @@ app.get('/login', cas.bounce, function (req, res) {
 
 app.get('/signUp', cas.bounce, function(req,res){
     if(!req.session || !req.session.cas_user) {
-      res.r
-edirect('/#/');
+      res.redirect('/#/');
     }
     console.log("here");
     var collection = db.get().collection('users');

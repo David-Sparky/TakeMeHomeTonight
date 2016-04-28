@@ -10,23 +10,24 @@
 	  <div class="centering text-center">
 			<!--<h3> Rides Available </h3>-->
 			<div class="ridecontainer" ng-repeat="offer in offerarray">
-				<a href="rides/offered/ride{{$index}}">
+				<a href="rides/offer?id={{offer['_id']}}">
 					<div class="rides row">
 						<div class="col-md-4">
 							<img src="/resources/imgs/carimg.png" alt="Car Image" height="100" width="130">
 						</div>
 						<div class="col-md-4">
 							<p> Details: </p>
-							<p> Going to: {{offer['Destination']}} </p>
-							<p> Leaving {{offer['Pickup']}} at or around: {{offer['Time']}}</p>
-							<p> Seats Remaining: {{offer['Seats']}} / {{offer['TotalSeats']}} </p>
-							<p> Cost if any: {{offer['Cost']}}</p>
+							<p> Going to: {{offer['destination']}} </p>
+							<p> Leaving {{offer['departLocation']}} at or around: {{offer['departDate']}}'</p>
+							<p> Seats Remaining: {{offer['availableseats']}} / {{offer['seats']}} </p>
+							<p> Cost if any: {{offer['cost']}}</p>
 						</div>
 						<div class="col-md-4">
 							<p> Info :</p>
-							<p> Driver: {{offer['Name']}}</p>
-							<p> Car Make & Model: {{offer['Car']}}</p>
-							<p> Car Color: {{offer['CarColor']}} </p>
+							<p> Driver: {{offer['rcs']}}</p>
+							<p> Car Make & Model: {{offer['car']['make']}} {{offer['car']['model']}}</p>
+							<p> Car Color: {{offer['car']['color']}} </p>
+							<p> License Plate: {{offer['car']['license']}} </p>
 						</div>
 					</div>
 				</a>
@@ -37,7 +38,7 @@
 	  <div class="centering text-center">
 			<!--<h3> Rides Needed </h3>-->
 			<div class="ridecontainer" ng-repeat="needed in needarray">
-				<a href="ride{{$index}}">
+				<a href="rides/ride?id={{needed['_id']}}">
 					<div class="rides row">
 						<div class="col-md-4">
 							<p> Details: </p>
@@ -54,4 +55,5 @@
 			</div>	  
 		</div>
 	</div>
+
 </div>

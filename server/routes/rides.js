@@ -36,7 +36,24 @@ router.post('/requestRide', function(req, res){
 });
 
 router.post('/addRide', function(req,res){
-	console.log(req.body);
+	if(!req.session || !req.session.cas_user){
+		//no user logged in
+		console.log('no user');
+	}else{
+		req.body['availableseats'] = req.body['seats'];
+		var collection = db.get().collection('offered');
+		collection.insert(req.body, function(err, results){
+			if(err) throw err;
+			console.log(results);
+			if(results.insertedCount == 1){
+				res.send({Success: 'Ride is now offered'});
+			}
+			else{
+				//error inserting into db\
+				console.log('error inserting ride offer');
+			}
+		})
+	}
 });
 
 
@@ -55,5 +72,26 @@ router.get('/allOfferedRides', function(req,res){
 		res.send(docs);
 	});
 });
+
+router.get('/get_ride', function(req,res){
+	var id = req.query['id'];
+	var collection = db.get().collection('requested');
+	collection.find({_id:ObjectID.createFromHexString(id)}).toArray(function(err, docs){
+		if(err) throw err;
+		res.send(docs);
+	});
+});
+
+
+router.get('/get_offer', function(req,res){
+	var id = req.query['id'];
+	var collection = db.get().collection('offered');
+	collection.find({_id:ObjectID.createFromHexString(id)}).toArray(function(err, docs){
+		if(err) throw err;
+		res.send(docs);
+	});
+
+});
+
 
 module.exports = router;
