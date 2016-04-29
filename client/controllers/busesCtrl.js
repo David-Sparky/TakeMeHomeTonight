@@ -1,7 +1,7 @@
 angular.module('tmht')
     .controller('busesCtrl', ['$scope','$location', '$http', function($scope, $location, $http){
 
-        $scope.searchbar = "Walmart";
+        $scope.searchbar = "";
         $scope.searchbar_d= "";
         $scope.loaded = true;
         //LOADED ENSURE THAT WE ARE DONE WITH THE API CALL TO MAKE SURE WE DON'T ANNOY THE API

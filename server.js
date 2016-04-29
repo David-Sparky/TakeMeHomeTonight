@@ -95,6 +95,7 @@ app.get('/logout',function(req, res, next){
 app.get('/cdta', function (req, resp) {
 
     var search = req.query.search_b;
+    search= escape(search);
 
     // http.get(cdta.api_time + '/' + search + cdta.api_key, function (callback) {
     //
