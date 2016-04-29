@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Fjalla+One);
 
-/*webpage*/
+/*general webpage CSS*/
 html {
   margin:0;
   padding:0;
@@ -26,71 +26,48 @@ a:hover {
   color: #2dcc70;
 }
 
-.btn-default {
-	border-color: white;
-	background-color: transparent; 
-	color: white;
-	border-width: 3px;
+input {
+  color: #555;
 }
 
-.btn-default:hover {
-  color: black;
-  background-color: #FFF;
+.modal-dialog {
+  color: #555;
 }
 
-.btn-xlarge {
-  padding: 18px 28px;
-  font-size: 22px;
-  font-weight: bold;
-  line-height: normal;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  border-radius: 8px;
+.well {
+  border-radius: 5px;
+  background-color: rgba(69,69,69,.7);
 }
 
-.container-fluid{
-  height:90%;
-  display:table;
-  width: 100%;
-  padding: 0;
+.well h3 {
+  margin-top: 0px;
+  text-align: center;
 }
 
-.row-fluid {
-  height: 80%; 
-  display:table-cell; 
-  vertical-align: middle;
-}
+/*end general webpage css*/
 
-.centering {
-  float:none;
-  margin:0 auto;
-}
 
-.page-header {
-  margin-top: -15px;
-  margin-bottom: 0px;
-  border-bottom: 0px;
-  height: 40px;
-}
-
+/*naviagation bar css*/
 .navbar-default {
   background-color: rgba(0,0,0,0.7);
   border: none;
   margin-bottom: 0px;
 }
 
+/*also in media size*/
 .navbar-header img {
   padding-top: 5px;
   margin-bottom: -50px;
 }
 
+/*also in media size*/
 .nav.navbar-nav li a,
 .nav.navbar-nav li a:visited {
-    color: white;
+  color: white;
 }
 
 .nav.navbar-nav li a:hover {
-    color: #2dcc70;
+  color: #2dcc70;
 }
 
 .navbar-default .navbar-nav .open .dropdown-menu,
@@ -109,11 +86,153 @@ a:hover {
   background-color: transparent;
   color: white;
 }
+/*end naviagation bar css*/
 
+
+/*main page css*/
 .logo {
   width: 20%;
   height: 20%;
   margin-left: 10px;
+}
+
+/*also in media size*/
+.page-header {
+  margin-top: -15px;
+  margin-bottom: 0px;
+  border-bottom: 0px;
+  height: 40px;
+}
+
+.title {
+  background: #2dcc70;
+  color: #fff;
+  padding: 10px 0;
+  margin-bottom: 10px;
+}
+
+#main {
+  padding-bottom: 80px;
+}
+
+#home {
+  position: relative;
+  transform: translateY(50%);
+}
+
+.container-fluid {
+  height:90%;
+  display:table;
+  width: 100%;
+  padding: 0;
+}
+
+.row-fluid {
+  height: 80%; 
+  display:table-cell; 
+  vertical-align: middle;
+}
+
+.centering {
+  float: none;
+  margin:0 auto;
+}
+
+.center {
+  text-align: center
+}
+
+.about {
+  background: #2dcc70;
+  color: #fff;
+  padding-top: 10px;
+  padding-bottom: 3px;
+  text-align: center;
+  margin-top: 100px;
+  width:80%;
+}
+
+.about p {
+  font-size: 1.4em;
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-bottom: 3px;
+}
+
+#footer {
+  background: #333;
+  padding-top: 7px;
+  padding-bottom: 15px;
+  color: #666;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+/*end main page css*/
+
+
+/*custom button css*/
+#mainButtons {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.btn-default {
+  border-color: white;
+  background-color: transparent; 
+  color: white;
+  border-width: 3px;
+}
+
+.btn-default:hover {
+  color: black;
+  background-color: #FFF;
+}
+
+.btn-xlarge {
+  padding: 18px 28px;
+  font-size: 22px;
+  font-weight: bold;
+  line-height: normal;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+}
+
+.custom-btn {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 5px;
+  border: 0;
+  background-image: none;
+  text-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  margin: 5px;
+}
+
+.btn-primary {
+  background-color: #2dcc70;
+}
+
+.btn-primary:hover {
+  background-color: #24a259;
+}
+
+/*also in media size*/
+.btn-xl {
+  height: 100px;
+  width: 300px;
+  font-weight: bold;
+  font-size: 30pt;
+}
+/*end custom button css*/
+
+
+/*rides / row css*/
+.pubRow {
+  padding-top: 15px;
 }
 
 .rides {
@@ -121,10 +240,6 @@ a:hover {
   margin: 0 auto;
   text-align: center;
   padding-top: 2px;
-}
-
-.pubRow {
-  padding-top: 15px;
 }
 
 .rides form input {
@@ -156,169 +271,19 @@ a:hover {
 .rides:hover {
   background-color: rgba(69,69,69,.9);
 }
+/*end rides / row css*/
 
-.custom-btn {
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  border-radius: 5px;
-  border: 0;
-  background-image: none;
-  text-shadow: none;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  margin: 5px;
-}
 
-.btn-primary {
-  background-color: #2dcc70
-}
-
-.btn-primary:hover {
-  background-color: #24a259
-}
-
-.btn-xl{
-  height: 100px;
-  width: 300px;
-  font-weight: bold;
-  font-size: 30pt;
-}
-
-#footer {
-  background: #333;
-  padding-top: 7px;
-  padding-bottom: 15px;
-  color: #666;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-}
-
-#footer #gototop {
-  height: 40px;
-  line-height: 40px;
-  width: 40px;
-  text-align: center;
-  display: inline-block;
-  background: #1d1d1d;
-  font-size: 24px;
-  color: #fff
-}
-
-#footer #gototop:hover {
-  background: #2b2b2b;
-  text-decoration: none
-}
-
-#footer .cp {
-  margin-top: 11px
-}
-
-ul.social {
-  list-style: none;
-  margin: 10px 0 0;
-  padding: 0;
-  display: inline-block
-}
-
-ul.social > li {
-  display: inline-block;
-  margin: 0 5px
-}
-
-ul.social > li > a {
-  font-size: 24px;
-  color: #666
-}
-
-ul.social > li > a:hover {
-  color: #999
-}
-
-.title {
-  background: #2dcc70;
-  color: #fff;
-  padding: 10px 0;
-  margin-bottom: 10px;
-
-}
-
-.about {
-  background: #2dcc70;
-  color: #fff;
-  padding-top: 10px;
-  padding-bottom: 3px;
-  text-align: center;
-  margin-top: 100px;
-  width:80%;
-}
-
-.about p {
-  font-size: 1.4em;
-  margin-left: 3px;
-  margin-right: 3px;
-  margin-bottom: 3px;
-}
-
-#mainButtons {
-  margin-top: 30px;
-  text-align: center;
-}
-
-.well {
-  border-radius: 5px;
-  background-color: rgba(69,69,69,.7);
-}
-
-.well h3 {
-  margin-top: 0px;
-  text-align: center;
-}
-
-#home {
-  position: relative;
-  transform: translateY(50%);
-}
-
-input{
-  color: #555;
-}
-
-.modal-dialog{
-  color: #555;
-}
-
-.team {
-  padding-left: 100px;
-}
-
-.box {
-  background-color: #999 ;
-  border-top: 1px solid #f0f0f0;
-  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px
-}
-
-.profile_img {
-  width: 100px;
-  border-radius: 20px;
-  padding-bottom: 10px;
-}
-
+/*signup page css*/
 .signup {
   padding-top: 50px;
-
 }
 
 .signup button {
   margin-top: 75px;
 }
 
+/*also in media size*/
 .signup .well {
   width: 100%;
 }
@@ -326,23 +291,22 @@ input{
 .signupButton {
   margin-top: -30px;
 }
+/*end singup page css*/
 
-#main {
-  padding-bottom: 80px;
+
+/*team page css*/
+.team {
+  padding-left: 100px;
 }
 
-.center {
-  text-align: center
-}
-
-.profile_img{
-  width: 200px;
-  padding-left: 5px;
+.profile_img {
+  width: 100px;
   border-radius: 20px;
   padding-bottom: 10px;
 }
+/*end team page css*/
 
-/*For when screen is smaller than medium size*/
+/*for when screen is smaller than 700px*/
 @media (max-width: 700px) {
   .signup .well {
     width: 40%;
@@ -351,7 +315,7 @@ input{
   }
 }
 
-/*medium*/
+/*for when screen is bigger than 700px but less than 768px*/
 @media (min-width: 700px) and (max-width: 768px) {
   .signup .well {
     width: 50%;
@@ -361,6 +325,7 @@ input{
   }
 }
 
+/*for when screen is medium size*/
 @media (max-width: 768px) {
   .navbar-header img {
     margin-bottom: 0px;
@@ -368,12 +333,14 @@ input{
   }
 }
 
+/*for when screen size is bigger than medium size but smaller than large size*/
 @media (min-width: 768px) and (max-width: 992px) {
   .signup .form-horizontal {
     margin-left: -100px; 
   }
 }
 
+/*for when screen is smaller than large size*/
 @media (max-width: 992px) {
   h1 {
     font-size: 2.2em;
@@ -387,14 +354,15 @@ input{
     font-size: 1.05em;
   }
 
-  #mainButtons button{
+  #mainButtons button {
     font-size: 1.5em;
   }
 
-  .btn-xl{
+  .btn-xl {
     height: 75px;
     width: 200px;
   }
+
   .middle {
     margin-top: 55px;
     min-height: 10px;
@@ -402,7 +370,7 @@ input{
   }
 }
 
-/*For when screen is bigger than medium size*/
+/*for when the screen is bigger than large size*/
 @media (min-width: 992px) {
   .nav.navbar-nav li a {
     font-size: 1.3em;
@@ -417,6 +385,8 @@ input{
   }
 }
 
+
+/*home page css based on height of window*/
 @media (max-height: 500px) {
   #home {
     position: relative;
@@ -429,12 +399,13 @@ input{
 }
 
 @media (min-height: 500px) and (max-height: 600px) {
-  .about {
-    margin-top: 40px;
-  }
-
   #home {
     position: relative;
     transform: translateY(40%);
   }
+
+  .about {
+    margin-top: 40px;
+  }
 }
+/*end home page css based on height of window*/

@@ -64,18 +64,17 @@ app.get('/signUp', cas.bounce, function(req,res){
     if(!req.session || !req.session.cas_user) {
       res.redirect('/#/');
     }
-    console.log("here");
     var collection = db.get().collection('users');
     collection.find({rcs: req.session.cas_user}).toArray(function(err, docs){
       if(err) throw err;
-      console.log(docs.length);
-      if(docs.length > 0){
+      // console.log(docs.length);
+      if(docs.length > 0) {
         console.log("User already exists");
         res.cookie('user', req.session.cas_user);
         //notify user that account alrady exists and log them in
         res.redirect('/#/landing');
       }
-      else{
+      else {
         res.redirect('/#/signUp');
         console.log('signUp');
       }
