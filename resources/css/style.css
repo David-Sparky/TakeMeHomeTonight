@@ -139,13 +139,18 @@ a:hover {
   margin-left: 10%;
 }
 
-.ridecontainer{
+.ridecontainer {
   width: 80%;
-  margin: auto;
+  margin: 0 auto;
+  padding-bottom: 10px;
 }
 
-.ridecontainer a{
+.ridecontainer a {
   color: white;
+}
+
+.ridecontainer .well {
+  padding-bottom: 10px;
 }
 
 .rides:hover {
@@ -266,7 +271,7 @@ ul.social > li > a:hover {
   background-color: rgba(69,69,69,.7);
 }
 
-.well h3{
+.well h3 {
   margin-top: 0px;
   text-align: center;
 }

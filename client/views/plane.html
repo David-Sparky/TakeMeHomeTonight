@@ -8,15 +8,17 @@
   </section>
 
   <div class="ridecontainer" ng-repeat="companyInfo in taxiarray">
-    <div class="rides row">
-      <div class="col-md-3">
-        <img src="/resources/imgs/{{companyInfo['logo']}}" alt="plane logo" height="100" width="100">
-      </div>
-      <div class="col-md-8">
-        <p> Company: {{companyInfo['Airline']}}</p>
-        <p> Phone: {{companyInfo['Phone']}}</p>
-        <p> Website: <a href= {{companyInfo['Website']}}>{{companyInfo['Website']}}</a> </p>
-        <p> Flys to Albany Airport: {{companyInfo['Albany']}}</p>
+    <div class="rides row well">
+      <div class="pubRow">
+        <div class="col-md-3">
+          <img src="/resources/imgs/{{companyInfo['logo']}}" alt="plane logo" height="100" width="150">
+        </div>
+        <div class="col-md-8">
+          <p> Company: {{companyInfo['Airline']}}</p>
+          <p> Phone: {{companyInfo['Phone']}}</p>
+          <p> Website: <a href= {{companyInfo['Website']}}>{{companyInfo['Website']}}</a> </p>
+          <p> Flys to Albany Airport: {{companyInfo['Albany']}}</p>
+        </div>
       </div>
     </div>
   </div>
