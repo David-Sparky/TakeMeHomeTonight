@@ -116,11 +116,15 @@ a:hover {
   margin-left: 10px;
 }
 
-/*Rides */
 .rides {
   width: 90%;
   margin: 0 auto;
   text-align: center;
+  padding-top: 2px;
+}
+
+.pubRow {
+  padding-top: 15px;
 }
 
 .rides form input {
@@ -143,16 +147,10 @@ a:hover {
 .ridecontainer a{
   color: white;
 }
+
 .rides:hover {
   background-color: rgba(69,69,69,.9);
 }
-
-.rides {
-  padding-top: 2px;
-}
-
-/*End Rides*/
-
 
 .custom-btn {
   -webkit-border-radius: 0;
