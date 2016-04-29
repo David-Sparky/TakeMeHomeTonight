@@ -1,59 +1,58 @@
 <div class="container-fluid">
-	<section class="title row-">
+  <section class="title row-">
         <div class="container">
-			<div class="page-header">
+      <div class="page-header">
                 <h1>{{title}}</h1>
             </div>
         </div>
     </section>
-	<div ng-show="ridesavail" class=""> <!-- Only show rides available on ridesoffered -->
-	  <div class="centering text-center">
-			<!--<h3> Rides Available </h3>-->
-			<div class="ridecontainer" ng-repeat="offer in offerarray">
-				<a href="#/rides/offer?id={{offer['_id']}}">
-					<div class="rides row">
-						<div class="col-md-4">
-							<img src="/resources/imgs/carimg.png" alt="Car Image" height="100" width="130">
-						</div>
-						<div class="col-md-4">
-							<p> Details: </p>
-							<p> Going to: {{offer['destination']}} </p>
-							<p> Leaving {{offer['departLocation']}} at or around: {{offer['departDate']}}'</p>
-							<p> Seats Remaining: {{offer['availableseats']}} / {{offer['seats']}} </p>
-							<p> Cost if any: {{offer['cost']}}</p>
-						</div>
-						<div class="col-md-4">
-							<p> Info :</p>
-							<p> Driver: {{offer['rcs']}}</p>
-							<p> Car Make & Model: {{offer['car']['make']}} {{offer['car']['model']}}</p>
-							<p> Car Color: {{offer['car']['color']}} </p>
-							<p> License Plate: {{offer['car']['license']}} </p>
-						</div>
-					</div>
-				</a>
-			</div>	  
-		</div>
-	</div>
-	<div ng-show='needed' class="needrides"><!-- Only show rides needed on ridesneeded -->
-	  <div class="centering text-center">
-			<!--<h3> Rides Needed </h3>-->
-			<div class="ridecontainer" ng-repeat="needed in needarray">
-				<a href="#/rides/ride?id={{needed['_id']}}">
-					<div class="rides row">
-						<div class="col-md-4">
-							<p> Details: </p>
-							<p> Person: {{needed.rcs}} </p>
-							<p> Time: {{needed.departDate | date:'shortDate'}} / {{needed.departTime | date:'shortTime'}} </p>
-						</div>
-						<div class="col-md-4">
-							<p> Info :</p>
-							<p> Destination: {{needed.destination}} </p>
-							<p> Offer: {{needed.cost}} </p>
-						</div>
-					</div>
-				</a>
-			</div>	  
-		</div>
-	</div>
+  <div ng-show="ridesavail" class=""> <!-- Only show rides available on ridesoffered -->
+    <div class="centering text-center">
+      <div class="ridecontainer" ng-repeat="offer in offerarray">
+        <a href="#/rides/offer?id={{offer['_id']}}">
+          <div class="rides row">
+            <div class="col-md-4">
+              <img src="/resources/imgs/carimg.png" alt="Car Image" height="100" width="130">
+            </div>
+            <div class="col-md-4">
+              <p> Details: </p>
+              <p> Going to: {{offer['destination']}} </p>
+              <p> Leaving {{offer['departLocation']}} at or around: {{offer['departDate']}}'</p>
+              <p> Seats Remaining: {{offer['availableseats']}} / {{offer['seats']}} </p>
+              <p> Cost if any: {{offer['cost']}}</p>
+            </div>
+            <div class="col-md-4">
+              <p> Info :</p>
+              <p> Driver: {{offer['rcs']}}</p>
+              <p> Car Make &amp; Model: {{offer['car']['make']}} {{offer['car']['model']}}</p>
+              <p> Car Color: {{offer['car']['color']}} </p>
+              <p> License Plate: {{offer['car']['license']}} </p>
+            </div>
+          </div>
+        </a>
+      </div>    
+    </div>
+  </div>
+  <div ng-show='needed' class="needrides"><!-- Only show rides needed on ridesneeded -->
+    <div class="centering text-center">
+      <!--<h3> Rides Needed </h3>-->
+      <div class="ridecontainer" ng-repeat="needed in needarray">
+        <a href="#/rides/ride?id={{needed['_id']}}">
+          <div class="rides row">
+            <div class="col-md-4">
+              <p> Details: </p>
+              <p> Person: {{needed.rcs}} </p>
+              <p> Time: {{needed.departDate | date:'shortDate'}} / {{needed.departTime | date:'shortTime'}} </p>
+            </div>
+            <div class="col-md-4">
+              <p> Info :</p>
+              <p> Destination: {{needed.destination}} </p>
+              <p> Offer: {{needed.cost}} </p>
+            </div>
+          </div>
+        </a>
+      </div>    
+    </div>
+  </div>
 
 </div>

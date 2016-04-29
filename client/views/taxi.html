@@ -1,23 +1,20 @@
-
 <div class= "container-fluid" ng-controller="taxiCtrl">
-    <section class="title">
-        <div class="container">
-            <div class="page-header">
-              <h1>Taxi</h1>
-            </div>
-        </div>
-    </section>
+  <section class="title">
+      <div class="container">
+          <div class="page-header">
+            <h1>Taxi</h1>
+          </div>
+      </div>
+  </section>
 
   <div class="ridecontainer" ng-repeat="companyInfo in taxiarray">
     <div class="rides row">
       <div class="col-md-3">
         <img src="/resources/imgs/taxi.png" alt="Taxi Image" height="80" width="110">
       </div>
-      <!-- <div class="col-md-6"> -->
         <p> Company: {{companyInfo['Company']}}</p>
         <p> Phone: {{companyInfo['Phone']}}</p>
         <p> Website: <a href= {{companyInfo['Website']}}>{{companyInfo['Website']}}</a> </p>
-      <!-- </div> -->
     </div>
   </div>
 
