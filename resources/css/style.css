@@ -128,6 +128,10 @@ a:hover {
   width: 80%;
 }
 
+.rides form {
+  padding-top: 15px;
+}
+
 .rides .form-horizontal input {
   margin-left: 10%;
 }
