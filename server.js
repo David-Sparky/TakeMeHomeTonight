@@ -12,6 +12,7 @@ var routes = require('./server/routes/index'),
     express = require('express'),
     port = 8005,
     app = express();
+    fs= require('fs');
 
 var cdta = require('./client/controllers/api_info.js');
 var http = require('http');
