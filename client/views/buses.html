@@ -40,15 +40,19 @@
                     </button>
                 </div>
             </form>
-            <h4>{{bus.stops[0].name}}</h4>
-            <ul>
-                Serviced by:
-                <li>{{bus.stops[0].serviced_by[87].route_id}} &mdash; {{bus.stops[0].serviced_by[87].direction}}
-                </li>
-                Look up route stops:
-                <button class="btn btn-primary" ng-click="checkRoute('1')">{{bus.directions[0].direction}}</button>
-                <button class="btn btn-primary" ng-click="checkRoute('2')">{{bus.directions[1].direction}}</button>
-            </ul>
+            <div ng-repeat="i in bus.stops">
+                <h4>{{i.name}}</h4>
+                <div ng-repeat="thing in i.serviced_by">
+                <ul>
+                    Serviced by:
+
+                    <li>{{thing.route_id}} &mdash; {{thing.direction}}</li>
+                </ul>
+                </div>
+            </div>
+            Look up route stops:
+            <button class="btn btn-primary" ng-click="checkRoute('1')">{{bus.directions[0].direction}}</button>
+            <button class="btn btn-primary" ng-click="checkRoute('2')">{{bus.directions[1].direction}}</button>
         </div>
     </div>
 </div>
