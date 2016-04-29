@@ -1,9 +1,10 @@
 angular.module('tmht')
-    .controller('busesCtrl', ['$scope','$location', '$http', function($scope, $location, $http){
+    .controller('busesCtrl', ['$scope','$location', '$http', '$sce', function($scope, $location, $http, $sce){
 
         $scope.searchbar = "";
         $scope.searchbar_d= "";
         $scope.loaded = true;
+        $scope.data_pres= false;
         //LOADED ENSURE THAT WE ARE DONE WITH THE API CALL TO MAKE SURE WE DON'T ANNOY THE API
         $scope.search = function () {
             if(!$scope.loaded) {
@@ -53,6 +54,8 @@ angular.module('tmht')
                 $scope.bus = response.data;
                 //DEBUG STATEMENT
                 console.log($scope.bus);
+                $scope.data_pres= true;
+
 
             });
         };
@@ -85,4 +88,7 @@ angular.module('tmht')
 
         }
 
+        $scope.escapeHTML = function (str) {
+            return $sce.trustAsHtml(str);
+        }
     }]);

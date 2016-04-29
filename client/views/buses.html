@@ -11,7 +11,7 @@
 
     <div class="col-lg-6">
         <div class="well">
-            <h3>CDTA Options</h3>
+            <h3>CDTA Bus Stops</h3>
             <form id="angular" name="btn_form" method="post" novalidate>
                 <div class="row">
                     <div class="col-lg-5 search">
@@ -25,6 +25,21 @@
                     </button>
                 </div>
             </form>
+            <div ng-repeat="i in bus.stops">
+                <h4>{{ escapeHTML(i.name) }}</h4>
+                <div ng-repeat="thing in i.serviced_by">
+                <ul>
+                    Serviced by:
+
+                    <li>{{thing.route_id}} &mdash; {{thing.direction}}</li>
+                </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="well">
+            <h3>CDTA Bus Routes</h3>
             <form>
                 <div class="row">
                     <div class="col-lg-5 search">
@@ -40,19 +55,8 @@
                     </button>
                 </div>
             </form>
-            <div ng-repeat="i in bus.stops">
-                <h4>{{i.name}}</h4>
-                <div ng-repeat="thing in i.serviced_by">
-                <ul>
-                    Serviced by:
-
-                    <li>{{thing.route_id}} &mdash; {{thing.direction}}</li>
-                </ul>
-                </div>
-            </div>
-            Look up route stops:
-            <button class="btn btn-primary" ng-click="checkRoute('1')">{{bus.directions[0].direction}}</button>
-            <button class="btn btn-primary" ng-click="checkRoute('2')">{{bus.directions[1].direction}}</button>
+            <button class="btn btn-primary" ng-hide="!data_pres" ng-click="checkRoute('1')">{{bus.directions[0].direction}}</button>
+            <button class="btn btn-primary" ng-hide="!data_pres" ng-click="checkRoute('2')">{{bus.directions[1].direction}}</button>
         </div>
     </div>
 </div>
