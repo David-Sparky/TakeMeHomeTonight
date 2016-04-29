@@ -1,31 +1,25 @@
 <div class = "container">
   <div class = "signup">
-    <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"> -->
-      <div class="well well-md">
-        <form name="signUpForm" class="form-horizontal">
-          
-          <label class="col-sm-6 control-label form-text">First Name:</label>
-          <div class="form-group">
-            <!-- <div class="col-sm-6"> -->
-              <input  type="text" ng-model="newUser.firstName" placeholder="First Name" required>
-            <!-- </div>  -->
-          </div> 
-          
-          <label class="col-sm-6 control-label form-text">Last Name:</label>
-          <div class="form-group">
-            <!-- <div class="col-sm-6"> -->
-              <input type="text" ng-model="newUser.lastName" placeholder="Last Name" required>
-            <!-- </div> -->
-          </div>
-
-        </form>
-
-        <div id ="signupButton">
-          <button class="btn btn-success center-block"  ng-click="signUp(newUser)" ng-disabled="signUpForm.$invalid">
-            Sign Up!
-          </button>
+    <div class="well well-md">
+      <form name="signUpForm" class="form-horizontal">
+        
+        <label class="col-sm-6 control-label form-text">First Name:</label>
+        <div class="form-group">
+            <input  type="text" ng-model="newUser.firstName" placeholder="First Name" required>
+        </div> 
+        
+        <label class="col-sm-6 control-label form-text">Last Name:</label>
+        <div class="form-group">
+            <input type="text" ng-model="newUser.lastName" placeholder="Last Name" required>
         </div>
+
+      </form>
+
+      <div id ="signupButton">
+        <button class="btn btn-success center-block"  ng-click="signUp(newUser)" ng-disabled="signUpForm.$invalid">
+          Sign Up!
+        </button>
       </div>
-    <!-- </div> -->
+    </div>
   </div>
 </div>

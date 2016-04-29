@@ -5,6 +5,7 @@ html {
   margin:0;
   padding:0;
   height:100%; 
+  max-height: 400px;
 }
 
 body {
@@ -60,17 +61,6 @@ a:hover {
   vertical-align: middle;
 }
 
-@media (max-width: 992px) {
-  h1 {
-    font-size: 2.2em;
-  }
-
-  .page-header {
-    height: 30px;
-  }
-
-}
-
 .centering {
   float:none;
   margin:0 auto;
@@ -103,27 +93,6 @@ a:hover {
     color: #2dcc70;
 }
 
-@media (max-width: 768px) {
-  .navbar-header img {
-    margin-bottom: 0px;
-    padding-top: 15px;
-  }
-}
-
-/*For when screen is smaller than medium size*/
-@media (max-width: 992px) {
-  .nav.navbar-nav li a {
-    font-size: 1.05em;
-  }
-}
-
-/*For when screen is bigger than medium size*/
-@media (min-width: 992px) {
-  .nav.navbar-nav li a {
-    font-size: 1.3em;
-  }
-}
-
 .navbar-default .navbar-nav .open .dropdown-menu,
 .navbar-default .navbar-nav .open .dropdown-menu>li>a,
 .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
@@ -150,9 +119,21 @@ a:hover {
 
 /*Rides */
 .rides {
-  background-color: rgba(0,0,0,0.5);
-  margin-top: 2px; 
-  border: 1px solid black;
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.rides form input {
+  width: 80%;
+}
+
+.rides form {
+  padding-top: 15px;
+}
+
+.rides .form-horizontal input {
+  margin-left: 10%;
 }
 
 .ridecontainer{
@@ -164,7 +145,7 @@ a:hover {
   color: white;
 }
 .rides:hover {
-  background-color: rgba(0,0,0,0.75);
+  background-color: rgba(69,69,69,.9);
 }
 
 .rides {
@@ -283,18 +264,7 @@ ul.social > li > a:hover {
   text-align: center;
 }
 
-/*For when screen is smaller than medium size*/
-@media (max-width: 992px) {
-  #mainButtons button{
-    font-size: 1.5em;
-  }
-  .btn-xl{
-    height: 75px;
-    width: 200px;
-  }
-}
-
-.well{
+.well {
   border-radius: 5px;
   background-color: rgba(69,69,69,.7);
 }
@@ -351,14 +321,23 @@ input{
   width: 100%;
 }
 
-#signupButton {
+.signupButton {
   margin-top: -30px;
 }
 
-@media (min-width: 992px) {
-  .form-horizontal {
-    margin-left: -50px;
-  }
+#main {
+  padding-bottom: 80px;
+}
+
+.center {
+  text-align: center
+}
+
+.profile_img{
+  width: 200px;
+  padding-left: 5px;
+  border-radius: 20px;
+  padding-bottom: 10px;
 }
 
 /*For when screen is smaller than medium size*/
@@ -380,23 +359,80 @@ input{
   }
 }
 
+@media (max-width: 768px) {
+  .navbar-header img {
+    margin-bottom: 0px;
+    padding-top: 15px;
+  }
+}
+
 @media (min-width: 768px) and (max-width: 992px) {
-  .form-horizontal {
+  .signup .form-horizontal {
     margin-left: -100px; 
   }
 }
 
-#main {
-  padding-bottom: 50px;
+@media (max-width: 992px) {
+  h1 {
+    font-size: 2.2em;
+  }
+
+  .page-header {
+    height: 30px;
+  }
+
+  .nav.navbar-nav li a {
+    font-size: 1.05em;
+  }
+
+  #mainButtons button{
+    font-size: 1.5em;
+  }
+
+  .btn-xl{
+    height: 75px;
+    width: 200px;
+  }
+  .middle {
+    margin-top: 55px;
+    min-height: 10px;
+    background-color: rgba(0,0,0,0.05);
+  }
 }
 
-.center {
-  text-align: center
+/*For when screen is bigger than medium size*/
+@media (min-width: 992px) {
+  .nav.navbar-nav li a {
+    font-size: 1.3em;
+  }
+  .middle {
+    margin-top: 55px;
+    min-height: 10px;
+    background-color: rgba(0,0,0,0.05);
+  }
+  .signup .form-horizontal {
+    margin-left: -50px;
+  }
 }
 
-.profile_img{
-  width: 200px;
-  padding-left: 5px;
-  border-radius: 20px;
-  padding-bottom: 10px;
+@media (max-height: 500px) {
+  #home {
+    position: relative;
+    transform: translateY(30%);
+  }
+
+  .about {
+    margin-top: 30px;
+  }
+}
+
+@media (min-height: 500px) and (max-height: 600px) {
+  .about {
+    margin-top: 40px;
+  }
+
+  #home {
+    position: relative;
+    transform: translateY(40%);
+  }
 }
