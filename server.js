@@ -96,8 +96,6 @@ app.get('/cdta', function (req, resp) {
 
     var search = req.query.search_b;
 
-    console.log(search);
-
     // http.get(cdta.api_time + '/' + search + cdta.api_key, function (callback) {
     //
     //     callback.on('data', function(d) {
@@ -108,10 +106,13 @@ app.get('/cdta', function (req, resp) {
     // });
 
     var x = '';
+    console.log("Search: " + search);
         http.get({
             host: 'api.cdta.org',
-            path: '/api/v1/' + cdta.api_stops + '/' + search + cdta.api_key
+            path: '/api/v1/' + cdta.api_stops + search + cdta.api_key
         }, function (res) {
+            var pt= '/api/v1/' + cdta.api_stops  + search + cdta.api_key;
+            console.log(pt);
             res.on('data', function (d) {
                 x += d.toString();
                 console.log(d.toString());
