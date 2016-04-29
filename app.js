@@ -75,6 +75,20 @@ app.config(['$routeProvider', function($routeProvider){
 	when('/shuttle', {
 		templateUrl: 'client/views/shuttle.html'
 	}).
+
+	// when('/publicTrans', {
+	// 	templateUrl: 'client/views/publicTrans.html',
+	// 	controller: 'publicTransitCtrl'
+	// }).
+	// when('/publicTrans', {
+	// 	templateUrl: 'client/views/publicTrans.html',
+	// 	controller: 'publicTransitCtrl'
+	// }).
+	// when('/buses', {
+	// 	templateUrl: 'client/views/buses.html',
+	// 	controller: 'busesCtrl'
+	// }).
+
 	otherwise({
 		redirectTo: '/'
 	})
@@ -89,3 +103,4 @@ app.run(['$rootScope', '$location', '$route', 'AuthService', function ($rootScop
     }
   });
 }]);
+
