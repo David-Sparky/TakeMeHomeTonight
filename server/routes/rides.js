@@ -3,7 +3,6 @@ var express = require('express'),
 	db = require('../db');
 
 router.use('*', function(req, res, next){
-  console.log(req);
   if(!req.session || !req.session.cas_user){
     res.status(401).send('Unauthorized access');
   }
@@ -39,7 +38,8 @@ router.post('/addRide', function(req,res){
 		//no user logged in
 		console.log('no user');
 	}else{
-		req.body['availableseats'] = req.body['seats'];
+		req.body.availableseats = req.body.seats;
+		req.body.owner = req.session.cas_user;
 		var collection = db.get().collection('offered');
 		collection.insert(req.body, function(err, results){
 			if(err) throw err;
@@ -111,7 +111,34 @@ router.get('/offeredRidesPerUser', function(req, res){
 		console.log("user does not exist");
 	}
 	else{
-		
+		var collection = db.get().collection('offered');
+		collection.find({owner: req.session.cas_user}).toArray(function(err, docs){
+			if(err) throw err;
+			res.send(docs);
+		});
+	}
+});
+
+router.get('/requestedRidesPerUser', function(req, res){
+	if(!req.session && !req.session.cas_user){
+		console.log("user does not exist");
+	}
+	else{
+		var collection = db.get().collection('offered');
+		collection.aggregate([
+			{$match : {'riders.rcs': req.session.cas_user}},
+			{$project: {
+				riders: {
+					$filter: {
+						input: '$riders',
+						as: 'item',
+						cond: {$eq: ['$$item.rcs': req.session.cas_user]}
+					}
+				}
+			}}
+		]).toArray(function(err, docs){
+			
+		})
 	}
 });
 
