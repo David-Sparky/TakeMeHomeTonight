@@ -38,8 +38,14 @@ router.post('/addRide', function(req,res){
 		//no user logged in
 		console.log('no user');
 	}else{
+<<<<<<< HEAD
 		req.body.availableseats = req.body.seats;
 		req.body.owner = req.session.cas_user;
+=======
+		req.body['availableseats'] = req.body['seats'];
+		req.body['riders']=[];
+		req.body['owner'] = req.session.cas_user;
+>>>>>>> dev
 		var collection = db.get().collection('offered');
 		collection.insert(req.body, function(err, results){
 			if(err) throw err;
@@ -106,6 +112,7 @@ router.get('/get_offer', function(req,res){
 	}
 });
 
+
 router.get('/offeredRidesPerUser', function(req, res){
 	if(!req.session && !req.session.cas_user){
 		console.log("user does not exist");
@@ -117,7 +124,23 @@ router.get('/offeredRidesPerUser', function(req, res){
 			res.send(docs);
 		});
 	}
+}
+
+router.put('/join_offer', function(req, res) {
+	var id = req.body.id;
+	var user = req.body.user;
+	var collection = db.get().collection('offered');
+	if(!req.session && !req.session.cas_user){
+		console.log("User does not exist");
+	}
+	else{
+		collection.update({_id:ObjectID.createFromHexString(id)}, {$push: {riders:{rcs:user,status:"pending"}},$inc:{availableseats:-1}}, function(err, results){
+			if(err) throw err;
+			res.status(200).send('Added to the list of pending users!');
+		});
+	}
 });
+
 
 router.get('/requestedRidesPerUser', function(req, res){
 	if(!req.session && !req.session.cas_user){
