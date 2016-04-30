@@ -123,5 +123,21 @@ router.put('/join_offer', function(req, res) {
 	}
 });
 
+router.put('/accept_join_offer', function(req, res) {
+	var id = req.body.id;
+	var user = req.body.user;
+	var collection = db.get().collection('offered');
+	if(!req.session && !req.session.cas_user){
+		console.log("User does not exist");
+	}
+	else{
+		collection.update({_id:ObjectID.createFromHexString(id)}, {$set: {'riders.'+index+'.status':"accepted"}}}, function(err, results){
+			if(err) throw err;
+			res.status(200).send('Updated '+user+" status to accepted");
+		});
+	}
+});
+
+
 
 module.exports = router;
