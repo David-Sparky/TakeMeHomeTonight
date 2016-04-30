@@ -1,3 +1,17 @@
+<script type="text/ng-template" id="group-template.html">
+    <div class="panel {{panelClass || 'panel-default'}}">
+      <div class="panel-heading">
+        <h4 class="panel-title" style="color:#fa39c3">
+          <a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" uib-accordion-transclude="heading"><span
+            ng-class="{'text-muted': isDisabled}">{{heading}}</span></a>
+        </h4>
+      </div>
+      <div class="panel-collapse collapse" uib-collapse="!isOpen">
+        <div class="panel-body" style="text-align: right" ng-transclude></div>
+      </div>
+    </div>
+  </script>
+
 <div class="container">
   <uib-tabset>
     <uib-tab heading="Profile">
@@ -46,8 +60,16 @@
     </uib-tab>
 
     <uib-tab heading="Rides">
-      
-
+      <uib-accordion style="color:black">
+        <uib-accordion-group heading="{{ride.destination}}" ng-repeat="ride in offeredRides">
+          <tbody>
+          <tr ng-repeat="rider in ride.riders">
+            <td><button ng-click="confirmtRide(ride._id, rider.rcs)">Confirm</button></td>
+            <td>{{rider.rcs}}</td>
+          <tr>
+          </tbody>
+        </uib-accordion-group>
+      </uib-accordion>
     </uib-tab>
   </uib-tabset>
 </div>

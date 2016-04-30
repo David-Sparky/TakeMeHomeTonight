@@ -1,6 +1,8 @@
 angular.module('tmht')
 .controller('userSettingsCtrl', ['$scope', 'rideService', '$uibModal', function($scope, rideService, $modal){
 
+	$scope.offeredRides = [];
+
 	rideService.getUserSettingInfo().then(function(data){
 		console.log(data);
 		$scope.editUser = data.data;
@@ -10,6 +12,7 @@ angular.module('tmht')
 
 	rideService.getOfferedRidesPerUser().then(function(data){
 		console.log(data);
+		$scope.offeredRides = data.data;
 	}).catch(function(err){
 		aletModal(err.status, err.data);
 	})
