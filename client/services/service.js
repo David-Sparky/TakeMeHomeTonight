@@ -39,17 +39,25 @@ angular.module('tmht')
 	};
 
 	this.getOfferRide = function(id){
-		console.log(id);
+		//console.log(id);
 		return $http({
 			method: "GET",
-			url: 'rides/get_offer?id='+id,
+			url: 'rides/get_offer?id='+id
 		});
 	};
 	this.getRide = function(id){
-		console.log(id);
+		//console.log(id);
 		return $http({
 			method: "GET",
-			url: 'rides/get_ride?id='+id,
+			url: 'rides/get_ride?id='+id
+		});
+	};
+	this.joinOffer = function(id,user){
+		//console.log(id);
+		return $http({
+			method: "PUT",
+			url: 'rides/join_offer',
+			data: {id:id,user:user}
 		});
 	};
 }]);
