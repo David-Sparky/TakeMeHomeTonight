@@ -79,16 +79,6 @@
                     </button>
                 </div>
             </form>
-            <div ng-repeat="i in bus.stops">
-                <h4>{{ escapeHTML(i.name) }}</h4>
-                <div ng-repeat="thing in i.serviced_by">
-                    <ul>
-                        Serviced by:
-
-                        <li>{{thing.route_id}} &mdash; {{thing.direction}}</li>
-                    </ul>
-                </div>
-            </div>
         </div>
     </div>
     <div class="col-lg-6">
