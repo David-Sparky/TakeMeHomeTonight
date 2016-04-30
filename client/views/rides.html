@@ -24,7 +24,7 @@
 						</div>
 						<div class="col-md-4">
 							<p> Info :</p>
-							<p> Driver: {{offer['rcs']}}</p>
+							<p> Driver: {{offer['owner']}}</p>
 							<p> Car Make & Model: {{offer['car']['make']}} {{offer['car']['model']}}</p>
 							<p> Car Color: {{offer['car']['color']}} </p>
 							<p> License Plate: {{offer['car']['license']}} </p>
@@ -53,6 +53,32 @@
 					</div>
 				</a>
 			</div>	  
+		</div>
+	</div>
+	<div ng-show='offer' class="offer"><!-- singular offer display -->
+		<div class="centering text-center">
+			<p>{{rcs}}</p>
+			<p>{{depart_local}}</p>
+			<p>{{depart_time}}</p>
+			<p>{{destination}}</p>
+			<p>{{seats_avil}}</p>
+			<p>{{total_seats}}</p>
+			<p>{{car_make}} {{car_model}} - {{car_license}}</p>
+			<p>{{car_color}}</p>
+			<div ng-show="owner" class="pending" ng-repeat="user in pendingarray">
+				<p> {{user.rcs}} is {{user.status}} <button class="btn btn-default btn-md" ng-click="add_user(user.rcs)">Accept</button><button class="btn btn-default btn-md" ng-click="reject_user(user.rcs)">Reject</button> </p>
+			</div>
+			<div ng-show="owner" class="accepted" ng-repeat="user in acceptedarray">
+				<p> {{user.rcs}} is {{user.status}} <button class="btn btn-default btn-md" ng-click="remove_user(user.rcs)">Remove</button> </p>
+			</div>
+			<div ng-show="owner_and_available_check()" class="join">
+				<button ng-show="!joined" type='button' class="btn btn-default btn-md" ng-click="join_offer()"> Request to Join </button>
+			</div>
+		</div>
+	</div>
+	<div ng-show='ride' class="ride"><!-- singular ride request display -->
+		<div class="centering text-center">
+
 		</div>
 	</div>
 
