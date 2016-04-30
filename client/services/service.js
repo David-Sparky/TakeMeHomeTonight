@@ -52,4 +52,11 @@ angular.module('tmht')
 			url: 'rides/get_ride?id='+id,
 		});
 	};
+
+	this.getOfferedRidesPerUser = function(){
+		return $http({
+			method: 'GET',
+			url: '/rides/offeredRidesPerUser'
+		});
+	};
 }]);

@@ -8,6 +8,12 @@ angular.module('tmht')
 		alertModal(err.status, err.data);
 	});
 
+	rideService.getOfferedRidesPerUser().then(function(data){
+		console.log(data);
+	}).catch(function(err){
+		aletModal(err.status, err.data);
+	})
+
 	$scope.save = function(formData){
 		rideService.editUserSettings(formData).then(function(data){
 			console.log(data);

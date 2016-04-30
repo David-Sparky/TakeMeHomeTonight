@@ -106,5 +106,14 @@ router.get('/get_offer', function(req,res){
 	}
 });
 
+router.get('/offeredRidesPerUser', function(req, res){
+	if(!req.session && !req.session.cas_user){
+		console.log("user does not exist");
+	}
+	else{
+		
+	}
+});
+
 
 module.exports = router;
