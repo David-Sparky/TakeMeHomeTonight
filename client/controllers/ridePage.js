@@ -8,6 +8,11 @@ angular.module('tmht')
                 $scope.ride = true;
                 var ride_id = $location.search();
                 rideService.getRide(ride_id.id).then(function(data){
+                    var ride = data.data;
+                    $scope.rcs = ride[0].rcs;
+                    $scope.depart_local = ride[0].departLocation;
+                    $scope.depart_time = ride[0].departDate;
+                    $scope.destination = ride[0].destination;
                     console.log(data);
                 }).catch(function(err){
                     console.log(err);
