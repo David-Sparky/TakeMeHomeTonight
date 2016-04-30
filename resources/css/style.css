@@ -43,7 +43,6 @@ input {
   margin-top: 0px;
   text-align: center;
 }
-
 /*end general webpage css*/
 
 
@@ -236,14 +235,15 @@ input {
 }
 
 .rides {
-  width: 90%;
+  width: 60%;
   margin: 0 auto;
   text-align: center;
   padding-top: 2px;
 }
 
+/*also in media size*/
 .rides form input {
-  width: 80%;
+  width: 50%;
 }
 
 .rides form {
@@ -251,7 +251,7 @@ input {
 }
 
 .rides .form-horizontal input {
-  margin-left: 10%;
+  margin-left: 25%;
 }
 
 .ridecontainer {
@@ -313,6 +313,17 @@ input {
     text-align: center;
     margin-left: 30%; 
   }
+  .rides {
+    width: 70%;
+  }
+
+  .rides .form-horizontal input {
+    margin-left: 20%;
+  }
+
+  .rides form input {
+    width: 60%;
+  }
 }
 
 /*for when screen is bigger than 700px but less than 768px*/
@@ -337,6 +348,18 @@ input {
 @media (min-width: 768px) and (max-width: 992px) {
   .signup .form-horizontal {
     margin-left: -100px; 
+  }
+
+  .rides {
+    width: 60%;
+  }
+
+  .rides .form-horizontal input {
+    margin-left: 25%;
+  }
+
+  .rides form input {
+    width: 50%;
   }
 }
 
@@ -375,14 +398,17 @@ input {
   .nav.navbar-nav li a {
     font-size: 1.3em;
   }
+
   .middle {
     margin-top: 55px;
     min-height: 10px;
     background-color: rgba(0,0,0,0.05);
   }
+
   .signup .form-horizontal {
     margin-left: -50px;
   }
+
   #carid {
     margin-top: 30px;
   }
