@@ -26,8 +26,11 @@
         <a href="#/landing"><img class="logo" src="resources/imgs/TMHT.png"></a>
       </div>
 
+      
+
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse">
+        <div class = "middle" ng-show="!checkForUser()"></div>
         <ul class="nav navbar-nav pull-right">
           <li><a ng-show="checkForUser()" href="#/rides/ridesOffered">Rides Available </a></li>
           
