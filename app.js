@@ -44,13 +44,13 @@ app.config(['$routeProvider', function($routeProvider){
 		access: {restricted: true}
 	}).
 	when('/rides/ride', {
-		templateUrl: 'client/views/rides.html',
-		controller: 'rides',
+		templateUrl: 'client/views/ridePage.html',
+		controller: 'ridePage',
 		access: {restricted: true}
 	}).
 	when('/rides/offer', {
-		templateUrl: 'client/views/rides.html',
-		controller: 'rides',
+		templateUrl: 'client/views/ridePage.html',
+		controller: 'ridePage',
 		access: {restricted: true}
 	}).
 	when('/team', {
