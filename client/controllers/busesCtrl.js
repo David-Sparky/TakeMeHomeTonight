@@ -3,7 +3,9 @@ angular.module('tmht')
 
         $scope.searchbar = "";
         $scope.searchbar_d = "";
+        $scope.searchbar_id= "";
         $scope.loaded = true;
+        $scope.loaded_stop= true;
         $scope.data_pres = false;
 
 
@@ -128,5 +130,39 @@ angular.module('tmht')
             });
         };
 
-        //refresh_outages();
+
+        $scope.stop_id = function () {
+            if (!$scope.loaded_stop) {
+                return;
+            }
+
+            $scope.loaded_stop = false;
+            //WE ARE RUNNING A QUERY, SO SET LOADED TO FALSE TO DISABLE THE BUTTON
+            var url = "/stop_id";
+
+            //PUT TOGETHER THE QUERY FOR OUT SEARCH
+            var query = {
+                stopid: $scope.searchbar_id
+            };
+
+            $http.get(url, {params: query}).then(function (response) {
+                //WE FINISHED THE QUERY, SO SET LOADED BACK TO TRUE
+                $scope.loaded = true;
+                //GET THE DATA FROM THE TWITTER API AND TAKE THE RESPONSE AND SEND IT TO THE FRONT END OF THE PAGE
+                $scope.arrs = response.data;
+                //DEBUG STATEMENT
+
+                if ($scope.arrs.status == 404) {
+                    sweetAlert("Oops...", "We couldn't find that bus route for you. Please check the number and try again.", "error");
+                    $scope.loaded_stop = true;
+                }
+                else {
+                    console.log($scope.arrs);
+                    $scope.loaded_stop = true;
+                }
+
+
+            });
+        };
+
     }]);
