@@ -310,6 +310,14 @@ router.delete('/removeRideOffer', function(req, res){
 	});
 });
 
+router.delete('/removeNeededRide', function(req, res){
+	var collection = db.get().collection('requested');
+	collection.remove({_id: ObjectID.createFromHexString(req.query.rideID), rcs: req.session.cas_user}, function(err, results){
+		if(err) throw(err);
+		res.send('Needed Ride was removed!');
+	});
+});
+
 
 
 

@@ -99,6 +99,7 @@
       <uib-accordion style="color:black">
         <uib-accordion-group ng-repeat="ride in neededRidesRider">
           <uib-accordion-heading style="color:black !important;">{{ride.destination}} {{ride.departDate | date: 'shortDate'}} {{ride.departTime | date: 'shortTime'}}</uib-accordion-heading>
+          <button class="pull-right" ng-click="removeNeededRide(ride._id)">Delete Ride Request</button>
           <table class="table table-striped">
             <thead><tr>
               <th>Confirm</th>

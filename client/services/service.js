@@ -98,6 +98,13 @@ angular.module('tmht')
 		});
 	};
 
+	this.removeNeededRide = function(rideID){
+		return $http({
+			method: 'DELETE',
+			url: '/rides/removeNeededRide?rideID=' + rideID
+		});
+	};
+
 	this.confirmDriver = function(rideID, user){
 		return $http({
 			method: 'PUT',

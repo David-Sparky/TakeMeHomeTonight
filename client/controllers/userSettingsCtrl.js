@@ -90,6 +90,20 @@ angular.module('tmht')
 		});
 	};
 
+	$scope.removeNeededRide = function(rideID){
+		rideService.removeNeededRide(rideID).then(function(data){
+			console.log(data);
+			for(var x in $scope.neededRidesRider){
+				if(rideID == $scope.neededRidesRider[x]._id){
+					$scope.neededRidesRider.splice(x, 1);
+					alert('confirmed');
+				}
+			}
+		}).catch(function(err){
+			alertModal(err.status, err.data);
+		});
+	}
+
 	alertModal = function(title, body){
 		$scope.modalInstance = $modal.open({
             animation: $scope.animationsEnabled,
