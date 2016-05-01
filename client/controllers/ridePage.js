@@ -1,6 +1,7 @@
 angular.module('tmht')
     .controller('ridePage', ['$scope','$location', 'rideService','$cookies','$filter', function($scope, $location, rideService,$cookies,$filter){
         $scope.joined = false;
+        $scope.joined2= false;
         $scope.cookieusername = $cookies.get('user');
         switch($location.path()){
             case "/rides/ride":
@@ -99,19 +100,6 @@ angular.module('tmht')
             }
         };
 
-        $scope.owner_and_available_check2 = function(){
-            var found = $filter('filter')($scope.drivers,{rcs:$scope.cookieusername},true);
-            if(found.length){
-                return false;
-            }else{
-                if($scope.owner2 == true){
-                    return false;
-                }else {
-                    return true;
-                }
-            }
-        };
-
         $scope.add_user = function(user){
             $scope.acceptedarray.push({rcs:user,status:"accepted"});
             for(var i=0;i<$scope.pendingarray.length;i++) {
@@ -131,6 +119,37 @@ angular.module('tmht')
             //need to do db stuff
         };
 
+        $scope.remove_user = function(user){
+            for(var i=0;i<$scope.acceptedarray.length;i++) {
+                if($scope.acceptedarray[i].rcs == user){
+                    $scope.acceptedarray.splice(i,1);
+                }
+            }
+            //need to remove the user from the array in the DB
+        };
+
+        $scope.join_offer2 = function(){
+            var request_id = $location.search();
+            rideService.joinRequest(request_id.id,$cookies.get('user')).then(function(data) {
+            }).catch(function(err){
+                console.log(err);
+            });
+            $scope.joined2=true;
+        };
+
+        $scope.owner_and_available_check2 = function(){
+            var found = $filter('filter')($scope.drivers,{rcs:$scope.cookieusername},true);
+            if(found.length){
+                return false;
+            }else{
+                if($scope.owner2 == true){
+                    return false;
+                }else {
+                    return true;
+                }
+            }
+        };
+
         $scope.accept_driver = function(user){
             $scope.acceptedDriver.push({rcs:user,status:"accepted"});
             $scope.acceptedDriver_Bool = true;
@@ -147,12 +166,5 @@ angular.module('tmht')
             //need to do db stuff
         };
 
-        $scope.remove_user = function(user){
-            for(var i=0;i<$scope.acceptedarray.length;i++) {
-                if($scope.acceptedarray[i].rcs == user){
-                    $scope.acceptedarray.splice(i,1);
-                }
-            }
-            //need to remove the user from the array in the DB
-        }
+
     }]);
