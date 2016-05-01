@@ -84,9 +84,27 @@ angular.module('tmht')
 		});
 	};
 
-	this.getOfferForNeededRides = function(){
+	this.confirmDriver = function(rideID, user){
+		return $http({
+			method: 'PUT',
+			url: '/rides/confirmDriver',
+			data: {rideID: rideID, rcs: user}
+		});
+	};
 
-	}
+	this.getOfferForNeededRidesDriver = function(){
+		return $http({
+			method: 'GET',
+			url: '/rides/offersForNeededRidesDriver'
+		});
+	};
+
+	this.getOfferForNeededRidesRider = function(){
+		return $http({
+			method: 'GET',
+			url: '/rides/offersForNeededRidesRider'
+		});
+	};
 
 	this.joinRequest = function(id,user){
 		//console.log(id);

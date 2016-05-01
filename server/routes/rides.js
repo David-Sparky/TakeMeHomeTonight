@@ -162,6 +162,28 @@ router.put('/confirmRide', function(req, res){
 	});
 });
 
+router.put('/confirmDriver', function(req, res){
+	var collection = db.get().collection('requested');
+	var id = ObjectID.createFromHexString(req.body.rideID);
+	collection.find({_id: id}).toArray(function(err,docs){
+		if(err) throw err;
+		console.log(docs);
+		if(docs.length <= 0){
+			res.status(400).send('no corresponding ride');
+		}
+		else if(docs[0].rcs != req.session.cas_user){
+			console.log("This user doesn't have access to confirm driver");
+		}
+		else{
+			collection.update({_id: id, 'drivers.rcs': req.body.rcs}, {$set: {'drivers.$.status': 'accepted'}}, function(err, docs){
+				if(err) throw err;
+				console.log(docs);
+				res.status(200).send("updated");
+			});
+		}
+	});
+});
+
 //Rides a user has requested
 router.get('/requestedRidesPerUser', function(req, res){
 	if(!req.session && !req.session.cas_user){
@@ -171,8 +193,6 @@ router.get('/requestedRidesPerUser', function(req, res){
 		var collection = db.get().collection('offered');
 		//collection.find({'riders.rcs': req.session.cas_user}, {riders: 0}
 		collection.aggregate([
-			/*{$match: {'riders.rcs': req.session.cas_user}},
-			{$project: {riders: 0}}*/
 			{$unwind : '$riders'},
 			{$match: {'riders.rcs': req.session.cas_user}},
 			{$group: {
@@ -227,6 +247,19 @@ router.get('/offersForNeededRidesDriver', function(req,res){
 		]).toArray(function(err, docs){
 			if(err) throw err;
 
+			res.send(docs);
+		});
+	}
+});
+
+router.get('/offersForNeededRidesRider', function(req, res){
+	if(!req.session && !req.session.cas_user){
+		console.log("user does not exist");
+	}
+	else{
+		var collection = db.get().collection('requested');
+		collection.find({rcs: req.session.cas_user}).toArray(function(err, docs){
+			if(err) throw err;
 			res.send(docs);
 		});
 	}

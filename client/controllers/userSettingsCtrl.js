@@ -3,7 +3,8 @@ angular.module('tmht')
 
 	$scope.offeredRides = [];
 	$scope.requestedRides = [];
-	$scope.offerForNeededDriver = [];
+	$scope.neededRidesDriver = [];
+	$scope.neededRidesRider = [];
 
 	rideService.getUserSettingInfo().then(function(data){
 		$scope.editUser = data.data;
@@ -18,7 +19,14 @@ angular.module('tmht')
 	});
 
 	rideService.getOfferForNeededRidesDriver().then(function(data){
-		$scope.offerForNeededDriver = data.data;
+		$scope.neededRidesDriver = data.data;
+	}).catch(function(err){
+		alertModal(err.status, err.data);
+	});
+
+	rideService.getOfferForNeededRidesRider().then(function(data){
+		$scope.neededRidesRider = data.data;
+		console.log(data.data);
 	}).catch(function(err){
 		alertModal(err.status, err.data);
 	});
@@ -47,7 +55,15 @@ angular.module('tmht')
 		}).catch(function(err){
 			alertModal(err.status, err.data);
 		});
-	}
+	};
+
+	$scope.confirmDriver = function(rideID, user){
+		rideService.confirmDriver(rideID, user).then(function(data){
+			console.log(data);
+		}).catch(function(err){
+			alertModal(err.status, err.data);
+		});
+	};
 
 	alertModal = function(title, body){
 		$scope.modalInstance = $modal.open({
