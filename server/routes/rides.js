@@ -19,6 +19,7 @@ router.post('/requestRide', function(req, res){
 	else{
 		req.body['drivers']=[];
 		req.body.rcs = req.session.cas_user;
+		req.body.accepted = false;
 		var collection = db.get().collection('requested');
 		collection.insert(req.body, function(err, results){
 			if(err) throw err;
@@ -175,7 +176,7 @@ router.put('/confirmDriver', function(req, res){
 			console.log("This user doesn't have access to confirm driver");
 		}
 		else{
-			collection.update({_id: id, 'drivers.rcs': req.body.rcs}, {$set: {'drivers.$.status': 'accepted'}}, function(err, docs){
+			collection.update({_id: id, 'drivers.rcs': req.body.rcs}, {$set: {'drivers.$.status': 'accepted', accepted: true}}, function(err, docs){
 				if(err) throw err;
 				console.log(docs);
 				res.status(200).send("updated");
@@ -258,9 +259,14 @@ router.get('/offersForNeededRidesRider', function(req, res){
 	}
 	else{
 		var collection = db.get().collection('requested');
-		collection.find({rcs: req.session.cas_user}).toArray(function(err, docs){
+		collection.find({rcs: req.session.cas_user, accepted: 'true'}).toArray(function(err, docs){
 			if(err) throw err;
-			res.send(docs);
+			collection.find({rcs: req.session.cas_user, $or : [{accepted: 'false'}, {accepted: {$exists: false}}]}).toArray(function(err, docs2){
+				if(err) throw err;
+
+				res.send({accepted:docs, pending: docs2});
+			});
+			//res.send(docs);
 		});
 	}
 });

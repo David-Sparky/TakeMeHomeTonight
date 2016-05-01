@@ -25,8 +25,10 @@ angular.module('tmht')
 	});
 
 	rideService.getOfferForNeededRidesRider().then(function(data){
-		$scope.neededRidesRider = data.data;
-		
+		//$scope.neededRidesRider = data.data;
+		console.log(data);
+		$scope.acceptedDrivers = data.data.accepted;
+		$scope.pendingDrivers = data.data.pending;
 		console.log(data.data);
 	}).catch(function(err){
 		alertModal(err.status, err.data);

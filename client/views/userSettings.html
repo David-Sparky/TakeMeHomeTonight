@@ -106,7 +106,7 @@
             <td>{{ride.cost}}</td>
             <td>{{ride.car.color + ' ' + ride.car.make + ' ' + ride.car.model}}</td>
           <tr>
-          <tr ng-repeat="ride in neededRidesRider" ng-if="ride.drivers[0].status == 'accepted'">
+          <tr ng-repeat="ride in acceptedDrivers" ng-if="ride.drivers[0].status == 'accepted'">
             <td>{{ride.destination}}</td>
             <td>{{ride.departDate | date: 'shortDate'}}, {{ride.departTime | date: 'shortTime'}}</td>
             <td>{{ride.cost}}</td>
@@ -137,7 +137,7 @@
 
       <h2>Confirm Drivers</h2>
       <uib-accordion style="color:black">
-        <uib-accordion-group ng-repeat="ride in neededRidesRider">
+        <uib-accordion-group ng-repeat="ride in pendingDrivers">
           <uib-accordion-heading style="color:black !important;">{{ride.destination}} {{ride.departDate | date: 'shortDate'}} {{ride.departTime | date: 'shortTime'}}</uib-accordion-heading>
           <table class="table table-striped">
             <thead><tr>
