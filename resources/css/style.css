@@ -438,3 +438,16 @@ input {
   }
 }
 /*end home page css based on height of window*/
+
+
+tbody {
+  color: black;
+}
+
+.settings {
+  margin-top: 15px;
+}
+
+.tab-content {
+  margin-top: 15px;
+}
