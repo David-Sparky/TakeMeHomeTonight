@@ -256,6 +256,7 @@ input {
 
 .ridecontainer {
   width: 80%;
+  height: 90%;
   margin: 0 auto;
   padding-bottom: 10px;
 }
@@ -266,6 +267,12 @@ input {
 
 .ridecontainer .well {
   padding-bottom: 10px;
+}
+
+.ridecontainer iframe {
+  min-width: 200px;
+  width: 100%;
+  min-height: 425px;
 }
 
 .rides:hover {
