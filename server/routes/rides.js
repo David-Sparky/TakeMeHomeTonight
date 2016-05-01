@@ -262,13 +262,14 @@ router.get('/offersForNeededRidesRider', function(req, res){
 	}
 	else{
 		var collection = db.get().collection('requested');
-		collection.find({rcs: req.session.cas_user, accepted: 'true'}).toArray(function(err, docs){
+		collection.find({rcs: req.session.cas_user/*, accepted: 'true'*/}).toArray(function(err, docs){
 			if(err) throw err;
-			collection.find({rcs: req.session.cas_user, $or : [{accepted: 'false'}, {accepted: {$exists: false}}]}).toArray(function(err, docs2){
+			res.send(docs);
+			/*collection.find({rcs: req.session.cas_user, $or : [{accepted: 'false'}, {accepted: {$exists: false}}]}).toArray(function(err, docs2){
 				if(err) throw err;
 
 				res.send({accepted:docs, pending: docs2});
-			});
+			});*/
 			//res.send(docs);
 		});
 	}
@@ -298,6 +299,14 @@ router.delete('/removeRider', function(req, res){
 
 		console.log(results);
 		res.send('Rider Removed!');
+	});
+});
+
+router.delete('/removeRideOffer', function(req, res){
+	var collection = db.get().collection('offered');
+	collection.remove({_id: ObjectID.createFromHexString(req.query.rideID), owner: req.session.cas_user}, function(err, results){
+		if(err) throw err;
+		res.send('Ride Offer was removed!');
 	});
 });
 
