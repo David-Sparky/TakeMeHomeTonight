@@ -506,3 +506,8 @@ tbody {
 .settings .well {
   width: 60%;
 }
+
+.offer .well {
+  width: 60%;
+  padding-bottom: 10px;
+}
