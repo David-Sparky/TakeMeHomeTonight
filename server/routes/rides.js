@@ -165,7 +165,10 @@ router.get('/requestedRidesPerUser', function(req, res){
 	}
 	else{
 		var collection = db.get().collection('offered');
+		//collection.find({'riders.rcs': req.session.cas_user}, {riders: 0}
 		collection.aggregate([
+			/*{$match: {'riders.rcs': req.session.cas_user}},
+			{$project: {riders: 0}}*/
 			{$unwind : '$riders'},
 			{$match: {'riders.rcs': req.session.cas_user}},
 			{$group: {

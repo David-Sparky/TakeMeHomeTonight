@@ -66,7 +66,32 @@
     </uib-tab>
 
     <uib-tab heading="Check Requested Rides">
-      
+      <!--Confirmed Rides -->
+      <h2>Confirmed Rides</h2>
+      <table class="table table-striped">
+        <tbody>
+          <tr ng-repeat="ride in requestedRides" ng-if="ride.riders[0].status == 'accepted'">
+            <td>{{ride.destination}}</td>
+            <td>{{ride.departDate | date: 'shortDate'}}, {{ride.departTime | date: 'shortTime'}}</td>
+            <td>{{ride.cost}}</td>
+            <td>{{ride.car.year + ' ' + ride.car.make + ' ' + ride.car.model}}</td>
+          <tr>
+        </tbody>
+      </table>
+
+      <!-- Pending Rides -->
+      <h2>Pending Rides</h2>
+      <table class="table table-striped">
+        <tbody>
+          <tr ng-repeat="ride in requestedRides" ng-if="ride.riders[0].status == 'pending'">
+            <td>{{ride.destination}}</td>
+            <td>{{ride.departDate | date: 'shortDate'}}, {{ride.departTime | date: 'shortTime'}}</td>
+            <td>{{ride.cost}}</td>
+            <td>{{ride.car.year + ' ' + ride.car.make + ' ' + ride.car.model}}</td>
+          <tr>
+        </tbody>
+      </table>
+
     </uib-tab>
   </uib-tabset>
 </div>
