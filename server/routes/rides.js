@@ -121,6 +121,8 @@ router.get('/offeredRidesPerUser', function(req, res){
 	}
 });
 
+
+
 router.put('/join_offer', function(req, res) {
 	var id = req.body.id;
 	var user = req.body.user;
@@ -200,6 +202,32 @@ router.get('/requestedRidesPerUser', function(req, res){
 			res.send(docs);
 		});
 	};
+});
+
+router.get('/offersForNeededRidesDriver', function(req,res){
+	if(!req.session && !req.session.cas_user){
+		console.log("user does not exist");
+	}
+	else{
+		var collection = db.get().collection('requested');
+		collection.aggregate([
+			{$unwind : '$drivers'},
+			{$match: {'drivers.rcs': req.session.cas_user}},
+			{$group: {
+				_id: '$_id', 
+				drivers: {$push: '$drivers'},
+				departLocation: {$first:'$departLocation'},
+				departTime: {$first:'$departTime'},
+				departDate: {$first:'$departDate'},
+				destination: {$first:'$destination'},
+				cost: {$first:'$cost'},
+			}}
+		]).toArray(function(err, docs){
+			if(err) throw err;
+
+			res.send(docs);
+		});
+	}
 });
 
 

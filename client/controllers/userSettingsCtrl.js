@@ -3,6 +3,7 @@ angular.module('tmht')
 
 	$scope.offeredRides = [];
 	$scope.requestedRides = [];
+	$scope.offerForNeededDriver = [];
 
 	rideService.getUserSettingInfo().then(function(data){
 		$scope.editUser = data.data;
@@ -14,7 +15,14 @@ angular.module('tmht')
 		$scope.offeredRides = data.data;
 	}).catch(function(err){
 		alertModal(err.status, err.data);
-	})
+	});
+
+	rideService.getOfferForNeededRidesDriver().then(function(data){
+		$scope.offerForNeededDriver = data.data;
+	}).catch(function(err){
+		alertModal(err.status, err.data);
+	});
+
 
 	rideService.getRequestedRidesPerUser().then(function(data){
 		console.log(data);

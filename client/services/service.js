@@ -82,4 +82,8 @@ angular.module('tmht')
 			data: {rideID: rideID, rcs: user}
 		});
 	};
+
+	this.getOfferForNeededRides = function(){
+
+	}
 }]);

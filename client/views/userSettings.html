@@ -43,14 +43,14 @@
         </div>
       </form>
       <button class="btn btn-success pull-left"  ng-click="save(editUser)" ng-disabled="editUserForm.$invalid">
-        <span class="glyphicon glyphicon-save"></span>Save Changes!
+        Save Changes!
       </button>
     </uib-tab>
 
-    <uib-tab heading="Confirm Offered Rides">
+    <uib-tab heading="Offered Rides">
       <uib-accordion style="color:black">
         <uib-accordion-group ng-repeat="ride in offeredRides">
-          <uib-accordion-heading style="color:black !important;">{{ride.destination}}</uib-accordion-heading>
+          <uib-accordion-heading style="color:black !important;">{{ride.destination}} {{ride.departDate | date: 'shortDate'}} {{ride.departTime | date: 'shortTime'}}</uib-accordion-heading>
           <p>Seats Left: {{ride.availableseats}}<p>
           <table ng-if="ride.availableseats != 0" class="table table-striped">
             <tbody>
@@ -63,9 +63,22 @@
           </table>
         </uib-accordion-group>
       </uib-accordion>
+
+      <h2>Offers for Needed Rides</h2>
+      <table class="table table-striped">
+        <tbody>
+          <tr ng-repeat="ride in offerForNeededDriver">
+            <td>{{rids.riders[0].status}}</td>
+            <td>{{ride.destination}}</td>
+            <td>{{ride.departDate | date: 'shortDate'}}, {{ride.departTime | date: 'shortTime'}}</td>
+            <td>{{ride.cost}}</td>
+            <td>{{ride.car.color + ' ' + ride.car.make + ' ' + ride.car.model}}</td>
+          <tr>
+        </tbody>
+      </table>
     </uib-tab>
 
-    <uib-tab heading="Check Requested Rides">
+    <uib-tab heading="Requested Rides">
       <!--Confirmed Rides -->
       <h2>Confirmed Rides</h2>
       <table class="table table-striped">
@@ -74,7 +87,7 @@
             <td>{{ride.destination}}</td>
             <td>{{ride.departDate | date: 'shortDate'}}, {{ride.departTime | date: 'shortTime'}}</td>
             <td>{{ride.cost}}</td>
-            <td>{{ride.car.year + ' ' + ride.car.make + ' ' + ride.car.model}}</td>
+            <td>{{ride.car.color + ' ' + ride.car.make + ' ' + ride.car.model}}</td>
           <tr>
         </tbody>
       </table>
