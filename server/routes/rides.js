@@ -137,10 +137,25 @@ router.put('/join_offer', function(req, res) {
 });
 
 router.put('/confirmRide', function(req, res){
-	var id = req.body.id;
-	var user = req.body.user;
 	var collection = db.get().collection('offered');
-
+	var id = ObjectID.createFromHexString(req.body.rideID);
+	collection.find({_id: id}).toArray(function(err,docs){
+		if(err) throw err;
+		console.log(docs);
+		if(docs.length <= 0){
+			res.status(400).send('no corresponding ride');
+		}
+		else if(docs[0].owner != req.session.cas_user){
+			console.log("This user doesn't have access to confirm ride");
+		}
+		else{
+			collection.update({_id: id, 'riders.rcs': req.body.rcs}, {$set: {'riders.$.status': 'accepted'}, $inc: {availableseats: -1}}, function(err, docs){
+				if(err) throw err;
+				console.log(docs);
+				res.status(200).send("updated");
+			});
+		}
+	});
 });
 
 //Rides a user has requested

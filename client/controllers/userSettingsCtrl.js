@@ -27,6 +27,14 @@ angular.module('tmht')
 		});
 	};
 
+	$scope.confirmRider = function(rideID, user){
+		rideService.confirmRider(rideID, user).then(function(data){
+			console.log(data);
+		}).catch(function(err){
+			alertModal(err.status, err.data);
+		});
+	}
+
 	alertModal = function(title, body){
 		$scope.modalInstance = $modal.open({
             animation: $scope.animationsEnabled,

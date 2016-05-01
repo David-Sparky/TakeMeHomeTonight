@@ -67,4 +67,12 @@ angular.module('tmht')
 			url: '/rides/offeredRidesPerUser'
 		});
 	};
+
+	this.confirmRider = function(rideID, user){
+		return $http({
+			method: 'PUT',
+			url:'/rides/confirmRide',
+			data: {rideID: rideID, rcs: user}
+		});
+	};
 }]);
