@@ -60,6 +60,15 @@ angular.module('tmht')
 		});
 	};
 
+	$scope.removeRider = function(rideID, user){
+		rideService.removeRider(rideID, user).then(function(data){
+			
+		}).catch(function(err){
+			alertModal(err.status, err.data);
+		});
+	};
+
+
 	$scope.confirmDriver = function(rideID, user){
 		rideService.confirmDriver(rideID, user).then(function(data){
 			console.log(data);

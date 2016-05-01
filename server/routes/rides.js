@@ -141,7 +141,7 @@ router.put('/join_offer', function(req, res) {
 });
 
 
-router.put('/confirmRide', function(req, res){
+router.put('/confirmRider', function(req, res){
 	var collection = db.get().collection('offered');
 	var id = ObjectID.createFromHexString(req.body.rideID);
 	collection.find({_id: id}).toArray(function(err,docs){
@@ -287,6 +287,18 @@ router.put('/join_request', function(req, res) {
 			res.status(200).send('Added to the list of pending users!');
 		});
 	}
+});
+
+
+router.delete('/removeRider', function(req, res){
+	console.log(req.query);
+	var collection = db.get().collection('offered');
+	collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {riders: {rcs: req.query.rcs}}, $inc: {availableseats: 1}}, function(err, results){
+		if(err) throw err;
+
+		console.log(results);
+		res.send('Rider Removed!');
+	});
 });
 
 
