@@ -1,6 +1,6 @@
 angular.module('tmht')
-.controller('rides', ['$scope','$location', 'rideService', function($scope, $location, rideService){
-
+.controller('rides', ['$scope','$location', 'rideService','$cookies','$filter', function($scope, $location, rideService,$cookies,$filter,$compile){
+	$scope.joined = false;
 	switch($location.path()){
 		case '/rides/ridesOffered':
 			$scope.title = 'Rides Available';
@@ -24,27 +24,5 @@ angular.module('tmht')
 				console.log(err);
 			});
 			break;
-		case "/rides/ride":
-			$scope.title = "Ride";
-			var id = $location.search();
-			//id = id['id'];
-			rideService.getRide(id.id).then(function(data){
-				console.log(data);
-				//$scope.needarray = data.data;
-			}).catch(function(err){
-				console.log(err);
-			});
-			break;
-		case "/rides/offer":
-			$scope.title = "Offer";
-			var id = $location.search();
-			//id = id['id'];
-			rideService.getOfferRide(id.id).then(function(data){
-				console.log(data);
-				//$scope.needarray = data.data;
-			}).catch(function(err){
-				console.log(err);
-			});
-			break;
-	}
+    }
 }]);	

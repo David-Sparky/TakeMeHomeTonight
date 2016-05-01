@@ -39,17 +39,80 @@ angular.module('tmht')
 	};
 
 	this.getOfferRide = function(id){
-		console.log(id);
+		//console.log(id);
 		return $http({
 			method: "GET",
-			url: 'rides/get_offer?id='+id,
+			url: 'rides/get_offer?id='+id
 		});
 	};
 	this.getRide = function(id){
-		console.log(id);
+		//console.log(id);
 		return $http({
 			method: "GET",
-			url: 'rides/get_ride?id='+id,
+			url: 'rides/get_ride?id='+id
 		});
 	};
+	this.joinOffer = function(id,user){
+		//console.log(id);
+		return $http({
+			method: "PUT",
+			url: 'rides/join_offer',
+			data: {id:id,user:user}
+		});
+	};
+
+
+	this.getOfferedRidesPerUser = function(){
+		return $http({
+			method: 'GET',
+			url: '/rides/offeredRidesPerUser'
+		});
+	};
+
+	this.getRequestedRidesPerUser = function(){
+		return $http({
+			method: 'GET',
+			url: '/rides/requestedRidesPerUser'
+		});
+	};
+
+	this.confirmRider = function(rideID, user){
+		return $http({
+			method: 'PUT',
+			url:'/rides/confirmRide',
+			data: {rideID: rideID, rcs: user}
+		});
+	};
+
+	this.confirmDriver = function(rideID, user){
+		return $http({
+			method: 'PUT',
+			url: '/rides/confirmDriver',
+			data: {rideID: rideID, rcs: user}
+		});
+	};
+
+	this.getOfferForNeededRidesDriver = function(){
+		return $http({
+			method: 'GET',
+			url: '/rides/offersForNeededRidesDriver'
+		});
+	};
+
+	this.getOfferForNeededRidesRider = function(){
+		return $http({
+			method: 'GET',
+			url: '/rides/offersForNeededRidesRider'
+		});
+	};
+
+	this.joinRequest = function(id,user){
+		//console.log(id);
+		return $http({
+			method: "PUT",
+			url: 'rides/join_request',
+			data: {id:id,user:user}
+		});
+	};
+
 }]);

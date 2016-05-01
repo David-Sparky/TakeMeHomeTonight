@@ -3,7 +3,6 @@ var express = require('express'),
 	db = require('../db');
 
 router.use('*', function(req, res, next){
-  console.log(req.path);
   if(req.path == '/user/logout')
     next();
   else if(!req.session || !req.session.cas_user){

@@ -44,13 +44,13 @@ app.config(['$routeProvider', function($routeProvider){
 		access: {restricted: true}
 	}).
 	when('/rides/ride', {
-		templateUrl: 'client/views/rides.html',
-		controller: 'rides',
+		templateUrl: 'client/views/ridePage.html',
+		controller: 'ridePage',
 		access: {restricted: true}
 	}).
 	when('/rides/offer', {
-		templateUrl: 'client/views/rides.html',
-		controller: 'rides',
+		templateUrl: 'client/views/ridePage.html',
+		controller: 'ridePage',
 		access: {restricted: true}
 	}).
 	when('/team', {
@@ -91,19 +91,7 @@ app.config(['$routeProvider', function($routeProvider){
 
 
 }]);
-
-/*
-app.run(function ($rootScope, $location, $route, AuthService) {
-  $rootScope.$on('$routeChangeStart',
-  function (event, next, current) {
-    if (next.access.restricted && AuthService.getUserStatus() == undefined) {
-      $location.path('/');
-      console.log('shit')
-      $route.reload();
-    }
-  });
-});
-*/
+	
 app.run(['$rootScope', '$location', '$route', 'AuthService', function ($rootScope, $location, $route, AuthService) {
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
     if (next.$$route != undefined && next.$$route.access.restricted && (AuthService.getUserStatus() == undefined || AuthService.getUserStatus() == '')) {
