@@ -85,12 +85,11 @@ input {
 
 .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
   color: #2dcc70;
+  background-color: transparent;
 }
 
 .navbar .nav > li.dropdown.open.active > a:hover, 
 .navbar .nav > li.dropdown.open > a {
-  /*background-color: transparent;*/
-  background-color: rgba(0,0,0,0.5);
   color: white;
 }
 /*end naviagation bar css*/
