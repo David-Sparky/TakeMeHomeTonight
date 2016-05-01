@@ -88,6 +88,9 @@
             <td>{{ride.destination}}</td>
             <td>{{ride.departDate | date: 'shortDate'}}, {{ride.departTime | date: 'shortTime'}}</td>
             <td>{{ride.cost}}</td>
+            <td>
+              <button ng-click="removeNeededRideOfferDriver(ride._id)">Remove</button>
+            </td>
             <!--<td>{{ride.car.color + ' ' + ride.car.make + ' ' + ride.car.model}}</td>-->
           <tr>
         </tbody>
@@ -135,6 +138,9 @@
             <td>{{ride.departDate | date: 'shortDate'}}, {{ride.departTime | date: 'shortTime'}}</td>
             <td>{{ride.cost}}</td>
             <td>{{ride.car.year + ' ' + ride.car.make + ' ' + ride.car.model}}</td>
+            <td>
+              <button ng-click="removeRequestForRide(ride._id)">Remove</button>
+            </td>
           <tr>
         </tbody>
       </table>

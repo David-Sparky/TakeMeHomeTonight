@@ -318,6 +318,26 @@ router.delete('/removeNeededRide', function(req, res){
 	});
 });
 
+router.delete('/removeNeededRideOfferDriver', function(req, res){
+	var collection = db.get().collection('requested');
+	collection.find({_id: ObjectID.createFromHexString(req.query.rideID), drivers: {rcs: req.session.cas_user, status: 'accepted'}}).toArray(function(err, docs){
+		if(err) throw err;
+		if(docs.length == 0){
+			collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {drivers: {rcs: req.session.cas_user}}}, function(err, results){
+				if(err) throw err;
+				res.send('Deleted!');
+			});
+		}
+		else{
+			collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {drivers: {rcs: req.session.cas_user}}, $set: {accepted: false}},function(err, results){
+				if(err) throw err;
+				res.send('Deleted!');
+			});
+		}
+	});
+	
+});
+
 
 
 

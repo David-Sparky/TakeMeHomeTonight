@@ -105,6 +105,13 @@ angular.module('tmht')
 		});
 	};
 
+	this.removeNeededRideOfferDriver = function(rideID){
+		return $http({
+			method: 'DELETE',
+			url: '/rides/removeNeededRideOfferDriver?rideID=' + rideID
+		});
+	};
+
 	this.confirmDriver = function(rideID, user){
 		return $http({
 			method: 'PUT',

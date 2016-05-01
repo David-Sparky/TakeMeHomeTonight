@@ -1,5 +1,5 @@
 angular.module('tmht')
-.controller('userSettingsCtrl', ['$scope', 'rideService', '$uibModal', function($scope, rideService, $modal){
+.controller('userSettingsCtrl', ['$scope', 'rideService', '$uibModal','AuthService', function($scope, rideService, $modal, AuthService){
 
 	$scope.offeredRides = [];
 	$scope.requestedRides = [];
@@ -103,6 +103,20 @@ angular.module('tmht')
 			alertModal(err.status, err.data);
 		});
 	}
+
+	$scope.removeNeededRideOfferDriver = function(rideID){
+		rideService.removeNeededRideOfferDriver(rideID).then(function(data){
+			console.log(data);
+			for(x in $scope.neededRidesDriver){
+				if($scope.neededRidesDriver[x]._id == rideID){
+					$scope.neededRidesDriver.splice(x, 1);
+				}
+			}
+			alert('deleted');
+		}).catch(function(err){
+			alertModal(err.status, err.data);
+		});
+	};
 
 	alertModal = function(title, body){
 		$scope.modalInstance = $modal.open({
