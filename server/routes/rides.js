@@ -17,6 +17,7 @@ router.post('/requestRide', function(req, res){
 		console.log('no user');
 	}
 	else{
+		req.body['drivers']=[];
 		req.body.rcs = req.session.cas_user;
 		var collection = db.get().collection('requested');
 		collection.insert(req.body, function(err, results){
@@ -138,6 +139,7 @@ router.put('/join_offer', function(req, res) {
 	}
 });
 
+
 router.put('/confirmRide', function(req, res){
 	var collection = db.get().collection('offered');
 	var id = ObjectID.createFromHexString(req.body.rideID);
@@ -229,6 +231,23 @@ router.get('/offersForNeededRidesDriver', function(req,res){
 		});
 	}
 });
+
+router.put('/join_request', function(req, res) {
+	var id = req.body.id;
+	var user = req.body.user;
+	var collection = db.get().collection('requested');
+	if(!req.session && !req.session.cas_user){
+		console.log("User does not exist");
+	}
+	else{
+		collection.update({_id:ObjectID.createFromHexString(id)}, {$push: {drivers:{rcs:user,status:"pending"}}}, function(err, results){
+			if(err) throw err;
+			res.status(200).send('Added to the list of pending users!');
+		});
+	}
+});
+
+
 
 
 module.exports = router;

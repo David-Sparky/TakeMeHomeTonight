@@ -61,6 +61,7 @@ angular.module('tmht')
 		});
 	};
 
+
 	this.getOfferedRidesPerUser = function(){
 		return $http({
 			method: 'GET',
@@ -86,4 +87,14 @@ angular.module('tmht')
 	this.getOfferForNeededRides = function(){
 
 	}
+
+	this.joinRequest = function(id,user){
+		//console.log(id);
+		return $http({
+			method: "PUT",
+			url: 'rides/join_request',
+			data: {id:id,user:user}
+		});
+	};
+
 }]);
