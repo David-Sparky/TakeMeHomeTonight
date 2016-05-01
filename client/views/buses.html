@@ -61,6 +61,10 @@
             <button class="btn btn-primary" ng-hide="!data_pres" ng-click="checkRoute('2')">
                 {{bus.directions[1].direction}}
             </button>
+            <h3>{{br.direction.direction_name}}</h3>
+            <div ng-repeat="z in br.direction.stops">
+                <p>{{z.stop_name}} &mdash; ({{z.stop_id}})</p>
+            </div>
         </div>
     </div>
     <div class="col-lg-6">
@@ -79,6 +83,11 @@
                     </button>
                 </div>
             </form>
+            <div ng-repeat="q in arrs.arrivals">
+                <h3>{{q.route_id}} &mdash; {{q.direction}}</h3>
+                <p>Arriving in: {{q.arrival_minutes}}</p>
+                <p>Scheduled to arrive at: {{q.arrival_time}}</p>
+            </div>
         </div>
     </div>
     <div class="col-lg-6">
