@@ -331,6 +331,7 @@ input {
     text-align: center;
     margin-left: 30%; 
   }
+
   .rides {
     width: 70%;
   }
@@ -360,12 +361,20 @@ input {
     margin-bottom: 0px;
     padding-top: 15px;
   }
+
+  .settings .form-horizontal .form-group {
+    text-align: center;
+  }
 }
 
 /*for when screen size is bigger than medium size but smaller than large size*/
 @media (min-width: 768px) and (max-width: 992px) {
   .signup .form-horizontal {
     margin-left: -100px; 
+  }
+
+  .settings .form-horizontal .form-group {
+    margin-left: 30%;
   }
 
   .rides {
@@ -435,6 +444,10 @@ input {
     margin-top: 12px;
     font-size: 1.3em;
   }
+
+  .settings .form-horizontal .form-group {
+    margin-left: 30%;
+  }
 }
 
 
@@ -478,4 +491,8 @@ tbody {
 .dropdown-menu {
   background-color: rgba(0,0,0,0.7);
   min-width: 85px;
+}
+
+.settings .well {
+  width: 60%;
 }
