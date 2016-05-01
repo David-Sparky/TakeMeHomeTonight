@@ -338,6 +338,25 @@ router.delete('/removeNeededRideOfferDriver', function(req, res){
 	
 });
 
+router.delete('/removeRequestForAvailableRide', function(req, res){
+	var collection = db.get().collection('offered');
+	collection.find({_id: ObjectID.createFromHexString(req.query.rideID), riders: {rcs: req.session.cas_user, status: 'accepted'}}).toArray(function(err, docs){
+		if(err) throw err;
+		if(docs.length == 0){
+			collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {riders: {rcs: req.session.cas_user}}}, function(err, docs){
+				if(err) throw err;
+				res.send('Deleted');
+			});
+		}
+		else{
+			collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {riders: {rcs: req.session.cas_user}}, $inc: {availableseats: -1}}, function(err, docs){
+				if(err) throw err;
+				res.send('Deleted');
+			});
+		}
+	});
+});
+
 
 
 

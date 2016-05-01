@@ -118,6 +118,19 @@ angular.module('tmht')
 		});
 	};
 
+	$scope.removeRequestForAvailableRide = function(rideID){
+		rideService.removeRequestForAvailableRide(rideID).then(function(data){
+			for(x in $scope.requestedRides){
+				if(rideID == $scope.requestedRides[x]._id){
+					$scope.requestedRides.splice(x, 1);
+					alert(data.data);
+				}
+			}
+		}).catch(function(err){
+			alertModal(err.status, err.data);
+		});
+	};
+
 	alertModal = function(title, body){
 		$scope.modalInstance = $modal.open({
             animation: $scope.animationsEnabled,
