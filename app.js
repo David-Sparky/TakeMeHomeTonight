@@ -58,7 +58,8 @@ app.config(['$routeProvider', function($routeProvider){
 		controller: 'teamCtrl'
 	}).
 	when('/publicTransit', {
-		templateUrl: 'client/views/publicTransit.html'
+		templateUrl: 'client/views/publicTransit.html',
+		controller: 'publicTransitCtrl'
 	}).
 	when('/taxi', {
 		templateUrl: 'client/views/taxi.html',
@@ -71,19 +72,8 @@ app.config(['$routeProvider', function($routeProvider){
 	when('/bus', {
 		templateUrl: 'client/views/bus.html'
 	}).
-	when('/train', {
-		templateUrl: 'client/views/train.html'
-	}).
 	when('/shuttle', {
 		templateUrl: 'client/views/shuttle.html'
-	}).
-	when('/publicTrans', {
-		templateUrl: 'client/views/publicTrans.html',
-		controller: 'publicTransitCtrl'
-	}).
-	when('/publicTrans', {
-		templateUrl: 'client/views/publicTrans.html',
-		controller: 'publicTransitCtrl'
 	}).
 	otherwise({
 		redirectTo: '/'

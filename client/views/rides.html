@@ -20,7 +20,8 @@
   						<div class="col-md-4">
   							<p> Details: </p>
   							<p> Going to: {{offer['destination']}} </p>
-  							<p> Leaving {{offer['departLocation']}} at or around: {{offer['departDate']}}'</p>
+                <p> Date: {{(offer['departDate']).split('T')[0]}} </p>
+  							<p> Leaving {{offer['departLocation']}} at or around: {{((offer['departDate']).split('T')[1]).split('.')[0]}}'</p>
   							<p> Seats Remaining: {{offer['availableseats']}} / {{offer['seats']}} </p>
   							<p> Cost if any: {{offer['cost']}}</p>
   						</div>
@@ -44,12 +45,10 @@
 					<div class="rides row well">
             <div class="pubRow">
   						<div class="col-md-4">
-  							<p> Details: </p>
   							<p> Person: {{needed.rcs}} </p>
   							<p> Time: {{needed.departDate | date:'shortDate'}} / {{needed.departTime | date:'shortTime'}} </p>
   						</div>
   						<div class="col-md-4">
-  							<p> Info :</p>
   							<p> Destination: {{needed.destination}} </p>
   							<p> Offer: {{needed.cost}} </p>
   						</div>

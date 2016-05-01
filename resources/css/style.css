@@ -69,20 +69,27 @@ input {
   color: #2dcc70;
 }
 
+.dropdown {
+  margin-top: 15px;
+}
+
+.dropdown-menu {
+  right: 100%;
+}
+
 .navbar-default .navbar-nav .open .dropdown-menu,
 .navbar-default .navbar-nav .open .dropdown-menu>li>a,
 .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
-  background-color: rgba(0,0,0,0.5);
   color: white;
 }
 
 .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
   color: #2dcc70;
+  background-color: transparent;
 }
 
 .navbar .nav > li.dropdown.open.active > a:hover, 
 .navbar .nav > li.dropdown.open > a {
-  background-color: transparent;
   color: white;
 }
 /*end naviagation bar css*/
@@ -320,6 +327,7 @@ input {
     text-align: center;
     margin-left: 30%; 
   }
+
   .rides {
     width: 70%;
   }
@@ -344,10 +352,27 @@ input {
 }
 
 /*for when screen is medium size*/
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .navbar-header img {
     margin-bottom: 0px;
     padding-top: 15px;
+  }
+
+  .settings .form-horizontal .form-group {
+    text-align: center;
+  }
+
+  .dropdown {
+    margin-left: 15px;
+  }
+
+  .dropdown-menu {
+    margin-top: 20px;
+  }
+
+  .dropdown-menu li {
+    margin-left: -10px;
+    width: 35px;
   }
 }
 
@@ -355,6 +380,10 @@ input {
 @media (min-width: 768px) and (max-width: 992px) {
   .signup .form-horizontal {
     margin-left: -100px; 
+  }
+
+  .settings .form-horizontal .form-group {
+    margin-left: 30%;
   }
 
   .rides {
@@ -419,6 +448,15 @@ input {
   #carid {
     margin-top: 30px;
   }
+
+  .dropdown {
+    margin-top: 12px;
+    font-size: 1.3em;
+  }
+
+  .settings .form-horizontal .form-group {
+    margin-left: 30%;
+  }
 }
 
 
@@ -445,3 +483,30 @@ input {
   }
 }
 /*end home page css based on height of window*/
+
+
+tbody {
+  color: black;
+}
+
+.settings {
+  margin-top: 15px;
+}
+
+.tab-content {
+  margin-top: 15px;
+}
+
+.dropdown-menu {
+  background-color: rgba(0,0,0,0.7);
+  min-width: 85px;
+}
+
+.settings .well {
+  width: 60%;
+}
+
+.offer .well {
+  width: 60%;
+  padding-bottom: 10px;
+}

@@ -6,41 +6,47 @@
             </div>
         </div>
     </section>
-    <div ng-show='offer' class="offer"><!-- singular offer display -->
-        <div class="centering text-center">
-            <p>{{rcs}}</p>
-            <p>{{depart_local}}</p>
-            <p>{{depart_time}}</p>
-            <p>{{destination}}</p>
-            <p>{{seats_avil}}</p>
-            <p>{{total_seats}}</p>
-            <p>{{car_make}} {{car_model}} - {{car_license}}</p>
-            <p>{{car_color}}</p>
-            <div ng-show="owner" class="pending" ng-repeat="user in pendingarray">
-                <p> {{user.rcs}} is {{user.status}} <button class="btn btn-default btn-md" ng-click="add_user(user.rcs)">Accept</button><button class="btn btn-default btn-md" ng-click="reject_user(user.rcs)">Reject</button> </p>
-            </div>
-            <div ng-show="owner" class="accepted" ng-repeat="user in acceptedarray">
-                <p> {{user.rcs}} is {{user.status}} <button class="btn btn-default btn-md" ng-click="remove_user(user.rcs)">Remove</button> </p>
-            </div>
-            <div ng-show="owner_and_available_check()" class="join">
-                <button ng-show="!joined" type='button' class="btn btn-default btn-md" ng-click="join_offer()"> Request to Join </button>
+    <div class="offer">
+        <div ng-show='offer' class="well centering">
+        <!-- singular offer display -->
+            <div class="centering text-center">
+                <p>Driver: {{rcs}}</p>
+                <p>Departure Location: {{depart_local}}</p>
+                <p>Departure Date: {{(depart_time).split('T')[0]}}</p>
+                <p>Departure Time: {{((depart_time).split('T')[1]).split('.')[0]}}</p>
+                <p>Destination: {{destination}}</p>
+                <p>Seats Availible: {{seats_avil}}</p>
+                <p>Total Seats: {{total_seats}}</p>
+                <p>Car Make: {{car_make}} || Car Model: {{car_model}} || Car License: {{car_license}}</p>
+                <p>Car Color: {{car_color}}</p>
+                <div ng-show="owner" class="pending" ng-repeat="user in pendingarray">
+                    <p> {{user.rcs}} is {{user.status}} <button class="btn btn-default btn-md" ng-click="add_user(user.rcs)">Accept</button><button class="btn btn-default btn-md" ng-click="reject_user(user.rcs)">Reject</button> </p>
+                </div>
+                <div ng-show="owner" class="accepted" ng-repeat="user in acceptedarray">
+                    <p> {{user.rcs}} is {{user.status}} <button class="btn btn-default btn-md" ng-click="remove_user(user.rcs)">Remove</button> </p>
+                </div>
+                <div ng-show="owner_and_available_check()" class="join">
+                    <button ng-show="!joined" type='button' class="btn btn-default btn-md" ng-click="join_offer()"> Request to Join </button>
+                </div>
             </div>
         </div>
-    </div>
-    <div ng-show='ride' class="ride"><!-- singular ride request display -->
-        <div class="centering text-center">
-            <p>{{rcs}}</p>
-            <p>{{depart_local}}</p>
-            <p>{{depart_time}}</p>
-            <p>{{destination}}</p>
-            <div ng-show="owner2" class="pending" ng-repeat="user in pendingDrivers">
-                <p> {{user.rcs}} is {{user.status}} <button class="btn btn-default btn-md" ng-click="accept_driver(user.rcs)">Accept</button><button class="btn btn-default btn-md" ng-click="reject_driver(user.rcs)">Reject</button> </p>
-            </div>
-            <div ng-show="acceptedDriver_Bool" ng-repeat="user in acceptedDriver">
-                <p> {{user.rcs}} is the driver that was accepted.</p>
-            </div>
-            <div ng-show="owner_and_available_check2()" class="join">
-                <button ng-show="!joined2" type='button' class="btn btn-default btn-md" ng-click="join_offer2()"> Request to Drive </button>
+    
+        <div ng-show='ride' class="well centering"><!-- singular ride request display -->
+            <div class="centering text-center">
+                <p>Driver: {{rcs}}</p>
+                <p>Departure Location: {{depart_local}}</p>
+                <p>Departure Date: {{(depart_time).split('T')[0]}}</p>
+                <p>Departure Time: {{((depart_time).split('T')[1]).split('.')[0]}}</p>
+                <p>Destination: {{destination}}</p>
+                <div ng-show="owner2" class="pending" ng-repeat="user in pendingDrivers">
+                    <p> {{user.rcs}} is {{user.status}} <button class="btn btn-default btn-md" ng-click="accept_driver(user.rcs)">Accept</button><button class="btn btn-default btn-md" ng-click="reject_driver(user.rcs)">Reject</button> </p>
+                </div>
+                <div ng-show="acceptedDriver_Bool" ng-repeat="user in acceptedDriver">
+                    <p> {{user.rcs}} is the driver that was accepted.</p>
+                </div>
+                <div ng-show="owner_and_available_check2()" class="join">
+                    <button ng-show="!joined2" type='button' class="btn btn-default btn-md" ng-click="join_offer2()"> Request to Drive </button>
+                </div>
             </div>
         </div>
     </div>
