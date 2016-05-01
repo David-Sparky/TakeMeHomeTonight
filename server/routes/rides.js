@@ -349,7 +349,7 @@ router.delete('/removeRequestForAvailableRide', function(req, res){
 			});
 		}
 		else{
-			collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {riders: {rcs: req.session.cas_user}}, $inc: {availableseats: -1}}, function(err, docs){
+			collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {riders: {rcs: req.session.cas_user}}, $inc: {availableseats: 1}}, function(err, docs){
 				if(err) throw err;
 				res.send('Deleted');
 			});
