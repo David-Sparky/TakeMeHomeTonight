@@ -68,6 +68,13 @@ angular.module('tmht')
 		});
 	};
 
+	this.getRequestedRidesPerUser = function(){
+		return $http({
+			method: 'GET',
+			url: '/rides/requestedRidesPerUser'
+		});
+	};
+
 	this.confirmRider = function(rideID, user){
 		return $http({
 			method: 'PUT',

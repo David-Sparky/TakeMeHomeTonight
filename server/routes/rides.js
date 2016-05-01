@@ -166,19 +166,35 @@ router.get('/requestedRidesPerUser', function(req, res){
 	else{
 		var collection = db.get().collection('offered');
 		collection.aggregate([
+			{$unwind : '$riders'},
+			{$match: {'riders.rcs': req.session.cas_user}},
+			{$group: {
+				_id: '$_id', 
+				riders: {$push: '$riders'},
+				departLocation: {$first:'$departLocation'},
+				car: {$first:'$car'},
+				departTime: {$first:'$departTime'},
+				departDate: {$first:'$departDate'},
+				destination: {$first:'$destination'},
+				cost: {$first:'$cost'},
+				seats: {$first:'$seats'},
+				availableseats: {$first:'$availableseats'}
+			}}
+			/*
 			{$match : {'riders.rcs': req.session.cas_user}},
 			{$project: {
 				riders: {
 					$filter: {
 						input: '$riders',
 						as: 'item',
-						cond: {$eq: ['$$item.rcs', req.session.cas_user]}
+						cond: {'$$item.rcs': req.session.cas_user}//{$eq: ['$$item.rcs' req.session.cas_user]}
 					}
 				}
-			}}
+			}}*/
 		]).toArray(function(err, docs){
 			if(err) throw err;
-			console.log(docs);
+
+			res.send(docs);
 		});
 	};
 });

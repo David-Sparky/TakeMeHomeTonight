@@ -4,18 +4,22 @@ angular.module('tmht')
 	$scope.offeredRides = [];
 
 	rideService.getUserSettingInfo().then(function(data){
-		console.log(data);
 		$scope.editUser = data.data;
 	}).catch(function(err){
 		alertModal(err.status, err.data);
 	});
 
 	rideService.getOfferedRidesPerUser().then(function(data){
-		console.log(data);
 		$scope.offeredRides = data.data;
 	}).catch(function(err){
-		aletModal(err.status, err.data);
+		alertModal(err.status, err.data);
 	})
+
+	rideService.getRequestedRidesPerUser().then(function(data){
+		console.log(data);
+	}).catch(function(err){
+		alertModal(err.status, err.data);
+	});
 
 	$scope.save = function(formData){
 		rideService.editUserSettings(formData).then(function(data){
