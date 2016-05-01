@@ -80,10 +80,7 @@ input {
 .navbar-default .navbar-nav .open .dropdown-menu,
 .navbar-default .navbar-nav .open .dropdown-menu>li>a,
 .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
-  /*background-color: rgba(0,0,0,0.5);*/
   color: white;
-  /*padding-right: 30px;*/
-  /*width: 90%;*/
 }
 
 .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
@@ -356,7 +353,7 @@ input {
 }
 
 /*for when screen is medium size*/
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .navbar-header img {
     margin-bottom: 0px;
     padding-top: 15px;
@@ -364,6 +361,19 @@ input {
 
   .settings .form-horizontal .form-group {
     text-align: center;
+  }
+
+  .dropdown {
+    margin-left: 15px;
+  }
+
+  .dropdown-menu {
+    margin-top: 20px;
+  }
+
+  .dropdown-menu li {
+    margin-left: -10px;
+    width: 35px;
   }
 }
 
