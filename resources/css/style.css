@@ -69,11 +69,21 @@ input {
   color: #2dcc70;
 }
 
+.dropdown {
+  margin-top: 15px;
+}
+
+.dropdown-menu {
+  right: 100%;
+}
+
 .navbar-default .navbar-nav .open .dropdown-menu,
 .navbar-default .navbar-nav .open .dropdown-menu>li>a,
 .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
-  background-color: rgba(0,0,0,0.5);
+  /*background-color: rgba(0,0,0,0.5);*/
   color: white;
+  /*padding-right: 30px;*/
+  /*width: 90%;*/
 }
 
 .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
@@ -82,7 +92,8 @@ input {
 
 .navbar .nav > li.dropdown.open.active > a:hover, 
 .navbar .nav > li.dropdown.open > a {
-  background-color: transparent;
+  /*background-color: transparent;*/
+  background-color: rgba(0,0,0,0.5);
   color: white;
 }
 /*end naviagation bar css*/
@@ -419,6 +430,11 @@ input {
   #carid {
     margin-top: 30px;
   }
+
+  .dropdown {
+    margin-top: 12px;
+    font-size: 1.3em;
+  }
 }
 
 
@@ -457,4 +473,9 @@ tbody {
 
 .tab-content {
   margin-top: 15px;
+}
+
+.dropdown-menu {
+  background-color: rgba(0,0,0,0.7);
+  min-width: 85px;
 }
