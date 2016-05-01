@@ -11,20 +11,14 @@
 
     <div class="col-lg-6">
         <div class="well">
-            <h3>CDTA Bus Stops</h3>
-            <form id="angular" name="btn_form" method="post" novalidate>
-                <div class="row">
-                    <div class="col-lg-5 search">
-                        <div class="input-group">
-                            <label for="stops">Search for stops:</label>
-                            <input id="stops" type="text" class="form-control" ng-model="searchbar"
-                                   placeholder="Search for...">
-                        </div>
-                    </div>
-                    <button class="btn btn-success" type="submit" ng-click="search()" ng-disabled="!loaded">Submit
-                    </button>
-                </div>
-            </form>
+            <h3>CDTA Bus Destinations</h3>
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="searchbar" placeholder="Search for...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-success" type="submit" ng-click="search()"
+                                    ng-disabled="!loaded">Go!</button>
+                        </span>
+            </div><!-- /input-group -->
             <div ng-repeat="i in bus.stops">
                 <h4>{{ escapeHTML(i.name) }}</h4>
                 <div ng-repeat="thing in i.serviced_by">
@@ -40,21 +34,12 @@
     <div class="col-lg-6">
         <div class="well">
             <h3>CDTA Bus Routes</h3>
-            <form>
-                <div class="row">
-                    <div class="col-lg-5 search">
-                        <div class="input-group">
-                            <label for="busses">Search for busses:</label>
-                            <input id="busses" type="text" class="form-control" ng-model="searchbar_d"
-                                   placeholder="Search for...">
-                            <label for="direction"></label>
-                        </div>
-                    </div>
-                    <button id="direction" class="btn btn-success" type="submit" ng-click="directions()"
-                            ng-disabled="!loaded">Submit
-                    </button>
-                </div>
-            </form>
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="searchbar_d" placeholder="Search for...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-success" type="submit" ng-click="directions()" ng-disabled="!loaded">Go!</button>
+                        </span>
+            </div><!-- /input-group -->
             <button class="btn btn-primary" ng-hide="!data_pres" ng-click="checkRoute('1')">
                 {{bus.directions[0].direction}}
             </button>
@@ -68,21 +53,31 @@
         </div>
     </div>
     <div class="col-lg-6">
+        <div class="well"> <!--data-ng-init="refresh_outages()" -->
+            <h3>CDTA Service Disruptions</h3>
+            <form id="angular" name="btn_form" method="post" novalidate>
+                <button class="btn btn-success" type="submit" ng-click="refresh_outages()" ng-disabled="!loaded">
+                    Refresh
+                    Status
+                </button>
+            </form>
+
+            <h4>{{ outage.alerts[0].header }}</h4>
+
+            <p>{{outage.alerts[0].message}}</p>
+
+        </div>
+    </div>
+    <div class="col-lg-6">
         <div class="well">
             <h3>CDTA Bus Stop Arrivals</h3>
-            <form id="arrivals" name="btn_form" method="post" novalidate>
-                <div class="row">
-                    <div class="col-lg-5 search">
-                        <div class="input-group">
-                            <label for="stop_id">Stop ID:</label>
-                            <input id="stop_id" type="text" class="form-control" ng-model="searchbar_id"
-                                   placeholder="Search for...">
-                        </div>
-                    </div>
-                    <button class="btn btn-success" type="submit" ng-click="stop_id()" ng-disabled="!loaded">Submit
-                    </button>
-                </div>
-            </form>
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="searchbar_id" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-success" type="submit" ng-click="stop_id()"
+                                        ng-disabled="!loaded">Go!</button>
+                            </span>
+            </div><!-- /input-group -->
             <div ng-repeat="q in arrs.arrivals">
                 <h3>{{q.route_id}} &mdash; {{q.direction}}</h3>
                 <p>Arriving in: {{q.arrival_minutes}}</p>
@@ -90,20 +85,5 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
-        <div class="well" data-ng-init="refresh_outages()">
-            <h3>CDTA Service Disruptions</h3>
-            <form id="angular" name="btn_form" method="post" novalidate>
-                <button class="btn btn-success" type="submit" ng-click="refresh_outages()" ng-disabled="!loaded">Refresh
-                    Status
-                </button>
-            </form>
-
-                <h4>{{ outage.alerts[0].header }}</h4>
-
-                        <p>{{outage.alerts[0].message}}</p>
-
-
-        </div>
-    </div>
 </div>
+
