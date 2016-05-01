@@ -133,7 +133,7 @@ router.put('/join_offer', function(req, res) {
 		console.log("User does not exist");
 	}
 	else{
-		collection.update({_id:ObjectID.createFromHexString(id)}, {$push: {riders:{rcs:user,status:"pending"}},$inc:{availableseats:-1}}, function(err, results){
+		collection.update({_id:ObjectID.createFromHexString(id)}, {$push: {riders:{rcs:user,status:"pending"}}}, function(err, results){
 			if(err) throw err;
 			res.status(200).send('Added to the list of pending users!');
 		});
@@ -152,6 +152,9 @@ router.put('/confirmRide', function(req, res){
 		}
 		else if(docs[0].owner != req.session.cas_user){
 			console.log("This user doesn't have access to confirm ride");
+		}
+		else if(docs[0].availableseats == 0){
+			res.status(400).send('There are no more seats available!');
 		}
 		else{
 			collection.update({_id: id, 'riders.rcs': req.body.rcs}, {$set: {'riders.$.status': 'accepted'}, $inc: {availableseats: -1}}, function(err, docs){

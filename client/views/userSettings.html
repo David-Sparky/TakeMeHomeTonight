@@ -53,14 +53,14 @@
         <uib-accordion-group ng-repeat="ride in offeredRides">
           <uib-accordion-heading style="color:black !important;">{{ride.destination}} {{ride.departDate | date: 'shortDate'}} {{ride.departTime | date: 'shortTime'}}</uib-accordion-heading>
           <p>Seats Left: {{ride.availableseats}}<p>
-          <table ng-if="ride.availableseats != 0" class="table table-striped">
+          <table class="table table-striped">
             <thead><tr>
               <th>Status</th>
               <th>Passengers<th>
             </tr></thead>
             <tbody>
               <tr ng-repeat="rider in ride.riders">
-                <td ng-if="rider.status == 'pending'"><button ng-click="confirmRider(ride._id, rider.rcs)">Confirm</button></td> 
+                <td ng-if="rider.status == 'pending' && ride.availableseats != 0"><button ng-click="confirmRider(ride._id, rider.rcs)">Confirm</button></td> 
                 <td ng-if="rider.status == 'accepted'">Confirmed!</td>
                 <td>{{rider.rcs}}</td>
               <tr>
