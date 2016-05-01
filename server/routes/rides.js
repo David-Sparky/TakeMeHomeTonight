@@ -18,6 +18,7 @@ router.post('/requestRide', function(req, res){
 		console.log('no user');
 	}
 	else{
+		req.body['drivers']=[];
 		req.body.rcs = req.session.cas_user;
 		var collection = db.get().collection('requested');
 		collection.insert(req.body, function(err, results){

@@ -33,6 +33,15 @@
             <p>{{depart_local}}</p>
             <p>{{depart_time}}</p>
             <p>{{destination}}</p>
+            <div ng-show="owner2" class="pending" ng-repeat="user in pendingDrivers">
+                <p> {{user.rcs}} is {{user.status}} <button class="btn btn-default btn-md" ng-click="accept_driver(user.rcs)">Accept</button><button class="btn btn-default btn-md" ng-click="reject_driver(user.rcs)">Reject</button> </p>
+            </div>
+            <div ng-show="acceptedDriver_Bool" ng-repeat="user in acceptedDriver">
+                <p> {{user.rcs}} is the driver that was accepted.</p>
+            </div>
+            <div ng-show="owner_and_available_check2()" class="join">
+                <button ng-show="!joined" type='button' class="btn btn-default btn-md" ng-click="join_offer()"> Request to Join </button>
+            </div>
         </div>
     </div>
 </div>
