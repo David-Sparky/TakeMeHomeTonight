@@ -98,15 +98,6 @@ app.get('/cdta', function (req, resp) {
     var search = req.query.search_b;
     search= escape(search);
 
-    // http.get(cdta.api_time + '/' + search + cdta.api_key, function (callback) {
-    //
-    //     callback.on('data', function(d) {
-    //         console.log(d);
-    //     })
-    //
-    //
-    // });
-
     var x = '';
     console.log("Search: " + search);
         http.get({
@@ -118,8 +109,9 @@ app.get('/cdta', function (req, resp) {
             res.on('data', function (d) {
                 x += d.toString();
                 console.log(d.toString());
-                res.destroy();
-                return resp.send(x);
+            });
+            res.on('end', function(){
+                resp.send(x);
             });
 
         });
@@ -128,18 +120,11 @@ app.get('/cdta', function (req, resp) {
 
 app.get('/cdta_dir', function (req, resp) {
 
+    console.log("DIRECTIONS");
+
     var search = req.query.search_b;
 
     console.log(search);
-
-    // http.get(cdta.api_time + '/' + search + cdta.api_key, function (callback) {
-    //
-    //     callback.on('data', function(d) {
-    //         console.log(d);
-    //     })
-    //
-    //
-    // });
 
     var x = '';
     http.get({
@@ -149,17 +134,19 @@ app.get('/cdta_dir', function (req, resp) {
         res.on('data', function (d) {
             x += d.toString();
             console.log(d.toString());
-            res.destroy();
-            return resp.send(x);
+        });
+        res.on('end', function(){
+            resp.send(x);
         });
 
     });
 
 });
 
+
 app.get('/get_route', function (req, resp) {
 
-    console.log("This stuff: " + req.query.info);
+    console.log("ROUTE");
     var x= '';
     http.get({
         host: 'api.cdta.org',
@@ -168,8 +155,9 @@ app.get('/get_route', function (req, resp) {
         res.on('data', function (d) {
             x += d.toString();
             console.log(d.toString());
-            res.destroy();
-            return resp.send(x);
+        });
+        res.on('end', function(){
+            resp.send(x);
         });
 
     });
@@ -207,8 +195,9 @@ app.get('/stop_id', function (req, resp) {
         res.on('data', function (d) {
             x += d.toString();
             console.log(d.toString());
-            res.destroy();
-            return resp.send(x);
+        });
+        res.on('end', function(){
+            resp.send(x);
         });
 
     });
