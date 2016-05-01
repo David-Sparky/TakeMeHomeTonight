@@ -48,11 +48,16 @@
     </uib-tab>
 
     <uib-tab heading="Offered Rides">
+      <h2>Available Offered Rides</h2>
       <uib-accordion style="color:black">
         <uib-accordion-group ng-repeat="ride in offeredRides">
           <uib-accordion-heading style="color:black !important;">{{ride.destination}} {{ride.departDate | date: 'shortDate'}} {{ride.departTime | date: 'shortTime'}}</uib-accordion-heading>
           <p>Seats Left: {{ride.availableseats}}<p>
           <table ng-if="ride.availableseats != 0" class="table table-striped">
+            <thead><tr>
+              <th>Status</th>
+              <th>Passengers<th>
+            </tr></thead>
             <tbody>
               <tr ng-repeat="rider in ride.riders">
                 <td ng-if="rider.status == 'pending'"><button ng-click="confirmRider(ride._id, rider.rcs)">Confirm</button></td> 
@@ -66,7 +71,13 @@
 
       <h2>Offers for Needed Rides</h2>
       <table class="table table-striped">
-        <tbody>
+        <thead><tr>
+          <th>Status</th>
+          <th>Destination</th>
+          <th>Time</th>
+          <th>Cost</th>
+        </tr></thead>
+        <tbody style="color:black">
           <tr ng-repeat="ride in neededRidesDriver">
             <td>{{ride.drivers[0].status}}</td>
             <td>{{ride.destination}}</td>
@@ -82,6 +93,12 @@
       <!--Confirmed Rides -->
       <h2>Confirmed Rides</h2>
       <table class="table table-striped">
+        <thead><tr>
+          <th>Destination</th>
+          <th>Time</th>
+          <th>Cost</th>
+          <th>Car</th>
+        </tr></thead>
         <tbody>
           <tr ng-repeat="ride in requestedRides" ng-if="ride.riders[0].status == 'accepted'">
             <td>{{ride.destination}}</td>
@@ -102,6 +119,12 @@
       <!-- Pending Rides -->
       <h2>Pending Rides</h2>
       <table class="table table-striped">
+        <thead><tr>
+          <th>Destination</th>
+          <th>Time</th>
+          <th>Cost</th>
+          <th>Car</th>
+        </tr></thead>
         <tbody>
           <tr ng-repeat="ride in requestedRides" ng-if="ride.riders[0].status == 'pending'">
             <td>{{ride.destination}}</td>
@@ -117,6 +140,10 @@
         <uib-accordion-group ng-repeat="ride in neededRidesRider">
           <uib-accordion-heading style="color:black !important;">{{ride.destination}} {{ride.departDate | date: 'shortDate'}} {{ride.departTime | date: 'shortTime'}}</uib-accordion-heading>
           <table class="table table-striped">
+            <thead><tr>
+              <th>Confirm</th>
+              <th>Driver</th>
+            </tr></thead>
             <tbody>
               <tr ng-repeat="driver in ride.drivers" ng-if="driver.status == 'pending'">
                 <td ng-if="driver.status == 'pending'"><button ng-click="confirmDriver(ride._id, driver.rcs)">Confirm</button></td> 
