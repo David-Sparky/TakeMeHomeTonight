@@ -25,7 +25,10 @@ angular.module('tmht')
 	});
 
 	rideService.getOfferForNeededRidesRider().then(function(data){
-		$scope.neededRidesRider = data.data;
+		//$scope.neededRidesRider = data.data;
+		console.log(data);
+		$scope.acceptedDrivers = data.data.accepted;
+		$scope.pendingDrivers = data.data.pending;
 		console.log(data.data);
 	}).catch(function(err){
 		alertModal(err.status, err.data);
@@ -56,6 +59,15 @@ angular.module('tmht')
 			alertModal(err.status, err.data);
 		});
 	};
+
+	$scope.removeRider = function(rideID, user){
+		rideService.removeRider(rideID, user).then(function(data){
+			
+		}).catch(function(err){
+			alertModal(err.status, err.data);
+		});
+	};
+
 
 	$scope.confirmDriver = function(rideID, user){
 		rideService.confirmDriver(rideID, user).then(function(data){

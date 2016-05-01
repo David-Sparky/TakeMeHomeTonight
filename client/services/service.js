@@ -79,8 +79,15 @@ angular.module('tmht')
 	this.confirmRider = function(rideID, user){
 		return $http({
 			method: 'PUT',
-			url:'/rides/confirmRide',
+			url:'/rides/confirmRider',
 			data: {rideID: rideID, rcs: user}
+		});
+	};
+
+	this.removeRider = function(rideID, user){
+		return $http({
+			method: 'DELETE',
+			url: '/rides/removeRider?rideID=' + rideID + '&rcs=' + user
 		});
 	};
 

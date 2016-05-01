@@ -19,6 +19,7 @@ router.post('/requestRide', function(req, res){
 	else{
 		req.body['drivers']=[];
 		req.body.rcs = req.session.cas_user;
+		req.body.accepted = false;
 		var collection = db.get().collection('requested');
 		collection.insert(req.body, function(err, results){
 			if(err) throw err;
@@ -132,7 +133,7 @@ router.put('/join_offer', function(req, res) {
 		console.log("User does not exist");
 	}
 	else{
-		collection.update({_id:ObjectID.createFromHexString(id)}, {$push: {riders:{rcs:user,status:"pending"}},$inc:{availableseats:-1}}, function(err, results){
+		collection.update({_id:ObjectID.createFromHexString(id)}, {$push: {riders:{rcs:user,status:"pending"}}}, function(err, results){
 			if(err) throw err;
 			res.status(200).send('Added to the list of pending users!');
 		});
@@ -140,7 +141,7 @@ router.put('/join_offer', function(req, res) {
 });
 
 
-router.put('/confirmRide', function(req, res){
+router.put('/confirmRider', function(req, res){
 	var collection = db.get().collection('offered');
 	var id = ObjectID.createFromHexString(req.body.rideID);
 	collection.find({_id: id}).toArray(function(err,docs){
@@ -151,6 +152,9 @@ router.put('/confirmRide', function(req, res){
 		}
 		else if(docs[0].owner != req.session.cas_user){
 			console.log("This user doesn't have access to confirm ride");
+		}
+		else if(docs[0].availableseats == 0){
+			res.status(400).send('There are no more seats available!');
 		}
 		else{
 			collection.update({_id: id, 'riders.rcs': req.body.rcs}, {$set: {'riders.$.status': 'accepted'}, $inc: {availableseats: -1}}, function(err, docs){
@@ -175,7 +179,7 @@ router.put('/confirmDriver', function(req, res){
 			console.log("This user doesn't have access to confirm driver");
 		}
 		else{
-			collection.update({_id: id, 'drivers.rcs': req.body.rcs}, {$set: {'drivers.$.status': 'accepted'}}, function(err, docs){
+			collection.update({_id: id, 'drivers.rcs': req.body.rcs}, {$set: {'drivers.$.status': 'accepted', accepted: true}}, function(err, docs){
 				if(err) throw err;
 				console.log(docs);
 				res.status(200).send("updated");
@@ -258,9 +262,14 @@ router.get('/offersForNeededRidesRider', function(req, res){
 	}
 	else{
 		var collection = db.get().collection('requested');
-		collection.find({rcs: req.session.cas_user}).toArray(function(err, docs){
+		collection.find({rcs: req.session.cas_user, accepted: 'true'}).toArray(function(err, docs){
 			if(err) throw err;
-			res.send(docs);
+			collection.find({rcs: req.session.cas_user, $or : [{accepted: 'false'}, {accepted: {$exists: false}}]}).toArray(function(err, docs2){
+				if(err) throw err;
+
+				res.send({accepted:docs, pending: docs2});
+			});
+			//res.send(docs);
 		});
 	}
 });
@@ -278,6 +287,18 @@ router.put('/join_request', function(req, res) {
 			res.status(200).send('Added to the list of pending users!');
 		});
 	}
+});
+
+
+router.delete('/removeRider', function(req, res){
+	console.log(req.query);
+	var collection = db.get().collection('offered');
+	collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {riders: {rcs: req.query.rcs}}, $inc: {availableseats: 1}}, function(err, results){
+		if(err) throw err;
+
+		console.log(results);
+		res.send('Rider Removed!');
+	});
 });
 
 
