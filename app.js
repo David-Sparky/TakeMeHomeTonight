@@ -83,7 +83,8 @@ app.config(['$routeProvider', function($routeProvider){
 	}).
 	when('/buses', {
 		templateUrl: 'client/views/buses.html',
-		controller: 'busesCtrl'
+		controller: 'busesCtrl',
+		access: {restricted: true}
 	}).
 	otherwise({
 		redirectTo: '/'
