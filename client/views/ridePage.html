@@ -12,8 +12,8 @@
             <div class="centering text-center">
                 <p>Driver: {{rcs}}</p>
                 <p>Departure Location: {{depart_local}}</p>
-                <p>Departure Date: {{departDate | date: 'shortDate'}}</p>
-                <p>Departure Time: {{departTime | date: 'shortTime'}}</p>
+                <p>Departure Date: {{depart_date | date: 'shortDate'}}</p>
+                <p>Departure Time: {{depart_time | date: 'shortTime'}}</p>
                 <p>Destination: {{destination}}</p>
                 <p>Seats Availible: {{seats_avil}}</p>
                 <p>Total Seats: {{total_seats}}</p>
@@ -36,8 +36,8 @@
             <div class="centering text-center">
                 <p>Requester: {{ride_owner}}</p>
                 <p>Departure Location: {{depart_local}}</p>
-                <p>Departure Date: {{departDate | date: 'shortDate'}}</p>
-                <p>Departure Time: {{departTime | date: 'shortTime'}}</p>
+                <p>Departure Date: {{depart_date | date: 'shortDate'}}</p>
+                <p>Departure Time: {{depart_time | date: 'shortTime'}}</p>
                 <p>Destination: {{destination}}</p>
                 <p>Willing to Offer: {{cost}}</p>
                 <div ng-show="owner2" class="pending" ng-repeat="user in pendingDrivers">

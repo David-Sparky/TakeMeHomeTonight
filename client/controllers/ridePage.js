@@ -13,7 +13,8 @@ angular.module('tmht')
                     var ride = data.data;
                     $scope.ride_owner = ride[0].rcs;
                     $scope.depart_local = ride[0].departLocation;
-                    $scope.depart_time = ride[0].departDate;
+                    $scope.depart_date = ride[0].departDate;
+                    $scope.depart_time = ride[0].departTime;
                     $scope.destination = ride[0].destination;
                     $scope.drivers = ride[0].drivers;
                     $scope.pendingDrivers = [];
@@ -48,7 +49,8 @@ angular.module('tmht')
                     var offer = data.data;
                     $scope.rcs = offer[0].owner;
                     $scope.depart_local = offer[0].departLocation;
-                    $scope.depart_time = offer[0].departDate;
+                    $scope.depart_date = offer[0].departDate;
+                    $scope.depart_time = offer[0].departTime;
                     $scope.destination = offer[0].destination;
                     $scope.seats_avil = offer[0].availableseats;
                     $scope.total_seats = offer[0].seats;
