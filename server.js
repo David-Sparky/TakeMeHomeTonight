@@ -36,6 +36,7 @@ var cas = new CASAuthentication({
     cas_version: '2.0'
 });
 
+
 app.use('/', routes);
 app.use('/rides', rides);
 app.use('/user', users);
