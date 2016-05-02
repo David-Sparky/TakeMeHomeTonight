@@ -4,7 +4,8 @@ var express = require('express'),
 
 router.use('*', function(req, res, next){
   if(!req.session || !req.session.cas_user){
-    res.status(401).send('Unauthorized access');
+    //res.status(401).send('Unauthorized access');
+    res.redirect('/#/');
   }
   else{
     next();
@@ -299,6 +300,25 @@ router.delete('/removeRider', function(req, res){
 
 		console.log(results);
 		res.send('Rider Removed!');
+	});
+});
+
+router.delete('/removeDriver', function(req, res){
+	var collection = db.get().collection('requested');
+	collection.find({_id:ObjectID.createFromHexString(req.query.rideID), drivers: {rcs: req.query.rcs, status: 'accepted'}}).toArray(function(err,docs){
+		if(err) throw err;
+		if(docs.length == 0){
+			collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {drivers:{rcs: req.query.rcs}}}, function(err, result){
+				if(err) throw err;
+				res.send('Driver removed!');
+			});
+		}
+		else{
+			collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {drivers: {rcs: req.query.rcs}}, $set:{accepted: false}}, function(err, results){
+				if(err) throw err;
+				res.send('Driver removed!');
+			});
+		}
 	});
 });
 

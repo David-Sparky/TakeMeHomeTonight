@@ -55,6 +55,7 @@ angular.module('tmht')
 	$scope.confirmRider = function(rideID, user){
 		rideService.confirmRider(rideID, user).then(function(data){
 			console.log(data);
+
 		}).catch(function(err){
 			alertModal(err.status, err.data);
 		});
@@ -62,7 +63,33 @@ angular.module('tmht')
 
 	$scope.removeRider = function(rideID, user){
 		rideService.removeRider(rideID, user).then(function(data){
-			
+			for(x in $scope.offeredRides){
+				if($scope.offeredRides[x]._id == rideID){
+					for(y in $scope.offeredRides[x].riders){
+						if($scope.offeredRides[x].riders[y].rcs == user){
+							$scope.offeredRides[x].riders.splice(y, 1);
+							break;
+						}
+					}
+				}
+			}
+		}).catch(function(err){
+			alertModal(err.status, err.data);
+		});
+	};
+	
+	$scope.removeDriver = function(rideID, user){
+		rideService.removeDriver(rideID, user).then(function(data){
+			for(x in $scope.neededRidesRider){
+				if($scope.neededRidesRider[x]._id == rideID){
+					for(y in $scope.neededRidesRider[x].drivers){
+						if($scope.neededRidesRider[x].drivers[y].rcs == user){
+							$scope.neededRidesRider[x].drivers.splice(y, 1);
+							break;
+						}
+					}
+				}
+			}
 		}).catch(function(err){
 			alertModal(err.status, err.data);
 		});
@@ -72,6 +99,17 @@ angular.module('tmht')
 	$scope.confirmDriver = function(rideID, user){
 		rideService.confirmDriver(rideID, user).then(function(data){
 			console.log(data);
+			for(x in $scope.neededRidesRider){
+				if($scope.neededRidesRider[x]._id == rideID){
+					$scope.neededRidesRider[x].accepted = true;
+					for(y in $scope.neededRidesRider[x].drivers){
+						if($scope.neededRidesRider[x].drivers[y].rcs == user){
+							$scope.neededRidesRider[x].drivers[y].status = 'accepted';
+							break;
+						}
+					}
+				}
+			}
 		}).catch(function(err){
 			alertModal(err.status, err.data);
 		});

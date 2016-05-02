@@ -108,7 +108,7 @@
               <th>Driver</th>
             </tr></thead>
             <tbody>
-              <tr ng-repeat="driver in ride.drivers" ng-if="(ride.accepted == undefined || ride.accepted == 'false') || (ride.accepted == 'true' && driver.status == 'accepted')">
+              <tr ng-repeat="driver in ride.drivers" ng-if="(ride.accepted == undefined || ride.accepted == false) || (ride.accepted == true && driver.status == 'accepted')">
                 <td>
                   <button ng-show="driver.status == 'pending'" ng-click="confirmDriver(ride._id, driver.rcs)">Confirm</button>
                   <button ng-click="removeDriver(ride._id, driver.rcs)">Remove</button>
