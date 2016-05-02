@@ -20,8 +20,8 @@
 							<div class="col-md-4">
 								<p> Details: </p>
 								<p> Going to: {{offer['destination']}} </p>
-								<p> Date: {{(offer['departDate']).split('T')[0]}} </p>
-								<p> Leaving {{offer['departLocation']}} at or around: {{((offer['departDate']).split('T')[1]).split('.')[0]}}'</p>
+								<p> Date: {{offer.departDate | date: 'shortDate'}} </p>
+								<p> Leaving {{offer['departLocation']}} at or around: {{offer.departTime | date: 'shortTime'}}</p>
 								<p> Seats Remaining: {{offer['availableseats']}} / {{offer['seats']}} </p>
 								<p> Cost if any: {{offer['cost']}}</p>
 							</div>
