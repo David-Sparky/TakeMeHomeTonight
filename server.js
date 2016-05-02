@@ -14,8 +14,14 @@ var routes = require('./server/routes/index'),
     app = express();
     fs= require('fs');
 
-var cdta = require('./client/controllers/api_info.js');
 var http = require('http');
+
+var cdta_api_stops = '?request=stops/';
+var cdta_api_directions = '?request=directions/';
+var cdta_api_sched = '?request=schedules/';
+var cdta_api_status = '?request=status/';
+var cdta_api_arrivals = '?request=arrivals/';
+var cdta_api_key = process.env.cdta_api_key;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -102,9 +108,9 @@ app.get('/cdta', function (req, resp) {
     console.log("Search: " + search);
         http.get({
             host: 'api.cdta.org',
-            path: '/api/v1/' + cdta.api_stops + search + cdta.api_key
+            path: '/api/v1/' + cdta_api_stops + search + cdta_api_key
         }, function (res) {
-            var pt= '/api/v1/' + cdta.api_stops  + search + cdta.api_key;
+            var pt= '/api/v1/' + cdta_api_stops  + search + cdta_api_key;
             console.log(pt);
             res.on('data', function (d) {
                 x += d.toString();
@@ -129,7 +135,7 @@ app.get('/cdta_dir', function (req, resp) {
     var x = '';
     http.get({
         host: 'api.cdta.org',
-        path: '/api/v1/' + cdta.api_directions + search + cdta.api_key
+        path: '/api/v1/' + cdta_api_directions + search + cdta_api_key
     }, function (res) {
         res.on('data', function (d) {
             x += d.toString();
@@ -150,7 +156,7 @@ app.get('/get_route', function (req, resp) {
     var x= '';
     http.get({
         host: 'api.cdta.org',
-        path: '/api/v1/' + cdta.api_sched + req.query.bus_num + '/weekday/' + req.query.info + cdta.api_key
+        path: '/api/v1/' + cdta_api_sched + req.query.bus_num + '/weekday/' + req.query.info + cdta_api_key
     }, function (res) {
         res.on('data', function (d) {
             x += d.toString();
@@ -171,7 +177,7 @@ app.get('/service_status', function (req, resp) {
     var x= '';
     http.get({
         host: 'api.cdta.org',
-        path: '/api/v1/' + cdta.api_status + cdta.api_key
+        path: '/api/v1/' + cdta_api_status + cdta_api_key
     }, function (res) {
         res.on('data', function (d) {
             x += d.toString();
@@ -190,7 +196,7 @@ app.get('/stop_id', function (req, resp) {
     var x= '';
     http.get({
         host: 'api.cdta.org',
-        path: '/api/v1/' + cdta.api_arrivals + req.query.stopid + '/2' + cdta.api_key
+        path: '/api/v1/' + cdta_api_arrivals + req.query.stopid + '/2' + cdta_api_key
     }, function (res) {
         res.on('data', function (d) {
             x += d.toString();
@@ -208,7 +214,7 @@ app.get('/stop_id', function (req, resp) {
 
 db.connect('mongodb://' + process.env.tmhtDBUser + ':' + process.env.tmhtDBPassword + '@ds023418.mlab.com:23418/tmht', function(err) {
   if (err) {
-    console.log('Unable to connect to Mongo.')
+    console.log('Unable to connect to Mongo.');
     process.exit(1)
   } else {
     app.listen(port, function() {
