@@ -55,7 +55,17 @@ angular.module('tmht')
 	$scope.confirmRider = function(rideID, user){
 		rideService.confirmRider(rideID, user).then(function(data){
 			console.log(data);
-
+			for(x in $scope.offeredRides){
+				if($scope.offeredRides[x]._id == rideID){
+					for(y in $scope.offeredRides[x].drivers){
+						if($scope.offeredRides[x].drivers[y].rcs == user){
+							$scope.offeredRides[x].drivers[y].status = 'accepted';
+							$scope.offeredRides[x].availableseats = $scope.offeredRides[x].availableseats + 1;
+							break;
+						}
+					}
+				}
+			}
 		}).catch(function(err){
 			alertModal(err.status, err.data);
 		});
@@ -68,6 +78,7 @@ angular.module('tmht')
 					for(y in $scope.offeredRides[x].riders){
 						if($scope.offeredRides[x].riders[y].rcs == user){
 							$scope.offeredRides[x].riders.splice(y, 1);
+							$scope.offeredRides[x].availableseats = $scope.offeredRides[x].availableseats - 1;
 							break;
 						}
 					}
