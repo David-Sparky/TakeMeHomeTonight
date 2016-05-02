@@ -157,4 +157,11 @@ angular.module('tmht')
 		});
 	};
 
+	this.removePendingRider = function(rideID, user){
+		return $http({
+			method: 'DELETE',
+			url: '/rides/removePendingRider?rideID=' + rideID + '&rcs=' + user
+		});
+	};
+
 }]);

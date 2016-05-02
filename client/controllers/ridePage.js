@@ -102,6 +102,7 @@ angular.module('tmht')
 
         $scope.add_user = function(user){
             $scope.acceptedarray.push({rcs:user,status:"accepted"});
+            $scope.seats_avil = $scope.seats_avil -1;
             for(var i=0;i<$scope.pendingarray.length;i++) {
                 if($scope.pendingarray[i].rcs == user){
                     $scope.pendingarray.splice(i,1);
@@ -122,7 +123,7 @@ angular.module('tmht')
                 }
             }
             var offer_id = $location.search();
-            rideService.removeRider(offer_id.id, user).then(function(data){
+            rideService.removePendingRider(offer_id.id, user).then(function(data){
 
             }).catch(function(err){
                 alertModal(err.status, err.data);
@@ -130,6 +131,7 @@ angular.module('tmht')
         };
 
         $scope.remove_user = function(user){
+            $scope.seats_avil = $scope.seats_avil +1;
             for(var i=0;i<$scope.acceptedarray.length;i++) {
                 if($scope.acceptedarray[i].rcs == user){
                     $scope.acceptedarray.splice(i,1);
