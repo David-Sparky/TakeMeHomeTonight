@@ -184,9 +184,10 @@ angular.module('tmht')
                     $scope.pendingDrivers.splice(i,1);
                 }
             }
+            $scope.acceptedDriver = [];
+            $scope.acceptedDriver_Bool = false;
             rideService.removeDriver(request_id.id,user).then(function(data){
                 console.log(data);
-                alert('deleted');
             }).catch(function(err){
                 alertModal(err.status, err.data);
             });
