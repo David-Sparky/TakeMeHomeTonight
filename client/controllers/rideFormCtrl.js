@@ -25,13 +25,13 @@ angular.module('tmht')
 		console.log($scope.rideInfo);
 		console.log($location.path());
 		rideService.rideFormSubmit($scope.rideInfo, $location.path()).then(function(data){
+			sweetAlert("Success!!","Your ride offer has been submitted!","success");
 			console.log(data);
-			alertModal($scope.title, data.data.Success);
 		},
 		function(err){
-			alertModal(err.status, err.data);
-		});
-	}
+			sweetAlert("Error!","Your ride offer has not been submitted! "+ err.data,"error");
+		})
+	};
 
 
 	alertModal = function(title, body){

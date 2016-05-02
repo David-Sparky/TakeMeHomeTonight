@@ -33,7 +33,7 @@
     
         <div ng-show='ride' class="well centering"><!-- singular ride request display -->
             <div class="centering text-center">
-                <p>Driver: {{rcs}}</p>
+                <p>Driver: {{ride_owner}}</p>
                 <p>Departure Location: {{depart_local}}</p>
                 <p>Departure Date: {{(depart_time).split('T')[0]}}</p>
                 <p>Departure Time: {{((depart_time).split('T')[1]).split('.')[0]}}</p>
