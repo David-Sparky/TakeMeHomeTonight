@@ -10,9 +10,10 @@ var routes = require('./server/routes/index'),
   	CASAuthentication = require('cas-authentication'),
   	session = require('express-session'),
     express = require('express'),
-    port = 8005,
     app = express();
     fs= require('fs');
+
+var port = process.env.PORT || 8005;
 
 var http = require('http');
 
