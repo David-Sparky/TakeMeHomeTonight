@@ -88,6 +88,23 @@ angular.module('tmht')
 			alertModal(err.status, err.data);
 		});
 	};
+
+	$scope.removePendingRider = function(rideID, user){
+		rideService.removePendingRider(rideID, user).then(function(data){
+			for(x in $scope.offeredRides){
+				if($scope.offeredRides[x]._id == rideID){
+					for(y in $scope.offeredRides[x].riders){
+						if($scope.offeredRides[x].riders[y].rcs == user){
+							$scope.offeredRides[x].riders.splice(y, 1);
+							break;
+						}
+					}
+				}
+			}
+		}).catch(function(err){
+			alertModal(err.status, err.data);
+		});
+	};
 	
 	$scope.removeDriver = function(rideID, user){
 		rideService.removeDriver(rideID, user).then(function(data){

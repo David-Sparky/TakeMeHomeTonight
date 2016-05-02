@@ -64,7 +64,7 @@
               <tr ng-repeat="rider in ride.riders" ng-if="ride.availableseats != 0 || (ride.availableseats == 0 && rider.status == 'accepted')">
                 <td>
                   <button ng-if="rider.status == 'pending' && ride.availableseats != 0" ng-click="confirmRider(ride._id, rider.rcs)">Confirm</button>
-                  <button ng-click="removeRider(ride._id, rider.rcs)">Remove</button>
+                  <button ng-click="removePendingRider(ride._id, rider.rcs)">Remove</button>
                 </td>
                 <td>{{rider.rcs}}</td>
               <tr>
