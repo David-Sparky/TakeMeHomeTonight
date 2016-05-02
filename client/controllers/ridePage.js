@@ -87,15 +87,17 @@ angular.module('tmht')
 
         $scope.owner_and_available_check = function(){
             var found = $filter('filter')($scope.total_array,{rcs:$scope.cookieusername},true);
-            if(found.length){
-                return false;
-            }else{
-                if($scope.seats_avil  == 0){
+            if(found != undefined) {
+                if (found.length) {
                     return false;
-                }else if($scope.owner == true){
-                    return false;
-                }else {
-                    return true;
+                } else {
+                    if ($scope.seats_avil == 0) {
+                        return false;
+                    } else if ($scope.owner == true) {
+                        return false;
+                    } else {
+                        return true;
+                    }
                 }
             }
         };
@@ -156,13 +158,15 @@ angular.module('tmht')
 
         $scope.owner_and_available_check2 = function(){
             var found = $filter('filter')($scope.drivers,{rcs:$scope.cookieusername},true);
-            if(found.length){
-                return false;
-            }else{
-                if($scope.owner2 == true){
+            if(found != undefined) {
+                if (found.length) {
                     return false;
-                }else {
-                    return true;
+                } else {
+                    if ($scope.owner2 == true) {
+                        return false;
+                    } else {
+                        return true;
+                    }
                 }
             }
         };
