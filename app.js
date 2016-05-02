@@ -89,13 +89,14 @@ app.config(['$routeProvider', function($routeProvider){
 	// 	controller: 'busesCtrl'
 	// }).
 
+
 	otherwise({
 		redirectTo: '/'
 	})
 
 
 }]);
-	
+
 app.run(['$rootScope', '$location', '$route', 'AuthService', function ($rootScope, $location, $route, AuthService) {
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
     if (next.$$route != undefined && next.$$route.access.restricted && (AuthService.getUserStatus() == undefined || AuthService.getUserStatus() == '')) {
@@ -103,4 +104,3 @@ app.run(['$rootScope', '$location', '$route', 'AuthService', function ($rootScop
     }
   });
 }]);
-
