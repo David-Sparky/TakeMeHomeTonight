@@ -40,7 +40,7 @@ app.use(session({
 // Create a new instance of CASAuthentication.
 var cas = new CASAuthentication({
     cas_url: 'https://cas-auth.rpi.edu/cas',
-    service_url: 'http://localhost:' + port,
+    service_url: process.env.herokuurl || "http://localhost:" + port,
     cas_version: '2.0'
 });
 
