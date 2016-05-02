@@ -17,7 +17,8 @@
                 <p>Destination: {{destination}}</p>
                 <p>Seats Availible: {{seats_avil}}</p>
                 <p>Total Seats: {{total_seats}}</p>
-                <p>Car Make: {{car_make}} || Car Model: {{car_model}} || Car License: {{car_license}}</p>
+                <p> Cost if any: {{cost}}</p>
+                <p>Car Make & Model: {{car_make}} {{car_model}} || License: {{car_license}}</p>
                 <p>Car Color: {{car_color}}</p>
                 <div ng-show="owner" class="pending" ng-repeat="user in pendingarray">
                     <p> {{user.rcs}} is {{user.status}} <button class="btn btn-default btn-md" ng-click="add_user(user.rcs)">Accept</button><button class="btn btn-default btn-md" ng-click="reject_user(user.rcs)">Reject</button> </p>
@@ -33,11 +34,12 @@
     
         <div ng-show='ride' class="well centering"><!-- singular ride request display -->
             <div class="centering text-center">
-                <p>Driver: {{rcs}}</p>
+                <p>Requester: {{ride_owner}}</p>
                 <p>Departure Location: {{depart_local}}</p>
                 <p>Departure Date: {{departDate | date: 'shortDate'}}</p>
                 <p>Departure Time: {{departTime | date: 'shortTime'}}</p>
                 <p>Destination: {{destination}}</p>
+                <p>Willing to Offer: {{cost}}</p>
                 <div ng-show="owner2" class="pending" ng-repeat="user in pendingDrivers">
                     <p> {{user.rcs}} is {{user.status}} <button class="btn btn-default btn-md" ng-click="accept_driver(user.rcs)">Accept</button><button class="btn btn-default btn-md" ng-click="reject_driver(user.rcs)">Reject</button> </p>
                 </div>

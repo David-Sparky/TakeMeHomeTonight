@@ -14,23 +14,15 @@
 				<a href="#/rides/offer?id={{offer['_id']}}">
 					<div class="rides row well">
 						<div class="pubRow">
-							<div class="col-md-4">
-								<img src="/resources/imgs/carimg.png" alt="Car Image" height="100" width="130">
+							<div class="col-md-6">
+								<p> Destination: {{offer['destination']}} </p>
+								<p> Date&Time: {{offer.departDate | date: 'shortDate'}} around {{offer.departTime | date: 'shortTime'}} </p>
+								<p> Leaving from {{offer['departLocation']}}</p>
 							</div>
-							<div class="col-md-4">
-								<p> Details: </p>
-								<p> Going to: {{offer['destination']}} </p>
-								<p> Date: {{offer.departDate | date: 'shortDate'}} </p>
-								<p> Leaving {{offer['departLocation']}} at or around: {{offer.departTime | date: 'shortTime'}}</p>
-								<p> Seats Remaining: {{offer['availableseats']}} / {{offer['seats']}} </p>
-								<p> Cost if any: {{offer['cost']}}</p>
-							</div>
-							<div class="col-md-4">
-								<p> Info :</p>
+							<div class="col-md-6">
 								<p> Driver: {{offer['owner']}}</p>
 								<p> Car Make &amp; Model: {{offer['car']['make']}} {{offer['car']['model']}}</p>
-								<p> Car Color: {{offer['car']['color']}} </p>
-								<p> License Plate: {{offer['car']['license']}} </p>
+								<p> Seats left {{offer['availableseats']}}/{{offer['seats']}}</p>
 							</div>
 						</div>
 					</div>
@@ -44,11 +36,11 @@
 				<a href="#/rides/ride?id={{needed['_id']}}">
 					<div class="rides row well">
             			<div class="pubRow">
-  							<div class="col-md-4">
+  							<div class="col-md-6">
   								<p> Person: {{needed.rcs}} </p>
   								<p> Time: {{needed.departDate | date:'shortDate'}} / {{needed.departTime | date:'shortTime'}} </p>
   							</div>
-  							<div class="col-md-4">
+  							<div class="col-md-6">
   								<p> Destination: {{needed.destination}} </p>
   								<p> Offer: {{needed.cost}} </p>
   							</div>

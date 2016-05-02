@@ -18,6 +18,7 @@ angular.module('tmht')
                     $scope.drivers = ride[0].drivers;
                     $scope.pendingDrivers = [];
                     $scope.acceptedDriver = [];
+                    $scope.cost = ride[0].cost;
                     for(var i=0;i<$scope.drivers.length;i++){
                         var entry = $scope.drivers[i];
                         if(entry.status == "pending"){
@@ -58,6 +59,7 @@ angular.module('tmht')
                     $scope.total_array = offer[0].riders;
                     $scope.pendingarray = [];
                     $scope.acceptedarray = [];
+                    $scope.cost = offer[0].cost;
                     if($scope.cookieusername == $scope.rcs){
                         $scope.owner = true;
                     }else{
@@ -79,23 +81,28 @@ angular.module('tmht')
         $scope.join_offer = function(){
             var offer_id = $location.search();
             rideService.joinOffer(offer_id.id,$cookies.get('user')).then(function(data) {
+                $scope.joined=true;
+                sweetAlert("Joined!","Successfully requested to join!","success");
             }).catch(function(err){
                 console.log(err);
+                sweetAlert("Error!","There was an error! "+err.data,"error");
             });
-            $scope.joined=true;
+
         };
 
         $scope.owner_and_available_check = function(){
             var found = $filter('filter')($scope.total_array,{rcs:$scope.cookieusername},true);
-            if(found.length){
-                return false;
-            }else{
-                if($scope.seats_avil  == 0){
+            if(found != undefined) {
+                if (found.length) {
                     return false;
-                }else if($scope.owner == true){
-                    return false;
-                }else {
-                    return true;
+                } else {
+                    if ($scope.seats_avil == 0) {
+                        return false;
+                    } else if ($scope.owner == true) {
+                        return false;
+                    } else {
+                        return true;
+                    }
                 }
             }
         };
@@ -110,9 +117,11 @@ angular.module('tmht')
             }
             var offer_id = $location.search();
             rideService.confirmRider(offer_id.id, user).then(function(data){
-                console.log(data);
+                //console.log(data);
+                sweetAlert("Added!","Successfully added "+user+"!","success");
             }).catch(function(err){
                 alertModal(err.status, err.data);
+                sweetAlert("Error!","There was an error! "+err.data,"error");
             });
         };
 
@@ -124,9 +133,11 @@ angular.module('tmht')
             }
             var offer_id = $location.search();
             rideService.removePendingRider(offer_id.id, user).then(function(data){
+                sweetAlert("Removed!","Successfully removed "+user+"!","success");
 
             }).catch(function(err){
                 alertModal(err.status, err.data);
+                sweetAlert("Error!","There was an error! "+err.data,"error");
             });
         };
 
@@ -139,30 +150,35 @@ angular.module('tmht')
             }
             var offer_id = $location.search();
             rideService.removeRider(offer_id.id, user).then(function(data){
-
+                sweetAlert("Removed!","Successfully removed "+user+"!","success");
             }).catch(function(err){
                 alertModal(err.status, err.data);
+                sweetAlert("Error!","There was an error! "+err.data,"error");
             });
         };
 
         $scope.join_offer2 = function(){
             var request_id = $location.search();
             rideService.joinRequest(request_id.id,$cookies.get('user')).then(function(data) {
+                sweetAlert("Joined!","Successfully request to join!","success");
+                $scope.joined2=true;
             }).catch(function(err){
                 console.log(err);
+                sweetAlert("Error!","There was an error! "+err.data,"error");
             });
-            $scope.joined2=true;
         };
 
         $scope.owner_and_available_check2 = function(){
             var found = $filter('filter')($scope.drivers,{rcs:$scope.cookieusername},true);
-            if(found.length){
-                return false;
-            }else{
-                if($scope.owner2 == true){
+            if(found != undefined) {
+                if (found.length) {
                     return false;
-                }else {
-                    return true;
+                } else {
+                    if ($scope.owner2 == true) {
+                        return false;
+                    } else {
+                        return true;
+                    }
                 }
             }
         };
@@ -173,9 +189,11 @@ angular.module('tmht')
             $scope.pendingDrivers = [];
             var request_id = $location.search();
             rideService.confirmDriver(request_id.id, user).then(function(data){
-                console.log(data);
+                sweetAlert("Added!","Accepted driver "+user+"!","success");
+                //console.log(data);
             }).catch(function(err){
                 alertModal(err.status, err.data);
+                sweetAlert("Error!","There was an error! "+err.data,"error");
             });
         };
 
@@ -189,9 +207,11 @@ angular.module('tmht')
             $scope.acceptedDriver = [];
             $scope.acceptedDriver_Bool = false;
             rideService.removeDriver(request_id.id,user).then(function(data){
-                console.log(data);
+                sweetAlert("Removed!","Successfully removed "+user+"!","success");
+                //console.log(data);
             }).catch(function(err){
                 alertModal(err.status, err.data);
+                sweetAlert("Error!","There was an error! "+err.data,"error");
             });
         };
 
