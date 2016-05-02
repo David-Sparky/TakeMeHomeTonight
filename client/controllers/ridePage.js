@@ -18,6 +18,7 @@ angular.module('tmht')
                     $scope.drivers = ride[0].drivers;
                     $scope.pendingDrivers = [];
                     $scope.acceptedDriver = [];
+                    $scope.cost = ride[0].cost;
                     for(var i=0;i<$scope.drivers.length;i++){
                         var entry = $scope.drivers[i];
                         if(entry.status == "pending"){
@@ -58,6 +59,7 @@ angular.module('tmht')
                     $scope.total_array = offer[0].riders;
                     $scope.pendingarray = [];
                     $scope.acceptedarray = [];
+                    $scope.cost = offer[0].cost;
                     if($scope.cookieusername == $scope.rcs){
                         $scope.owner = true;
                     }else{
@@ -115,7 +117,7 @@ angular.module('tmht')
             }
             var offer_id = $location.search();
             rideService.confirmRider(offer_id.id, user).then(function(data){
-                console.log(data);
+                //console.log(data);
                 sweetAlert("Added!","Successfully added "+user+"!","success");
             }).catch(function(err){
                 alertModal(err.status, err.data);
@@ -188,7 +190,7 @@ angular.module('tmht')
             var request_id = $location.search();
             rideService.confirmDriver(request_id.id, user).then(function(data){
                 sweetAlert("Added!","Accepted driver "+user+"!","success");
-                console.log(data);
+                //console.log(data);
             }).catch(function(err){
                 alertModal(err.status, err.data);
                 sweetAlert("Error!","There was an error! "+err.data,"error");
@@ -206,7 +208,7 @@ angular.module('tmht')
             $scope.acceptedDriver_Bool = false;
             rideService.removeDriver(request_id.id,user).then(function(data){
                 sweetAlert("Removed!","Successfully removed "+user+"!","success");
-                console.log(data);
+                //console.log(data);
             }).catch(function(err){
                 alertModal(err.status, err.data);
                 sweetAlert("Error!","There was an error! "+err.data,"error");
