@@ -107,7 +107,12 @@ angular.module('tmht')
                     $scope.pendingarray.splice(i,1);
                 }
             }
-            //need to do DB stuff
+            var offer_id = $location.search();
+            rideService.confirmRider(offer_id.id, user).then(function(data){
+                console.log(data);
+            }).catch(function(err){
+                alertModal(err.status, err.data);
+            });
         };
 
         $scope.reject_user = function(user){
@@ -116,7 +121,12 @@ angular.module('tmht')
                     $scope.pendingarray.splice(i,1);
                 }
             }
-            //need to do db stuff
+            var offer_id = $location.search();
+            rideService.removeRider(offer_id.id, user).then(function(data){
+
+            }).catch(function(err){
+                alertModal(err.status, err.data);
+            });
         };
 
         $scope.remove_user = function(user){
@@ -125,7 +135,12 @@ angular.module('tmht')
                     $scope.acceptedarray.splice(i,1);
                 }
             }
-            //need to remove the user from the array in the DB
+            var offer_id = $location.search();
+            rideService.removeRider(offer_id.id, user).then(function(data){
+
+            }).catch(function(err){
+                alertModal(err.status, err.data);
+            });
         };
 
         $scope.join_offer2 = function(){
@@ -154,16 +169,27 @@ angular.module('tmht')
             $scope.acceptedDriver.push({rcs:user,status:"accepted"});
             $scope.acceptedDriver_Bool = true;
             $scope.pendingDrivers = [];
-            //need to do DB stuff
+            var request_id = $location.search();
+            rideService.confirmDriver(request_id.id, user).then(function(data){
+                console.log(data);
+            }).catch(function(err){
+                alertModal(err.status, err.data);
+            });
         };
 
         $scope.reject_driver = function(user){
+            var request_id = $location.search();
             for(var i=0;i<$scope.pendingDrivers.length;i++){
                 if($scope.pendingDrivers[i].rcs == user ){
                     $scope.pendingDrivers.splice(i,1);
                 }
             }
-            //need to do db stuff
+            rideService.removeDriver(request_id.id,user).then(function(data){
+                console.log(data);
+                alert('deleted');
+            }).catch(function(err){
+                alertModal(err.status, err.data);
+            });
         };
 
 
