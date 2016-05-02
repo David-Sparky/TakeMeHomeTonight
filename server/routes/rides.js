@@ -295,12 +295,26 @@ router.put('/join_request', function(req, res) {
 router.delete('/removeRider', function(req, res){
 	console.log(req.query);
 	var collection = db.get().collection('offered');
-	collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {riders: {rcs: req.query.rcs}}, $inc: {availableseats: 1}}, function(err, results){
+	collection.find({_id: ObjectID.createFromHexString(req.query.rideID), riders:{rcs: req.query.rcs, status: 'accepted'}}).toArray(function(err, results){
 		if(err) throw err;
+		if(docs.length == 0){
+			collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {riders: {rcs: req.query.rcs}}}, function(err, results){
+				if(err) throw err;
 
-		console.log(results);
-		res.send('Rider Removed!');
+				res.send('Rider Removed!');
+			});
+		}
+		else{
+			collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {riders: {rcs: req.query.rcs}}, $inc: {availableseats: 1}}, function(err, results){
+				if(err) throw err;
+
+				console.log(results);
+				res.send('Rider Removed!');
+			});
+		}
+
 	});
+
 });
 
 router.delete('/removePendingRider', function(req, res){
