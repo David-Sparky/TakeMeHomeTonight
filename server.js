@@ -84,13 +84,6 @@ app.get('/signUp', cas.bounce, function(req,res){
 
 });
 
-app.get('/getSessionStatus', function(req, res){
-  console.log(req.cookies);
-  if(req.session.cas_user == req.cookies.user){
-
-  }
-});
-
 app.get('/logout',function(req, res, next){
   if(!req.session || !req.session.cas_user){
     res.status(400).send('No user signed in');

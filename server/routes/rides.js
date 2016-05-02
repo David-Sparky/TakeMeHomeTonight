@@ -4,8 +4,8 @@ var express = require('express'),
 
 router.use('*', function(req, res, next){
   if(!req.session || !req.session.cas_user){
-    //res.status(401).send('Unauthorized access');
-    res.redirect('/#/');
+    res.status(401).send('Unauthorized access');
+    //res.redirect('/#/');
   }
   else{
     next();

@@ -2,6 +2,16 @@ var express = require('express'),
 	router = express.Router(),
 	db = require('../db');
 
+router.get('/checkSessionStatus', function(req, res){
+  //console.log(req.cookies);
+  if(req.session.cas_user == req.cookies.user){
+  	res.send(true);
+  }
+  else{
+  	res.send(false);
+  }
+});
+
 router.use('*', function(req, res, next){
   if(req.path == '/user/logout')
     next();

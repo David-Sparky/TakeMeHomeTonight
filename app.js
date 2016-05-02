@@ -55,25 +55,31 @@ app.config(['$routeProvider', function($routeProvider){
 	}).
 	when('/team', {
 		templateUrl: 'client/views/team.html',
-		controller: 'teamCtrl'
+		controller: 'teamCtrl',
+		access: {restricted: false}
 	}).
 	when('/publicTransit', {
 		templateUrl: 'client/views/publicTransit.html',
-		controller: 'publicTransitCtrl'
+		controller: 'publicTransitCtrl',
+		access: {restricted: true}
 	}).
 	when('/taxi', {
 		templateUrl: 'client/views/taxi.html',
-		controller: 'taxiCtrl'
+		controller: 'taxiCtrl',
+		access: {restricted: true}
 	}).
 	when('/plane', {
 		templateUrl: 'client/views/plane.html',
-		controller: 'planeCtrl'
+		controller: 'planeCtrl',
+		access: {restricted: true}
 	}).
 	when('/bus', {
-		templateUrl: 'client/views/bus.html'
+		templateUrl: 'client/views/bus.html',
+		access: {restricted: true}
 	}).
 	when('/shuttle', {
-		templateUrl: 'client/views/shuttle.html'
+		templateUrl: 'client/views/shuttle.html',
+		access: {restricted: true}
 	}).
 
 	// when('/publicTrans', {
@@ -97,10 +103,19 @@ app.config(['$routeProvider', function($routeProvider){
 
 }]);
 
-app.run(['$rootScope', '$location', '$route', 'AuthService', function ($rootScope, $location, $route, AuthService) {
+app.run(['$rootScope', '$window', '$route', 'AuthService', function ($rootScope, $window, $route, AuthService) {
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
-    if (next.$$route != undefined && next.$$route.access.restricted && (AuthService.getUserStatus() == undefined || AuthService.getUserStatus() == '')) {
-      $location.path('/');
-    }
+  	AuthService.checkSessionStatus().then(function(data){
+  		if (next.$$route != undefined && (next.$$route.access == undefined || next.$$route.access.restricted) && !data.data) {
+	      AuthService.removeUser();
+	      alert("You are not authorize or not logged in");
+	      $window.location = '/';
+	      //swal("Oops..", "You are not logged in/authorized", "error");
+	    }
+  	}).catch(function(err){
+  		console.log(err);
+  		alert(err);
+  	});
   });
 }]);
+

@@ -8,9 +8,13 @@ angular.module('tmht')
     function checkSessionStatus(){
       return $http({
         method: 'GET',
-        url: '/checkSessionStatus'
+        url: '/user/checkSessionStatus'
       });
     };
+
+    function removeUser(){
+      $cookies.remove('user');
+    }
     /*
     function login(userInput) {
 
@@ -76,6 +80,8 @@ angular.module('tmht')
     return ({
       //sLoggedIn: isLoggedIn,
       getUserStatus: getUserStatus,
+      checkSessionStatus: checkSessionStatus,
+      removeUser: removeUser,
       //login: login,
       logout: logout
     });
