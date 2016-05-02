@@ -9,19 +9,19 @@ angular.module('tmht')
 	rideService.getUserSettingInfo().then(function(data){
 		$scope.editUser = data.data;
 	}).catch(function(err){
-		alertModal(err.status, err.data);
+		sweetAlert("Error!","There was an error! "+err.data,"error");
 	});
 
 	rideService.getOfferedRidesPerUser().then(function(data){
 		$scope.offeredRides = data.data;
 	}).catch(function(err){
-		alertModal(err.status, err.data);
+		sweetAlert("Error!","There was an error! "+err.data,"error");
 	});
 
 	rideService.getOfferForNeededRidesDriver().then(function(data){
 		$scope.neededRidesDriver = data.data;
 	}).catch(function(err){
-		alertModal(err.status, err.data);
+		sweetAlert("Error!","There was an error! "+err.data,"error");
 	});
 
 	rideService.getOfferForNeededRidesRider().then(function(data){
@@ -31,7 +31,7 @@ angular.module('tmht')
 		//$scope.pendingDrivers = data.data.pending;
 		console.log(data.data);
 	}).catch(function(err){
-		alertModal(err.status, err.data);
+		sweetAlert("Error!","There was an error! "+err.data,"error");
 	});
 
 
@@ -39,15 +39,15 @@ angular.module('tmht')
 		console.log(data);
 		$scope.requestedRides = data.data;
 	}).catch(function(err){
-		alertModal(err.status, err.data);
+		sweetAlert("Error!","There was an error! "+err.data,"error");
 	});
 
 	$scope.save = function(formData){
 		rideService.editUserSettings(formData).then(function(data){
 			console.log(data);
-			alertModal('User Settings', data.data);
+			sweetAlert("Success!","Your changes were saved successfully!","success");
 		}).catch(function(err){
-			alertModal(err.status, err.data);
+			sweetAlert("Error!","There was an error! "+err.data,"error");
 			console.log(err);
 		});
 	};
@@ -66,8 +66,9 @@ angular.module('tmht')
 					}
 				}
 			}
+			sweetAlert("Success!","Successfully confirmed "+user,"success");
 		}).catch(function(err){
-			alertModal(err.status, err.data);
+			sweetAlert("Error!","There was an error! "+err.data,"error");
 		});
 	};
 
@@ -84,8 +85,9 @@ angular.module('tmht')
 					}
 				}
 			}
+			sweetAlert("Success!","Successfully removed "+user,"success");
 		}).catch(function(err){
-			alertModal(err.status, err.data);
+			sweetAlert("Error!","There was an error! "+err.data,"error");
 		});
 	};
 
@@ -101,8 +103,9 @@ angular.module('tmht')
 					}
 				}
 			}
+			sweetAlert("Success!","Successfully removed "+user,"success");
 		}).catch(function(err){
-			alertModal(err.status, err.data);
+			sweetAlert("Error!","There was an error! "+err.data,"error");
 		});
 	};
 	
@@ -118,8 +121,9 @@ angular.module('tmht')
 					}
 				}
 			}
+			sweetAlert("Success!","Successfully removed "+user,"success");
 		}).catch(function(err){
-			alertModal(err.status, err.data);
+			sweetAlert("Error!","There was an error! "+err.data,"error");
 		});
 	};
 
@@ -138,8 +142,9 @@ angular.module('tmht')
 					}
 				}
 			}
+			sweetAlert("Success!","Successfully confirmed "+user,"success");
 		}).catch(function(err){
-			alertModal(err.status, err.data);
+			sweetAlert("Error!","There was an error! "+err.data,"error");
 		});
 	};
 
@@ -151,8 +156,9 @@ angular.module('tmht')
 					$scope.offeredRides.splice(x, 1);
 				}
 			}
+			sweetAlert("Success!","Successfully removed your ride offer!","success");
 		}).catch(function(err){
-			alertModal(err.status, err.data);
+			sweetAlert("Error!","There was an error! "+err.data,"error");
 		});
 	};
 
@@ -162,11 +168,11 @@ angular.module('tmht')
 			for(var x in $scope.neededRidesRider){
 				if(rideID == $scope.neededRidesRider[x]._id){
 					$scope.neededRidesRider.splice(x, 1);
-					alert('confirmed');
 				}
 			}
+			sweetAlert("Success!","Successfully removed your ride request!","success");
 		}).catch(function(err){
-			alertModal(err.status, err.data);
+			sweetAlert("Error!","There was an error! "+err.data,"error");
 		});
 	}
 
@@ -178,9 +184,9 @@ angular.module('tmht')
 					$scope.neededRidesDriver.splice(x, 1);
 				}
 			}
-			alert('deleted');
+			sweetAlert("Success!","Successfully removed your the driver!","success");
 		}).catch(function(err){
-			alertModal(err.status, err.data);
+			sweetAlert("Error!","There was an error! "+err.data,"error");
 		});
 	};
 
@@ -192,21 +198,10 @@ angular.module('tmht')
 					alert(data.data);
 				}
 			}
+			sweetAlert("Success!","Successfully removed your ride offer!","success");
 		}).catch(function(err){
-			alertModal(err.status, err.data);
+			sweetAlert("Error!","There was an error! "+err.data,"error");
 		});
 	};
 
-	alertModal = function(title, body){
-		$scope.modalInstance = $modal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'client/views/alert.html',
-            controller: ['$scope', function(scope) {
-                scope.cancel = $scope.cancel;
-                scope.title = title;
-              	scope.body = body;
-            }]
-        });
-	};
-
-}])
+}]);
