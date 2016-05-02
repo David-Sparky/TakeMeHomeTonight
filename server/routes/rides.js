@@ -295,7 +295,7 @@ router.put('/join_request', function(req, res) {
 router.delete('/removeRider', function(req, res){
 	console.log(req.query);
 	var collection = db.get().collection('offered');
-	collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {riders: {rcs: req.query.rcs}}, $inc: {availableseats: 1}}, function(err, results){
+	collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {riders: {rcs: req.query.rcs}}, $inc: {availableseats: -1}}, function(err, results){
 		if(err) throw err;
 
 		console.log(results);
