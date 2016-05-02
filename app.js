@@ -81,21 +81,10 @@ app.config(['$routeProvider', function($routeProvider){
 		templateUrl: 'client/views/shuttle.html',
 		access: {restricted: true}
 	}).
-
-	// when('/publicTrans', {
-	// 	templateUrl: 'client/views/publicTrans.html',
-	// 	controller: 'publicTransitCtrl'
-	// }).
-	// when('/publicTrans', {
-	// 	templateUrl: 'client/views/publicTrans.html',
-	// 	controller: 'publicTransitCtrl'
-	// }).
-	// when('/buses', {
-	// 	templateUrl: 'client/views/buses.html',
-	// 	controller: 'busesCtrl'
-	// }).
-
-
+	when('/buses', {
+		templateUrl: 'client/views/buses.html',
+		controller: 'busesCtrl'
+	}).
 	otherwise({
 		redirectTo: '/'
 	})
