@@ -5,7 +5,12 @@ angular.module('tmht')
       return $cookies.get('user');//user;
     }
 
-
+    function checkSessionStatus(){
+      return $http({
+        method: 'GET',
+        url: '/checkSessionstatus'
+      });
+    };
     /*
     function login(userInput) {
 

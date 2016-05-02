@@ -60,7 +60,7 @@ angular.module('tmht')
 					for(y in $scope.offeredRides[x].drivers){
 						if($scope.offeredRides[x].drivers[y].rcs == user){
 							$scope.offeredRides[x].drivers[y].status = 'accepted';
-							$scope.offeredRides[x].availableseats = $scope.offeredRides[x].availableseats + 1;
+							$scope.offeredRides[x].availableseats = $scope.offeredRides[x].availableseats - 1;
 							break;
 						}
 					}
@@ -78,7 +78,7 @@ angular.module('tmht')
 					for(y in $scope.offeredRides[x].riders){
 						if($scope.offeredRides[x].riders[y].rcs == user){
 							$scope.offeredRides[x].riders.splice(y, 1);
-							$scope.offeredRides[x].availableseats = $scope.offeredRides[x].availableseats - 1;
+							$scope.offeredRides[x].availableseats = $scope.offeredRides[x].availableseats + 1;
 							break;
 						}
 					}
