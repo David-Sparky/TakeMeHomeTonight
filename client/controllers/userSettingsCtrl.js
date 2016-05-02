@@ -57,9 +57,9 @@ angular.module('tmht')
 			console.log(data);
 			for(x in $scope.offeredRides){
 				if($scope.offeredRides[x]._id == rideID){
-					for(y in $scope.offeredRides[x].drivers){
-						if($scope.offeredRides[x].drivers[y].rcs == user){
-							$scope.offeredRides[x].drivers[y].status = 'accepted';
+					for(y in $scope.offeredRides[x].riders){
+						if($scope.offeredRides[x].riders[y].rcs == user){
+							$scope.offeredRides[x].riders[y].status = 'accepted';
 							$scope.offeredRides[x].availableseats = $scope.offeredRides[x].availableseats - 1;
 							break;
 						}

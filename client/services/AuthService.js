@@ -8,7 +8,7 @@ angular.module('tmht')
     function checkSessionStatus(){
       return $http({
         method: 'GET',
-        url: '/checkSessionstatus'
+        url: '/checkSessionStatus'
       });
     };
     /*
