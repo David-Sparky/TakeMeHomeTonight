@@ -12,6 +12,7 @@ var routes = require('./server/routes/index'),
     express = require('express'),
     port = 8005,
     app = express();
+    fs= require('fs');
 
 var cdta = require('./client/controllers/api_info.js');
 var http = require('http');
@@ -95,28 +96,22 @@ app.get('/logout',function(req, res, next){
 app.get('/cdta', function (req, resp) {
 
     var search = req.query.search_b;
-
-    console.log(search);
-
-    // http.get(cdta.api_time + '/' + search + cdta.api_key, function (callback) {
-    //
-    //     callback.on('data', function(d) {
-    //         console.log(d);
-    //     })
-    //
-    //
-    // });
+    search= escape(search);
 
     var x = '';
+    console.log("Search: " + search);
         http.get({
             host: 'api.cdta.org',
-            path: '/api/v1/' + cdta.api_stops + '/' + search + cdta.api_key
+            path: '/api/v1/' + cdta.api_stops + search + cdta.api_key
         }, function (res) {
+            var pt= '/api/v1/' + cdta.api_stops  + search + cdta.api_key;
+            console.log(pt);
             res.on('data', function (d) {
                 x += d.toString();
                 console.log(d.toString());
-                res.destroy();
-                return resp.send(x);
+            });
+            res.on('end', function(){
+                resp.send(x);
             });
 
         });
@@ -125,18 +120,11 @@ app.get('/cdta', function (req, resp) {
 
 app.get('/cdta_dir', function (req, resp) {
 
+    console.log("DIRECTIONS");
+
     var search = req.query.search_b;
 
     console.log(search);
-
-    // http.get(cdta.api_time + '/' + search + cdta.api_key, function (callback) {
-    //
-    //     callback.on('data', function(d) {
-    //         console.log(d);
-    //     })
-    //
-    //
-    // });
 
     var x = '';
     http.get({
@@ -146,21 +134,44 @@ app.get('/cdta_dir', function (req, resp) {
         res.on('data', function (d) {
             x += d.toString();
             console.log(d.toString());
-            res.destroy();
-            return resp.send(x);
+        });
+        res.on('end', function(){
+            resp.send(x);
         });
 
     });
 
 });
 
+
 app.get('/get_route', function (req, resp) {
+
+    console.log("ROUTE");
+    var x= '';
+    http.get({
+        host: 'api.cdta.org',
+        path: '/api/v1/' + cdta.api_sched + req.query.bus_num + '/weekday/' + req.query.info + cdta.api_key
+    }, function (res) {
+        res.on('data', function (d) {
+            x += d.toString();
+            console.log(d.toString());
+        });
+        res.on('end', function(){
+            resp.send(x);
+        });
+
+    });
+
+});
+
+
+app.get('/service_status', function (req, resp) {
 
     console.log("This stuff: " + req.query.info);
     var x= '';
     http.get({
         host: 'api.cdta.org',
-        path: '/api/v1/' + cdta.api_sched + req.query.bus_num + '/weekday/' + req.query.info + cdta.api_key
+        path: '/api/v1/' + cdta.api_status + cdta.api_key
     }, function (res) {
         res.on('data', function (d) {
             x += d.toString();
@@ -172,6 +183,28 @@ app.get('/get_route', function (req, resp) {
     });
 
 });
+
+app.get('/stop_id', function (req, resp) {
+
+    console.log("This stuff: " + req.query.info);
+    var x= '';
+    http.get({
+        host: 'api.cdta.org',
+        path: '/api/v1/' + cdta.api_arrivals + req.query.stopid + '/2' + cdta.api_key
+    }, function (res) {
+        res.on('data', function (d) {
+            x += d.toString();
+            console.log(d.toString());
+        });
+        res.on('end', function(){
+            resp.send(x);
+        });
+
+    });
+
+});
+
+
 
 db.connect('mongodb://' + process.env.tmhtDBUser + ':' + process.env.tmhtDBPassword + '@ds023418.mlab.com:23418/tmht', function(err) {
   if (err) {
