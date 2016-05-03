@@ -17,10 +17,10 @@ var port = process.env.PORT || 8005;
 
 var http = require('http');
 
-var cdta_api_stops = '?request=stops/';
+var cdta_api_stops = '?request=searchstops/';
 var cdta_api_directions = '?request=directions/';
 var cdta_api_sched = '?request=schedules/';
-var cdta_api_status = '?request=status/';
+var cdta_api_status = '?request=alerts/';
 var cdta_api_arrivals = '?request=arrivals/';
 var cdta_api_key = process.env.cdta_api_key;
 
@@ -115,7 +115,7 @@ app.get('/cdta', function (req, resp) {
             console.log(pt);
             res.on('data', function (d) {
                 x += d.toString();
-                console.log(d.toString());
+                //console.log(d.toString());
             });
             res.on('end', function(){
                 resp.send(x);
@@ -140,7 +140,6 @@ app.get('/cdta_dir', function (req, resp) {
     }, function (res) {
         res.on('data', function (d) {
             x += d.toString();
-            console.log(d.toString());
         });
         res.on('end', function(){
             resp.send(x);
@@ -161,7 +160,6 @@ app.get('/get_route', function (req, resp) {
     }, function (res) {
         res.on('data', function (d) {
             x += d.toString();
-            console.log(d.toString());
         });
         res.on('end', function(){
             resp.send(x);
@@ -182,7 +180,6 @@ app.get('/service_status', function (req, resp) {
     }, function (res) {
         res.on('data', function (d) {
             x += d.toString();
-            console.log(d.toString());
             res.destroy();
             return resp.send(x);
         });
@@ -201,7 +198,6 @@ app.get('/stop_id', function (req, resp) {
     }, function (res) {
         res.on('data', function (d) {
             x += d.toString();
-            console.log(d.toString());
         });
         res.on('end', function(){
             resp.send(x);

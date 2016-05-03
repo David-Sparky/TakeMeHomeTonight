@@ -41,10 +41,10 @@
                         </span>
             </div><!-- /input-group -->
             <button class="btn btn-primary" ng-hide="!data_pres" ng-click="checkRoute('1')">
-                {{bus.directions[0].direction}}
+                {{dir.directions[0].direction}}
             </button>
             <button class="btn btn-primary" ng-hide="!data_pres" ng-click="checkRoute('2')">
-                {{bus.directions[1].direction}}
+                {{dir.directions[1].direction}}
             </button>
             <h3>{{br.direction.direction_name}}</h3>
             <div ng-repeat="z in br.direction.stops">
@@ -70,15 +70,18 @@
         </div>
     </div>
     <div class="col-sm-6">
-        <div class="well" data-ng-init="refresh_outages()" >
+        <div class="well" data-ng-init="refresh_outages()">
             <h3>CDTA Service Disruptions</h3>
+            <div ng-repeat="a in outage.alerts">
 
-            <h4>{{ outage.alerts[0].header }}</h4>
+                <h4>{{ a.header }}</h4>
 
-            <p>{{outage.alerts[0].message}}</p>
-            
-            <div id ="busButton">
-                <button class="btn btn-success centering" type="submit" ng-click="refresh_outages()" ng-disabled="!loaded">
+                <p>{{ a.message }}</p>
+            </div>
+
+            <div id="busButton">
+                <button class="btn btn-success centering" type="submit" ng-click="refresh_outages()"
+                        ng-disabled="!loaded">
                     Refresh
                     Status
                 </button>
