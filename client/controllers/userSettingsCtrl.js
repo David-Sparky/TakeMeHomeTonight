@@ -26,17 +26,12 @@ angular.module('tmht')
 
 	rideService.getOfferForNeededRidesRider().then(function(data){
 		$scope.neededRidesRider = data.data;
-		console.log(data);
-		//$scope.acceptedDrivers = data.data.accepted;
-		//$scope.pendingDrivers = data.data.pending;
-		console.log(data.data);
 	}).catch(function(err){
 		sweetAlert("Error!","There was an error! "+err.data,"error");
 	});
 
 
 	rideService.getRequestedRidesPerUser().then(function(data){
-		console.log(data);
 		$scope.requestedRides = data.data;
 	}).catch(function(err){
 		sweetAlert("Error!","There was an error! "+err.data,"error");
@@ -44,17 +39,14 @@ angular.module('tmht')
 
 	$scope.save = function(formData){
 		rideService.editUserSettings(formData).then(function(data){
-			console.log(data);
 			sweetAlert("Success!","Your changes were saved successfully!","success");
 		}).catch(function(err){
 			sweetAlert("Error!","There was an error! "+err.data,"error");
-			console.log(err);
 		});
 	};
 
 	$scope.confirmRider = function(rideID, user){
 		rideService.confirmRider(rideID, user).then(function(data){
-			console.log(data);
 			for(x in $scope.offeredRides){
 				if($scope.offeredRides[x]._id == rideID){
 					for(y in $scope.offeredRides[x].riders){
@@ -150,7 +142,6 @@ angular.module('tmht')
 
 	$scope.removeRideOffer = function(rideID){
 		rideService.removeRideOffer(rideID).then(function(data){
-			console.log(data);
 			for(var x in $scope.offeredRides){
 				if(rideID == $scope.offeredRides[x]._id){
 					$scope.offeredRides.splice(x, 1);
@@ -164,7 +155,6 @@ angular.module('tmht')
 
 	$scope.removeNeededRide = function(rideID){
 		rideService.removeNeededRide(rideID).then(function(data){
-			console.log(data);
 			for(var x in $scope.neededRidesRider){
 				if(rideID == $scope.neededRidesRider[x]._id){
 					$scope.neededRidesRider.splice(x, 1);
@@ -178,7 +168,6 @@ angular.module('tmht')
 
 	$scope.removeNeededRideOfferDriver = function(rideID){
 		rideService.removeNeededRideOfferDriver(rideID).then(function(data){
-			console.log(data);
 			for(x in $scope.neededRidesDriver){
 				if($scope.neededRidesDriver[x]._id == rideID){
 					$scope.neededRidesDriver.splice(x, 1);

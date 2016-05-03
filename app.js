@@ -100,11 +100,9 @@ app.run(['$rootScope', '$window', '$route', 'AuthService', function ($rootScope,
 	      AuthService.removeUser();
 	      alert("You are not authorize or not logged in");
 	      $window.location = '/';
-	      //swal("Oops..", "You are not logged in/authorized", "error");
 	    }
   	}).catch(function(err){
-  		console.log(err);
-  		alert(err);
+  		alert(err.data);
   	});
   });
 }]);
