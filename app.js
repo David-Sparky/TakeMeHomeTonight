@@ -20,7 +20,6 @@ app.config(['$routeProvider', function($routeProvider){
 	}).
 	when('/landing', {
 		templateUrl: 'client/views/landing.html',
-		controller: 'landingCtrl',
 		access: {restricted: true}
 	}).
 	when('/rides/ridesOffered', {
@@ -55,7 +54,6 @@ app.config(['$routeProvider', function($routeProvider){
 	}).
 	when('/team', {
 		templateUrl: 'client/views/team.html',
-		controller: 'teamCtrl',
 		access: {restricted: false}
 	}).
 	when('/publicTransit', {

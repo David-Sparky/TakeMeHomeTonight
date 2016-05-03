@@ -1,46 +1,29 @@
 angular.module('tmht')
-.controller('signUpCtrl', ['$scope', '$http', '$window', '$uibModal', function($scope, $http, $window, $modal){
+.controller('signUpCtrl', ['$scope', '$http', '$window', function($scope, $http, $window){
 
 
 	$http({
 		method: 'GET',
 		url: 'signUp?returnTo=/%23/signUp'
 	}).then(function(data){
-		console.log(data);
 		$window.location = data.data;
 
 	}).catch(function(err){
-		alert(err);
+		swal("Oops...", "There was an error! "+err.data, "error");
 	});
 	
 	$scope.signUp = function(userData) {
-		console.log(userData);
 		$http({
 			method: "POST",
 			data: userData,
 			url: '/user/signUp'
 		})
 		.then(function(data){
-			console.log(data);
-			
 			$window.location = data.data;
 		},
 		function(err){
-			alertModal(err.status, err.data);
+			swal("Oops...", "There was an error! "+err.data, "error");
 		})
 	}
-
-
-	alertModal = function(title, body){
-		$scope.modalInstance = $modal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'client/views/alert.html',
-            controller: ['$scope', function(scope) {
-                scope.cancel = $scope.cancel;
-                scope.title = title;
-              	scope.body = body;
-            }]
-        });
-	};
 	
 }]);

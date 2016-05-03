@@ -1,5 +1,5 @@
 angular.module('tmht')
-.controller('userSettingsCtrl', ['$scope', 'rideService', '$uibModal','AuthService', function($scope, rideService, $modal, AuthService){
+.controller('userSettingsCtrl', ['$scope', 'rideService', 'AuthService', function($scope, rideService, AuthService){
 
 	$scope.offeredRides = [];
 	$scope.requestedRides = [];
