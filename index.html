@@ -63,7 +63,6 @@
           </div>
           <li class="divider"></li>
           <div class="notifications-wrapper" ng-repeat="notification in notifications">
-            {{notification.db}}
            <a class="content" ng-if="notification.db=='offered'" ng-href="/#/rides/offer?id={{notification.rideID}}">
             <div class="notification-item">
               <h4 class="item-title">{{notification.message}}</h4>

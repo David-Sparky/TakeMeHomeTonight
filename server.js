@@ -246,8 +246,28 @@ io.on("connection", function(socket){
           if(session && session.cas_user){
             socket.join(session.cas_user);
             db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, docs){
-              socket.emit('notifications', {
-                notifications: docs[0].notifications
+              db.get().collection('users').aggregate([
+                {$unwind : '$notifications'},
+                {$match: {'rcs': session.cas_user, 'notifications.seen': false}},
+                {$group: {
+                  _id: '$_id', 
+                  notifications: {$push: '$notifications'},
+                }}
+              ]).toArray(function(err, docs2){
+                if(err) throw err;
+                console.log(docs2);
+                if(docs2[0] == undefined){
+                  socket.emit('notifications', {
+                      notifications: docs[0].notifications,
+                      count: 0
+                  });
+                }
+                else{
+                  socket.emit('notifications', {
+                      notifications: docs[0].notifications,
+                      count: docs2[0].notifications.length
+                  });
+                }
               });
             });
           }
@@ -263,9 +283,30 @@ io.on("connection", function(socket){
     socket.on('update notifications', function(data){
       sessionStore.get(decoded_id, function(error, session){
           db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, docs){
-              socket.emit('notifications', {
-                  notifications: docs[0].notifications
-              });
+            db.get().collection('users').aggregate([
+              {$unwind : '$notifications'},
+              {$match: {'rcs': session.cas_user}, 'notifications.seen': false},
+              {$group: {
+                _id: '$_id', 
+                notifications: {$push: '$notifications'},
+              }}
+            ]).toArray(function(err, docs2){
+              if(err) throw err;
+              console.log(docs2);
+              if(docs2[0] == undefined){
+                  socket.emit('notifications', {
+                      notifications: docs[0].notifications,
+                      count: 0
+                  });
+              }
+              else{
+                socket.emit('notifications', {
+                    notifications: docs[0].notifications,
+                    count: docs2[0].notifications.length
+                });
+              }
+            });
+              
           });
       });
     });
