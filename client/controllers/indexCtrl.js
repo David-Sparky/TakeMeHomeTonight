@@ -21,6 +21,7 @@ angular.module('tmht')
 	}
 	socket.emit('logged in');
 	socket.on('notifications', function(data){
+		AuthService.setNotifications(data.notifications);
 		console.log(data);
 	});
 

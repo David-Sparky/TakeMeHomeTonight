@@ -1,6 +1,8 @@
 angular.module('tmht')
 .factory('AuthService', ['$http', '$cookies', '$window',  function ($http, $cookies, $window) {
 
+    var notifications = [];
+
     function getUserStatus() {
       return $cookies.get('user');//user;
     }
@@ -15,6 +17,16 @@ angular.module('tmht')
     function removeUser(){
       $cookies.remove('user');
     }
+    
+    
+    function getNotifications(){
+      return notifications;
+    }
+
+    function setNotifications(input){
+      notifications = input;
+    }
+
     /*
     function login(userInput) {
 
@@ -83,6 +95,8 @@ angular.module('tmht')
       checkSessionStatus: checkSessionStatus,
       removeUser: removeUser,
       //login: login,
-      logout: logout
+      logout: logout,
+      getNotifications,
+      setNotifications
     });
 }]);
