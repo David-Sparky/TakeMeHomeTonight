@@ -3,6 +3,7 @@ angular.module('tmht')
 	
 	$scope.logout = AuthService.logout;
 	$scope.notifications = AuthService.getNotifications();
+	$scope.newNotifications = 0;
 
 	$scope.checkForUser = function(){
 		var user = AuthService.getUserStatus();
@@ -23,6 +24,7 @@ angular.module('tmht')
 	socket.emit('logged in');
 	socket.on('notifications', function(data){
 		AuthService.setNotifications(data.notifications);
+		$scope.newNotifications = data.count;
 		$scope.notifications = data.notifications;
 		console.log(data);
 	});
@@ -33,6 +35,9 @@ angular.module('tmht')
 	});
 	//socket.on()
 
+	$scope.checkNotifications = function(){
+		
+	}
 
 	$(document).ready(function () {
 		$("nav").find("li").on("click", "a", function () {

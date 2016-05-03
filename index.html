@@ -51,11 +51,12 @@
 
         </ul>
       </div><!-- /.navbar-collapse -->
-      <div class="dropdown nav navbar-nav pull-right">
-        <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
-          Notifications
+      <div class="dropdown nav navbar-nav">
+        <a id="dLabel" class="noti_Container" role="button" data-toggle="dropdown" data-target="#" href="/page.html"  ng-click="checkNotifications()">
+          Notifications<div class="noti_bubble">{{newNotifications}}</div>
           <!--<i class="glyphicon glyphicon-bell"></i>-->
         </a>
+        
         
         <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
           
