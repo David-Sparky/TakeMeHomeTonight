@@ -26,7 +26,6 @@ router.post('/requestRide', function(req, res){
 		var collection = db.get().collection('requested');
 		collection.insert(req.body, function(err, results){
 			if(err) throw err;
-			console.log(results);
 			if(results.insertedCount == 1){
 				res.send({Success: 'Ride was requested'});
 			}
@@ -49,7 +48,6 @@ router.post('/addRide', function(req,res){
 		var collection = db.get().collection('offered');
 		collection.insert(req.body, function(err, results){
 			if(err) throw err;
-			console.log(results);
 			if(results.insertedCount == 1){
 				res.send({Success: 'Ride is now offered'});
 			}
@@ -80,7 +78,6 @@ router.get('/allOfferedRides', function(req,res){
 
 router.get('/get_ride', function(req,res){
 	var id = req.query.id;
-	//console.log(id);
 	if(!req.session && !req.session.cas_user){
 		//user does not exist
 		console.log("User does not exist");
@@ -97,7 +94,6 @@ router.get('/get_ride', function(req,res){
 
 router.get('/get_offer', function(req,res){
 	var id = req.query.id;
-	//console.log(id);
 	if(!req.session && !req.session.cas_user){
 		//user does not exist
 		console.log("User does not exist");
@@ -157,7 +153,6 @@ router.put('/confirmRider', function(req, res){
 	var id = ObjectID.createFromHexString(req.body.rideID);
 	collection.find({_id: id}).toArray(function(err,docs){
 		if(err) throw err;
-		console.log(docs);
 		if(docs.length <= 0){
 			res.status(400).send('no corresponding ride');
 		}
@@ -186,7 +181,6 @@ router.put('/confirmDriver', function(req, res){
 	var id = ObjectID.createFromHexString(req.body.rideID);
 	collection.find({_id: id}).toArray(function(err,docs){
 		if(err) throw err;
-		console.log(docs);
 		if(docs.length <= 0){
 			res.status(400).send('no corresponding ride');
 		}
@@ -214,7 +208,6 @@ router.get('/requestedRidesPerUser', function(req, res){
 	}
 	else{
 		var collection = db.get().collection('offered');
-		//collection.find({'riders.rcs': req.session.cas_user}, {riders: 0}
 		collection.aggregate([
 			{$unwind : '$riders'},
 			{$match: {'riders.rcs': req.session.cas_user}},
@@ -230,17 +223,6 @@ router.get('/requestedRidesPerUser', function(req, res){
 				seats: {$first:'$seats'},
 				availableseats: {$first:'$availableseats'}
 			}}
-			/*
-			{$match : {'riders.rcs': req.session.cas_user}},
-			{$project: {
-				riders: {
-					$filter: {
-						input: '$riders',
-						as: 'item',
-						cond: {'$$item.rcs': req.session.cas_user}//{$eq: ['$$item.rcs' req.session.cas_user]}
-					}
-				}
-			}}*/
 		]).toArray(function(err, docs){
 			if(err) throw err;
 
@@ -281,15 +263,9 @@ router.get('/offersForNeededRidesRider', function(req, res){
 	}
 	else{
 		var collection = db.get().collection('requested');
-		collection.find({rcs: req.session.cas_user/*, accepted: 'true'*/}).toArray(function(err, docs){
+		collection.find({rcs: req.session.cas_user}).toArray(function(err, docs){
 			if(err) throw err;
 			res.send(docs);
-			/*collection.find({rcs: req.session.cas_user, $or : [{accepted: 'false'}, {accepted: {$exists: false}}]}).toArray(function(err, docs2){
-				if(err) throw err;
-
-				res.send({accepted:docs, pending: docs2});
-			});*/
-			//res.send(docs);
 		});
 	}
 });
@@ -317,7 +293,6 @@ router.put('/join_request', function(req, res) {
 
 
 router.delete('/removeRider', function(req, res){
-	console.log(req.query);
 	var collection = db.get().collection('offered');
 	collection.find({_id: ObjectID.createFromHexString(req.query.rideID), riders:{rcs: req.query.rcs, status: 'accepted'}}).toArray(function(err, docs){
 		if(err) throw err;
@@ -331,8 +306,6 @@ router.delete('/removeRider', function(req, res){
 		else{
 			collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {riders: {rcs: req.query.rcs}}, $inc: {availableseats: 1}}, function(err, results){
 				if(err) throw err;
-
-				console.log(results);
 				res.send('Rider Removed!');
 			});
 		}
@@ -346,7 +319,6 @@ router.delete('/removeRider', function(req, res){
 });
 
 router.delete('/removePendingRider', function(req, res){
-	console.log(req.query);
 	var collection = db.get().collection('offered');
 	collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {riders: {rcs: req.query.rcs}}}, function(err, results){
 		if(err) throw err;

@@ -37,7 +37,7 @@ angular.module('tmht')
                         $scope.acceptedDriver_Bool = true;
                     }
                 }).catch(function(err){
-                    console.log(err);
+                    swal("Oops...", "There was an error! "+err.data, "error");
                 });
                 break;
             case "/rides/offer":
@@ -76,7 +76,7 @@ angular.module('tmht')
                         }
                     }
                 }).catch(function(err){
-                    console.log(err);
+                    swal("Oops...", "There was an error! "+err.data, "error");
                 });
                 break;
         }
@@ -86,7 +86,6 @@ angular.module('tmht')
                 $scope.joined=true;
                 sweetAlert("Joined!","Successfully requested to join!","success");
             }).catch(function(err){
-                console.log(err);
                 sweetAlert("Error!","There was an error! "+err.data,"error");
             });
 
@@ -119,7 +118,6 @@ angular.module('tmht')
             }
             var offer_id = $location.search();
             rideService.confirmRider(offer_id.id, user).then(function(data){
-                //console.log(data);
                 sweetAlert("Added!","Successfully added "+user+"!","success");
             }).catch(function(err){
                 alertModal(err.status, err.data);
@@ -138,7 +136,6 @@ angular.module('tmht')
                 sweetAlert("Removed!","Successfully removed "+user+"!","success");
 
             }).catch(function(err){
-                alertModal(err.status, err.data);
                 sweetAlert("Error!","There was an error! "+err.data,"error");
             });
         };
@@ -154,7 +151,6 @@ angular.module('tmht')
             rideService.removeRider(offer_id.id, user).then(function(data){
                 sweetAlert("Removed!","Successfully removed "+user+"!","success");
             }).catch(function(err){
-                alertModal(err.status, err.data);
                 sweetAlert("Error!","There was an error! "+err.data,"error");
             });
         };
@@ -165,7 +161,6 @@ angular.module('tmht')
                 sweetAlert("Joined!","Successfully request to join!","success");
                 $scope.joined2=true;
             }).catch(function(err){
-                console.log(err);
                 sweetAlert("Error!","There was an error! "+err.data,"error");
             });
         };
@@ -192,9 +187,7 @@ angular.module('tmht')
             var request_id = $location.search();
             rideService.confirmDriver(request_id.id, user).then(function(data){
                 sweetAlert("Added!","Accepted driver "+user+"!","success");
-                //console.log(data);
             }).catch(function(err){
-                alertModal(err.status, err.data);
                 sweetAlert("Error!","There was an error! "+err.data,"error");
             });
         };
@@ -210,9 +203,7 @@ angular.module('tmht')
             $scope.acceptedDriver_Bool = false;
             rideService.removeDriver(request_id.id,user).then(function(data){
                 sweetAlert("Removed!","Successfully removed "+user+"!","success");
-                //console.log(data);
             }).catch(function(err){
-                alertModal(err.status, err.data);
                 sweetAlert("Error!","There was an error! "+err.data,"error");
             });
         };
