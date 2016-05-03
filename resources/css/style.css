@@ -326,7 +326,7 @@ input {
     text-align: center;
     margin-left: 5%; 
   }
-  
+
   .signup form input {
     width: 80%;
   }
@@ -341,6 +341,15 @@ input {
 
   .rides form input {
     width: 80%;
+  }
+
+  #home {
+    position: relative;
+    transform: translateY(15%);
+  }
+
+  #home section {
+    font-size: 0.7em;
   }
 }
 
@@ -486,10 +495,14 @@ input {
 
 
 /*home page css based on height of window*/
-@media (max-height: 500px) {
+@media (max-height: 500px) and (max-width: 400px){
   #home {
     position: relative;
-    transform: translateY(30%);
+    transform: translateY(10%);
+  }
+
+  #home section {
+    font-size: 0.7em;
   }
 
   .about {
@@ -500,7 +513,7 @@ input {
 @media (min-height: 500px) and (max-height: 600px) {
   #home {
     position: relative;
-    transform: translateY(40%);
+    transform: translateY(30%);
   }
 
   .about {
