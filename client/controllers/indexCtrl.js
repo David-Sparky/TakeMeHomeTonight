@@ -2,6 +2,7 @@ angular.module('tmht')
 .controller('indexCtrl', ['$scope', '$http', '$window','AuthService','socket', function($scope, $http, $window, AuthService, socket){
 	
 	$scope.logout = AuthService.logout;
+	$scope.notifications = AuthService.getNotifications();
 
 	$scope.checkForUser = function(){
 		var user = AuthService.getUserStatus();
@@ -22,6 +23,7 @@ angular.module('tmht')
 	socket.emit('logged in');
 	socket.on('notifications', function(data){
 		AuthService.setNotifications(data.notifications);
+		$scope.notifications = data.notifications;
 		console.log(data);
 	});
 

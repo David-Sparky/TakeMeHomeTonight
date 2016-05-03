@@ -40,7 +40,6 @@
           <li><a ng-show="checkForUser()" href="#/rides/requestRide">Request a Ride</a></li>
 
           <li><a ng-show="checkForUser()" href="#/publicTransit">Public Transit</a></li>
-
           <li class="dropdown">
             <span ng-show="checkForUser()" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile
             <span class="caret"></span></span>
@@ -49,8 +48,42 @@
               <li><a ng-show="checkForUser()" ng-click="logout()">Logout</a></li>
             </ul>
           </li>
+
         </ul>
       </div><!-- /.navbar-collapse -->
+      <div class="dropdown nav navbar-nav pull-right">
+        <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
+          Notifications
+          <!--<i class="glyphicon glyphicon-bell"></i>-->
+        </a>
+        
+        <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
+          
+          <div class="notification-heading"><h4 class="menu-title">Notifications</h4>
+          </div>
+          <li class="divider"></li>
+          <div class="notifications-wrapper" ng-repeat="notification in notifications">
+            {{notification.db}}
+           <a class="content" ng-if="notification.db=='offered'" ng-href="/#/rides/offer?id={{notification.rideID}}">
+            <div class="notification-item">
+              <h4 class="item-title">{{notification.message}}</h4>
+              <p class="item-info">{{notification.time | date: 'short'}}</p>
+            </div>
+           </a>
+           <a class="content" ng-if="notification.db=='requested'" ng-href="/#/rides/ride?id={{notification.rideID}}">
+             <div class="notification-item">
+              <h4 class="item-title">{{notification.message}}</h4>
+              <p class="item-info">{{notification.time | date: 'short'}}</p>
+            </div>
+           </a>
+          </div>
+          <li class="divider"></li>
+          <!--
+          <div class="notification-footer"><h4 class="menu-title">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4></div>-->
+        </ul>
+      
+      </div>
+
     </div><!-- /.container-fluid -->
   </nav>
 

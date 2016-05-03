@@ -232,41 +232,44 @@ app.get('/stop_id', function (req, resp) {
 
 io.on("connection", function(socket){
   var cookie_string = socket.request.headers.cookie;
-  var parsed_cookies = cookie.parse(cookie_string);
-  var connect_sid = parsed_cookies['connect.sid'];
-  
-  var decoded_id = cookieParser.signedCookie(connect_sid, 'super secret key')
+  console.log(cookie_string);
+  if(typeof cookie_string == 'string'){
+    var parsed_cookies = cookie.parse(cookie_string);
+    var connect_sid = parsed_cookies['connect.sid'];
+    
+    var decoded_id = cookieParser.signedCookie(connect_sid, 'super secret key')
 
-  socket.on('logged in', function(data){
-    if(decoded_id) {
-      sessionStore.get(decoded_id, function (error, session) {
-        console.log(session);
-        if(session && session.cas_user){
-          socket.join(session.cas_user);
-          db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, docs){
-            socket.emit('notifications', {
-              notifications: docs[0].notifications
-            });
-          });
-        }
-        //HOORAY NOW YOU'VE GOT THE SESSION OBJECT!!!!
-      });
-    }
-    /*
-    if(req.session && req.session.cas_user){
-      
-    }*/
-  });
-
-  socket.on('update notifications', function(data){
-    sessionStore.get(decoded_id, function(error, session){
-        db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, docs){
-            socket.emit('notifications', {
+    socket.on('logged in', function(data){
+      if(decoded_id) {
+        sessionStore.get(decoded_id, function (error, session) {
+          console.log(session);
+          if(session && session.cas_user){
+            socket.join(session.cas_user);
+            db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, docs){
+              socket.emit('notifications', {
                 notifications: docs[0].notifications
+              });
             });
+          }
+          //HOORAY NOW YOU'VE GOT THE SESSION OBJECT!!!!
         });
+      }
+      /*
+      if(req.session && req.session.cas_user){
+        
+      }*/
     });
-  });
+
+    socket.on('update notifications', function(data){
+      sessionStore.get(decoded_id, function(error, session){
+          db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, docs){
+              socket.emit('notifications', {
+                  notifications: docs[0].notifications
+              });
+          });
+      });
+    });
+  }
 
 });
 
