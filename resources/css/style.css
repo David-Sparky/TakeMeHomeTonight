@@ -183,6 +183,10 @@ input {
   text-align: center;
 }
 
+#busButton {
+  margin-left: 40%;
+}
+
 .btn-default {
   border-color: white;
   background-color: transparent; 
