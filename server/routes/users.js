@@ -32,7 +32,7 @@ router.post('/signUp', function(req, res){
 			//user already exists
 		}
 		else{
-			collection.insert({rcs: req.session.cas_user, firstName: req.body.firstName, lastName: req.body.lastName}, function(err, results){
+			collection.insert({rcs: req.session.cas_user, firstName: req.body.firstName, lastName: req.body.lastName, notifications: []}, function(err, results){
 				if(err) throw err;
 				console.log(results);
 				if(results.insertedCount == 1){

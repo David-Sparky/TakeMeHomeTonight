@@ -1,3 +1,5 @@
+module.exports = function(io){
+
 var express = require('express'),
 	router = express.Router(),
 	db = require('../db');
@@ -136,7 +138,15 @@ router.put('/join_offer', function(req, res) {
 	else{
 		collection.update({_id:ObjectID.createFromHexString(id)}, {$push: {riders:{rcs:user,status:"pending"}}}, function(err, results){
 			if(err) throw err;
-			res.status(200).send('Added to the list of pending users!');
+			collection.find({_id: ObjectID.createFromHexString(id)}).toArray(function(err, docs){
+				db.get().collection('users').update({rcs: docs[0].owner}, {$push: {notifications: {rideID:id, db:'offered', time: new Date(), message: req.session.cas_user + ' requested your offered ride', seen: false}}}, function(err, results){
+					if(err) throw err;
+					console.log(io());
+					io().of(docs[0].owner).emit('notification', 'random shit');
+				})
+				res.status(200).send('Added to the list of pending users!');
+			})
+			
 		});
 	}
 });
@@ -160,6 +170,10 @@ router.put('/confirmRider', function(req, res){
 		else{
 			collection.update({_id: id, 'riders.rcs': req.body.rcs}, {$set: {'riders.$.status': 'accepted'}, $inc: {availableseats: -1}}, function(err, docs){
 				if(err) throw err;
+				db.get().collection('users').update({rcs: req.body.rcs}, {$push: {notifications: {rideID: id, db:'offered', time: new Date(), message: 'You have been confirmed for ' + req.session.cas_user + '\'s ride', seen: false}}}, function(err, results){
+					if(err) throw err;
+					io.to(req.body.rcs).emit('notification');
+				});
 				console.log(docs);
 				res.status(200).send("updated");
 			});
@@ -182,6 +196,7 @@ router.put('/confirmDriver', function(req, res){
 		else{
 			collection.update({_id: id, 'drivers.rcs': req.body.rcs}, {$set: {'drivers.$.status': 'accepted', accepted: true}}, function(err, docs){
 				if(err) throw err;
+				db.get().collection('users').update({rcs: req.body.rcs}, {$push: {notifications: {rideID:id, db:'requested', time: new Date(), message: req.session.cas_user + ' requested your offered ride', seen: false}}})
 				console.log(docs);
 				res.status(200).send("updated");
 			});
@@ -403,6 +418,6 @@ router.delete('/removeRequestForAvailableRide', function(req, res){
 });
 
 
-
-
-module.exports = router;
+return router;
+}
+//module.exports = router;

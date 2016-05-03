@@ -1,8 +1,5 @@
 //testing a js file for heroku
-var routes = require('./server/routes/index'),
-    rides = require('./server/routes/rides'),
-    users = require('./server/routes/users'),
-    db = require('./server/db');
+var db = require('./server/db');
     ObjectID = require('mongodb').ObjectID,
   	bodyParser = require('body-parser'),
   	cookieParser = require('cookie-parser'),
@@ -11,11 +8,25 @@ var routes = require('./server/routes/index'),
   	session = require('express-session'),
     express = require('express'),
     app = express();
-    fs= require('fs');
+    fs = require('fs'),
+    http = require('http'),
+    server = http.Server(app)
+    io = require('socket.io')(server),
+    MemoryStore = session.MemoryStore,
+    sessionStore = new MemoryStore(),
+    cookie = require('cookie');
+
+var getIOInstance = function(){
+  return io;
+}
+
+var routes = require('./server/routes/index'),
+    rides = require('./server/routes/rides')(getIOInstance),
+    users = require('./server/routes/users');
 
 var port = process.env.PORT || 8005;
 
-var http = require('http');
+
 
 var cdta_api_stops = '?request=stops/';
 var cdta_api_directions = '?request=directions/';
@@ -34,7 +45,8 @@ app.use('/', express.static(path.join(__dirname, '/')));
 app.use(session({
     secret: 'super secret key',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: sessionStore
 }));
 
 // Create a new instance of CASAuthentication.
@@ -44,6 +56,13 @@ var cas = new CASAuthentication({
     cas_version: '2.0'
 });
 
+/*
+app.use('*', function(req, res, next){
+  sessionStore.all(function(err, sessions){
+    console.log(sessions);
+    next();
+  });
+});*/
 
 app.use('/', routes);
 app.use('/rides', rides);
@@ -192,7 +211,6 @@ app.get('/service_status', function (req, resp) {
 });
 
 app.get('/stop_id', function (req, resp) {
-
     console.log("This stuff: " + req.query.info);
     var x= '';
     http.get({
@@ -212,14 +230,50 @@ app.get('/stop_id', function (req, resp) {
 });
 
 
+io.on("connection", function(socket){
+  var cookie_string = socket.request.headers.cookie;
+  var parsed_cookies = cookie.parse(cookie_string);
+  var connect_sid = parsed_cookies['connect.sid'];
+  
+  var decoded_id = cookieParser.signedCookie(connect_sid, 'super secret key')
+
+  socket.on('logged in', function(data){
+    if(decoded_id) {
+      sessionStore.get(decoded_id, function (error, session) {
+        console.log(session);
+        if(session && session.cas_user){
+          socket.join(session.cas_user);
+          db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, docs){
+            socket.emit('notifications', {
+              notifications: docs[0].notifications
+            });
+          });
+        }
+        //HOORAY NOW YOU'VE GOT THE SESSION OBJECT!!!!
+      });
+    }
+    /*
+    if(req.session && req.session.cas_user){
+      
+    }*/
+  });
+
+  
+
+});
+
+
 
 db.connect('mongodb://' + process.env.tmhtDBUser + ':' + process.env.tmhtDBPassword + '@ds023418.mlab.com:23418/tmht', function(err) {
   if (err) {
     console.log('Unable to connect to Mongo.');
     process.exit(1)
   } else {
-    app.listen(port, function() {
+    /*app.listen(port, function() {
       console.log('Server running on port ' + port + '.')
+    })*/
+    server.listen(port, function(){
+      console.log('Server running on port ' + port + '.');
     })
   }
 });

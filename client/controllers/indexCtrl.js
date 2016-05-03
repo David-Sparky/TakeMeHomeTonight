@@ -1,5 +1,5 @@
 angular.module('tmht')
-.controller('indexCtrl', ['$scope', '$http', '$window','AuthService', function($scope, $http, $window, AuthService){
+.controller('indexCtrl', ['$scope', '$http', '$window','AuthService','socket', function($scope, $http, $window, AuthService, socket){
 	
 	$scope.logout = AuthService.logout;
 
@@ -12,6 +12,22 @@ angular.module('tmht')
 			return true;
 		}
 	};
+
+	socket.on('join', function(data){
+		console.log(data);
+	});	
+	if($scope.checkForUser == true){
+		socket.emit('logged in');
+	}
+	socket.emit('logged in');
+	socket.on('notifications', function(data){
+		console.log(data);
+	});
+
+	socket.on('notification', function(data){
+		console.log(data);
+	});
+	//socket.on()
 
 
 	$(document).ready(function () {
