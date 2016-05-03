@@ -183,6 +183,10 @@ input {
   text-align: center;
 }
 
+#busButton {
+  margin-left: 40%;
+}
+
 .btn-default {
   border-color: white;
   background-color: transparent; 
@@ -320,8 +324,42 @@ input {
 }
 /*end team page css*/
 
+@media (max-width: 400px) {
+  .signup .well {
+    width: 90%;
+    text-align: center;
+    margin-left: 5%; 
+  }
+
+  .signup form input {
+    width: 80%;
+  }
+
+  .rides {
+    width: 90%;
+  }
+
+  .rides .form-horizontal input {
+    margin-left: 10%;
+  }
+
+  .rides form input {
+    width: 80%;
+  }
+
+  #home {
+    position: relative;
+    transform: translateY(15%);
+  }
+
+  #home section {
+    font-size: 0.7em;
+  }
+}
+
+
 /*for when screen is smaller than 700px*/
-@media (max-width: 700px) {
+@media (min-width: 400px) and (max-width: 700px) {
   .signup .well {
     width: 40%;
     text-align: center;
@@ -461,10 +499,14 @@ input {
 
 
 /*home page css based on height of window*/
-@media (max-height: 500px) {
+@media (max-height: 500px) and (max-width: 400px){
   #home {
     position: relative;
-    transform: translateY(30%);
+    transform: translateY(10%);
+  }
+
+  #home section {
+    font-size: 0.7em;
   }
 
   .about {
@@ -475,7 +517,7 @@ input {
 @media (min-height: 500px) and (max-height: 600px) {
   #home {
     position: relative;
-    transform: translateY(40%);
+    transform: translateY(30%);
   }
 
   .about {

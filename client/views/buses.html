@@ -9,7 +9,7 @@
         </div>
     </section>
 
-    <div class="col-lg-6">
+    <div class="col-sm-6">
         <div class="well">
             <h3>CDTA Bus Destinations</h3>
             <div class="input-group">
@@ -31,7 +31,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-sm-6">
         <div class="well">
             <h3>CDTA Bus Routes</h3>
             <div class="input-group">
@@ -52,7 +52,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-sm-6">
         <div class="well">
             <h3>CDTA Bus Stop Arrivals</h3>
             <div class="input-group">
@@ -69,7 +69,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-sm-6">
         <div class="well" data-ng-init="refresh_outages()" >
             <h3>CDTA Service Disruptions</h3>
 
@@ -77,10 +77,12 @@
 
             <p>{{outage.alerts[0].message}}</p>
             
-            <button class="btn btn-success" type="submit" ng-click="refresh_outages()" ng-disabled="!loaded">
-                Refresh
-                Status
-            </button>
+            <div id ="busButton">
+                <button class="btn btn-success centering" type="submit" ng-click="refresh_outages()" ng-disabled="!loaded">
+                    Refresh
+                    Status
+                </button>
+            </div>
         </div>
     </div>
 </div>
