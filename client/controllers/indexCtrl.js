@@ -26,6 +26,7 @@ angular.module('tmht')
 
 	socket.on('notification', function(data){
 		console.log(data);
+		socket.emit('update notifications');
 	});
 	//socket.on()
 

@@ -172,7 +172,7 @@ router.put('/confirmRider', function(req, res){
 				if(err) throw err;
 				db.get().collection('users').update({rcs: req.body.rcs}, {$push: {notifications: {rideID: id, db:'offered', time: new Date(), message: 'You have been confirmed for ' + req.session.cas_user + '\'s ride', seen: false}}}, function(err, results){
 					if(err) throw err;
-					io.to(req.body.rcs).emit('notification');
+					io().to(req.body.rcs).emit('notification');
 				});
 				console.log(docs);
 				res.status(200).send("updated");
@@ -198,7 +198,7 @@ router.put('/confirmDriver', function(req, res){
 				if(err) throw err;
 				db.get().collection('users').update({rcs: req.body.rcs}, {$push: {notifications: {rideID:id, db:'requested', time: new Date(), message: req.session.cas_user + ' confirmed you as their driver', seen: false}}}, function(err,results){
 					if(err) throw err;
-					io.to(req.body.rcs).emit('notification');
+					io().to(req.body.rcs).emit('notification');
 				});
 				console.log(docs);
 				res.status(200).send("updated");
@@ -307,7 +307,7 @@ router.put('/join_request', function(req, res) {
 			collection.find({_id: ObjectID.createFromHexString(id)}).toArray(function(err, docs){
 				db.get().collection('users').update({rcs: docs[0].rcs}, {$push: {notifications: {rideID:id, db:'requested', time: new Date(), message: req.session.cas_user + ' has requested to give you a ride', seen: false}}}, function(err,results){
 					if(err) throw err;
-					io.to(docs[0].rcs).emit('notification');
+					io().to(docs[0].rcs).emit('notification');
 				});
 			});
 			res.status(200).send('Added to the list of pending users!');
@@ -336,9 +336,9 @@ router.delete('/removeRider', function(req, res){
 				res.send('Rider Removed!');
 			});
 		}
-		db.get().collection('users').update({rcs: req.query.rcs}, {$push: {notifications: {rideID:id, db:'offered', time: new Date(), message: req.session.cas_user + " has removed you as their passenger", seen: false}}}, function(err,results){
+		db.get().collection('users').update({rcs: req.query.rcs}, {$push: {notifications: {rideID: ObjectID.createFromHexString(req.query.rideID), db:'offered', time: new Date(), message: req.session.cas_user + " has removed you as their passenger", seen: false}}}, function(err,results){
 			if(err) throw err;
-			io.to(req.query.rcs).emit('notification');
+			io().to(req.query.rcs).emit('notification');
 		});
 
 	});
@@ -350,9 +350,9 @@ router.delete('/removePendingRider', function(req, res){
 	var collection = db.get().collection('offered');
 	collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {riders: {rcs: req.query.rcs}}}, function(err, results){
 		if(err) throw err;
-		db.get().collection('users').update({rcs: req.query.rcs}, {$push: {notifications: {rideID:id, db:'offered', time: new Date(), message: req.session.cas_user + ' has removed you as their passenger', seen: false}}}, function(err,results){
+		db.get().collection('users').update({rcs: req.query.rcs}, {$push: {notifications: {rideID:ObjectID.createFromHexString(req.query.rideID), db:'offered', time: new Date(), message: req.session.cas_user + ' has removed you as their passenger', seen: false}}}, function(err,results){
 			if(err) throw err;
-			io.to(req.query.rcs).emit('notification');
+			io().to(req.query.rcs).emit('notification');
 		});
 		res.send('Pending Rider Removed!');
 	});
@@ -374,9 +374,9 @@ router.delete('/removeDriver', function(req, res){
 				res.send('Driver removed!');
 			});
 		}
-		db.get().collection('users').update({rcs: req.query.rcs}, {$push: {notifications: {rideID:id, db:'requested', time: new Date(), message: req.session.cas_user + ' removed you as their driver', seen: false}}}, function(err,results){
+		db.get().collection('users').update({rcs: req.query.rcs}, {$push: {notifications: {rideID:ObjectID.createFromHexString(req.query.rideID), db:'requested', time: new Date(), message: req.session.cas_user + ' removed you as their driver', seen: false}}}, function(err,results){
 			if(err) throw err;
-			io.to(req.query.rcs).emit('notification');
+			io().to(req.query.rcs).emit('notification');
 		});
 	});
 });
@@ -405,9 +405,9 @@ router.delete('/removeNeededRideOfferDriver', function(req, res){
 			collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {drivers: {rcs: req.session.cas_user}}}, function(err, results){
 				if(err) throw err;
 				collection.find({_id: ObjectID.createFromHexString(req.query.rideID)}).toArray(function(err, docs2){
-					db.get().collection('users').update({rcs: docs2[0].rcs}, {$push: {notifications: {rideID:id, db:'requested', time: new Date(), message: req.session.cas_user + ' removed themselves as a potential driver', seen: false}}}, function(err,results){
+					db.get().collection('users').update({rcs: docs2[0].rcs}, {$push: {notifications: {rideID:ObjectID.createFromHexString(req.query.rideID), db:'requested', time: new Date(), message: req.session.cas_user + ' removed themselves as a potential driver', seen: false}}}, function(err,results){
 						if(err) throw err;
-						io.to(docs2[0].rcs).emit('notification');
+						io().to(docs2[0].rcs).emit('notification');
 					});
 				});
 				res.send('Deleted!');
@@ -418,9 +418,9 @@ router.delete('/removeNeededRideOfferDriver', function(req, res){
 				if(err) throw err;
 
 				collection.find({_id: ObjectID.createFromHexString(req.query.rideID)}).toArray(function(err, docs2){
-					db.get().collection('users').update({rcs: docs2[0].rcs}, {$push: {notifications: {rideID:id, db:'requested', time: new Date(), message: req.session.cas_user + ' removed themselves as your driver', seen: false}}}, function(err,results){
+					db.get().collection('users').update({rcs: docs2[0].rcs}, {$push: {notifications: {rideID:ObjectID.createFromHexString(req.query.rideID), db:'requested', time: new Date(), message: req.session.cas_user + ' removed themselves as your driver', seen: false}}}, function(err,results){
 						if(err) throw err;
-						io.to(docs2[0].rcs).emit('notification');
+						io().to(docs2[0].rcs).emit('notification');
 					});
 				});
 				res.send('Deleted!');
@@ -440,9 +440,9 @@ router.delete('/removeRequestForAvailableRide', function(req, res){
 			collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {riders: {rcs: req.session.cas_user}}}, function(err, docs){
 				if(err) throw err;
 				collection.find({_id: ObjectID.createFromHexString(req.query.rideID)}).toArray(function(err, docs2){
-					db.get().collection('users').update({rcs: docs2[0].owner}, {$push: {notifications: {rideID:id, db:'offered', time: new Date(), message: req.session.cas_user + ' removed themselves as a potential rider', seen: false}}}, function(err,results){
+					db.get().collection('users').update({rcs: docs2[0].owner}, {$push: {notifications: {rideID:ObjectID.createFromHexString(req.query.rideID), db:'offered', time: new Date(), message: req.session.cas_user + ' removed themselves as a potential rider', seen: false}}}, function(err,results){
 						if(err) throw err;
-						io.to(docs2[0].owner).emit('notification');
+						io().to(docs2[0].owner).emit('notification');
 					});
 				});
 
@@ -454,9 +454,9 @@ router.delete('/removeRequestForAvailableRide', function(req, res){
 				if(err) throw err;
 
 				collection.find({_id: ObjectID.createFromHexString(req.query.rideID)}).toArray(function(err, docs2){
-					db.get().collection('users').update({rcs: docs2[0].owner}, {$push: {notifications: {rideID:id, db:'offered', time: new Date(), message: req.session.cas_user + ' removed themselves as a passenger. You have an extra seat available', seen: false}}}, function(err,results){
+					db.get().collection('users').update({rcs: docs2[0].owner}, {$push: {notifications: {rideID:ObjectID.createFromHexString(req.query.rideID), db:'offered', time: new Date(), message: req.session.cas_user + ' removed themselves as a passenger. You have an extra seat available', seen: false}}}, function(err,results){
 						if(err) throw err;
-						io.to(docs2[0].owner).emit('notification');
+						io().to(docs2[0].owner).emit('notification');
 					});
 				});
 				res.send('Deleted');

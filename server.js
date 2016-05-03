@@ -258,7 +258,15 @@ io.on("connection", function(socket){
     }*/
   });
 
-  
+  socket.on('update notifications', function(data){
+    sessionStore.get(decoded_id, function(error, session){
+        db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, docs){
+            socket.emit('notifications', {
+                notifications: docs[0].notifications
+            });
+        });
+    });
+  });
 
 });
 
