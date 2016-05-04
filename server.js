@@ -70,44 +70,43 @@ app.use('/user', users);
 
 //CAS route handlers
 app.get('/login', cas.bounce, function (req, res) {
-  	if (!req.session || !req.session.cas_user) {
-        res.redirect('/#/');
+	if (!req.session || !req.session.cas_user) {
+    res.redirect('/#/');
+  }
+  res.cookie('user', req.session.cas_user);
+  var collection = db.get().collection('users');
+  collection.find({rcs: req.session.cas_user}).toArray(function(err, docs){
+    if(err) throw err;
+    if(docs.length == 1){
+      res.redirect('/#/landing');
     }
-    res.cookie('user', req.session.cas_user);
-    var collection = db.get().collection('users');
-    collection.find({rcs: req.session.cas_user}).toArray(function(err, docs){
-      if(err) throw err;
-      if(docs.length == 1){
-        res.redirect('/#/landing');
-      }
-      else{
-        console.log('user does not exist');
-        //logic to notify user and tell them to sign up
-        res.redirect('/#/');
-      }
-    })
+    else{
+      console.log('user does not exist');
+      //logic to notify user and tell them to sign up
+      res.redirect('/#/');
+    }
+  })
 });
 
 app.get('/signUp', cas.bounce, function(req,res){
-    if(!req.session || !req.session.cas_user) {
-      res.redirect('/#/');
+  if(!req.session || !req.session.cas_user) {
+    res.redirect('/#/');
+  }
+  var collection = db.get().collection('users');
+  collection.find({rcs: req.session.cas_user}).toArray(function(err, docs){
+    if(err) throw err;
+    // console.log(docs.length);
+    if(docs.length > 0) {
+      console.log("User already exists");
+      res.cookie('user', req.session.cas_user);
+      //notify user that account alrady exists and log them in
+      res.redirect('/#/landing');
     }
-    var collection = db.get().collection('users');
-    collection.find({rcs: req.session.cas_user}).toArray(function(err, docs){
-      if(err) throw err;
-      // console.log(docs.length);
-      if(docs.length > 0) {
-        console.log("User already exists");
-        res.cookie('user', req.session.cas_user);
-        //notify user that account alrady exists and log them in
-        res.redirect('/#/landing');
-      }
-      else {
-        res.redirect('/#/signUp');
-        console.log('signUp');
-      }
-    })
-
+    else {
+      res.redirect('/#/signUp');
+      console.log('signUp');
+    }
+  })
 });
 
 app.get('/logout',function(req, res, next){
@@ -120,113 +119,96 @@ app.get('/logout',function(req, res, next){
 }, cas.logout);
 
 app.get('/cdta', function (req, resp) {
+  var search = req.query.search_b;
+  search= escape(search);
 
-    var search = req.query.search_b;
-    search= escape(search);
-
-    var x = '';
-    console.log("Search: " + search);
-        http.get({
-            host: 'api.cdta.org',
-            path: '/api/v1/' + cdta_api_stops + search + cdta_api_key
-        }, function (res) {
-            var pt= '/api/v1/' + cdta_api_stops  + search + cdta_api_key;
-            console.log(pt);
-            res.on('data', function (d) {
-                x += d.toString();
-                console.log(d.toString());
-            });
-            res.on('end', function(){
-                resp.send(x);
-            });
-
-        });
-
+  var x = '';
+  console.log("Search: " + search);
+    http.get({
+      host: 'api.cdta.org',
+      path: '/api/v1/' + cdta_api_stops + search + cdta_api_key
+    }, function (res) {
+      var pt= '/api/v1/' + cdta_api_stops  + search + cdta_api_key;
+      console.log(pt);
+      res.on('data', function (d) {
+          x += d.toString();
+          console.log(d.toString());
+      });
+      res.on('end', function(){
+          resp.send(x);
+      });
+    });
 });
 
 app.get('/cdta_dir', function (req, resp) {
-
-    console.log("DIRECTIONS");
-
-    var search = req.query.search_b;
-
-    console.log(search);
-
-    var x = '';
-    http.get({
-        host: 'api.cdta.org',
-        path: '/api/v1/' + cdta_api_directions + search + cdta_api_key
-    }, function (res) {
-        res.on('data', function (d) {
-            x += d.toString();
-            console.log(d.toString());
-        });
-        res.on('end', function(){
-            resp.send(x);
-        });
-
-    });
-
+  console.log("DIRECTIONS");
+  var search = req.query.search_b;
+  console.log(search);
+  var x = '';
+  http.get({
+      host: 'api.cdta.org',
+      path: '/api/v1/' + cdta_api_directions + search + cdta_api_key
+  }, function (res) {
+      res.on('data', function (d) {
+        x += d.toString();
+        console.log(d.toString());
+      });
+      res.on('end', function(){
+        resp.send(x);
+      });
+  });
 });
 
 
 app.get('/get_route', function (req, resp) {
-
-    console.log("ROUTE");
-    var x= '';
-    http.get({
-        host: 'api.cdta.org',
-        path: '/api/v1/' + cdta_api_sched + req.query.bus_num + '/weekday/' + req.query.info + cdta_api_key
-    }, function (res) {
-        res.on('data', function (d) {
-            x += d.toString();
-            console.log(d.toString());
-        });
-        res.on('end', function(){
-            resp.send(x);
-        });
-
-    });
-
+  console.log("ROUTE");
+  var x= '';
+  http.get({
+      host: 'api.cdta.org',
+      path: '/api/v1/' + cdta_api_sched + req.query.bus_num + '/weekday/' + req.query.info + cdta_api_key
+  }, function (res) {
+      res.on('data', function (d) {
+        x += d.toString();
+        console.log(d.toString());
+      });
+      res.on('end', function(){
+        resp.send(x);
+      });
+  });
 });
 
 
 app.get('/service_status', function (req, resp) {
-
-    console.log("This stuff: " + req.query.info);
-    var x= '';
-    http.get({
-        host: 'api.cdta.org',
-        path: '/api/v1/' + cdta_api_status + cdta_api_key
-    }, function (res) {
-        res.on('data', function (d) {
-            x += d.toString();
-            console.log(d.toString());
-            res.destroy();
-            return resp.send(x);
-        });
-
-    });
-
+  console.log("This stuff: " + req.query.info);
+  var x= '';
+  http.get({
+    host: 'api.cdta.org',
+    path: '/api/v1/' + cdta_api_status + cdta_api_key
+  }, function (res) {
+      res.on('data', function (d) {
+        x += d.toString();
+        console.log(d.toString());
+        res.destroy();
+        return resp.send(x);
+      });
+  });
 });
 
 app.get('/stop_id', function (req, resp) {
-    console.log("This stuff: " + req.query.info);
-    var x= '';
-    http.get({
-        host: 'api.cdta.org',
-        path: '/api/v1/' + cdta_api_arrivals + req.query.stopid + '/2' + cdta_api_key
-    }, function (res) {
-        res.on('data', function (d) {
-            x += d.toString();
-            console.log(d.toString());
-        });
-        res.on('end', function(){
-            resp.send(x);
-        });
-
-    });
-
+  console.log("This stuff: " + req.query.info);
+  var x= '';
+  http.get({
+    host: 'api.cdta.org',
+    path: '/api/v1/' + cdta_api_arrivals + req.query.stopid + '/2' + cdta_api_key
+  }, function (res) {
+      res.on('data', function (d) {
+        x += d.toString();
+        console.log(d.toString());
+      });
+      res.on('end', function(){
+        resp.send(x);
+      });
+  });
 });
 
 
@@ -254,14 +236,14 @@ io.on("connection", function(socket){
                 if(err) throw err;
                 if(docs2[0] == undefined){
                   socket.emit('notifications', {
-                      notifications: docs[0].notifications,
-                      count: 0
+                    notifications: docs[0].notifications,
+                    count: 0
                   });
                 }
                 else{
                   socket.emit('notifications', {
-                      notifications: docs[0].notifications,
-                      count: docs2[0].notifications.length
+                    notifications: docs[0].notifications,
+                    count: docs2[0].notifications.length
                   });
                 }
               });
@@ -285,18 +267,17 @@ io.on("connection", function(socket){
               if(err) throw err;
               if(docs2[0] == undefined){
                 socket.emit('notifications', {
-                    notifications: docs[0].notifications,
-                    count: 0
+                  notifications: docs[0].notifications,
+                  count: 0
                 });
               }
               else{
                 socket.emit('notifications', {
-                    notifications: docs[0].notifications,
-                    count: docs2[0].notifications.length
+                  notifications: docs[0].notifications,
+                  count: docs2[0].notifications.length
                 });
               }
             });
-              
           });
       });
     });

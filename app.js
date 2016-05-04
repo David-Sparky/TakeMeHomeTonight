@@ -1,4 +1,4 @@
-	var app = angular.module('tmht', ['ui.bootstrap', 'ngRoute', 'ngCookies', 'btford.socket-io']);
+var app = angular.module('tmht', ['ui.bootstrap', 'ngRoute', 'ngCookies', 'btford.socket-io']);
 
 app.config(['$routeProvider', function($routeProvider){
 	$routeProvider.
@@ -82,8 +82,6 @@ app.config(['$routeProvider', function($routeProvider){
 	otherwise({
 		redirectTo: '/'
 	})
-
-
 }]);
 
 app.run(['$rootScope', '$window', '$route', 'AuthService', function ($rootScope, $window, $route, AuthService) {
