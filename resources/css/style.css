@@ -519,9 +519,10 @@ input {
   }
 
   .middle {
-    margin-top: 25px;
+    margin-top: 35px;
     min-height: 10px;
     background-color: rgba(0,0,0,0.05);
+    /*background-color: red;*/
   }
 }
 
@@ -532,7 +533,7 @@ input {
   }
 
   .middle {
-    margin-top: 35px;
+    margin-top: 45px;
     min-height: 10px;
     background-color: rgba(0,0,0,0.05);
   }
