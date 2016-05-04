@@ -1,5 +1,5 @@
 angular.module('tmht')
-.controller('rideFormCtrl', ['$scope','$location', 'rideService', '$uibModal', function($scope, $location, rideService, $modal){
+.controller('rideFormCtrl', ['$scope','$location', 'rideService', function($scope, $location, rideService){
 
 	$scope.rideInfo = {};
 
@@ -9,7 +9,7 @@ angular.module('tmht')
 		rideService.getUserSettingInfo().then(function(data){
 			$scope.rideInfo.car = data.data.car;
 		}).catch(function(err){
-			swal("Oops...", "There was an error! "+err.data, "error");
+			sweetAlert("Oops...", "There was an error! "+err.data, "error");
 		});
 	}
 	else{

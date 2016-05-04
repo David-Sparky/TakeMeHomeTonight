@@ -9,7 +9,7 @@ angular.module('tmht')
 		$window.location = data.data;
 
 	}).catch(function(err){
-		swal("Oops...", "There was an error! "+err.data, "error");
+		sweetAlert("Oops...", "There was an error! "+err.data, "error");
 	});
 	
 	$scope.signUp = function(userData) {
@@ -22,7 +22,7 @@ angular.module('tmht')
 			$window.location = data.data;
 		},
 		function(err){
-			swal("Oops...", "There was an error! "+err.data, "error");
+			sweetAlert("Oops...", "There was an error! "+err.data, "error");
 		})
 	}
 	

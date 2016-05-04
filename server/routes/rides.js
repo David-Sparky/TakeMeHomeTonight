@@ -1,3 +1,5 @@
+module.exports = function(io){
+
 var express = require('express'),
 	router = express.Router(),
 	db = require('../db');
@@ -5,7 +7,6 @@ var express = require('express'),
 router.use('*', function(req, res, next){
   if(!req.session || !req.session.cas_user){
     res.status(401).send('Unauthorized access');
-    //res.redirect('/#/');
   }
   else{
     next();
@@ -132,7 +133,14 @@ router.put('/join_offer', function(req, res) {
 	else{
 		collection.update({_id:ObjectID.createFromHexString(id)}, {$push: {riders:{rcs:user,status:"pending"}}}, function(err, results){
 			if(err) throw err;
-			res.status(200).send('Added to the list of pending users!');
+			collection.find({_id: ObjectID.createFromHexString(id)}).toArray(function(err, docs){
+				db.get().collection('users').update({rcs: docs[0].owner}, {$push: {notifications: {rideID:id, db:'offered', time: new Date(), message: req.session.cas_user + ' requested your offered ride', seen: false}}}, function(err, results){
+					if(err) throw err;
+					io().of(docs[0].owner).emit('notification', 'random shit');
+				})
+				res.status(200).send('Added to the list of pending users!');
+			})
+			
 		});
 	}
 });
@@ -155,6 +163,10 @@ router.put('/confirmRider', function(req, res){
 		else{
 			collection.update({_id: id, 'riders.rcs': req.body.rcs}, {$set: {'riders.$.status': 'accepted'}, $inc: {availableseats: -1}}, function(err, docs){
 				if(err) throw err;
+				db.get().collection('users').update({rcs: req.body.rcs}, {$push: {notifications: {rideID: id, db:'offered', time: new Date(), message: 'You have been confirmed for ' + req.session.cas_user + '\'s ride', seen: false}}}, function(err, results){
+					if(err) throw err;
+					io().to(req.body.rcs).emit('notification');
+				});
 				res.status(200).send("updated");
 			});
 		}
@@ -175,6 +187,10 @@ router.put('/confirmDriver', function(req, res){
 		else{
 			collection.update({_id: id, 'drivers.rcs': req.body.rcs}, {$set: {'drivers.$.status': 'accepted', accepted: true}}, function(err, docs){
 				if(err) throw err;
+				db.get().collection('users').update({rcs: req.body.rcs}, {$push: {notifications: {rideID:id, db:'requested', time: new Date(), message: req.session.cas_user + ' confirmed you as their driver', seen: false}}}, function(err,results){
+					if(err) throw err;
+					io().to(req.body.rcs).emit('notification');
+				});
 				res.status(200).send("updated");
 			});
 		}
@@ -260,6 +276,12 @@ router.put('/join_request', function(req, res) {
 	else{
 		collection.update({_id:ObjectID.createFromHexString(id)}, {$push: {drivers:{rcs:user,status:"pending"}}}, function(err, results){
 			if(err) throw err;
+			collection.find({_id: ObjectID.createFromHexString(id)}).toArray(function(err, docs){
+				db.get().collection('users').update({rcs: docs[0].rcs}, {$push: {notifications: {rideID:id, db:'requested', time: new Date(), message: req.session.cas_user + ' has requested to give you a ride', seen: false}}}, function(err,results){
+					if(err) throw err;
+					io().to(docs[0].rcs).emit('notification');
+				});
+			});
 			res.status(200).send('Added to the list of pending users!');
 		});
 	}
@@ -283,6 +305,10 @@ router.delete('/removeRider', function(req, res){
 				res.send('Rider Removed!');
 			});
 		}
+		db.get().collection('users').update({rcs: req.query.rcs}, {$push: {notifications: {rideID: ObjectID.createFromHexString(req.query.rideID), db:'offered', time: new Date(), message: req.session.cas_user + " has removed you as their passenger", seen: false}}}, function(err,results){
+			if(err) throw err;
+			io().to(req.query.rcs).emit('notification');
+		});
 
 	});
 
@@ -292,6 +318,10 @@ router.delete('/removePendingRider', function(req, res){
 	var collection = db.get().collection('offered');
 	collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {riders: {rcs: req.query.rcs}}}, function(err, results){
 		if(err) throw err;
+		db.get().collection('users').update({rcs: req.query.rcs}, {$push: {notifications: {rideID:ObjectID.createFromHexString(req.query.rideID), db:'offered', time: new Date(), message: req.session.cas_user + ' has removed you as their passenger', seen: false}}}, function(err,results){
+			if(err) throw err;
+			io().to(req.query.rcs).emit('notification');
+		});
 		res.send('Pending Rider Removed!');
 	});
 });
@@ -312,6 +342,10 @@ router.delete('/removeDriver', function(req, res){
 				res.send('Driver removed!');
 			});
 		}
+		db.get().collection('users').update({rcs: req.query.rcs}, {$push: {notifications: {rideID:ObjectID.createFromHexString(req.query.rideID), db:'requested', time: new Date(), message: req.session.cas_user + ' removed you as their driver', seen: false}}}, function(err,results){
+			if(err) throw err;
+			io().to(req.query.rcs).emit('notification');
+		});
 	});
 });
 
@@ -338,15 +372,30 @@ router.delete('/removeNeededRideOfferDriver', function(req, res){
 		if(docs.length == 0){
 			collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {drivers: {rcs: req.session.cas_user}}}, function(err, results){
 				if(err) throw err;
+				collection.find({_id: ObjectID.createFromHexString(req.query.rideID)}).toArray(function(err, docs2){
+					db.get().collection('users').update({rcs: docs2[0].rcs}, {$push: {notifications: {rideID:ObjectID.createFromHexString(req.query.rideID), db:'requested', time: new Date(), message: req.session.cas_user + ' removed themselves as a potential driver', seen: false}}}, function(err,results){
+						if(err) throw err;
+						io().to(docs2[0].rcs).emit('notification');
+					});
+				});
 				res.send('Deleted!');
 			});
 		}
 		else{
 			collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {drivers: {rcs: req.session.cas_user}}, $set: {accepted: false}},function(err, results){
 				if(err) throw err;
+
+				collection.find({_id: ObjectID.createFromHexString(req.query.rideID)}).toArray(function(err, docs2){
+					db.get().collection('users').update({rcs: docs2[0].rcs}, {$push: {notifications: {rideID:ObjectID.createFromHexString(req.query.rideID), db:'requested', time: new Date(), message: req.session.cas_user + ' removed themselves as your driver', seen: false}}}, function(err,results){
+						if(err) throw err;
+						io().to(docs2[0].rcs).emit('notification');
+					});
+				});
 				res.send('Deleted!');
 			});
 		}
+		
+		
 	});
 	
 });
@@ -358,12 +407,26 @@ router.delete('/removeRequestForAvailableRide', function(req, res){
 		if(docs.length == 0){
 			collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {riders: {rcs: req.session.cas_user}}}, function(err, docs){
 				if(err) throw err;
+				collection.find({_id: ObjectID.createFromHexString(req.query.rideID)}).toArray(function(err, docs2){
+					db.get().collection('users').update({rcs: docs2[0].owner}, {$push: {notifications: {rideID:ObjectID.createFromHexString(req.query.rideID), db:'offered', time: new Date(), message: req.session.cas_user + ' removed themselves as a potential rider', seen: false}}}, function(err,results){
+						if(err) throw err;
+						io().to(docs2[0].owner).emit('notification');
+					});
+				});
+
 				res.send('Deleted');
 			});
 		}
 		else{
 			collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {riders: {rcs: req.session.cas_user}}, $inc: {availableseats: 1}}, function(err, docs){
 				if(err) throw err;
+
+				collection.find({_id: ObjectID.createFromHexString(req.query.rideID)}).toArray(function(err, docs2){
+					db.get().collection('users').update({rcs: docs2[0].owner}, {$push: {notifications: {rideID:ObjectID.createFromHexString(req.query.rideID), db:'offered', time: new Date(), message: req.session.cas_user + ' removed themselves as a passenger. You have an extra seat available', seen: false}}}, function(err,results){
+						if(err) throw err;
+						io().to(docs2[0].owner).emit('notification');
+					});
+				});
 				res.send('Deleted');
 			});
 		}
@@ -371,6 +434,6 @@ router.delete('/removeRequestForAvailableRide', function(req, res){
 });
 
 
+return router;
 
-
-module.exports = router;
+}

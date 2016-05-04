@@ -37,7 +37,7 @@ angular.module('tmht')
                         $scope.acceptedDriver_Bool = true;
                     }
                 }).catch(function(err){
-                    swal("Oops...", "There was an error! "+err.data, "error");
+                    sweetAlert("Oops...", "There was an error! "+err.data, "error");
                 });
                 break;
             case "/rides/offer":
@@ -76,7 +76,7 @@ angular.module('tmht')
                         }
                     }
                 }).catch(function(err){
-                    swal("Oops...", "There was an error! "+err.data, "error");
+                    sweetAlert("Oops...", "There was an error! "+err.data, "error");
                 });
                 break;
         }
@@ -120,7 +120,6 @@ angular.module('tmht')
             rideService.confirmRider(offer_id.id, user).then(function(data){
                 sweetAlert("Added!","Successfully added "+user+"!","success");
             }).catch(function(err){
-                alertModal(err.status, err.data);
                 sweetAlert("Error!","There was an error! "+err.data,"error");
             });
         };
