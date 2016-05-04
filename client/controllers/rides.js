@@ -1,5 +1,5 @@
 angular.module('tmht')
-.controller('rides', ['$scope','$location', 'rideService','$cookies','$filter', function($scope, $location, rideService,$cookies,$filter,$compile){
+.controller('rides', ['$scope','$location', 'rideService','$cookies','$filter', function($scope, $location, rideService,$cookies,$filter){
 	$scope.joined = false;
 	switch($location.path()){
 		case '/rides/ridesOffered':
