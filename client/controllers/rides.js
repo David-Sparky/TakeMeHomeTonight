@@ -7,10 +7,9 @@ angular.module('tmht')
 			$scope.needed = false;
 			$scope.ridesavail = true;
 			rideService.getAllOfferedRides().then(function(data){
-				//console.log(data);
 				$scope.offerarray = data.data;
 			}).catch(function(err){
-				console.log(err);
+				swal("Oops...", "There was an error! "+err.data, "error");
 			});
 			break;
 		case "/rides/ridesNeeded":
@@ -18,10 +17,9 @@ angular.module('tmht')
 			$scope.needed = true;
 			$scope.ridesavail = false;
 			rideService.getAllRequestedRides().then(function(data){
-				//console.log(data);
 				$scope.needarray = data.data;
 			}).catch(function(err){
-				console.log(err);
+				swal("Oops...", "There was an error! "+err.data, "error")
 			});
 			break;
     }

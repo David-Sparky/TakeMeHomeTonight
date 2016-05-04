@@ -1,4 +1,4 @@
-	var app = angular.module('tmht', ['ui.bootstrap', 'ngRoute', 'ngFileUpload', 'ngCookies']);
+	var app = angular.module('tmht', ['ui.bootstrap', 'ngRoute', 'ngFileUpload', 'ngCookies', 'btford.socket-io']);
 
 app.config(['$routeProvider', function($routeProvider){
 	$routeProvider.
@@ -20,7 +20,6 @@ app.config(['$routeProvider', function($routeProvider){
 	}).
 	when('/landing', {
 		templateUrl: 'client/views/landing.html',
-		controller: 'landingCtrl',
 		access: {restricted: true}
 	}).
 	when('/rides/ridesOffered', {
@@ -55,7 +54,6 @@ app.config(['$routeProvider', function($routeProvider){
 	}).
 	when('/team', {
 		templateUrl: 'client/views/team.html',
-		controller: 'teamCtrl',
 		access: {restricted: false}
 	}).
 	when('/publicTransit', {
@@ -100,11 +98,9 @@ app.run(['$rootScope', '$window', '$route', 'AuthService', function ($rootScope,
 	      AuthService.removeUser();
 	      alert("You are not authorize or not logged in");
 	      $window.location = '/';
-	      //swal("Oops..", "You are not logged in/authorized", "error");
 	    }
   	}).catch(function(err){
-  		console.log(err);
-  		alert(err);
+  		alert(err.data);
   	});
   });
 }]);
