@@ -30,10 +30,6 @@ input {
   color: #555;
 }
 
-.modal-dialog {
-  color: #555;
-}
-
 .well {
   border-radius: 5px;
   background-color: rgba(69,69,69,.7);
@@ -523,7 +519,7 @@ input {
   }
 
   .middle {
-    margin-top: 55px;
+    margin-top: 25px;
     min-height: 10px;
     background-color: rgba(0,0,0,0.05);
   }
@@ -536,7 +532,7 @@ input {
   }
 
   .middle {
-    margin-top: 55px;
+    margin-top: 35px;
     min-height: 10px;
     background-color: rgba(0,0,0,0.05);
   }
