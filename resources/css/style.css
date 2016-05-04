@@ -606,17 +606,14 @@ thead {
   min-width: 85px;
 }
 
-
-
 .offer .well {
   width: 60%;
   padding-bottom: 10px;
 }
 
 .glyphicon-bell {
-   
-    font-size:1.5rem;
-  }
+  font-size:1.5rem;
+}
 
 #notificationsDiv {
   padding-left: 15px;
