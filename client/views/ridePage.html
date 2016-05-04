@@ -10,16 +10,17 @@
 		<div ng-show='offer' class="well centering">
 		<!-- singular offer display -->
 			<div class="centering text-center">
-				<p>Driver: {{rcs}}</p>
-				<p>Departure Location: {{depart_local}}</p>
-				<p>Departure Date: {{depart_date | date: 'shortDate'}}</p>
-				<p>Departure Time: {{depart_time | date: 'shortTime'}}</p>
-				<p>Destination: {{destination}}</p>
-				<p>Seats Availible: {{seats_avil}}</p>
-				<p>Total Seats: {{total_seats}}</p>
-				<p> Cost if any: {{cost}}</p>
-				<p>Car Make &amp; Model: {{car_make}} {{car_model}} || License: {{car_license}}</p>
-				<p>Car Color: {{car_color}}</p>
+				<p><span class="rlabel">Driver:</span> {{rcs}}</p>
+				<p><span class="rlabel">Departure Location:</span> {{depart_local}}</p>
+				<p><span class="rlabel">Departure Date:</span> {{depart_date | date: 'shortDate'}}</p>
+				<p><span class="rlabel">Departure Time:</span> {{depart_time | date: 'shortTime'}}</p>
+				<p><span class="rlabel">Destination:</span> {{destination}}</p>
+				<p><span class="rlabel">Seats Availible:</span> {{seats_avil}}</p>
+				<p><span class="rlabel">Total Seats:</span> {{total_seats}}</p>
+				<p><span class="rlabel">Cost (if any):</span> {{cost}}</p>
+				<p><span class="rlabel">Car Make &amp; Model:</span> {{car_make}} {{car_model}}<p>
+				<p><span class="rlabel">License Plate:</span> {{car_license}}</p>
+				<p><span class="rlabel">Car Color:</span> {{car_color}}</p>
 				<div ng-show="owner" class="pending" ng-repeat="user in pendingarray">
 					<p> {{user.rcs}} is {{user.status}} <button class="btn btn-default btn-md" ng-click="add_user(user.rcs)">Accept</button><button class="btn btn-default btn-md" ng-click="reject_user(user.rcs)">Reject</button> </p>
 				</div>

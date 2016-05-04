@@ -30,7 +30,7 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse">
         <div class = "middle" ng-show="!checkForUser()"></div>
-        <ul class="nav navbar-nav pull-right">
+        <ul class="nav navbar-nav">
           <li><a ng-show="checkForUser()" href="#/rides/ridesOffered">Rides Available </a></li>
           
           <li><a ng-show="checkForUser()" href="#/rides/ridesNeeded">Rides Needed</a></li>
@@ -53,18 +53,17 @@
       </div><!-- /.navbar-collapse -->
 
       <div id="notificationsDiv">
-        <div ng-show="checkForUser()" class="dropdown nav navbar-nav">
+        <div ng-show="checkForUser()" class="dropdown nav navbar-nav pull-right">
           <a id="dLabel" class="noti_Container" role="button" data-toggle="dropdown" data-target="#" href="/page.html"  ng-click="checkNotifications()">
-            Notifications<div ng-show="newNotifications != 0" class="noti_bubble">{{newNotifications}}</div>
-            <!--<i class="glyphicon glyphicon-bell"></i>-->
+            <!-- Notifications -->
+            <img src="../resources/imgs/bell.png"></img>
+            <div ng-show="newNotifications != 0" class="noti_bubble">{{newNotifications}}</div>
           </a>
-          
-          
+
           <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
             
             <div class="notification-heading"><h4 class="menu-title">Notifications</h4>
             </div>
-            <li class="divider"></li>
             <div class="notifications-wrapper">
               <div ng-repeat="notification in notifications">
                  <a class="content" ng-if="notification.db=='offered'" ng-href="/#/rides/offer?id={{notification.rideID}}">
@@ -83,7 +82,6 @@
             </div>
             <li class="divider"></li>
           </ul>
-        
         </div>
       </div>
 
