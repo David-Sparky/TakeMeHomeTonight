@@ -16,7 +16,6 @@ angular.module('tmht')
 	};
 
 	socket.on('join', function(data){
-		
 	});	
 	if($scope.checkForUser == true){
 		socket.emit('logged in');
