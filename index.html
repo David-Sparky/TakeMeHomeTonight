@@ -51,35 +51,38 @@
 
         </ul>
       </div><!-- /.navbar-collapse -->
-      <div ng-show="checkForUser()" class="dropdown nav navbar-nav">
-        <a id="dLabel" class="noti_Container" role="button" data-toggle="dropdown" data-target="#" href="/page.html"  ng-click="checkNotifications()">
-          Notifications<div ng-show="newNotifications != 0" class="noti_bubble">{{newNotifications}}</div>
-          <!--<i class="glyphicon glyphicon-bell"></i>-->
-        </a>
-        
-        
-        <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
+
+      <div id="notificationsDiv">
+        <div ng-show="checkForUser()" class="dropdown nav navbar-nav">
+          <a id="dLabel" class="noti_Container" role="button" data-toggle="dropdown" data-target="#" href="/page.html"  ng-click="checkNotifications()">
+            Notifications<div ng-show="newNotifications != 0" class="noti_bubble">{{newNotifications}}</div>
+            <!--<i class="glyphicon glyphicon-bell"></i>-->
+          </a>
           
-          <div class="notification-heading"><h4 class="menu-title">Notifications</h4>
-          </div>
-          <li class="divider"></li>
-          <div class="notifications-wrapper" ng-repeat="notification in notifications">
-           <a class="content" ng-if="notification.db=='offered'" ng-href="/#/rides/offer?id={{notification.rideID}}">
-            <div class="notification-item">
-              <h4 class="item-title">{{notification.message}}</h4>
-              <p class="item-info">{{notification.time | date: 'short'}}</p>
+          
+          <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
+            
+            <div class="notification-heading"><h4 class="menu-title">Notifications</h4>
             </div>
-           </a>
-           <a class="content" ng-if="notification.db=='requested'" ng-href="/#/rides/ride?id={{notification.rideID}}">
-             <div class="notification-item">
-              <h4 class="item-title">{{notification.message}}</h4>
-              <p class="item-info">{{notification.time | date: 'short'}}</p>
+            <li class="divider"></li>
+            <div class="notifications-wrapper" ng-repeat="notification in notifications">
+             <a class="content" ng-if="notification.db=='offered'" ng-href="/#/rides/offer?id={{notification.rideID}}">
+              <div class="notification-item">
+                <h4 class="item-title">{{notification.message}}</h4>
+                <p class="item-info">{{notification.time | date: 'short'}}</p>
+              </div>
+             </a>
+             <a class="content" ng-if="notification.db=='requested'" ng-href="/#/rides/ride?id={{notification.rideID}}">
+               <div class="notification-item">
+                <h4 class="item-title">{{notification.message}}</h4>
+                <p class="item-info">{{notification.time | date: 'short'}}</p>
+              </div>
+             </a>
             </div>
-           </a>
-          </div>
-          <li class="divider"></li>
-        </ul>
-      
+            <li class="divider"></li>
+          </ul>
+        
+        </div>
       </div>
 
     </div><!-- /.container-fluid -->
