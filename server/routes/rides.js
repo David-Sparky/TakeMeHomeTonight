@@ -7,7 +7,6 @@ var express = require('express'),
 router.use('*', function(req, res, next){
   if(!req.session || !req.session.cas_user){
     res.status(401).send('Unauthorized access');
-    //res.redirect('/#/');
   }
   else{
     next();
@@ -137,7 +136,10 @@ router.put('/join_offer', function(req, res) {
 			collection.find({_id: ObjectID.createFromHexString(id)}).toArray(function(err, docs){
 				db.get().collection('users').update({rcs: docs[0].owner}, {$push: {notifications: {rideID:id, db:'offered', time: new Date(), message: req.session.cas_user + ' requested your offered ride', seen: false}}}, function(err, results){
 					if(err) throw err;
+<<<<<<< HEAD
 					console.log(io());
+=======
+>>>>>>> dev
 					io().of(docs[0].owner).emit('notification', 'random shit');
 				})
 				res.status(200).send('Added to the list of pending users!');
@@ -169,7 +171,10 @@ router.put('/confirmRider', function(req, res){
 					if(err) throw err;
 					io().to(req.body.rcs).emit('notification');
 				});
+<<<<<<< HEAD
 				console.log(docs);
+=======
+>>>>>>> dev
 				res.status(200).send("updated");
 			});
 		}
@@ -194,7 +199,10 @@ router.put('/confirmDriver', function(req, res){
 					if(err) throw err;
 					io().to(req.body.rcs).emit('notification');
 				});
+<<<<<<< HEAD
 				console.log(docs);
+=======
+>>>>>>> dev
 				res.status(200).send("updated");
 			});
 		}
@@ -439,5 +447,9 @@ router.delete('/removeRequestForAvailableRide', function(req, res){
 
 
 return router;
+<<<<<<< HEAD
 }
 //module.exports = router;
+=======
+}
+>>>>>>> dev
