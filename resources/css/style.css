@@ -47,6 +47,7 @@ input {
   background-color: rgba(0,0,0,0.7);
   border: none;
   margin-bottom: 0px;
+
 }
 
 /*also in media size*/
@@ -63,6 +64,10 @@ input {
 
 .nav.navbar-nav li a:hover {
   color: #2dcc70;
+}
+
+.navbar ul {
+  text-align: center;
 }
 
 .dropdown {
@@ -495,6 +500,28 @@ input {
   }
 }
 
+@media (min-width: 768px) and (max-width: 800px) {
+  .navbar ul {
+    margin-left: 20%;
+  }
+  .navbar a {
+    margin-left: -10px;
+  }
+}
+
+@media (min-width: 800px) and (max-width: 848px) {
+  .navbar ul{
+    margin-left: 21%;
+  }
+}
+
+
+@media (min-width: 848px) and (max-width: 992px) {
+  .navbar ul{
+    margin-left: 25%;
+  }
+}
+
 /*for when screen is smaller than large size*/
 @media (max-width: 992px) {
   h1 {
@@ -522,7 +549,6 @@ input {
     margin-top: 35px;
     min-height: 10px;
     background-color: rgba(0,0,0,0.05);
-    /*background-color: red;*/
   }
 }
 
@@ -553,6 +579,10 @@ input {
 
   .settings .well {
     width: 60%;
+  }
+
+  .navbar ul {
+    margin-left: 25%;
   }
 }
 
@@ -612,12 +642,20 @@ thead {
   padding-bottom: 10px;
 }
 
-.glyphicon-bell {
-  font-size:1.5rem;
+#notificationsDiv {
+  /*padding-left: 15px;*/
+  margin-top: -40px;
 }
 
-#notificationsDiv {
-  padding-left: 15px;
+#notificationsDiv img {
+  width: 25px;
+  height: 25px;
+  margin-bottom: 10px;
+  margin-left: -45px;
+}
+
+#notificationsDiv .dropdown {
+  margin-top: 0px;
 }
 
 .notifications {
