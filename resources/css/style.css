@@ -148,6 +148,12 @@ input {
   text-align: center
 }
 
+.rlabel {
+  color: #2dcc70;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
 .about {
   background: #2dcc70;
   color: #fff;
@@ -163,6 +169,20 @@ input {
   margin-left: 3px;
   margin-right: 3px;
   margin-bottom: 3px;
+}
+
+.request {
+  background: rgba(69,69,69,.7);
+  color: #fff;
+  padding-top: 2px;
+  padding-bottom: 1.5px;
+  text-align: center;
+  margin-top: 10px; 
+  margin-bottom: 10px;
+}
+
+.request a {
+  color: #2dcc70;
 }
 
 #footer {
