@@ -301,34 +301,17 @@ io.on("connection", function(socket){
       });
     });
     socket.on('notifications seen', function(){
-<<<<<<< HEAD
-      console.log('We saw them');
       sessionStore.get(decoded_id, function(error, session){
         if(error) throw error;
-        console.log('insessionstore');
-        console.log(session);
-        /*db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, docs){
-          console.log(docs);
-        })*/
-=======
-      sessionStore.get(decoded_id, function(error, session){
-        if(error) throw error;
->>>>>>> dev
+
         db.get().collection('users').find({rcs: session.cas_user}).forEach(function(doc){
           doc.notifications.forEach(function(data){
              db.get().collection('users').update({rcs:session.cas_user, notifications:data}, {$set: {'notifications.$.seen': true}}, function(err, results){
               if(err) throw err;
-<<<<<<< HEAD
-            })
-          })
-           
-        })
-        //db.get().collection('users').update({rcs: session.cas_user}, {$set: {'notifications.$.seen': true}}, {multi: true})
-=======
             });
           });
         });
->>>>>>> dev
+
       })
     });
   }
