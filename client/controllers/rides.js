@@ -9,7 +9,7 @@ angular.module('tmht')
 			rideService.getAllOfferedRides().then(function(data){
 				$scope.offerarray = data.data;
 			}).catch(function(err){
-				swal("Oops...", "There was an error! "+err.data, "error");
+				sweetAlert("Oops...", "There was an error! "+err.data, "error");
 			});
 			break;
 		case "/rides/ridesNeeded":
@@ -19,7 +19,7 @@ angular.module('tmht')
 			rideService.getAllRequestedRides().then(function(data){
 				$scope.needarray = data.data;
 			}).catch(function(err){
-				swal("Oops...", "There was an error! "+err.data, "error")
+				sweetAlert("Oops...", "There was an error! "+err.data, "error")
 			});
 			break;
     }

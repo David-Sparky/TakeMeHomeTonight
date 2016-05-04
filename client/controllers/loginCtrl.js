@@ -9,7 +9,7 @@ angular.module('tmht')
 			$window.location = data.data;
 		},
 		function(err){
-			swal("Oops...", "There was an error! "+err.data, "error");
+			sweetAlert("Oops...", "There was an error! "+err.data, "error");
 		});
 	};
 	
@@ -20,7 +20,7 @@ angular.module('tmht')
 		}).then(function(data){
 			$window.location = data.data;
 		}).catch(function(err){
-			swal("Oops...", "There was an error! "+err.data, "error");
+			sweetAlert("Oops...", "There was an error! "+err.data, "error");
 		});
 	}
 
