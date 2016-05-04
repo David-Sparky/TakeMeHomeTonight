@@ -4,39 +4,39 @@
       <uib-tab heading="Profile">
         <form name="editUserForm" class="form-horizontal">
           <div class="form-group">
-            <label class="col-sm-3 control-label form-text">First Name: </label>
-            <div class="col-sm-9">
+            <label class="col-xs-6 control-label form-text">First Name: </label>
+            <div class="col-xs-6">
               <input  type="text" ng-model="editUser.firstName" placeholder="First Name" required>
             </div> 
           </div> 
           <div class="form-group">
-            <label class="col-sm-3 control-label form-text">Last Name: </label>
-            <div class="col-sm-9">
+            <label class="col-xs-6 control-label form-text">Last Name: </label>
+            <div class="col-xs-6">
               <input type="text" ng-model="editUser.lastName" placeholder="Last Name" required>
             </div>
           </div>
-          <h3>Vehicle</h3>
+          <h3><span class="slabel">Vehicle</span></h3>
           <div class="form-group">
-            <label class="col-sm-3 control-label form-text">Make: </label>
-            <div class="col-sm-9">
+            <label class="col-xs-6 control-label form-text">Make: </label>
+            <div class="col-xs-6">
               <input type="text" ng-model="editUser.car.make" placeholder="Car Make">
             </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-3 control-label form-text">Model: </label>
-            <div class="col-sm-9">
+            <label class="col-xs-6 control-label form-text">Model: </label>
+            <div class="col-xs-6">
               <input type="text" ng-model="editUser.car.model" placeholder="Car Model">
             </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-3 control-label form-text">Color: </label>
-            <div class="col-sm-9">
+            <label class="col-xs-6 control-label form-text">Color: </label>
+            <div class="col-xs-6">
               <input type="text" ng-model="editUser.car.color" placeholder="Car Color">
             </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-3 control-label form-text">License Plate:</label>
-            <div class="col-sm-9">
+            <label class="col-xs-6 control-label form-text">License Plate:</label>
+            <div class="col-xs-6">
               <input type="text" ng-model="editUser.car.license" placeholder="Plate #">
             </div>
           </div>
@@ -47,7 +47,7 @@
       </uib-tab>
 
     <uib-tab heading="Offered Rides">
-      <h3>Available Offered Rides</h3>
+      <h3><span class="slabel">Available Offered Rides</span></h3>
       <uib-accordion style="color:black">
         <uib-accordion-group ng-repeat="ride in offeredRides">
           <uib-accordion-heading style="color:black !important;">
@@ -73,7 +73,7 @@
         </uib-accordion-group>
       </uib-accordion>
 
-      <h3>Offers for Needed Rides</h3>
+      <h3><span class="slabel">Offers for Needed Rides<span></h3>
       <table class="table table-striped">
         <thead><tr>
           <th>Status</th>
@@ -97,7 +97,7 @@
     </uib-tab>
 
     <uib-tab heading="Requested Rides">
-      <h3>Needed Rides</h3>
+      <h3><span class="slabel">Needed Rides</span></h3>
       <uib-accordion style="color:black">
         <uib-accordion-group ng-repeat="ride in neededRidesRider">
           <uib-accordion-heading style="color:black !important;">{{ride.destination}} {{ride.departDate | date: 'shortDate'}} {{ride.departTime | date: 'shortTime'}}</uib-accordion-heading>
@@ -120,7 +120,7 @@
         </uib-accordion-group>
       </uib-accordion>
 
-      <h3>Requested Rides</h3>
+      <h3><span class="slabel">Requested Rides</span></h3>
       <table class="table table-striped">
         <thead><tr>
           <th>Status</th>
@@ -128,6 +128,7 @@
           <th>Time</th>
           <th>Cost</th>
           <th>Car</th>
+          <th>Remove</th>
         </tr></thead>
         <tbody>
           <tr ng-repeat="ride in requestedRides">

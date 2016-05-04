@@ -154,6 +154,26 @@ input {
   text-transform: uppercase;
 }
 
+.slabel {
+  color: #2dcc70;
+  font-weight: bold;
+}
+
+.table-striped > tbody > tr:nth-child(even) > td, .table-striped > tbody > tr:nth-child(even) > th {
+  /*background-color: #2dcc70;*/
+  background-color: white;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {
+  background-color: #2dcc70;
+  background-color: #59da90;
+
+}
+
+.panel-default > .panel-heading a{
+  color: black !important;
+}
+
 .about {
   background: #2dcc70;
   color: #fff;
@@ -375,6 +395,14 @@ input {
   #home section {
     font-size: 0.7em;
   }
+
+  .settings .well {
+    width: 90%;
+  }
+
+  .settings .form-horizontal .form-group {
+    margin-left: -20%;
+  }
 }
 
 
@@ -396,6 +424,10 @@ input {
 
   .rides form input {
     width: 60%;
+  }
+
+  .settings .well {
+    width: 70%;
   }
 }
 
@@ -432,16 +464,20 @@ input {
     margin-left: -10px;
     width: 35px;
   }
+
+  .settings .well {
+    width: 80%;
+  }
+
+  .settings .form-horizontal .form-group {
+    margin-left: -10%;
+  }
 }
 
 /*for when screen size is bigger than medium size but smaller than large size*/
 @media (min-width: 768px) and (max-width: 992px) {
   .signup .form-horizontal {
     margin-left: -100px; 
-  }
-
-  .settings .form-horizontal .form-group {
-    margin-left: 30%;
   }
 
   .rides {
@@ -454,6 +490,10 @@ input {
 
   .rides form input {
     width: 50%;
+  }
+
+  .settings .well {
+    width: 60%;
   }
 }
 
@@ -512,8 +552,8 @@ input {
     font-size: 1.3em;
   }
 
-  .settings .form-horizontal .form-group {
-    margin-left: 30%;
+  .settings .well {
+    width: 60%;
   }
 }
 
@@ -551,6 +591,10 @@ tbody {
   color: black;
 }
 
+thead {
+  /*color: #2dcc70;*/
+}
+
 .settings {
   margin-top: 15px;
 }
@@ -564,9 +608,7 @@ tbody {
   min-width: 85px;
 }
 
-.settings .well {
-  width: 60%;
-}
+
 
 .offer .well {
   width: 60%;
