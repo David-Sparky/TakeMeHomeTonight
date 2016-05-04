@@ -1,6 +1,8 @@
 angular.module('tmht')
 .controller('rides', ['$scope','$location', 'rideService','$cookies','$filter', function($scope, $location, rideService,$cookies,$filter){
 	$scope.joined = false;
+	$scope.off_value = "['departDate','departTime']";
+	$scope.need_value = "['departDate','departTime']";
 	switch($location.path()){
 		case '/rides/ridesOffered':
 			$scope.title = 'Rides Available';

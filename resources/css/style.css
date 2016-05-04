@@ -189,6 +189,10 @@ input {
   margin-bottom: 3px;
 }
 
+.sort select{
+  background: rgba(69,69,69,.7);
+}
+
 .request {
   background: rgba(69,69,69,.7);
   color: #fff;
