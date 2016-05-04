@@ -91,7 +91,6 @@
             <td>
               <button ng-click="removeNeededRideOfferDriver(ride._id)">Remove</button>
             </td>
-            <!--<td>{{ride.car.color + ' ' + ride.car.make + ' ' + ride.car.model}}</td>-->
           <tr>
         </tbody>
       </table>
@@ -114,7 +113,6 @@
                   <button ng-show="driver.status == 'pending'" ng-click="confirmDriver(ride._id, driver.rcs)">Confirm</button>
                   <button ng-click="removeDriver(ride._id, driver.rcs)">Remove</button>
                 </td> 
-                <!--<td ng-if="driver.status == 'accepted'">Confirmed!</td>-->
                 <td>{{driver.rcs}}</td>
               <tr>
             </tbody>

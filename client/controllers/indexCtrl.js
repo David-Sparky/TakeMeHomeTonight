@@ -16,7 +16,7 @@ angular.module('tmht')
 	};
 
 	socket.on('join', function(data){
-		console.log(data);
+		
 	});	
 	if($scope.checkForUser == true){
 		socket.emit('logged in');
@@ -26,14 +26,11 @@ angular.module('tmht')
 		AuthService.setNotifications(data.notifications);
 		$scope.newNotifications = data.count;
 		$scope.notifications = data.notifications;
-		console.log(data);
 	});
 
 	socket.on('notification', function(data){
-		console.log(data);
 		socket.emit('update notifications');
 	});
-	//socket.on()
 
 	$scope.checkNotifications = function(){
 		$scope.newNotifications = 0;

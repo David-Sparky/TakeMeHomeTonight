@@ -1,5 +1,5 @@
 angular.module('tmht')
-.controller('rideFormCtrl', ['$scope','$location', 'rideService', '$uibModal', function($scope, $location, rideService, $modal){
+.controller('rideFormCtrl', ['$scope','$location', 'rideService', function($scope, $location, rideService){
 
 	$scope.rideInfo = {};
 

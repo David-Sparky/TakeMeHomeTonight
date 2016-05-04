@@ -1,4 +1,4 @@
-	var app = angular.module('tmht', ['ui.bootstrap', 'ngRoute', 'ngFileUpload', 'ngCookies', 'btford.socket-io']);
+	var app = angular.module('tmht', ['ui.bootstrap', 'ngRoute', 'ngCookies', 'btford.socket-io']);
 
 app.config(['$routeProvider', function($routeProvider){
 	$routeProvider.
@@ -58,7 +58,6 @@ app.config(['$routeProvider', function($routeProvider){
 	}).
 	when('/publicTransit', {
 		templateUrl: 'client/views/publicTransit.html',
-		controller: 'publicTransitCtrl',
 		access: {restricted: true}
 	}).
 	when('/taxi', {
@@ -69,10 +68,6 @@ app.config(['$routeProvider', function($routeProvider){
 	when('/plane', {
 		templateUrl: 'client/views/plane.html',
 		controller: 'planeCtrl',
-		access: {restricted: true}
-	}).
-	when('/bus', {
-		templateUrl: 'client/views/bus.html',
 		access: {restricted: true}
 	}).
 	when('/shuttle', {

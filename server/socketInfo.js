@@ -1,6 +1,5 @@
 module.exports = function (io) {
   io.sockets.on('connection', function(socket) {
-    //..
       socket.on('logged in', function(data){
 	    if(req.session && req.session.cas_user){
 	      socket.join(req.session.cas_user);

@@ -308,24 +308,16 @@ io.on("connection", function(socket){
       });
     });
     socket.on('notifications seen', function(){
-      console.log('We saw them');
       sessionStore.get(decoded_id, function(error, session){
         if(error) throw error;
-        console.log('insessionstore');
-        console.log(session);
-        /*db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, docs){
-          console.log(docs);
-        })*/
         db.get().collection('users').find({rcs: session.cas_user}).forEach(function(doc){
           doc.notifications.forEach(function(data){
               console.log(data);
              db.get().collection('users').update({rcs:session.cas_user, notifications:data}, {$set: {'notifications.$.seen': true}}, function(err, results){
               if(err) throw err;
-            })
-          })
-           
-        })
-        //db.get().collection('users').update({rcs: session.cas_user}, {$set: {'notifications.$.seen': true}}, {multi: true})
+            });
+          });
+        });
       })
     });
   }
