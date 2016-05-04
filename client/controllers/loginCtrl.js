@@ -6,11 +6,10 @@ angular.module('tmht')
 			method: 'GET',
 			url: 'login?returnTo=/%23/landing'
 		}).then(function(data){
-			console.log(data);
 			$window.location = data.data;
 		},
 		function(err){
-			console.log(err);
+			sweetAlert("Oops...", "There was an error! "+err.data, "error");
 		});
 	};
 	
@@ -19,10 +18,9 @@ angular.module('tmht')
 			method: 'GET',
 			url: 'signUp?returnTo=/%23/signUp'
 		}).then(function(data){
-			console.log(data);
 			$window.location = data.data;
 		}).catch(function(err){
-			alert(err);
+			sweetAlert("Oops...", "There was an error! "+err.data, "error");
 		});
 	}
 
