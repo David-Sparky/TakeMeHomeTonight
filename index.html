@@ -68,13 +68,13 @@
             <div class="notifications-wrapper">
               <div ng-repeat="notification in notifications">
                  <a class="content" ng-if="notification.db=='offered'" ng-href="/#/rides/offer?id={{notification.rideID}}">
-                  <div class="notification-item">
+                  <div class="notification-item" ng-class="{notSeen: !notification.seen}">
                     <h4 class="item-title">{{notification.message}}</h4>
                     <p class="item-info">{{notification.time | date: 'short'}}</p>
                   </div>
                  </a>
                  <a class="content" ng-if="notification.db=='requested'" ng-href="/#/rides/ride?id={{notification.rideID}}">
-                   <div class="notification-item">
+                   <div class="notification-item" ng-class="{notSeen: !notification.seen}">
                     <h4 class="item-title">{{notification.message}}</h4>
                     <p class="item-info">{{notification.time | date: 'short'}}</p>
                   </div>
