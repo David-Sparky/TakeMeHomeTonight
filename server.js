@@ -235,7 +235,6 @@ io.on("connection", function(socket){
   if(typeof cookie_string == 'string'){
     var parsed_cookies = cookie.parse(cookie_string);
     var connect_sid = parsed_cookies['connect.sid'];
-    
     var decoded_id = cookieParser.signedCookie(connect_sid, 'super secret key')
 
     socket.on('logged in', function(data){
@@ -268,13 +267,8 @@ io.on("connection", function(socket){
               });
             });
           }
-          //HOORAY NOW YOU'VE GOT THE SESSION OBJECT!!!!
         });
       }
-      /*
-      if(req.session && req.session.cas_user){
-        
-      }*/
     });
 
     socket.on('update notifications', function(data){
@@ -289,12 +283,11 @@ io.on("connection", function(socket){
               }}
             ]).toArray(function(err, docs2){
               if(err) throw err;
-              console.log(docs2);
               if(docs2[0] == undefined){
-                  socket.emit('notifications', {
-                      notifications: docs[0].notifications,
-                      count: 0
-                  });
+                socket.emit('notifications', {
+                    notifications: docs[0].notifications,
+                    count: 0
+                });
               }
               else{
                 socket.emit('notifications', {
@@ -312,7 +305,6 @@ io.on("connection", function(socket){
         if(error) throw error;
         db.get().collection('users').find({rcs: session.cas_user}).forEach(function(doc){
           doc.notifications.forEach(function(data){
-              console.log(data);
              db.get().collection('users').update({rcs:session.cas_user, notifications:data}, {$set: {'notifications.$.seen': true}}, function(err, results){
               if(err) throw err;
             });
@@ -331,9 +323,6 @@ db.connect('mongodb://' + process.env.tmhtDBUser + ':' + process.env.tmhtDBPassw
     console.log('Unable to connect to Mongo.');
     process.exit(1)
   } else {
-    /*app.listen(port, function() {
-      console.log('Server running on port ' + port + '.')
-    })*/
     server.listen(port, function(){
       console.log('Server running on port ' + port + '.');
     })
