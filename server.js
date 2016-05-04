@@ -232,7 +232,6 @@ app.get('/stop_id', function (req, resp) {
 
 io.on("connection", function(socket){
   var cookie_string = socket.request.headers.cookie;
-  console.log(cookie_string);
   if(typeof cookie_string == 'string'){
     var parsed_cookies = cookie.parse(cookie_string);
     var connect_sid = parsed_cookies['connect.sid'];
@@ -242,7 +241,6 @@ io.on("connection", function(socket){
     socket.on('logged in', function(data){
       if(decoded_id) {
         sessionStore.get(decoded_id, function (error, session) {
-          console.log(session);
           if(session && session.cas_user){
             socket.join(session.cas_user);
             db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, docs){
@@ -255,7 +253,6 @@ io.on("connection", function(socket){
                 }}
               ]).toArray(function(err, docs2){
                 if(err) throw err;
-                console.log(docs2);
                 if(docs2[0] == undefined){
                   socket.emit('notifications', {
                       notifications: docs[0].notifications,
@@ -309,6 +306,27 @@ io.on("connection", function(socket){
               
           });
       });
+    });
+    socket.on('notifications seen', function(){
+      console.log('We saw them');
+      sessionStore.get(decoded_id, function(error, session){
+        if(error) throw error;
+        console.log('insessionstore');
+        console.log(session);
+        /*db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, docs){
+          console.log(docs);
+        })*/
+        db.get().collection('users').find({rcs: session.cas_user}).forEach(function(doc){
+          doc.notifications.forEach(function(data){
+              console.log(data);
+             db.get().collection('users').update({rcs:session.cas_user, notifications:data}, {$set: {'notifications.$.seen': true}}, function(err, results){
+              if(err) throw err;
+            })
+          })
+           
+        })
+        //db.get().collection('users').update({rcs: session.cas_user}, {$set: {'notifications.$.seen': true}}, {multi: true})
+      })
     });
   }
 

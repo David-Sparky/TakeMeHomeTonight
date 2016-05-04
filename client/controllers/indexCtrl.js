@@ -36,7 +36,8 @@ angular.module('tmht')
 	//socket.on()
 
 	$scope.checkNotifications = function(){
-		
+		$scope.newNotifications = 0;
+		socket.emit('notifications seen');
 	}
 
 	$(document).ready(function () {
