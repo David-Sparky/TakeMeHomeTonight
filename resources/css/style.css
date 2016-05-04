@@ -160,18 +160,20 @@ input {
 }
 
 .table-striped > tbody > tr:nth-child(even) > td, .table-striped > tbody > tr:nth-child(even) > th {
-  /*background-color: #2dcc70;*/
   background-color: white;
 }
 
 .table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {
-  background-color: #2dcc70;
-  background-color: #59da90;
+  background-color: #81e0a9;
 
 }
 
 .panel-default > .panel-heading a{
   color: black !important;
+}
+
+.bus h3 {
+  padding-top: 10px;
 }
 
 .about {
