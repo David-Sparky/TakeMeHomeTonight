@@ -160,7 +160,7 @@ app.get('/cdta_dir', function (req, resp) {
     var x = '';
     http.get({
       host: 'api.cdta.org',
-      path: '/api/v1/' + cdta_api_stops + search + cdta_api_key
+      path: '/api/v1/' + cdta_api_directions + search + cdta_api_key
     }, function (res) {
         res.on('data', function (d) {
             x += d.toString();

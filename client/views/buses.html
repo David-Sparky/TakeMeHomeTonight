@@ -39,10 +39,10 @@
       </span>
             </div><!-- /input-group -->
             <button class="btn btn-primary" ng-hide="!data_pres" ng-click="checkRoute('1')">
-                {{bus.directions[0].direction}}
+                {{dir.directions[0].direction}}
             </button>
             <button class="btn btn-primary" ng-hide="!data_pres" ng-click="checkRoute('2')">
-                {{bus.directions[1].direction}}
+                {{dir.directions[1].direction}}
             </button>
             <h3>{{br.direction.direction_name}}</h3>
             <div ng-repeat="z in br.direction.stops">
