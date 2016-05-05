@@ -2,7 +2,7 @@
 
 angular.module('tmht')
 .factory('socket', function (socketFactory) {
-    var myIoSocket = io.connect('http://localhost:8005');
+    var myIoSocket = io.connect('https://takemehometonight.herokuapp.com');
 
     var socket = socketFactory({
         ioSocket: myIoSocket
