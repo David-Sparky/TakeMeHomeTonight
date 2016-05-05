@@ -445,6 +445,7 @@ input {
     margin-left: 30%; 
     padding-left: -10px;
   }
+
 }
 
 /*for when screen is medium size*/
@@ -478,6 +479,33 @@ input {
   .settings .form-horizontal .form-group {
     margin-left: -10%;
   }
+
+  #notificationsDiv img {
+    margin-left: -100px;
+    margin-top: -55px;
+  }
+
+  .noti_bubble {
+    position:absolute;    /* This breaks the div from the normal HTML document. */
+    top: 1px;
+    margin-top: -32px;
+    left: 2px;
+    margin-left: -85px;
+    margin-right: 73px;
+    padding:1px 2px 1px 2px;
+    background-color:red; /* you could use a background image if you'd like as well */
+    color:white;
+    font-weight:bold;
+    font-size:0.55em;
+  }
+}
+
+@media (min-width: 768px) {
+  #notificationsDiv img {
+    margin-bottom: 10px;
+    margin-top: 8px;
+    margin-left: 15px;
+  }
 }
 
 /*for when screen size is bigger than medium size but smaller than large size*/
@@ -501,6 +529,8 @@ input {
   .settings .well {
     width: 60%;
   }
+
+  
 }
 
 @media (min-width: 768px) and (max-width: 800px) {
@@ -626,15 +656,14 @@ thead {
 }
 
 #notificationsDiv {
-  /*padding-left: 15px;*/
-  margin-top: -40px;
+  /*margin-top: -40px;*/
+  background-color: red;
 }
 
 #notificationsDiv img {
   width: 25px;
   height: 25px;
   margin-bottom: 10px;
-  margin-left: -45px;
 }
 
 #notificationsDiv .dropdown {
@@ -655,12 +684,7 @@ thead {
   font-size:1.5rem;
   display:inline-block;
 }
- 
-.glyphicon-circle-arrow-right {
-  margin-left:10px;     
-}
-  
-   
+
 .notification-heading, .notification-footer  {
   padding:2px 10px;
 }
@@ -687,7 +711,6 @@ thead {
   border-radius:4px;
 }
 
-
 .noti_Container {
   position:relative;     /* This is crucial for the absolutely positioned element */
   width:16px;
@@ -697,7 +720,7 @@ thead {
 .noti_bubble {
   position:absolute;    /* This breaks the div from the normal HTML document. */
   top: -10px;
-  left: -30px;
+  right: 2px;
   padding:1px 2px 1px 2px;
   background-color:red; /* you could use a background image if you'd like as well */
   color:white;

@@ -33,31 +33,6 @@
 
       
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse">
-        <div class = "middle" ng-show="!checkForUser()"></div>
-        <ul class="nav navbar-nav">
-          <li><a ng-show="checkForUser()" href="#/rides/ridesOffered">Rides Available </a></li>
-          
-          <li><a ng-show="checkForUser()" href="#/rides/ridesNeeded">Rides Needed</a></li>
-
-          <li><a ng-show="checkForUser()" href="#/rides/addRide">Add a Ride</a></li>
-
-          <li><a ng-show="checkForUser()" href="#/rides/requestRide">Request a Ride</a></li>
-
-          <li><a ng-show="checkForUser()" href="#/publicTransit">Public Transit</a></li>
-          <li class="dropdown">
-            <span ng-show="checkForUser()" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile
-            <span class="caret"></span></span>
-            <ul class="dropdown-menu pull-right">
-              <li><a ng-show="checkForUser()" href="#/userSettings">Settings</a></li>
-              <li><a ng-show="checkForUser()" ng-click="logout()">Logout</a></li>
-            </ul>
-          </li>
-
-        </ul>
-      </div><!-- /.navbar-collapse -->
-
       <div id="notificationsDiv">
         <div ng-show="checkForUser()" class="dropdown nav navbar-nav pull-right">
           <a id="dLabel" class="noti_Container" role="button" data-toggle="dropdown" data-target="#" href="/page.html"  ng-click="checkNotifications()">
@@ -90,6 +65,31 @@
           </ul>
         </div>
       </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse">
+        <div class = "middle" ng-show="!checkForUser()"></div>
+        <ul class="nav navbar-nav">
+          <li><a ng-show="checkForUser()" href="#/rides/ridesOffered">Rides Available </a></li>
+          
+          <li><a ng-show="checkForUser()" href="#/rides/ridesNeeded">Rides Needed</a></li>
+
+          <li><a ng-show="checkForUser()" href="#/rides/addRide">Add a Ride</a></li>
+
+          <li><a ng-show="checkForUser()" href="#/rides/requestRide">Request a Ride</a></li>
+
+          <li><a ng-show="checkForUser()" href="#/publicTransit">Public Transit</a></li>
+          <li class="dropdown">
+            <span ng-show="checkForUser()" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile
+            <span class="caret"></span></span>
+            <ul class="dropdown-menu pull-right">
+              <li><a ng-show="checkForUser()" href="#/userSettings">Settings</a></li>
+              <li><a ng-show="checkForUser()" ng-click="logout()">Logout</a></li>
+            </ul>
+          </li>
+
+        </ul>
+      </div><!-- /.navbar-collapse -->
 
     </div><!-- /.container-fluid -->
   </nav>
