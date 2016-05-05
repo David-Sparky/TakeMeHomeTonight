@@ -1,7 +1,7 @@
 angular.module('tmht')
 .controller('signUpCtrl', ['$scope', '$http', '$window', function($scope, $http, $window){
 
-
+	/*
 	$http({
 		method: 'GET',
 		url: 'signUp?returnTo=/%23/signUp'
@@ -10,7 +10,7 @@ angular.module('tmht')
 
 	}).catch(function(err){
 		sweetAlert("Oops...", "There was an error! "+err.data, "error");
-	});
+	});*/
 	
 	$scope.signUp = function(userData) {
 		$http({
