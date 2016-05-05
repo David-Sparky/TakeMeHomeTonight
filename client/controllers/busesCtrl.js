@@ -155,7 +155,7 @@ angular.module('tmht')
                 //DEBUG STATEMENT
 
                 if ($scope.arrs.status == 404) {
-                    sweetAlert("Oops...", "We couldn't find that bus route for you. Please check the number and try again.", "error");
+                    sweetAlert("Oops...", "We couldn't find that bus stop for you. Please check the number and try again.", "error");
                     $scope.loaded_stop = true;
                 }
                 else {
