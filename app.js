@@ -86,12 +86,19 @@ app.config(['$routeProvider', function($routeProvider){
 
 app.run(['$rootScope', '$window', '$route', 'AuthService', function ($rootScope, $window, $route, AuthService) {
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
-  	//AuthService.checkSessionStatus().then(function(data){
-  		if (next.$$route != undefined && (next.$$route.access == undefined || next.$$route.access.restricted) && /*!data.data*/ (AuthService.getUserStatus() == '' || AuthService.getUserStatus() == undefined)) {
+  	AuthService.checkSessionStatus().then(function(data){
+  		if(data.data == false){
+  			AuthService.removeUser();
+  		}
+  		if (next.$$route != undefined && next.$$route.access != undefined && next.$$route.access.restricted && /*!data.data*/ (AuthService.getUserStatus() == '' || AuthService.getUserStatus() == undefined)) {
 	      AuthService.removeUser();
 	      alert("You are not authorize or not logged in");
 	      $window.location = '/';
 	    }
+  		
+  	});
+  	//AuthService.checkSessionStatus().then(function(data){
+  		
   	/*}).catch(function(err){
   		alert(err.data);
   	});*/
