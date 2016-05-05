@@ -184,7 +184,6 @@ angular.module('tmht')
 			for(x in $scope.requestedRides){
 				if(rideID == $scope.requestedRides[x]._id){
 					$scope.requestedRides.splice(x, 1);
-					alert(data.data);
 				}
 			}
 			sweetAlert("Success!","Successfully removed your ride offer!","success");
