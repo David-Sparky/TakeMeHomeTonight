@@ -310,29 +310,38 @@ io.on("connection", function(socket){
               {$match: {rcs: session.cas_user}},
               {$sort: {"notifications.time": -1}},
               {$group: {_id: '$_id', notifications: {$push: '$notifications'}}}
-          ]).toArray(function(err, docs){  
-            db.get().collection('users').aggregate([
-              {$unwind : '$notifications'},
-              {$match: {'rcs': session.cas_user}, 'notifications.seen': false},
-              {$group: {
-                _id: '$_id', 
-                notifications: {$push: '$notifications'},
-              }}
-            ]).toArray(function(err, docs2){
-              if(err) throw err;
-              if(docs2[0] == undefined){
+          ]).toArray(function(err, docs){ 
+
+              if(docs[0].notifications == undefined){
                 socket.emit('notifications', {
-                  notifications: docs[0].notifications,
+                  notifications: [],
                   count: 0
                 });
               }
               else{
-                socket.emit('notifications', {
-                  notifications: docs[0].notifications,
-                  count: docs2[0].notifications.length
+                db.get().collection('users').aggregate([
+                  {$unwind : '$notifications'},
+                  {$match: {'rcs': session.cas_user, 'notifications.seen': false}},
+                  {$group: {
+                    _id: '$_id', 
+                    notifications: {$push: '$notifications'},
+                  }}
+                ]).toArray(function(err, docs2){
+                  if(err) throw err;
+                  if(docs2[0] == undefined){
+                    socket.emit('notifications', {
+                      notifications: docs[0].notifications,
+                      count: 0
+                    });
+                  }
+                  else{
+                    socket.emit('notifications', {
+                      notifications: docs[0].notifications,
+                      count: docs2[0].notifications.length
+                    });
+                  }
                 });
               }
-            });
           });
       });
     });
