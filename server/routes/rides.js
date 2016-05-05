@@ -140,7 +140,7 @@ router.put('/join_offer', function(req, res) {
 			collection.find({_id: ObjectID.createFromHexString(id)}).toArray(function(err, docs){
 				db.get().collection('users').update({rcs: docs[0].owner}, {$push: {notifications: {rideID:id, db:'offered', time: new Date(), message: req.session.cas_user + ' requested your offered ride', seen: false}}}, function(err, results){
 					if(err) throw err;
-					io().of(docs[0].owner).emit('notification', 'random shit');
+					io().of(docs[0].owner).emit('notification');
 				})
 				res.status(200).send('Added to the list of pending users!');
 			})
