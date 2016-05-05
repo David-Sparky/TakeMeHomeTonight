@@ -35,12 +35,12 @@
 	
 		<div ng-show='ride' class="well centering"><!-- singular ride request display -->
 			<div class="centering text-center">
-				<p>Requester: {{ride_owner}}</p>
-				<p>Departure Location: {{depart_local}}</p>
-				<p>Departure Date: {{depart_date | date: 'shortDate'}}</p>
-				<p>Departure Time: {{depart_time | date: 'shortTime'}}</p>
-				<p>Destination: {{destination}}</p>
-				<p>Willing to Offer: {{cost}}</p>
+				<p><span class="rlabel">Requester:</span> {{ride_owner}}</p>
+				<p><span class="rlabel">Departure Location:</span> {{depart_local}}</p>
+				<p><span class="rlabel">Departure Date:</span> {{depart_date | date: 'shortDate'}}</p>
+				<p><span class="rlabel">Departure Time:</span> {{depart_time | date: 'shortTime'}}</p>
+				<p><span class="rlabel">Destination:</span> {{destination}}</p>
+				<p><span class="rlabel">Willing to Offer:</span> {{cost}}</p>
 				<div ng-show="owner2" class="pending" ng-repeat="user in pendingDrivers">
 					<p> {{user.rcs}} is {{user.status}} <button class="btn btn-default btn-md" ng-click="accept_driver(user.rcs)">Accept</button><button class="btn btn-default btn-md" ng-click="reject_driver(user.rcs)">Reject</button> </p>
 				</div>
