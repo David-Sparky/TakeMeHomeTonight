@@ -14,7 +14,6 @@ var db = require('./server/db');
     io = require('socket.io')(server),
     MongoDbStore = require('connect-mongodb-session')(session),
     dbURI = 'mongodb://' + process.env.tmhtDBUser + ':' + process.env.tmhtDBPassword + '@ds023418.mlab.com:23418/tmht',
-    //MemoryStore = session.MemoryStore,
     sessionStore = new MongoDbStore({
       uri: dbURI,
       collection: 'mySessions'
@@ -69,14 +68,6 @@ var cas = new CASAuthentication({
     service_url: process.env.herokuurl || "http://localhost:" + port,
     cas_version: '2.0'
 });
-
-/*
-app.use('*', function(req, res, next){
-  sessionStore.all(function(err, sessions){
-    console.log(sessions);
-    next();
-  });
-});*/
 
 app.use('/', routes);
 app.use('/rides', rides);
@@ -228,7 +219,7 @@ app.get('/stop_id', function (req, resp) {
 
 io.on("connection", function(socket){
   var cookie_string = socket.request.headers.cookie;
-  if(typeof cookie_string == 'string'){
+  if(session == undefined || typeof cookie_string == 'string'){
     var parsed_cookies = cookie.parse(cookie_string);
     var connect_sid = parsed_cookies['connect.sid'];
     var decoded_id = cookieParser.signedCookie(connect_sid, 'super secret key')
@@ -238,29 +229,32 @@ io.on("connection", function(socket){
         sessionStore.get(decoded_id, function (error, session) {
           if(session && session.cas_user){
             socket.join(session.cas_user);
-            db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, docs){
-              db.get().collection('users').aggregate([
-                {$unwind : '$notifications'},
-                {$match: {'rcs': session.cas_user, 'notifications.seen': false}},
-                {$group: {
-                  _id: '$_id', 
-                  notifications: {$push: '$notifications'},
-                }}
-              ]).toArray(function(err, docs2){
-                if(err) throw err;
-                if(docs2[0] == undefined){
-                  socket.emit('notifications', {
-                    notifications: docs[0].notifications,
-                    count: 0
-                  });
-                }
-                else{
-                  socket.emit('notifications', {
-                    notifications: docs[0].notifications,
-                    count: docs2[0].notifications.length
-                  });
-                }
-              });
+            db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, docs){//THIS NEEDS TO BE A SORTED AGGREGATE
+            /*db.get.collection('users').aggregate([
+              {$}
+              ])*/
+                db.get().collection('users').aggregate([
+                  {$unwind : '$notifications'},
+                  {$match: {'rcs': session.cas_user, 'notifications.seen': false}},
+                  {$group: {
+                    _id: '$_id', 
+                    notifications: {$push: '$notifications'},
+                  }}
+                ]).toArray(function(err, docs2){
+                  if(err) throw err;
+                  if(docs2[0] == undefined){
+                    socket.emit('notifications', {
+                      notifications: docs[0].notifications,
+                      count: 0
+                    });
+                  }
+                  else{
+                    socket.emit('notifications', {
+                      notifications: docs[0].notifications,
+                      count: docs2[0].notifications.length
+                    });
+                  }
+                });
             });
           }
         });
@@ -269,7 +263,7 @@ io.on("connection", function(socket){
 
     socket.on('update notifications', function(data){
       sessionStore.get(decoded_id, function(error, session){
-          db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, docs){
+          db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, docs){//THIS NEEDS TO BE A SORTED AGGREGATE
             db.get().collection('users').aggregate([
               {$unwind : '$notifications'},
               {$match: {'rcs': session.cas_user}, 'notifications.seen': false},

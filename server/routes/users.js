@@ -3,12 +3,15 @@ var express = require('express'),
 	db = require('../db');
 
 router.get('/checkSessionStatus', function(req, res){
-  if(req.session.cas_user == req.cookies.user){
-  	res.send(true);
-  }
-  else{
-  	res.send(false);
-  }
+	if(req.session == undefined || req.cookies == undefined){
+		res.send(false);
+	}
+	else if(req.session.cas_user == req.cookies.user){
+		res.send(true);
+	}
+	else{
+		res.send(false);
+	}
 });
 
 router.use('*', function(req, res, next){
