@@ -12,23 +12,25 @@ var db = require('./server/db');
     http = require('http'),
     server = http.Server(app)
     io = require('socket.io')(server),
-    MongoDbStore = require('connect-mongodb-session')(session),
+    MemoryStore = session.MemoryStore,
+    sessionStore = new MemoryStore(),
+    //MongoDbStore = require('connect-mongodb-session')(session),
     dbURI = 'mongodb://' + process.env.tmhtDBUser + ':' + process.env.tmhtDBPassword + '@ds023418.mlab.com:23418/tmht',
-    sessionStore = new MongoDbStore({
+    /*sessionStore = new MongoDbStore({
       uri: dbURI,
       collection: 'mySessions'
-    }),
+    }),*/
     cookie = require('cookie');
 
 var getIOInstance = function(){
   return io;
 }
-
+/*
 // Catch errors 
 sessionStore.on('error', function(error) {
   assert.ifError(error);
   assert.ok(false);
-});
+});*/
 
 var routes = require('./server/routes/index'),
     rides = require('./server/routes/rides')(getIOInstance),
@@ -256,10 +258,13 @@ io.on("connection", function(socket){
         sessionStore.get(decoded_id, function (error, session) {
           if(session && session.cas_user){
             socket.join(session.cas_user);
-            db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, docs){//THIS NEEDS TO BE A SORTED AGGREGATE
-            /*db.get.collection('users').aggregate([
-              {$}
-              ])*/
+            //db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, docs){//THIS NEEDS TO BE A SORTED AGGREGATE
+            db.get().collection('users').aggregate([
+              {$unwind: '$notifications'},
+              {$match: {rcs: session.cas_user}},
+              {$sort: {"notifications.time": -1}},
+              {$group: {_id: '$_id', notifications: {$push: '$notifications'}}}
+            ]).toArray(function(err, docs){
                 db.get().collection('users').aggregate([
                   {$unwind : '$notifications'},
                   {$match: {'rcs': session.cas_user, 'notifications.seen': false}},
@@ -290,7 +295,13 @@ io.on("connection", function(socket){
 
     socket.on('update notifications', function(data){
       sessionStore.get(decoded_id, function(error, session){
-          db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, docs){//THIS NEEDS TO BE A SORTED AGGREGATE
+          //db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, docs){//THIS NEEDS TO BE A SORTED AGGREGATE
+          db.get().collection('users').aggregate([
+              {$unwind: '$notifications'},
+              {$match: {rcs: session.cas_user}},
+              {$sort: {"notifications.time": -1}},
+              {$group: {_id: '$_id', notifications: {$push: '$notifications'}}}
+          ]).toArray(function(err, docs){  
             db.get().collection('users').aggregate([
               {$unwind : '$notifications'},
               {$match: {'rcs': session.cas_user}, 'notifications.seen': false},
