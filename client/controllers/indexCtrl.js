@@ -15,6 +15,15 @@ angular.module('tmht')
 		}
 	};
 
+	AuthService.checkSessionStatus().then(function(data){
+		if(data.data == true){
+
+		} 
+		else{
+			AuthService.removeUser();
+		}
+	});
+
 	socket.on('join', function(data){
 	});	
 	if($scope.checkForUser == true){
