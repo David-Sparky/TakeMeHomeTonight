@@ -48,7 +48,7 @@ angular.module('tmht')
       checkSessionStatus: checkSessionStatus,
       removeUser: removeUser,
       logout: logout,
-      getNotifications,
-      setNotifications
+      getNotifications: getNotifications,
+      setNotifications: setNotifications
     });
 }]);
