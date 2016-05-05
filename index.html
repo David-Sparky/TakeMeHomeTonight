@@ -30,7 +30,7 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse">
         <div class = "middle" ng-show="!checkForUser()"></div>
-        <ul class="nav navbar-nav pull-right">
+        <ul class="nav navbar-nav">
           <li><a ng-show="checkForUser()" href="#/rides/ridesOffered">Rides Available </a></li>
           
           <li><a ng-show="checkForUser()" href="#/rides/ridesNeeded">Rides Needed</a></li>
@@ -53,35 +53,35 @@
       </div><!-- /.navbar-collapse -->
 
       <div id="notificationsDiv">
-        <div ng-show="checkForUser()" class="dropdown nav navbar-nav">
+        <div ng-show="checkForUser()" class="dropdown nav navbar-nav pull-right">
           <a id="dLabel" class="noti_Container" role="button" data-toggle="dropdown" data-target="#" href="/page.html"  ng-click="checkNotifications()">
-            Notifications<div ng-show="newNotifications != 0" class="noti_bubble">{{newNotifications}}</div>
-            <!--<i class="glyphicon glyphicon-bell"></i>-->
+            <!-- Notifications -->
+            <img src="../resources/imgs/bell.png"></img>
+            <div ng-show="newNotifications != 0" class="noti_bubble">{{newNotifications}}</div>
           </a>
-          
-          
+
           <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
             
             <div class="notification-heading"><h4 class="menu-title">Notifications</h4>
             </div>
-            <li class="divider"></li>
-            <div class="notifications-wrapper" ng-repeat="notification in notifications">
-             <a class="content" ng-if="notification.db=='offered'" ng-href="/#/rides/offer?id={{notification.rideID}}">
-              <div class="notification-item">
-                <h4 class="item-title">{{notification.message}}</h4>
-                <p class="item-info">{{notification.time | date: 'short'}}</p>
-              </div>
-             </a>
-             <a class="content" ng-if="notification.db=='requested'" ng-href="/#/rides/ride?id={{notification.rideID}}">
-               <div class="notification-item">
-                <h4 class="item-title">{{notification.message}}</h4>
-                <p class="item-info">{{notification.time | date: 'short'}}</p>
-              </div>
-             </a>
+            <div class="notifications-wrapper">
+              <div ng-repeat="notification in notifications">
+                 <a class="content" ng-if="notification.db=='offered'" ng-href="/#/rides/offer?id={{notification.rideID}}">
+                  <div class="notification-item" ng-class="{notSeen: !notification.seen}">
+                    <h4 class="item-title">{{notification.message}}</h4>
+                    <p class="item-info">{{notification.time | date: 'short'}}</p>
+                  </div>
+                 </a>
+                 <a class="content" ng-if="notification.db=='requested'" ng-href="/#/rides/ride?id={{notification.rideID}}">
+                   <div class="notification-item" ng-class="{notSeen: !notification.seen}">
+                    <h4 class="item-title">{{notification.message}}</h4>
+                    <p class="item-info">{{notification.time | date: 'short'}}</p>
+                  </div>
+                 </a>
+                </div>
             </div>
             <li class="divider"></li>
           </ul>
-        
         </div>
       </div>
 
@@ -114,6 +114,7 @@
 <script type="text/javascript" src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
 <script type="text/javascript" src="node_modules/angular-route/angular-route.min.js"></script>
 <script type="text/javascript" src="node_modules/angular-cookies/angular-cookies.min.js"></script>
+<script type="text/javascript" src="node_modules/ng-autocomplete/src/ngAutocomplete.js"></script>
 <script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
 <script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
 <script src="node_modules/socket.io-client/socket.io.js"></script>
@@ -135,4 +136,5 @@
 <script type="text/javascript" src="client/controllers/userSettingsCtrl.js"></script>
 <script type="text/javascript" src="client/controllers/publicTransitCtrl.js"></script>
 <script type="text/javascript" src="client/controllers/busesCtrl.js"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC7CwuJng7B5-ynLYwPf7cqqYHYsv6SFrs&libraries=places"></script>
 </html>

@@ -1,4 +1,4 @@
-var app = angular.module('tmht', ['ui.bootstrap', 'ngRoute', 'ngCookies', 'btford.socket-io']);
+var app = angular.module('tmht', ['ui.bootstrap', 'ngRoute', 'ngCookies', 'btford.socket-io', 'ngAutocomplete']);
 
 app.config(['$routeProvider', function($routeProvider){
 	$routeProvider.

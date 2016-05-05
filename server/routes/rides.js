@@ -61,7 +61,7 @@ router.post('/addRide', function(req,res){
 
 router.get('/allRequestedRides', function(req, res){
 	var collection = db.get().collection('requested');
-	collection.find().toArray(function(err, docs){
+	collection.find().sort({departDate:1,departTime:1}).toArray(function(err, docs){
 		if(err) throw err;
 		res.send(docs);
 	});
@@ -69,7 +69,7 @@ router.get('/allRequestedRides', function(req, res){
 
 router.get('/allOfferedRides', function(req,res){
 	var collection = db.get().collection('offered');
-	collection.find().toArray(function(err, docs){
+	collection.find().sort({departDate:1,departTime:1}).toArray(function(err, docs){
 		if(err) throw err;
 		res.send(docs);
 	});

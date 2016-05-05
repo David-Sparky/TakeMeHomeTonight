@@ -12,7 +12,7 @@
 
       <div class="form-group">
         <label class="control-label">Departure Location</label>
-        <input type="string" class="form-control" ng-model="rideInfo.departLocation" required>
+        <input type="string" class="form-control" id="autocomplete" ng-autocomplete ng-model="rideInfo.departLocation" required>
       </div>
 
       <div class="form-group">
@@ -27,7 +27,7 @@
       
       <label class="control-label">Destination</label>
       <div class="form-group">
-        <input type="string" class="form-control" ng-model="rideInfo.destination" required>
+        <input type="string" class="form-control" ng-autocomplete ng-model="rideInfo.destination" required>
       </div>
 
       <label class="control-label">Cost</label>

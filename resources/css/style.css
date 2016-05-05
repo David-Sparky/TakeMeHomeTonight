@@ -47,11 +47,11 @@ input {
   background-color: rgba(0,0,0,0.7);
   border: none;
   margin-bottom: 0px;
+
 }
 
 /*also in media size*/
 .navbar-header img {
-  padding-top: 5px;
   margin-bottom: -50px;
 }
 
@@ -63,6 +63,11 @@ input {
 
 .nav.navbar-nav li a:hover {
   color: #2dcc70;
+}
+
+.navbar ul {
+  text-align: center;
+  float: right;
 }
 
 .dropdown {
@@ -187,6 +192,10 @@ input {
   margin-left: 3px;
   margin-right: 3px;
   margin-bottom: 3px;
+}
+
+.sort select{
+  background: rgba(69,69,69,.7);
 }
 
 .request {
@@ -495,6 +504,12 @@ input {
   }
 }
 
+@media (min-width: 768px) and (max-width: 800px) {
+  .navbar a {
+    margin-left: -10px;
+  }
+}
+
 /*for when screen is smaller than large size*/
 @media (max-width: 992px) {
   h1 {
@@ -519,7 +534,7 @@ input {
   }
 
   .middle {
-    margin-top: 25px;
+    margin-top: 35px;
     min-height: 10px;
     background-color: rgba(0,0,0,0.05);
   }
@@ -532,7 +547,7 @@ input {
   }
 
   .middle {
-    margin-top: 35px;
+    margin-top: 45px;
     min-height: 10px;
     background-color: rgba(0,0,0,0.05);
   }
@@ -611,12 +626,20 @@ thead {
   padding-bottom: 10px;
 }
 
-.glyphicon-bell {
-  font-size:1.5rem;
+#notificationsDiv {
+  /*padding-left: 15px;*/
+  margin-top: -40px;
 }
 
-#notificationsDiv {
-  padding-left: 15px;
+#notificationsDiv img {
+  width: 25px;
+  height: 25px;
+  margin-bottom: 10px;
+  margin-left: -45px;
+}
+
+#notificationsDiv .dropdown {
+  margin-top: 0px;
 }
 
 .notifications {
@@ -674,8 +697,8 @@ thead {
 
 .noti_bubble {
   position:absolute;    /* This breaks the div from the normal HTML document. */
-  top: -6px;
-  right:-6px;
+  top: -10px;
+  left: -30px;
   padding:1px 2px 1px 2px;
   background-color:red; /* you could use a background image if you'd like as well */
   color:white;
@@ -687,4 +710,8 @@ thead {
   /* You can always use a background image to produce the same effect if you want to, and you can use both together so browsers without CSS3 still have the rounded/shadow look. */
   border-radius:30px;
   box-shadow:1px 1px 1px gray;
+}
+
+.notSeen {
+  background-color: rgb(45, 204, 112);
 }

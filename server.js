@@ -12,13 +12,24 @@ var db = require('./server/db');
     http = require('http'),
     server = http.Server(app)
     io = require('socket.io')(server),
-    MemoryStore = session.MemoryStore,
-    sessionStore = new MemoryStore(),
+    MongoDbStore = require('connect-mongodb-session')(session),
+    dbURI = 'mongodb://' + process.env.tmhtDBUser + ':' + process.env.tmhtDBPassword + '@ds023418.mlab.com:23418/tmht',
+    //MemoryStore = session.MemoryStore,
+    sessionStore = new MongoDbStore({
+      uri: dbURI,
+      collection: 'mySessions'
+    }),
     cookie = require('cookie');
 
 var getIOInstance = function(){
   return io;
 }
+
+// Catch errors 
+sessionStore.on('error', function(error) {
+  assert.ifError(error);
+  assert.ok(false);
+});
 
 var routes = require('./server/routes/index'),
     rides = require('./server/routes/rides')(getIOInstance),
@@ -44,6 +55,9 @@ app.use('/', express.static(path.join(__dirname, '/')));
 // Set up an Express session, which is required for CASAuthentication.
 app.use(session({
     secret: 'super secret key',
+    cookie: {
+      maxAge: 24 * 60 * 60 * 1000
+    },
     resave: false,
     saveUninitialized: false,
     store: sessionStore
@@ -326,7 +340,7 @@ io.on("connection", function(socket){
 
 
 
-db.connect('mongodb://' + process.env.tmhtDBUser + ':' + process.env.tmhtDBPassword + '@ds023418.mlab.com:23418/tmht', function(err) {
+db.connect(dbURI, function(err) {
   if (err) {
     console.log('Unable to connect to Mongo.');
     process.exit(1)
