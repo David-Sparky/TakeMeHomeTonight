@@ -1,14 +1,18 @@
+<!-- Singular Ride Page -->
 <div class="container-fluid">
-  <section class="title row-">
-	<div class="container">
-	  <div class="page-header">
-		<h1>{{title}}</h1>
-	  </div>
-	</div>
-  </section>
+	<!-- Title -->
+  	<section class="title row-">
+		<div class="container">
+	  		<div class="page-header">
+				<h1>{{title}}</h1>
+	  		</div>
+		</div>
+  	</section>
+  	<!-- Close title -->
+
 	<div class="offer">
 		<div ng-show='offer' class="well centering">
-		<!-- singular offer display -->
+		<!-- Singular offer display -->
 			<div class="centering text-center">
 				<p><span class="rlabel">Driver:</span> {{rcs}}</p>
 				<p><span class="rlabel">Departure Location:</span> {{depart_local}}</p>
@@ -32,8 +36,10 @@
 				</div>
 			</div>
 		</div>
+		<!-- Close singular ride display -->
 	
-		<div ng-show='ride' class="well centering"><!-- singular ride request display -->
+		<!-- Singular ride request display -->
+		<div ng-show='ride' class="well centering">
 			<div class="centering text-center">
 				<p><span class="rlabel">Requester:</span> {{ride_owner}}</p>
 				<p><span class="rlabel">Departure Location:</span> {{depart_local}}</p>
@@ -53,5 +59,6 @@
 				</div>
 			</div>
 		</div>
+		<!-- Close singular ride request display -->
 	</div>
 </div>

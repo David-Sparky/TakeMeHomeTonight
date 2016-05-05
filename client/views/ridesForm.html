@@ -1,4 +1,6 @@
+<!-- Ride Form -->
 <div class="container-fluid">
+  <!-- Title -->
   <section class="title">
       <div class="container">
           <div class="page-header">
@@ -6,7 +8,9 @@
           </div>
       </div>
   </section>
+  <!-- Close Title -->
 
+  <!-- Ride Form -->
   <div class = "rides well well-lg">
     <form name="rideForm" class="form-horizontal">
 
@@ -35,6 +39,7 @@
         <input type="string"class="form-control" ng-model="rideInfo.cost">
       </div>
       
+      <!-- Only show if on add a ride -->
       <div ng-show='add'>
         <label class="control-label">Available Seats</label>
         <div class="form-group">
@@ -42,6 +47,7 @@
         </div>
       </div>
 
+      <!-- Car information -->
       <div ng-show="add" id="carInfoForm">
         <h3>Car Information</h3>
         <label class="control-label">Make</label>
@@ -64,6 +70,7 @@
           <input type="string" class="form-control" ng-model="rideInfo.car.license">
         </div>
       </div>
+      <!-- Close car information -->
 
       <div class ="rideButton mainButtons">
         <button type="button" class="custom-btn btn-primary btn-xlarge" ng-click="submit()" ng-disabled="rideForm.$invalid">Submit</button>

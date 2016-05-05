@@ -1,28 +1,34 @@
+<!-- Rides Availible and Rides Offered Pages -->
 <div class="container-fluid">
-  <section class="title row-">
+	<!-- Title -->
+  	<section class="title row-">
     	<div class="container">
         	<div class="page-header">
                 <h1>{{title}}</h1>
             </div>
         </div>
     </section>
+    <!-- Close Title -->
   
+  	<!-- Rides Availible Page-->
 	<div ng-show="ridesavail" class=""> 
-  <!-- Only show rides available on ridesoffered -->
-		    <section class="request">
-			     <h4>Want to offer a ride that isn't listed? Add one <a href="#/rides/requestRide">here</a>.</h4>
-				<section class="sort">
-					Sort by:
-					<select ng-model="off_value">
-						<option value="destination">Destination</option>
-						<option value="departLocation">Start Location</option>
-						<option value="['departDate','departTime']">Departing Date</option>
-					</select>
-				</section>
-		    </section>
-	  <div class="centering text-center">
+		<!-- Offer a Ride -->
+	    <section class="request">
+		     <h4>Want to offer a ride that isn't listed? Add one <a href="#/rides/requestRide">here</a>.</h4>
+			<section class="sort">
+				Sort by:
+				<select ng-model="off_value">
+					<option value="destination">Destination</option>
+					<option value="departLocation">Start Location</option>
+					<option value="['departDate','departTime']">Departing Date</option>
+				</select>
+			</section>
+	    </section>
+	    <!-- Close Offer a Ride -->
+	  	<div class="centering text-center">
 		 	<div class="ridecontainer" ng-repeat="offer in offerarray | orderBy:off_value">
 				<a href="#/rides/offer?id={{offer['_id']}}">
+					<!-- Well for each ride -->
 					<div class="rides row well">
 						<div class="pubRow">
 							<div class="col-md-6">
@@ -41,9 +47,14 @@
 			</div>	  
 		</div>
 	</div>
-	<div ng-show='needed' class="needrides"><!-- Only show rides needed on ridesneeded -->
+	<!-- Close Rides Offered Page -->
+
+	<!-- Rides Needed Page-->
+	<div ng-show='needed' class="needrides">
+		<!-- Need a Ride -->
 		<section class="request">
 			<h4>Need a ride that isn't listed? Request one <a href="#/rides/addRide">here</a>.</h4>
+			<!-- Sorting -->
 			<section class="sort">
 				Sort by:
 				<select ng-model="need_value">
@@ -52,7 +63,9 @@
 					<option value="['departDate','departTime']">Departing Date</option>
 				</select>
 			</section>
+			<!-- Close Sorting -->
 		</section>
+		<!-- Close Need a Ride -->
 	  <div class="centering text-center">
 		  	<div class="ridecontainer" ng-repeat="needed in needarray  | orderBy:need_value">
 				<a href="#/rides/ride?id={{needed['_id']}}">
@@ -72,4 +85,5 @@
 			</div>	  
 		</div>
 	</div>
+	<!-- Close Rides Needed Page -->
 </div>
