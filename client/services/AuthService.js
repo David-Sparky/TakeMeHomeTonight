@@ -16,6 +16,7 @@ angular.module('tmht')
 
     function removeUser(){
       $cookies.remove('user');
+      $cookies.remove('connect.sid');
     }
     
     function getNotifications(){
@@ -33,6 +34,7 @@ angular.module('tmht')
       })
       .then(function(data){
         $cookies.remove('user');
+        $cookies.remove('connect.sid');
         $window.location = data.data;
       },
       function(err){

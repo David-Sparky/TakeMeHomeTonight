@@ -25,7 +25,8 @@ angular.module('tmht')
                 search_b: $scope.searchbar
             };
 
-            console.log(query.search_b);
+            //console.log(query.search_b);
+
 
             $http.get(url, {params: query}).then(function (response) {
 
@@ -42,7 +43,7 @@ angular.module('tmht')
 
 
                 //DEBUG STATEMENT
-                console.log($scope.bus);
+                //console.log($scope.bus);
 
             });
         };
@@ -65,15 +66,15 @@ angular.module('tmht')
                 //WE FINISHED THE QUERY, SO SET LOADED BACK TO TRUE
                 $scope.loaded = true;
                 //GET THE DATA FROM THE TWITTER API AND TAKE THE RESPONSE AND SEND IT TO THE FRONT END OF THE PAGE
-                $scope.bus = response.data;
+                $scope.dir = response.data;
                 //DEBUG STATEMENT
 
-                if ($scope.bus.status == 404) {
+                if ($scope.dir.status == 404) {
                     sweetAlert("Oops...", "We couldn't find that bus route for you. Please check the number and try again.", "error");
                     $scope.data_pres = false;
                 }
                 else {
-                    console.log($scope.bus);
+                    //console.log($scope.bus);
                     $scope.data_pres = true;
                 }
 
@@ -102,7 +103,7 @@ angular.module('tmht')
                 //GET THE DATA FROM THE TWITTER API AND TAKE THE RESPONSE AND SEND IT TO THE FRONT END OF THE PAGE
                 $scope.br = response.data;
                 //DEBUG STATEMENT
-                console.log($scope.br);
+                //console.log($scope.br);
 
             });
 
@@ -124,6 +125,7 @@ angular.module('tmht')
                 $scope.loaded_out = true;
                 //GET THE DATA FROM THE TWITTER API AND TAKE THE RESPONSE AND SEND IT TO THE FRONT END OF THE PAGE
                 $scope.outage = response.data;
+                console.log($scope.outage.alerts);
                 //DEBUG STATEMENT
 
 
@@ -153,11 +155,11 @@ angular.module('tmht')
                 //DEBUG STATEMENT
 
                 if ($scope.arrs.status == 404) {
-                    sweetAlert("Oops...", "We couldn't find that bus route for you. Please check the number and try again.", "error");
+                    sweetAlert("Oops...", "We couldn't find that bus stop    for you. Please check the number and try again.", "error");
                     $scope.loaded_stop = true;
                 }
                 else {
-                    console.log($scope.arrs);
+                    //console.log($scope.arrs);
                     $scope.loaded_stop = true;
                 }
 
