@@ -265,6 +265,14 @@ io.on("connection", function(socket){
               {$sort: {"notifications.time": -1}},
               {$group: {_id: '$_id', notifications: {$push: '$notifications'}}}
             ]).toArray(function(err, docs){
+
+              if(docs[0].notifications == undefined){
+                socket.emit('notifications', {
+                  notifications: [],
+                  count: 0
+                });
+              }
+              else{
                 db.get().collection('users').aggregate([
                   {$unwind : '$notifications'},
                   {$match: {'rcs': session.cas_user, 'notifications.seen': false}},
@@ -287,6 +295,7 @@ io.on("connection", function(socket){
                     });
                   }
                 });
+              }
             });
           }
         });
