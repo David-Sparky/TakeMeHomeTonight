@@ -60,16 +60,20 @@ router.post('/addRide', function(req,res){
 
 
 router.get('/allRequestedRides', function(req, res){
+	var date = new Date();
+	date = date.toISOString();
 	var collection = db.get().collection('requested');
-	collection.find().sort({departDate:1,departTime:1}).toArray(function(err, docs){
+	collection.find({departDate:{$gte:date}}).sort({departDate:1,departTime:1}).toArray(function(err, docs){
 		if(err) throw err;
 		res.send(docs);
 	});
 });
 
 router.get('/allOfferedRides', function(req,res){
+	var date = new Date();
+	date = date.toISOString();
 	var collection = db.get().collection('offered');
-	collection.find().sort({departDate:1,departTime:1}).toArray(function(err, docs){
+	collection.find({availableseats:{$ne:0},departDate:{$gte:date}}).sort({departDate:1,departTime:1}).toArray(function(err, docs){
 		if(err) throw err;
 		res.send(docs);
 	});
