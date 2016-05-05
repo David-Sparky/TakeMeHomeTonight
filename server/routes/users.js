@@ -2,6 +2,31 @@ var express = require('express'),
 	router = express.Router(),
 	db = require('../db');
 
+
+router.post('/signUp', function(req, res){
+	if(req.session == undefined || req.session.cas_user == undefined){
+		res.status(401).send('Unauthorized Access');
+	}
+	else{
+		var collection = db.get().collection('users');
+		collection.find({rcs: req.session.cas_user}).toArray(function(err, docs){
+			if(err) throw err;
+			if(docs.length != 0){
+				//user already exists
+			}
+			else{
+				collection.insert({rcs: req.session.cas_user, firstName: req.body.firstName, lastName: req.body.lastName, notifications: []}, function(err, results){
+					if(err) throw err;
+					if(results.insertedCount == 1){
+						res.cookie('user', req.session.cas_user);
+						res.status(200).send('/#/landing');
+					}
+				});
+			}
+		});
+	}
+});
+
 router.get('/checkSessionStatus', function(req, res){
 	if(req.session == undefined || req.cookies == undefined){
 		res.send(false);
@@ -23,25 +48,6 @@ router.use('*', function(req, res, next){
   else{
     next();
   }
-});
-
-router.post('/signUp', function(req, res){
-	var collection = db.get().collection('users');
-	collection.find({rcs: req.session.cas_user}).toArray(function(err, docs){
-		if(err) throw err;
-		if(docs.length != 0){
-			//user already exists
-		}
-		else{
-			collection.insert({rcs: req.session.cas_user, firstName: req.body.firstName, lastName: req.body.lastName, notifications: []}, function(err, results){
-				if(err) throw err;
-				if(results.insertedCount == 1){
-					res.cookie('user', req.session.cas_user);
-					res.status(200).send('/#/landing');
-				}
-			});
-		}
-	});
 });
 
 
