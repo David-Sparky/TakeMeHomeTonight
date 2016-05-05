@@ -52,7 +52,6 @@ input {
 
 /*also in media size*/
 .navbar-header img {
-  padding-top: 5px;
   margin-bottom: -50px;
 }
 
@@ -68,6 +67,7 @@ input {
 
 .navbar ul {
   text-align: center;
+  float: right;
 }
 
 .dropdown {
@@ -505,24 +505,8 @@ input {
 }
 
 @media (min-width: 768px) and (max-width: 800px) {
-  .navbar ul {
-    margin-left: 20%;
-  }
   .navbar a {
     margin-left: -10px;
-  }
-}
-
-@media (min-width: 800px) and (max-width: 848px) {
-  .navbar ul{
-    margin-left: 21%;
-  }
-}
-
-
-@media (min-width: 848px) and (max-width: 992px) {
-  .navbar ul{
-    margin-left: 25%;
   }
 }
 
@@ -583,10 +567,6 @@ input {
 
   .settings .well {
     width: 60%;
-  }
-
-  .navbar ul {
-    margin-left: 25%;
   }
 }
 
@@ -717,8 +697,8 @@ thead {
 
 .noti_bubble {
   position:absolute;    /* This breaks the div from the normal HTML document. */
-  top: -6px;
-  right:-6px;
+  top: -10px;
+  left: -30px;
   padding:1px 2px 1px 2px;
   background-color:red; /* you could use a background image if you'd like as well */
   color:white;
