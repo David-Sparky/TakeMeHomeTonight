@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <section class="title row-">
-        <div class="container">
-      <div class="page-header">
+    	<div class="container">
+        	<div class="page-header">
                 <h1>{{title}}</h1>
             </div>
         </div>
@@ -9,28 +9,31 @@
   
 	<div ng-show="ridesavail" class=""> 
   <!-- Only show rides available on ridesoffered -->
+		    <section class="request">
+			     <h4>Want to offer a ride that isn't listed? Add one <a href="#/rides/addRide">here</a>.</h4>
+				<section class="sort">
+					Sort by:
+					<select ng-model="off_value">
+						<option value="destination">Destination</option>
+						<option value="departLocation">Start Location</option>
+						<option value="['departDate','departTime']">Departing Date</option>
+					</select>
+				</section>
+		    </section>
 	  <div class="centering text-center">
-			<div class="ridecontainer" ng-repeat="offer in offerarray">
+		 	<div class="ridecontainer" ng-repeat="offer in offerarray | orderBy:off_value">
 				<a href="#/rides/offer?id={{offer['_id']}}">
 					<div class="rides row well">
 						<div class="pubRow">
-							<div class="col-md-4">
-								<img src="/resources/imgs/carimg.png" alt="Car Image" height="100" width="130">
+							<div class="col-md-6">
+								<p> <span class="rlabel">Destination:</span> {{offer['destination']}} </p>
+								<p> <span class="rlabel">Date &amp; Time:</span> {{offer.departDate | date: 'shortDate'}} at {{offer.departTime | date: 'shortTime'}} </p>
+								<p> <span class="rlabel">Leaving From:</span> {{offer['departLocation']}}</p>
 							</div>
-							<div class="col-md-4">
-								<p> Details: </p>
-								<p> Going to: {{offer['destination']}} </p>
-								<p> Date: {{(offer['departDate']).split('T')[0]}} </p>
-								<p> Leaving {{offer['departLocation']}} at or around: {{((offer['departDate']).split('T')[1]).split('.')[0]}}'</p>
-								<p> Seats Remaining: {{offer['availableseats']}} / {{offer['seats']}} </p>
-								<p> Cost if any: {{offer['cost']}}</p>
-							</div>
-							<div class="col-md-4">
-								<p> Info :</p>
-								<p> Driver: {{offer['owner']}}</p>
-								<p> Car Make &amp; Model: {{offer['car']['make']}} {{offer['car']['model']}}</p>
-								<p> Car Color: {{offer['car']['color']}} </p>
-								<p> License Plate: {{offer['car']['license']}} </p>
+							<div class="col-md-6">
+								<p> <span class="rlabel">Driver:</span> {{offer['owner']}}</p>
+								<p> <span class="rlabel">Car Make &amp; Model:</span> {{offer['car']['make']}} {{offer['car']['model']}}</p>
+								<p> <span class="rlabel">Seats Left:</span> {{offer['availableseats']}}/{{offer['seats']}}</p>
 							</div>
 						</div>
 					</div>
@@ -39,18 +42,29 @@
 		</div>
 	</div>
 	<div ng-show='needed' class="needrides"><!-- Only show rides needed on ridesneeded -->
+		<section class="request">
+			<h4>Need a ride that isn't listed? Request one <a href="#/rides/requestRide">here</a>.</h4>
+			<section class="sort">
+				Sort by:
+				<select ng-model="need_value">
+					<option value="destination">Destination</option>
+					<option value="departLocation">Start Location</option>
+					<option value="['departDate','departTime']">Departing Date</option>
+				</select>
+			</section>
+		</section>
 	  <div class="centering text-center">
-			<div class="ridecontainer" ng-repeat="needed in needarray">
+		  	<div class="ridecontainer" ng-repeat="needed in needarray  | orderBy:need_value">
 				<a href="#/rides/ride?id={{needed['_id']}}">
 					<div class="rides row well">
             			<div class="pubRow">
-  							<div class="col-md-4">
-  								<p> Person: {{needed.rcs}} </p>
-  								<p> Time: {{needed.departDate | date:'shortDate'}} / {{needed.departTime | date:'shortTime'}} </p>
+  							<div class="col-md-6">
+  								<p> <span class="rlabel">Person:</span> {{needed.rcs}} </p>
+  								<p> <span class="rlabel">Time:</span> {{needed.departDate | date:'shortDate'}} / {{needed.departTime | date:'shortTime'}} </p>
   							</div>
-  							<div class="col-md-4">
-  								<p> Destination: {{needed.destination}} </p>
-  								<p> Offer: {{needed.cost}} </p>
+  							<div class="col-md-6">
+  								<p> <span class="rlabel">Destination:</span> {{needed.destination}} </p>
+  								<p> <span class="rlabel">Offer: </span>{{needed.cost}} </p>
   							</div>
   						</div>
 					</div>

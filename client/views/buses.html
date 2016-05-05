@@ -1,44 +1,42 @@
-<div ng-controller="busesCtrl">
-    <section class="title">
-        <div class="container">
-            <div class="row-fluid">
-                <div class="span6">
-                    <h1>Buses</h1>
-                </div>
+<section class="title">
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span6">
+                <h1>Buses</h1>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <div class="col-lg-6">
+<div class="bus">
+    <div class="col-sm-6">
         <div class="well">
             <h3>CDTA Bus Destinations</h3>
             <div class="input-group">
-                <input type="text" class="form-control" ng-model="searchbar" placeholder="Enter a destination...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-success" type="submit" ng-click="search()"
-                                    ng-disabled="!loaded">Go!</button>
-                        </span>
+                <input type="text" class="form-control" ng-autocomplete  ng-model="searchbar" placeholder="Enter a destination...">
+      <span class="input-group-btn">
+        <button class="btn btn-success" type="submit" ng-click="search()" ng-disabled="!loaded">Go!</button>
+      </span>
             </div><!-- /input-group -->
             <div ng-repeat="i in bus.stops">
                 <h4>{{ escapeHTML(i.name) }}</h4>
                 <div ng-repeat="thing in i.serviced_by">
                     <ul>
                         Serviced by:
-
                         <li>{{thing.route_id}} &mdash; {{thing.direction}}</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-sm-6">
         <div class="well">
             <h3>CDTA Bus Routes</h3>
             <div class="input-group">
                 <input type="text" class="form-control" ng-model="searchbar_d" placeholder="Enter a bus number...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-success" type="submit" ng-click="directions()" ng-disabled="!loaded">Go!</button>
-                        </span>
+      <span class="input-group-btn">
+        <button class="btn btn-success" type="submit" ng-click="directions()" ng-disabled="!loaded">Go!</button>
+      </span>
             </div><!-- /input-group -->
             <button class="btn btn-primary" ng-hide="!data_pres" ng-click="checkRoute('1')">
                 {{bus.directions[0].direction}}
@@ -52,35 +50,39 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-sm-6">
         <div class="well">
             <h3>CDTA Bus Stop Arrivals</h3>
             <div class="input-group">
-                <input type="text" class="form-control" ng-model="searchbar_id" placeholder="Enter a stop ID number...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-success" type="submit" ng-click="stop_id()"
-                                        ng-disabled="!loaded">Go!</button>
-                            </span>
+                <input type="text" class="form-control" ng-model="searchbar_id"
+                       placeholder="Enter a stop ID number...">
+      <span class="input-group-btn">
+        <button class="btn btn-success" type="submit" ng-click="stop_id()" ng-disabled="!loaded">Go!</button>
+      </span>
             </div><!-- /input-group -->
             <div ng-repeat="q in arrs.arrivals">
                 <h3>{{q.route_id}} &mdash; {{q.direction}}</h3>
-                <p>Arriving in: {{q.arrival_minutes}}</p>
+                <p>Arriving in: {{q.arrival_minutes}} minutes</p>
                 <p>Scheduled to arrive at: {{q.arrival_time}}</p>
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
-        <div class="well" data-ng-init="refresh_outages()" >
+    <div class="col-sm-6">
+        <div class="well" data-ng-init="refresh_outages()">
             <h3>CDTA Service Disruptions</h3>
+            <div ng-repeat="a in outage.alerts">
 
-            <h4>{{ outage.alerts[0].header }}</h4>
+                <h4>{{ a.header }}</h4>
 
-            <p>{{outage.alerts[0].message}}</p>
-            
-            <button class="btn btn-success" type="submit" ng-click="refresh_outages()" ng-disabled="!loaded">
-                Refresh
-                Status
-            </button>
+                <p>{{ a.message }}</p>
+            </div>
+
+            <div id="busButton">
+                <button class="btn btn-success centering" type="submit" ng-click="refresh_outages()"
+                        ng-disabled="!loaded">
+                    Refresh Status
+                </button>
+            </div>
         </div>
     </div>
 </div>

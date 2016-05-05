@@ -3,13 +3,15 @@ var express = require('express'),
 	db = require('../db');
 
 router.get('/checkSessionStatus', function(req, res){
-  //console.log(req.cookies);
-  if(req.session.cas_user == req.cookies.user){
-  	res.send(true);
-  }
-  else{
-  	res.send(false);
-  }
+	if(req.session == undefined || req.cookies == undefined){
+		res.send(false);
+	}
+	else if(req.session.cas_user == req.cookies.user){
+		res.send(true);
+	}
+	else{
+		res.send(false);
+	}
 });
 
 router.use('*', function(req, res, next){
@@ -24,7 +26,6 @@ router.use('*', function(req, res, next){
 });
 
 router.post('/signUp', function(req, res){
-	console.log(req.body);
 	var collection = db.get().collection('users');
 	collection.find({rcs: req.session.cas_user}).toArray(function(err, docs){
 		if(err) throw err;
@@ -32,9 +33,8 @@ router.post('/signUp', function(req, res){
 			//user already exists
 		}
 		else{
-			collection.insert({rcs: req.session.cas_user, firstName: req.body.firstName, lastName: req.body.lastName}, function(err, results){
+			collection.insert({rcs: req.session.cas_user, firstName: req.body.firstName, lastName: req.body.lastName, notifications: []}, function(err, results){
 				if(err) throw err;
-				console.log(results);
 				if(results.insertedCount == 1){
 					res.cookie('user', req.session.cas_user);
 					res.status(200).send('/#/landing');
@@ -65,7 +65,6 @@ router.get('/getUserSettingsInfo', function(req, res){
 });
 
 router.put('/editUserSettings', function(req, res){
-	console.log(req.body);
 	var collection = db.get().collection('users');
 	if(!req.session && !req.session.cas_user){
 		//user does not exist

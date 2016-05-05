@@ -1,4 +1,4 @@
-	var app = angular.module('tmht', ['ui.bootstrap', 'ngRoute', 'ngFileUpload', 'ngCookies']);
+var app = angular.module('tmht', ['ui.bootstrap', 'ngRoute', 'ngCookies', 'btford.socket-io', 'ngAutocomplete']);
 
 app.config(['$routeProvider', function($routeProvider){
 	$routeProvider.
@@ -20,7 +20,6 @@ app.config(['$routeProvider', function($routeProvider){
 	}).
 	when('/landing', {
 		templateUrl: 'client/views/landing.html',
-		controller: 'landingCtrl',
 		access: {restricted: true}
 	}).
 	when('/rides/ridesOffered', {
@@ -55,12 +54,10 @@ app.config(['$routeProvider', function($routeProvider){
 	}).
 	when('/team', {
 		templateUrl: 'client/views/team.html',
-		controller: 'teamCtrl',
 		access: {restricted: false}
 	}).
 	when('/publicTransit', {
 		templateUrl: 'client/views/publicTransit.html',
-		controller: 'publicTransitCtrl',
 		access: {restricted: true}
 	}).
 	when('/taxi', {
@@ -71,10 +68,6 @@ app.config(['$routeProvider', function($routeProvider){
 	when('/plane', {
 		templateUrl: 'client/views/plane.html',
 		controller: 'planeCtrl',
-		access: {restricted: true}
-	}).
-	when('/bus', {
-		templateUrl: 'client/views/bus.html',
 		access: {restricted: true}
 	}).
 	when('/shuttle', {
@@ -89,23 +82,19 @@ app.config(['$routeProvider', function($routeProvider){
 	otherwise({
 		redirectTo: '/'
 	})
-
-
 }]);
 
 app.run(['$rootScope', '$window', '$route', 'AuthService', function ($rootScope, $window, $route, AuthService) {
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
-  	AuthService.checkSessionStatus().then(function(data){
-  		if (next.$$route != undefined && (next.$$route.access == undefined || next.$$route.access.restricted) && !data.data) {
+  	//AuthService.checkSessionStatus().then(function(data){
+  		if (next.$$route != undefined && (next.$$route.access == undefined || next.$$route.access.restricted) && /*!data.data*/ (AuthService.getUserStatus() == '' || AuthService.getUserStatus() == undefined)) {
 	      AuthService.removeUser();
 	      alert("You are not authorize or not logged in");
 	      $window.location = '/';
-	      //swal("Oops..", "You are not logged in/authorized", "error");
 	    }
-  	}).catch(function(err){
-  		console.log(err);
-  		alert(err);
-  	});
+  	/*}).catch(function(err){
+  		alert(err.data);
+  	});*/
   });
 }]);
 

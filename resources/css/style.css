@@ -30,10 +30,6 @@ input {
   color: #555;
 }
 
-.modal-dialog {
-  color: #555;
-}
-
 .well {
   border-radius: 5px;
   background-color: rgba(69,69,69,.7);
@@ -51,11 +47,11 @@ input {
   background-color: rgba(0,0,0,0.7);
   border: none;
   margin-bottom: 0px;
+
 }
 
 /*also in media size*/
 .navbar-header img {
-  padding-top: 5px;
   margin-bottom: -50px;
 }
 
@@ -67,6 +63,11 @@ input {
 
 .nav.navbar-nav li a:hover {
   color: #2dcc70;
+}
+
+.navbar ul {
+  text-align: center;
+  float: right;
 }
 
 .dropdown {
@@ -148,6 +149,34 @@ input {
   text-align: center
 }
 
+.rlabel {
+  color: #2dcc70;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.slabel {
+  color: #2dcc70;
+  font-weight: bold;
+}
+
+.table-striped > tbody > tr:nth-child(even) > td, .table-striped > tbody > tr:nth-child(even) > th {
+  background-color: white;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {
+  background-color: #81e0a9;
+
+}
+
+.panel-default > .panel-heading a{
+  color: black !important;
+}
+
+.bus h3 {
+  padding-top: 10px;
+}
+
 .about {
   background: #2dcc70;
   color: #fff;
@@ -163,6 +192,24 @@ input {
   margin-left: 3px;
   margin-right: 3px;
   margin-bottom: 3px;
+}
+
+.sort select{
+  background: rgba(69,69,69,.7);
+}
+
+.request {
+  background: rgba(69,69,69,.7);
+  color: #fff;
+  padding-top: 2px;
+  padding-bottom: 1.5px;
+  text-align: center;
+  margin-top: 10px; 
+  margin-bottom: 10px;
+}
+
+.request a {
+  color: #2dcc70;
 }
 
 #footer {
@@ -181,6 +228,10 @@ input {
 #mainButtons {
   margin-top: 30px;
   text-align: center;
+}
+
+#busButton {
+  margin-left: 40%;
 }
 
 .btn-default {
@@ -263,7 +314,6 @@ input {
 
 .ridecontainer {
   width: 80%;
-  height: 90%;
   margin: 0 auto;
   padding-bottom: 10px;
 }
@@ -320,8 +370,50 @@ input {
 }
 /*end team page css*/
 
+@media (max-width: 400px) {
+  .signup .well {
+    width: 90%;
+    text-align: center;
+    margin-left: 5%; 
+  }
+
+  .signup form input {
+    width: 80%;
+  }
+
+  .rides {
+    width: 90%;
+  }
+
+  .rides .form-horizontal input {
+    margin-left: 10%;
+  }
+
+  .rides form input {
+    width: 80%;
+  }
+
+  #home {
+    position: relative;
+    transform: translateY(15%);
+  }
+
+  #home section {
+    font-size: 0.7em;
+  }
+
+  .settings .well {
+    width: 90%;
+  }
+
+  .settings .form-horizontal .form-group {
+    margin-left: -20%;
+  }
+}
+
+
 /*for when screen is smaller than 700px*/
-@media (max-width: 700px) {
+@media (min-width: 400px) and (max-width: 700px) {
   .signup .well {
     width: 40%;
     text-align: center;
@@ -338,6 +430,10 @@ input {
 
   .rides form input {
     width: 60%;
+  }
+
+  .settings .well {
+    width: 70%;
   }
 }
 
@@ -374,16 +470,20 @@ input {
     margin-left: -10px;
     width: 35px;
   }
+
+  .settings .well {
+    width: 80%;
+  }
+
+  .settings .form-horizontal .form-group {
+    margin-left: -10%;
+  }
 }
 
 /*for when screen size is bigger than medium size but smaller than large size*/
 @media (min-width: 768px) and (max-width: 992px) {
   .signup .form-horizontal {
     margin-left: -100px; 
-  }
-
-  .settings .form-horizontal .form-group {
-    margin-left: 30%;
   }
 
   .rides {
@@ -396,6 +496,16 @@ input {
 
   .rides form input {
     width: 50%;
+  }
+
+  .settings .well {
+    width: 60%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 800px) {
+  .navbar a {
+    margin-left: -10px;
   }
 }
 
@@ -423,7 +533,7 @@ input {
   }
 
   .middle {
-    margin-top: 55px;
+    margin-top: 35px;
     min-height: 10px;
     background-color: rgba(0,0,0,0.05);
   }
@@ -436,7 +546,7 @@ input {
   }
 
   .middle {
-    margin-top: 55px;
+    margin-top: 45px;
     min-height: 10px;
     background-color: rgba(0,0,0,0.05);
   }
@@ -454,17 +564,21 @@ input {
     font-size: 1.3em;
   }
 
-  .settings .form-horizontal .form-group {
-    margin-left: 30%;
+  .settings .well {
+    width: 60%;
   }
 }
 
 
 /*home page css based on height of window*/
-@media (max-height: 500px) {
+@media (max-height: 500px) and (max-width: 400px){
   #home {
     position: relative;
-    transform: translateY(30%);
+    transform: translateY(10%);
+  }
+
+  #home section {
+    font-size: 0.7em;
   }
 
   .about {
@@ -475,7 +589,7 @@ input {
 @media (min-height: 500px) and (max-height: 600px) {
   #home {
     position: relative;
-    transform: translateY(40%);
+    transform: translateY(30%);
   }
 
   .about {
@@ -487,6 +601,10 @@ input {
 
 tbody {
   color: black;
+}
+
+thead {
+  /*color: #2dcc70;*/
 }
 
 .settings {
@@ -502,11 +620,97 @@ tbody {
   min-width: 85px;
 }
 
-.settings .well {
-  width: 60%;
-}
-
 .offer .well {
   width: 60%;
   padding-bottom: 10px;
+}
+
+#notificationsDiv {
+  /*padding-left: 15px;*/
+  margin-top: -40px;
+}
+
+#notificationsDiv img {
+  width: 25px;
+  height: 25px;
+  margin-bottom: 10px;
+  margin-left: -45px;
+}
+
+#notificationsDiv .dropdown {
+  margin-top: 0px;
+}
+
+.notifications {
+ min-width:420px; 
+}
+  
+.notifications-wrapper {
+  overflow:auto;
+  max-height:250px;
+}
+    
+.menu-title {
+  color:#ff7788;
+  font-size:1.5rem;
+  display:inline-block;
+}
+ 
+.glyphicon-circle-arrow-right {
+  margin-left:10px;     
+}
+  
+   
+.notification-heading, .notification-footer  {
+  padding:2px 10px;
+}
+      
+        
+.dropdown-menu.divider {
+  margin:5px 0;          
+}
+
+.item-title {
+  font-size:1.3rem;
+  color:#000;  
+}
+
+.notifications a.content {
+ text-decoration:none;
+ background:#ccc;
+}
+    
+.notification-item {
+  padding:10px;
+  margin:5px;
+  background:#ccc;
+  border-radius:4px;
+}
+
+
+.noti_Container {
+  position:relative;     /* This is crucial for the absolutely positioned element */
+  width:16px;
+  height:16px;
+}
+
+.noti_bubble {
+  position:absolute;    /* This breaks the div from the normal HTML document. */
+  top: -10px;
+  left: -30px;
+  padding:1px 2px 1px 2px;
+  background-color:red; /* you could use a background image if you'd like as well */
+  color:white;
+  font-weight:bold;
+  font-size:0.55em;
+
+  /* The following is CSS3, but isn't crucial for this technique to work. */
+  /* Keep in mind that if a browser doesn't support CSS3, it's fine! They just won't have rounded borders and won't have a box shadow effect. */
+  /* You can always use a background image to produce the same effect if you want to, and you can use both together so browsers without CSS3 still have the rounded/shadow look. */
+  border-radius:30px;
+  box-shadow:1px 1px 1px gray;
+}
+
+.notSeen {
+  background-color: rgb(45, 204, 112);
 }

@@ -1,8 +1,10 @@
 angular.module('tmht')
 .factory('AuthService', ['$http', '$cookies', '$window',  function ($http, $cookies, $window) {
 
+    var notifications = [];
+
     function getUserStatus() {
-      return $cookies.get('user');//user;
+      return $cookies.get('user');
     }
 
     function checkSessionStatus(){
@@ -14,75 +16,39 @@ angular.module('tmht')
 
     function removeUser(){
       $cookies.remove('user');
+      $cookies.remove('connect.sid');
     }
-    /*
-    function login(userInput) {
+    
+    function getNotifications(){
+      return notifications;
+    }
 
-      // create a new instance of deferred
-      var deferred = $q.defer();
+    function setNotifications(input){
+      notifications = input;
+    }
 
-      // send a post request to the server
-      $http.post('/login', userInput)
-        // handle success
-        .success(function (data, status) {
-          if(status === 200 && data.status){
-            $cookies.put('Authorization', data.access);
-            $cookies.put('Location', data.location);
-            $cookies.put('user', userInput.username);
-            deferred.resolve();
-          } else {
-            $cookies.put('Authorization', 'none');
-            $cookies.remove('user');
-            $cookies.remove('Location');
-            deferred.reject();
-          }
-        })
-        // handle error
-        .error(function (data) {
-          //user = false;
-          $cookies.remove('Location');
-          $cookies.put('Authorization', 'none');
-          $cookies.remove('user');
-          deferred.reject();
-        });
-
-      // return promise object
-      return deferred.promise;
-
-    }*/
     function logout(){
       $http({
         method: 'GET',
         url: 'logout'
       })
       .then(function(data){
-        console.log(data);
         $cookies.remove('user');
+        $cookies.remove('connect.sid');
         $window.location = data.data;
       },
       function(err){
-        console.log(err);
+        swal("Oops...", "There was an error! "+err.data, "error");
       });
     };
-    /*
-    function logout() {
-
-      // create a new instance of deferred
-      var deferred = $q.defer();
-        $cookies.remove('user');
-      // return promise object
-      return deferred.promise;
-
-    }
-*/
 
     // return available functions for use in controllers
     return ({
-      //sLoggedIn: isLoggedIn,
       getUserStatus: getUserStatus,
       checkSessionStatus: checkSessionStatus,
       removeUser: removeUser,
-      //login: login,
-      logout: logout
+      logout: logout,
+      getNotifications,
+      setNotifications
     });
 }]);

@@ -12,33 +12,33 @@
 
       <div class="form-group">
         <label class="control-label">Departure Location</label>
-        <input type="string" class="form-control" ng-model="rideInfo.departLocation"/>
+        <input type="string" class="form-control" id="autocomplete" ng-autocomplete ng-model="rideInfo.departLocation" required>
       </div>
 
       <div class="form-group">
         <label class="control-label">Departure Date</label>
-        <input type="date" class="form-control" ng-model="rideInfo.departDate" placeholder="mm/dd/yyyy"/>
+        <input type="date" class="form-control" ng-model="rideInfo.departDate" placeholder="mm/dd/yyyy" required>
       </div>
 
       <div class="form-group">
         <label class="control-label">Departure Time</label>
-        <input type="time" class="form-control" ng-model="rideInfo.departTime" placeholder="--:-- --"/>
+        <input type="time" class="form-control" ng-model="rideInfo.departTime" placeholder="--:-- --" required>
       </div>
       
       <label class="control-label">Destination</label>
       <div class="form-group">
-        <input type="string" class="form-control" ng-model="rideInfo.destination"/>
+        <input type="string" class="form-control" ng-autocomplete ng-model="rideInfo.destination" required>
       </div>
 
       <label class="control-label">Cost</label>
       <div class="form-group">
-        <input type="string"class="form-control" ng-model="rideInfo.cost"/>
+        <input type="string"class="form-control" ng-model="rideInfo.cost" required>
       </div>
       
       <div ng-show='add'>
         <label class="control-label">Available Seats</label>
         <div class="form-group">
-          <input type="Number" class="form-control" ng-model="rideInfo.seats" />
+          <input type="Number" class="form-control" ng-model="rideInfo.seats" required>
         </div>
       </div>
 
@@ -46,27 +46,27 @@
         <h3>Car Information</h3>
         <label class="control-label">Make</label>
         <div class="form-group">
-          <input type="string" class="form-control" ng-model="rideInfo.car.make"/>
+          <input type="string" class="form-control" ng-model="rideInfo.car.make" required>
         </div>
 
         <label class="control-label">Model</label>
         <div class="form-group">
-          <input type="string" class="form-control" ng-model="rideInfo.car.model" />
+          <input type="string" class="form-control" ng-model="rideInfo.car.model"  required>
         </div>
 
         <label class="control-label">Color</label>
         <div class="form-group">
-          <input type="string" class="form-control" ng-model="rideInfo.car.color" />
+          <input type="string" class="form-control" ng-model="rideInfo.car.color" required>
         </div>
 
         <label class="control-label">License Plate #</label>
         <div class="form-group">
-          <input type="string" class="form-control" ng-model="rideInfo.car.license" />
+          <input type="string" class="form-control" ng-model="rideInfo.car.license" required>
         </div>
       </div>
 
       <div class ="rideButton mainButtons">
-        <button type="button" class="custom-btn btn-primary btn-xlarge" ng-click="submit()">Submit</button>
+        <button type="button" class="custom-btn btn-primary btn-xlarge" ng-click="submit()" ng-disabled="rideForm.$invalid">Submit</button>
       </div>
     </form>
     
