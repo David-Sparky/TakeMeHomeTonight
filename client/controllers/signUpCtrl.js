@@ -1,5 +1,5 @@
 angular.module('tmht')
-.controller('signUpCtrl', ['$scope', '$http', '$window','$cookies', function($scope, $http, $window, $cookies){
+.controller('signUpCtrl', ['$scope', '$http', '$window', function($scope, $http, $window){
 
 	/*
 	$http({
@@ -19,7 +19,6 @@ angular.module('tmht')
 			url: '/user/signUp'
 		})
 		.then(function(data){
-			$cookies.put('users', )
 			$window.location = data.data;
 		},
 		function(err){
