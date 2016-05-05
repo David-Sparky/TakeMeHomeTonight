@@ -16,7 +16,7 @@ router.get('/checkSessionStatus', function(req, res){
 		res.send(false);
 	}
 });
-/*
+
 router.use('*', function(req, res, next){
   if(req.path == '/user/logout' || req.path == '/user/signUp')
     next();
@@ -26,7 +26,7 @@ router.use('*', function(req, res, next){
   else{
     next();
   }
-});*/
+});
 
 router.post('/signUp', function(req, res){
 		var collection = db.get().collection('users');
