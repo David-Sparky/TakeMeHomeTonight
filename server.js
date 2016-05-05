@@ -260,52 +260,61 @@ io.on("connection", function(socket){
             socket.join(session.cas_user);
             //db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, docs){//THIS NEEDS TO BE A SORTED AGGREGATE
             db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, results){
-              if(results[0].notifications == undefined || results[0].notifications.length == 0){
+              if(results[0] == undefined){
                 socket.emit('notifications', {
                   notifications: [],
                   count: 0
                 });
               }
               else{
-                db.get().collection('users').aggregate([
-                  {$unwind: '$notifications'},
-                  {$match: {rcs: session.cas_user}},
-                  {$sort: {"notifications.time": -1}},
-                  {$group: {_id: '$_id', notifications: {$push: '$notifications'}}}
-                ]).toArray(function(err, docs){
+                if(results[0].notifications == undefined || results[0].notifications.length == 0){
+                  socket.emit('notifications', {
+                    notifications: [],
+                    count: 0
+                  });
+                }
+                else{
+                  db.get().collection('users').aggregate([
+                    {$unwind: '$notifications'},
+                    {$match: {rcs: session.cas_user}},
+                    {$sort: {"notifications.time": -1}},
+                    {$group: {_id: '$_id', notifications: {$push: '$notifications'}}}
+                  ]).toArray(function(err, docs){
 
-                  if(docs[0].notifications == undefined){
-                    socket.emit('notifications', {
-                      notifications: [],
-                      count: 0
-                    });
-                  }
-                  else{
-                    db.get().collection('users').aggregate([
-                      {$unwind : '$notifications'},
-                      {$match: {'rcs': session.cas_user, 'notifications.seen': false}},
-                      {$group: {
-                        _id: '$_id', 
-                        notifications: {$push: '$notifications'},
-                      }}
-                    ]).toArray(function(err, docs2){
-                      if(err) throw err;
-                      if(docs2[0] == undefined){
-                        socket.emit('notifications', {
-                          notifications: docs[0].notifications,
-                          count: 0
-                        });
-                      }
-                      else{
-                        socket.emit('notifications', {
-                          notifications: docs[0].notifications,
-                          count: docs2[0].notifications.length
-                        });
-                      }
-                    });
-                  }
-                });
+                    if(docs[0].notifications == undefined){
+                      socket.emit('notifications', {
+                        notifications: [],
+                        count: 0
+                      });
+                    }
+                    else{
+                      db.get().collection('users').aggregate([
+                        {$unwind : '$notifications'},
+                        {$match: {'rcs': session.cas_user, 'notifications.seen': false}},
+                        {$group: {
+                          _id: '$_id', 
+                          notifications: {$push: '$notifications'},
+                        }}
+                      ]).toArray(function(err, docs2){
+                        if(err) throw err;
+                        if(docs2[0] == undefined){
+                          socket.emit('notifications', {
+                            notifications: docs[0].notifications,
+                            count: 0
+                          });
+                        }
+                        else{
+                          socket.emit('notifications', {
+                            notifications: docs[0].notifications,
+                            count: docs2[0].notifications.length
+                          });
+                        }
+                      });
+                    }
+                  });
+                }
               }
+
 
             });
           }
