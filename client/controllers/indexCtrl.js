@@ -32,8 +32,17 @@ angular.module('tmht')
 	});
 
 	$scope.checkNotifications = function(){
-		$scope.newNotifications = 0;
-		socket.emit('notifications seen');
+		if($scope.newNotifications == 0){
+			for(x in $scope.notifications){
+				if($scope.notifications[x].seen == false){
+					$scope.notifications[x].seen = true;
+				}
+			}
+		}
+		else{
+			$scope.newNotifications = 0;
+			socket.emit('notifications seen');
+		}	
 	}
 
 	$(document).ready(function () {

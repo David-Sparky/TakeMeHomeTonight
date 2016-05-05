@@ -79,7 +79,7 @@ angular.module('tmht')
 					if($scope.offeredRides[x]._id == rideID){
 						for(y in $scope.offeredRides[x].riders){
 							if($scope.offeredRides[x].riders[y].rcs == user){
-								if($scope.offeredRides[x].riders[y].status == 'pending'){
+								if($scope.offeredRides[x].riders[y].status == 'accepted'){
 									$scope.offeredRides[x].availableseats = $scope.offeredRides[x].availableseats + 1;
 									$scope.offeredRides[x].riders.splice(y, 1);
 									break;

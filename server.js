@@ -330,13 +330,19 @@ io.on("connection", function(socket){
     socket.on('notifications seen', function(){
       sessionStore.get(decoded_id, function(error, session){
         if(error) throw error;
-        db.get().collection('users').find({rcs: session.cas_user}).forEach(function(doc){
-          doc.notifications.forEach(function(data){
-             db.get().collection('users').update({rcs:session.cas_user, notifications:data}, {$set: {'notifications.$.seen': true}}, function(err, results){
-              if(err) throw err;
+        if(session == undefined){
+
+        }
+        else{
+          db.get().collection('users').find({rcs: session.cas_user}).forEach(function(doc){
+            doc.notifications.forEach(function(data){
+               db.get().collection('users').update({rcs:session.cas_user, notifications:data}, {$set: {'notifications.$.seen': true}}, function(err, results){
+                if(err) throw err;
+              });
             });
           });
-        });
+        }
+
       })
     });
   }

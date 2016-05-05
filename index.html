@@ -22,7 +22,13 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a href="#/landing"><img class="logo" src="resources/imgs/TMHT.png"></a>
+
+        <a ng-if="checkForUser()" href="#/landing">
+          <img class="logo" src="resources/imgs/TMHT.png">
+        </a>
+        <a ng-if="!checkForUser()" href="#/">
+          <img class="logo" src="resources/imgs/TMHT.png">
+        </a>
       </div>
 
       
