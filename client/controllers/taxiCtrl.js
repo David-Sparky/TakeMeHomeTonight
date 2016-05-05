@@ -1,5 +1,7 @@
+// Taxi Controller
 angular.module('tmht')
 .controller('taxiCtrl', ['$scope','$location', function($scope, $location){
+  // Array with taxi information
   $scope.taxiarray = 
   [ {Company:'ACES Taxi',Phone:'518-878-8812',Website:'http://www.yelp.com/biz/aces-taxi-saratoga-springs'},
   	{Company:'Acme Taxi',Phone:'518-233-8294',Website:'http://www.yelp.com/biz/acme-taxi-cohoes'}, 

@@ -11,7 +11,7 @@ Our audience is students, faculty and staff within the RPI community. The websit
 HTML5, CSS3, JavaScript,  AngularJS, and Bootstrap
 
 #Back End Technologies
-Node.JS, NPM, MonogoDB, and Express
+Node.JS, NPM, MonogoDB, Socket.io and Express
 
 #Integrated Services
 CAS for authentication, CDTA API, and Plane and Taxi Information

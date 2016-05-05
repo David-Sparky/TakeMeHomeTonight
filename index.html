@@ -31,8 +31,7 @@
         </a>
       </div>
 
-      
-
+      <!-- Notifications div -->
       <div id="notificationsDiv">
         <div ng-show="checkForUser()" class="dropdown nav navbar-nav pull-right">
           <a id="dLabel" class="noti_Container" role="button" data-toggle="dropdown" data-target="#" href="/page.html"  ng-click="checkNotifications()">
@@ -61,7 +60,6 @@
                  </a>
                 </div>
             </div>
-            <li class="divider"></li>
           </ul>
         </div>
       </div>
@@ -87,16 +85,19 @@
               <li><a ng-show="checkForUser()" ng-click="logout()">Logout</a></li>
             </ul>
           </li>
-
         </ul>
-      </div><!-- /.navbar-collapse -->
+      </div>
+      <!-- close navbar-collapse -->
 
-    </div><!-- /.container-fluid -->
+    </div>
+    <!-- close container-fluid -->
   </nav>
 
+  <!-- div for main content -->
   <div id = "main">
     <div id="content" ng-view></div>
   </div>
+  <!-- close div for main content -->
 
 </div>
 <!--Footer-->
@@ -112,7 +113,7 @@
       </div>
     </div>
 </footer>
-<!--/Footer-->
+<!-- Close Footer-->
 </body>
 
 <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>

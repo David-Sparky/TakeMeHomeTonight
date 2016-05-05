@@ -1,14 +1,14 @@
+// Bus Controller
 angular.module('tmht')
     .controller('busesCtrl', ['$scope', '$location', '$http', '$sce', function ($scope, $location, $http, $sce) {
 
+        // Set default variables
         $scope.searchbar = "";
         $scope.searchbar_d = "";
         $scope.searchbar_id= "";
         $scope.loaded = true;
         $scope.loaded_stop= true;
         $scope.data_pres = false;
-
-
 
         //LOADED ENSURE THAT WE ARE DONE WITH THE API CALL TO MAKE SURE WE DON'T ANNOY THE API
         $scope.search = function () {
@@ -25,26 +25,16 @@ angular.module('tmht')
                 search_b: $scope.searchbar
             };
 
-            //console.log(query.search_b);
-
-
             $http.get(url, {params: query}).then(function (response) {
-
-
                 //WE FINISHED THE QUERY, SO SET LOADED BACK TO TRUE
                 $scope.loaded = true;
-                //GET THE DATA FROM THE TWITTER API AND TAKE THE RESPONSE AND SEND IT TO THE FRONT END OF THE PAGE
+                //GET THE DATA FROM THE CDTA API AND TAKE THE RESPONSE AND SEND IT TO THE FRONT END OF THE PAGE
                 $scope.bus = response.data;
 
                 if ($scope.bus.status == 404) {
                     sweetAlert("Oops...", "We couldn't find that bus stop for you. Please try another search term.", "error");
                     $scope.data_pres = false;
                 }
-
-
-                //DEBUG STATEMENT
-                //console.log($scope.bus);
-
             });
         };
 
@@ -65,16 +55,14 @@ angular.module('tmht')
             $http.get(url, {params: query}).then(function (response) {
                 //WE FINISHED THE QUERY, SO SET LOADED BACK TO TRUE
                 $scope.loaded = true;
-                //GET THE DATA FROM THE TWITTER API AND TAKE THE RESPONSE AND SEND IT TO THE FRONT END OF THE PAGE
+                //GET THE DATA FROM THE CDTA API AND TAKE THE RESPONSE AND SEND IT TO THE FRONT END OF THE PAGE
                 $scope.dir = response.data;
-                //DEBUG STATEMENT
 
                 if ($scope.dir.status == 404) {
                     sweetAlert("Oops...", "We couldn't find that bus route for you. Please check the number and try again.", "error");
                     $scope.data_pres = false;
                 }
                 else {
-                    //console.log($scope.bus);
                     $scope.data_pres = true;
                 }
 
@@ -83,31 +71,20 @@ angular.module('tmht')
         };
 
         $scope.checkRoute = function (dir) {
-
             var url = '/get_route';
-
             if (dir == '1') {
-
                 var query = {info: '0', bus_num: $scope.searchbar_d};
-
             }
             else if (dir == '2') {
-
                 var query = {info: '1', bus_num: $scope.searchbar_d};
-
             }
 
             $http.get(url, {params: query}).then(function (response) {
                 //WE FINISHED THE QUERY, SO SET LOADED BACK TO TRUE
                 $scope.loaded = true;
-                //GET THE DATA FROM THE TWITTER API AND TAKE THE RESPONSE AND SEND IT TO THE FRONT END OF THE PAGE
+                //GET THE DATA FROM THE CDTA API AND TAKE THE RESPONSE AND SEND IT TO THE FRONT END OF THE PAGE
                 $scope.br = response.data;
-                //DEBUG STATEMENT
-                //console.log($scope.br);
-
             });
-
-
         }
 
         $scope.escapeHTML = function (str) {
@@ -115,7 +92,6 @@ angular.module('tmht')
         }
 
         $scope.refresh_outages = function () {
-
             $scope.loaded_out = false;
             //WE ARE RUNNING A QUERY, SO SET LOADED TO FALSE TO DISABLE THE BUTTON
             var url = "/service_status";
@@ -123,12 +99,9 @@ angular.module('tmht')
             $http.get(url, {}).then(function (response) {
                 //WE FINISHED THE QUERY, SO SET LOADED BACK TO TRUE
                 $scope.loaded_out = true;
-                //GET THE DATA FROM THE TWITTER API AND TAKE THE RESPONSE AND SEND IT TO THE FRONT END OF THE PAGE
+                //GET THE DATA FROM THE CDTA API AND TAKE THE RESPONSE AND SEND IT TO THE FRONT END OF THE PAGE
                 $scope.outage = response.data;
                 console.log($scope.outage.alerts);
-                //DEBUG STATEMENT
-
-
             });
         };
 
@@ -150,21 +123,16 @@ angular.module('tmht')
             $http.get(url, {params: query}).then(function (response) {
                 //WE FINISHED THE QUERY, SO SET LOADED BACK TO TRUE
                 $scope.loaded = true;
-                //GET THE DATA FROM THE TWITTER API AND TAKE THE RESPONSE AND SEND IT TO THE FRONT END OF THE PAGE
+                //GET THE DATA FROM THE CDTA API AND TAKE THE RESPONSE AND SEND IT TO THE FRONT END OF THE PAGE
                 $scope.arrs = response.data;
-                //DEBUG STATEMENT
 
                 if ($scope.arrs.status == 404) {
                     sweetAlert("Oops...", "We couldn't find that bus stop    for you. Please check the number and try again.", "error");
                     $scope.loaded_stop = true;
                 }
                 else {
-                    //console.log($scope.arrs);
                     $scope.loaded_stop = true;
                 }
-
-
             });
         };
-
     }]);

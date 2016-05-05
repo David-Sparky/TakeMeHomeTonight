@@ -15,8 +15,7 @@ router.use('*', function(req, res, next){
 
 router.post('/requestRide', function(req, res){
 	if(!req.session || !req.session.cas_user){
-		//no user logged in
-		console.log('no user');
+		// no user logged in
 	}
 	else{
 		req.body['drivers']=[];
@@ -29,8 +28,7 @@ router.post('/requestRide', function(req, res){
 				res.send({Success: 'Ride was requested'});
 			}
 			else{
-				//error inserting into db\
-				console.log('error inserting ride request');
+				// error inserting into db
 			}
 		})
 	}
@@ -38,9 +36,8 @@ router.post('/requestRide', function(req, res){
 
 router.post('/addRide', function(req,res){
 	if(!req.session || !req.session.cas_user){
-		//no user logged in
-		console.log('no user');
-	}else{
+		// no user logged in
+	} else{
 		req.body.availableseats = req.body.seats;
 		req.body.owner = req.session.cas_user;
 		req.body.riders = [];
@@ -57,7 +54,6 @@ router.post('/addRide', function(req,res){
 		})
 	}
 });
-
 
 router.get('/allRequestedRides', function(req, res){
 	var date = new Date();
@@ -85,7 +81,7 @@ router.get('/get_ride', function(req,res){
 		//user does not exist
 		console.log("User does not exist");
 	}
-	else{
+	else {
 		var collection = db.get().collection('requested');
 		collection.find({_id:ObjectID.createFromHexString(id)}).toArray(function(err, docs){
 			if(err) throw err;
@@ -101,7 +97,7 @@ router.get('/get_offer', function(req,res){
 		//user does not exist
 		console.log("User does not exist");
 	}
-	else{
+	else {
 		var collection = db.get().collection('offered');
 		collection.find({_id:ObjectID.createFromHexString(id)}).toArray(function(err, docs){
 			if(err) throw err;
@@ -116,7 +112,7 @@ router.get('/offeredRidesPerUser', function(req, res){
 	if(!req.session && !req.session.cas_user){
 		console.log("user does not exist");
 	}
-	else{
+	else {
 		var collection = db.get().collection('offered');
 		collection.find({owner: req.session.cas_user}).toArray(function(err, docs){
 			if(err) throw err;
@@ -134,7 +130,7 @@ router.put('/join_offer', function(req, res) {
 	if(!req.session && !req.session.cas_user){
 		console.log("User does not exist");
 	}
-	else{
+	else {
 		collection.update({_id:ObjectID.createFromHexString(id)}, {$push: {riders:{rcs:user,status:"pending"}}}, function(err, results){
 			if(err) throw err;
 			collection.find({_id: ObjectID.createFromHexString(id)}).toArray(function(err, docs){
@@ -204,7 +200,7 @@ router.put('/confirmDriver', function(req, res){
 //Rides a user has requested
 router.get('/requestedRidesPerUser', function(req, res){
 	if(!req.session && !req.session.cas_user){
-		console.log("user does not exist");
+		// user does not exist
 	}
 	else{
 		var collection = db.get().collection('offered');
@@ -233,7 +229,7 @@ router.get('/requestedRidesPerUser', function(req, res){
 
 router.get('/offersForNeededRidesDriver', function(req,res){
 	if(!req.session && !req.session.cas_user){
-		console.log("user does not exist");
+		// user does not exist
 	}
 	else{
 		var collection = db.get().collection('requested');
@@ -259,7 +255,7 @@ router.get('/offersForNeededRidesDriver', function(req,res){
 
 router.get('/offersForNeededRidesRider', function(req, res){
 	if(!req.session && !req.session.cas_user){
-		console.log("user does not exist");
+		// user does not exist
 	}
 	else{
 		var collection = db.get().collection('requested');

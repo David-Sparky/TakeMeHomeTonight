@@ -1,6 +1,8 @@
+// Login Controller
 angular.module('tmht')
 .controller('loginCtrl', ['$scope', '$http', '$window', function($scope, $http, $window){
 	
+	// Login function
 	$scope.login = function(){
 		$http({
 			method: 'GET',
@@ -8,11 +10,13 @@ angular.module('tmht')
 		}).then(function(data){
 			$window.location = data.data;
 		},
+		// If cant login and there is an error
 		function(err){
 			sweetAlert("Oops...", "There was an error! "+err.data, "error");
 		});
 	};
 	
+	// Sign up function
 	$scope.signUp = function(){
 		$http({
 			method: 'GET',

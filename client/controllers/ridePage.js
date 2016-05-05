@@ -1,9 +1,14 @@
+// Singular Ride Page Controller
 angular.module('tmht')
     .controller('ridePage', ['$scope','$location', 'rideService','$cookies','$filter', function($scope, $location, rideService,$cookies,$filter){
+        
+        // Set default variables 
         $scope.joined = false;
         $scope.joined2= false;
         $scope.cookieusername = $cookies.get('user');
+
         switch($location.path()){
+            // if ride is being requested
             case "/rides/ride":
                 $scope.title = "Ride";
                 $scope.offer = false;
@@ -40,6 +45,8 @@ angular.module('tmht')
                     sweetAlert("Oops...", "There was an error! "+err.data, "error");
                 });
                 break;
+
+            // if ride is being offered
             case "/rides/offer":
                 $scope.title = "Offer";
                 $scope.offer = true;
@@ -80,6 +87,7 @@ angular.module('tmht')
                 });
                 break;
         }
+        
         $scope.join_offer = function(){
             var offer_id = $location.search();
             rideService.joinOffer(offer_id.id,$cookies.get('user')).then(function(data) {

@@ -1,5 +1,7 @@
+// Plane Controller
 angular.module('tmht')
 .controller('planeCtrl', ['$scope','$location', function($scope, $location){
+  // Array with plane information
   $scope.planearray = 
   [ {logo: 'american.png', Airline:'American Airlines',Phone:'1-800-882-8880',Website:'https://www.aa.com', Albany: 'Yes'},
   	{logo: 'delta.png', Airline:'Delta Air Lines',Phone:'1-800-455-2720',Website:'http://www.delta.com', Albany: 'Yes'},

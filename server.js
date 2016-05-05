@@ -1,4 +1,4 @@
-//testing a js file for heroku
+// Set default require variables
 var db = require('./server/db');
     ObjectID = require('mongodb').ObjectID,
   	bodyParser = require('body-parser'),
@@ -14,32 +14,20 @@ var db = require('./server/db');
     io = require('socket.io')(server),
     MemoryStore = session.MemoryStore,
     sessionStore = new MemoryStore(),
-    //MongoDbStore = require('connect-mongodb-session')(session),
     dbURI = 'mongodb://' + process.env.tmhtDBUser + ':' + process.env.tmhtDBPassword + '@ds023418.mlab.com:23418/tmht',
-    /*sessionStore = new MongoDbStore({
-      uri: dbURI,
-      collection: 'mySessions'
-    }),*/
     cookie = require('cookie');
 
 var getIOInstance = function(){
   return io;
 }
-/*
-// Catch errors 
-sessionStore.on('error', function(error) {
-  assert.ifError(error);
-  assert.ok(false);
-});*/
 
+// Set routes
 var routes = require('./server/routes/index'),
     rides = require('./server/routes/rides')(getIOInstance),
     users = require('./server/routes/users');
 
+// Set default variables
 var port = process.env.PORT || 8005;
-
-
-
 var cdta_api_stops = '?request=searchstops/';
 var cdta_api_directions = '?request=directions/';
 var cdta_api_sched = '?request=schedules/';
@@ -75,7 +63,7 @@ app.use('/', routes);
 app.use('/rides', rides);
 app.use('/user', users);
 
-//CAS route handlers
+// CAS route handlers
 app.get('/login', cas.bounce, function (req, res) {
 	if (!req.session || !req.session.cas_user) {
     res.redirect('/#/');
@@ -88,13 +76,13 @@ app.get('/login', cas.bounce, function (req, res) {
       res.redirect('/#/landing');
     }
     else{
-      console.log('user does not exist');
-      //logic to notify user and tell them to sign up
+      // logic to notify user and tell them to sign up
       res.redirect('/#/');
     }
   })
 });
 
+// Signup redirect with CAS
 app.get('/signUp', cas.bounce, function(req,res){
   if(!req.session || !req.session.cas_user) {
     res.redirect('/#/');
@@ -102,20 +90,18 @@ app.get('/signUp', cas.bounce, function(req,res){
   var collection = db.get().collection('users');
   collection.find({rcs: req.session.cas_user}).toArray(function(err, docs){
     if(err) throw err;
-    // console.log(docs.length);
     if(docs.length > 0) {
-      console.log("User already exists");
       res.cookie('user', req.session.cas_user);
       //notify user that account alrady exists and log them in
       res.redirect('/#/landing');
     }
     else {
       res.redirect('/#/signUp');
-      console.log('signUp');
     }
   })
 });
 
+// Logout redirect with CAS
 app.get('/logout',function(req, res, next){
   if(!req.session || !req.session.cas_user){
     res.status(400).send('No user signed in');
@@ -125,38 +111,28 @@ app.get('/logout',function(req, res, next){
   }
 }, cas.logout);
 
+// Get CDTA stops
 app.get('/cdta', function (req, resp) {
   var search = req.query.search_b;
   search= escape(search);
-
     var x = '';
-    console.log("Search: " + search);
-        http.get({
-            host: 'api.cdta.org',
-            path: '/api/v1/' + cdta_api_stops + search + cdta_api_key
-        }, function (res) {
-            var pt= '/api/v1/' + cdta_api_stops  + search + cdta_api_key;
-            console.log(pt);
-            res.on('data', function (d) {
-                x += d.toString();
-                //console.log(d.toString());
-            });
-            res.on('end', function(){
-                resp.send(x);
-            });
-
+    http.get({
+        host: 'api.cdta.org',
+        path: '/api/v1/' + cdta_api_stops + search + cdta_api_key
+    }, function (res) {
+        var pt= '/api/v1/' + cdta_api_stops  + search + cdta_api_key;
+        res.on('data', function (d) {
+            x += d.toString();
         });
-
+        res.on('end', function(){
+            resp.send(x);
+        });
+    });
 });
 
+// Get CDTA bus directions
 app.get('/cdta_dir', function (req, resp) {
-
-    console.log("DIRECTIONS");
-
     var search = req.query.search_b;
-
-    console.log(search);
-
     var x = '';
     http.get({
       host: 'api.cdta.org',
@@ -171,10 +147,9 @@ app.get('/cdta_dir', function (req, resp) {
     });
 });
 
+// Get CDTA bus directions
 app.get('/cdta_dir', function (req, resp) {
-  console.log("DIRECTIONS");
   var search = req.query.search_b;
-  console.log(search);
   var x = '';
   http.get({
       host: 'api.cdta.org',
@@ -182,7 +157,6 @@ app.get('/cdta_dir', function (req, resp) {
   }, function (res) {
       res.on('data', function (d) {
         x += d.toString();
-        console.log(d.toString());
       });
       res.on('end', function(){
         resp.send(x);
@@ -190,10 +164,8 @@ app.get('/cdta_dir', function (req, resp) {
   });
 });
 
-
+// Get CDTA route
 app.get('/get_route', function (req, resp) {
-
-    console.log("ROUTE");
     var x= '';
     http.get({
         host: 'api.cdta.org',
@@ -205,15 +177,11 @@ app.get('/get_route', function (req, resp) {
         res.on('end', function(){
             resp.send(x);
         });
-
     });
-
 });
 
-
+// Get CDTA service status
 app.get('/service_status', function (req, resp) {
-
-    console.log("This stuff: " + req.query.info);
     var x= '';
     http.get({
         host: 'api.cdta.org',
@@ -224,13 +192,11 @@ app.get('/service_status', function (req, resp) {
             res.destroy();
             return resp.send(x);
         });
-
     });
-
 });
 
+// Gets arrivals for stop
 app.get('/stop_id', function (req, resp) {
-  console.log("This stuff: " + req.query.info);
   var x= '';
   http.get({
     host: 'api.cdta.org',
@@ -238,7 +204,6 @@ app.get('/stop_id', function (req, resp) {
   }, function (res) {
       res.on('data', function (d) {
         x += d.toString();
-        console.log(d.toString());
       });
       res.on('end', function(){
         resp.send(x);
@@ -246,6 +211,7 @@ app.get('/stop_id', function (req, resp) {
   });
 });
 
+// Connect for variables
 io.on("connection", function(socket){
   var cookie_string = socket.request.headers.cookie;
   if(session == undefined || typeof cookie_string == 'string'){
@@ -258,7 +224,6 @@ io.on("connection", function(socket){
         sessionStore.get(decoded_id, function (error, session) {
           if(session && session.cas_user){
             socket.join(session.cas_user);
-            //db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, docs){//THIS NEEDS TO BE A SORTED AGGREGATE
             db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, results){
               if(results[0] == undefined){
                 socket.emit('notifications', {
@@ -322,9 +287,9 @@ io.on("connection", function(socket){
       }
     });
 
+  // Update notifications
     socket.on('update notifications', function(data){
       sessionStore.get(decoded_id, function(error, session){
-          //db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, docs){//THIS NEEDS TO BE A SORTED AGGREGATE
             db.get().collection('users').find({rcs: session.cas_user}).toArray(function(err, results){
               if(results[0].notifications == undefined || results[0].notifications.length == 0){
                 socket.emit('notifications', {
@@ -376,11 +341,12 @@ io.on("connection", function(socket){
             });
       });
     });
+    
+    // When notifciations seen
     socket.on('notifications seen', function(){
       sessionStore.get(decoded_id, function(error, session){
         if(error) throw error;
         if(session == undefined){
-
         }
         else{
           db.get().collection('users').find({rcs: session.cas_user}).forEach(function(doc){
@@ -398,8 +364,7 @@ io.on("connection", function(socket){
 
 });
 
-
-
+// Connect to mongo
 db.connect(dbURI, function(err) {
   if (err) {
     console.log('Unable to connect to Mongo.');

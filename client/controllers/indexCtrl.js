@@ -1,10 +1,13 @@
+// Index Controller
 angular.module('tmht')
 .controller('indexCtrl', ['$scope', '$http', '$window','AuthService','socket', function($scope, $http, $window, AuthService, socket){
 	
+	// Set default variables
 	$scope.logout = AuthService.logout;
 	$scope.notifications = AuthService.getNotifications();
 	$scope.newNotifications = 0;
 
+	// Check if user is logged in
 	$scope.checkForUser = function(){
 		var user = AuthService.getUserStatus();
 		if( user == undefined || user == ''){
@@ -17,16 +20,16 @@ angular.module('tmht')
 
 	AuthService.checkSessionStatus().then(function(data){
 		if(data.data == true){
-
 		} 
-		else{
+		else {
 			AuthService.removeUser();
 		}
 	});
 
+	// Notification socket information
 	socket.on('join', function(data){
 	});	
-	if($scope.checkForUser == true){
+	if ($scope.checkForUser == true) {
 		socket.emit('logged in');
 	}
 	socket.emit('logged in');
@@ -40,6 +43,7 @@ angular.module('tmht')
 		socket.emit('update notifications');
 	});
 
+	// Check if there is notifications
 	$scope.checkNotifications = function(){
 		if($scope.newNotifications == 0){
 			for(x in $scope.notifications){
@@ -48,17 +52,17 @@ angular.module('tmht')
 				}
 			}
 		}
-		else{
+		else {
 			$scope.newNotifications = 0;
 			socket.emit('notifications seen');
 		}	
 	}
 
+	// When nav bar is collapsed and someone clicks on link, close nav bar
 	$(document).ready(function () {
 		$("nav").find("li").on("click", "a", function () {
 	        $('.navbar-collapse.in').collapse('hide');
     	});
     });
 
-	
 }]);

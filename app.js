@@ -1,5 +1,6 @@
 var app = angular.module('tmht', ['ui.bootstrap', 'ngRoute', 'ngCookies', 'btford.socket-io', 'ngAutocomplete']);
 
+// Set routes and controllers for each website
 app.config(['$routeProvider', function($routeProvider){
 	$routeProvider.
 	when('/', {
@@ -79,6 +80,7 @@ app.config(['$routeProvider', function($routeProvider){
 		controller: 'busesCtrl',
 		access: {restricted: true}
 	}).
+	// if other page redirect to other page
 	otherwise({
 		redirectTo: '/'
 	})
@@ -97,11 +99,6 @@ app.run(['$rootScope', '$window', '$route', 'AuthService', function ($rootScope,
 	    }
   		
   	});
-  	//AuthService.checkSessionStatus().then(function(data){
-  		
-  	/*}).catch(function(err){
-  		alert(err.data);
-  	});*/
   });
 }]);
 

@@ -76,6 +76,8 @@ input {
 
 .dropdown-menu {
   right: 100%;
+  background-color: rgba(0,0,0,0.7);
+  min-width: 85px;
 }
 
 .navbar-default .navbar-nav .open .dropdown-menu,
@@ -160,10 +162,18 @@ input {
   font-weight: bold;
 }
 
+.offer .well {
+  width: 60%;
+  padding-bottom: 10px;
+}
+
+
+/*table stripe css*/
 .table-striped > tbody > tr:nth-child(even) > td, .table-striped > tbody > tr:nth-child(even) > th {
   background-color: white;
 }
 
+/*table stripe css*/
 .table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {
   background-color: #81e0a9;
 
@@ -370,6 +380,111 @@ input {
 }
 /*end team page css*/
 
+/*Notifications CSS*/
+#notificationsDiv {
+  background-color: red;
+}
+
+#notificationsDiv img {
+  width: 25px;
+  height: 25px;
+  margin-bottom: 10px;
+}
+
+#notificationsDiv .dropdown {
+  margin-top: 0px;
+}
+
+.notifications {
+ min-width:420px; 
+}
+  
+.notifications-wrapper {
+  overflow:auto;
+  max-height:250px;
+}
+    
+.menu-title {
+  color:#ff7788;
+  font-size:1.5rem;
+  display:inline-block;
+}
+
+.notification-heading, .notification-footer  {
+  padding:2px 10px;
+}
+      
+        
+.dropdown-menu.divider {
+  margin:5px 0;          
+}
+
+.item-title {
+  font-size:1.3rem;
+  color:#000;  
+}
+
+.notifications a.content {
+ text-decoration:none;
+ background:#ccc;
+}
+    
+.notification-item {
+  padding:10px;
+  margin:5px;
+  background:#ccc;
+  border-radius:4px;
+}
+
+.noti_Container {
+  position:relative;     /* This is crucial for the absolutely positioned element */
+  width:16px;
+  height:16px;
+}
+
+.noti_bubble {
+  position:absolute;    /* This breaks the div from the normal HTML document. */
+  top: -10px;
+  right: 2px;
+  padding:1px 2px 1px 2px;
+  background-color:red; /* you could use a background image if you'd like as well */
+  color:white;
+  font-weight:bold;
+  font-size:0.55em;
+
+  /* The following is CSS3, but isn't crucial for this technique to work. */
+  /* Keep in mind that if a browser doesn't support CSS3, it's fine! They just won't have rounded borders and won't have a box shadow effect. */
+  /* You can always use a background image to produce the same effect if you want to, and you can use both together so browsers without CSS3 still have the rounded/shadow look. */
+  border-radius:30px;
+  box-shadow:1px 1px 1px gray;
+}
+
+.notSeen {
+  background-color: rgb(45, 204, 112);
+}
+/*End Notifications CSS*/
+
+
+/*settings css*/
+tbody {
+  color: black;
+}
+
+thead {
+  /*color: #2dcc70;*/
+}
+
+.settings {
+  margin-top: 15px;
+}
+
+.tab-content {
+  margin-top: 15px;
+}
+/*end settings css*/
+
+
+/*Media queries*/
 @media (max-width: 400px) {
   .signup .well {
     width: 90%;
@@ -529,8 +644,6 @@ input {
   .settings .well {
     width: 60%;
   }
-
-  
 }
 
 @media (min-width: 768px) and (max-width: 800px) {
@@ -627,113 +740,3 @@ input {
   }
 }
 /*end home page css based on height of window*/
-
-
-tbody {
-  color: black;
-}
-
-thead {
-  /*color: #2dcc70;*/
-}
-
-.settings {
-  margin-top: 15px;
-}
-
-.tab-content {
-  margin-top: 15px;
-}
-
-.dropdown-menu {
-  background-color: rgba(0,0,0,0.7);
-  min-width: 85px;
-}
-
-.offer .well {
-  width: 60%;
-  padding-bottom: 10px;
-}
-
-#notificationsDiv {
-  /*margin-top: -40px;*/
-  background-color: red;
-}
-
-#notificationsDiv img {
-  width: 25px;
-  height: 25px;
-  margin-bottom: 10px;
-}
-
-#notificationsDiv .dropdown {
-  margin-top: 0px;
-}
-
-.notifications {
- min-width:420px; 
-}
-  
-.notifications-wrapper {
-  overflow:auto;
-  max-height:250px;
-}
-    
-.menu-title {
-  color:#ff7788;
-  font-size:1.5rem;
-  display:inline-block;
-}
-
-.notification-heading, .notification-footer  {
-  padding:2px 10px;
-}
-      
-        
-.dropdown-menu.divider {
-  margin:5px 0;          
-}
-
-.item-title {
-  font-size:1.3rem;
-  color:#000;  
-}
-
-.notifications a.content {
- text-decoration:none;
- background:#ccc;
-}
-    
-.notification-item {
-  padding:10px;
-  margin:5px;
-  background:#ccc;
-  border-radius:4px;
-}
-
-.noti_Container {
-  position:relative;     /* This is crucial for the absolutely positioned element */
-  width:16px;
-  height:16px;
-}
-
-.noti_bubble {
-  position:absolute;    /* This breaks the div from the normal HTML document. */
-  top: -10px;
-  right: 2px;
-  padding:1px 2px 1px 2px;
-  background-color:red; /* you could use a background image if you'd like as well */
-  color:white;
-  font-weight:bold;
-  font-size:0.55em;
-
-  /* The following is CSS3, but isn't crucial for this technique to work. */
-  /* Keep in mind that if a browser doesn't support CSS3, it's fine! They just won't have rounded borders and won't have a box shadow effect. */
-  /* You can always use a background image to produce the same effect if you want to, and you can use both together so browsers without CSS3 still have the rounded/shadow look. */
-  border-radius:30px;
-  box-shadow:1px 1px 1px gray;
-}
-
-.notSeen {
-  background-color: rgb(45, 204, 112);
-}
