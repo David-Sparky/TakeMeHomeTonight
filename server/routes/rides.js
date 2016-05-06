@@ -1,10 +1,10 @@
-module.exports = function(io){
+module.exports = function(io){ // all of these are what is called by the service.js
 
 var express = require('express'),
 	router = express.Router(),
-	db = require('../db');
+	db = require('../db'); // use the db.js file that has the connect and close for the mongodb.
 
-router.use('*', function(req, res, next){
+router.use('*', function(req, res, next){ // authentication things, to ensure a use=r is actually logged in.
   if(!req.session || !req.session.cas_user){
     res.status(401).send('Unauthorized access');
   }
@@ -13,7 +13,7 @@ router.use('*', function(req, res, next){
   }
 });
 
-router.post('/requestRide', function(req, res){
+router.post('/requestRide', function(req, res){ // request a ride, this is based on the form input and we add extra fields by adding to the req.body.
 	if(!req.session || !req.session.cas_user){
 		// no user logged in
 	}
@@ -25,7 +25,7 @@ router.post('/requestRide', function(req, res){
 		collection.insert(req.body, function(err, results){
 			if(err) throw err;
 			if(results.insertedCount == 1){
-				res.send({Success: 'Ride was requested'});
+				res.send({Success: 'Ride was requested'}); // send a success to the front end to alert
 			}
 			else{
 				// error inserting into db
@@ -34,7 +34,7 @@ router.post('/requestRide', function(req, res){
 	}
 });
 
-router.post('/addRide', function(req,res){
+router.post('/addRide', function(req,res){ // add an offer to the database - does the same thing that the request ride addition does just in a different collection with slightly different variables
 	if(!req.session || !req.session.cas_user){
 		// no user logged in
 	} else{
@@ -55,7 +55,7 @@ router.post('/addRide', function(req,res){
 	}
 });
 
-router.get('/allRequestedRides', function(req, res){
+router.get('/allRequestedRides', function(req, res){ // get all requests riders - checks to ensure that the ride is not less than today and then default sorts them by date and then time
 	var date = new Date();
 	date = date.toISOString();
 	var collection = db.get().collection('requested');
@@ -65,7 +65,7 @@ router.get('/allRequestedRides', function(req, res){
 	});
 });
 
-router.get('/allOfferedRides', function(req,res){
+router.get('/allOfferedRides', function(req,res){ // gets all offered rides - ensures tht there are seats vailable and that the depart date is greater than today  - does the default date/time sortS
 	var date = new Date();
 	date = date.toISOString();
 	var collection = db.get().collection('offered');
@@ -75,7 +75,7 @@ router.get('/allOfferedRides', function(req,res){
 	});
 });
 
-router.get('/get_ride', function(req,res){
+router.get('/get_ride', function(req,res){ // returns a specific ride based on the id passed in - this gets all information about a requested ride.
 	var id = req.query.id;
 	if(!req.session && !req.session.cas_user){
 		//user does not exist
@@ -91,7 +91,7 @@ router.get('/get_ride', function(req,res){
 });
 
 
-router.get('/get_offer', function(req,res){
+router.get('/get_offer', function(req,res){ // return specific ride information for an offer - similar to the get_ride just on the offered collection
 	var id = req.query.id;
 	if(!req.session && !req.session.cas_user){
 		//user does not exist
@@ -108,7 +108,7 @@ router.get('/get_offer', function(req,res){
 });
 
 
-router.get('/offeredRidesPerUser', function(req, res){
+router.get('/offeredRidesPerUser', function(req, res){ // returns all offered rides by the current user.
 	if(!req.session && !req.session.cas_user){
 		console.log("user does not exist");
 	}
@@ -123,20 +123,20 @@ router.get('/offeredRidesPerUser', function(req, res){
 
 
 
-router.put('/join_offer', function(req, res) {
+router.put('/join_offer', function(req, res) { // joins an offer based on the id
 	var id = req.body.id;
 	var user = req.body.user;
 	var collection = db.get().collection('offered');
 	if(!req.session && !req.session.cas_user){
-		console.log("User does not exist");
+		console.log("User does not exist"); // ensures the user is logged in
 	}
 	else {
-		collection.update({_id:ObjectID.createFromHexString(id)}, {$push: {riders:{rcs:user,status:"pending"}}}, function(err, results){
+		collection.update({_id:ObjectID.createFromHexString(id)}, {$push: {riders:{rcs:user,status:"pending"}}}, function(err, results){ // add the user to the array as pending
 			if(err) throw err;
-			collection.find({_id: ObjectID.createFromHexString(id)}).toArray(function(err, docs){
+			collection.find({_id: ObjectID.createFromHexString(id)}).toArray(function(err, docs){ // this does the notification for the users.
 				db.get().collection('users').update({rcs: docs[0].owner}, {$push: {notifications: {rideID:id, db:'offered', time: new Date(), message: req.session.cas_user + ' requested your offered ride', seen: false}}}, function(err, results){
 					if(err) throw err;
-					io().to(docs[0].owner).emit('notification');
+					io().to(docs[0].owner).emit('notification'); // emit to the owner that there was a notification
 				})
 				res.status(200).send('Added to the list of pending users!');
 			})
@@ -146,7 +146,7 @@ router.put('/join_offer', function(req, res) {
 });
 
 
-router.put('/confirmRider', function(req, res){
+router.put('/confirmRider', function(req, res){ // confirm the pending user and then alert them - this is similar to the above put but does extra error checking
 	var collection = db.get().collection('offered');
 	var id = ObjectID.createFromHexString(req.body.rideID);
 	collection.find({_id: id}).toArray(function(err,docs){
@@ -173,7 +173,7 @@ router.put('/confirmRider', function(req, res){
 	});
 });
 
-router.put('/confirmDriver', function(req, res){
+router.put('/confirmDriver', function(req, res){ // same as confirm rider but for a request not an offer
 	var collection = db.get().collection('requested');
 	var id = ObjectID.createFromHexString(req.body.rideID);
 	collection.find({_id: id}).toArray(function(err,docs){
@@ -198,7 +198,7 @@ router.put('/confirmDriver', function(req, res){
 });
 
 //Rides a user has requested
-router.get('/requestedRidesPerUser', function(req, res){
+router.get('/requestedRidesPerUser', function(req, res){ // this does a aggregate to get all of the offered rides where the current user is a rider
 	if(!req.session && !req.session.cas_user){
 		// user does not exist
 	}
@@ -227,7 +227,7 @@ router.get('/requestedRidesPerUser', function(req, res){
 	};
 });
 
-router.get('/offersForNeededRidesDriver', function(req,res){
+router.get('/offersForNeededRidesDriver', function(req,res){ // gets all rides where the current users is asking or is the driver
 	if(!req.session && !req.session.cas_user){
 		// user does not exist
 	}
@@ -253,7 +253,7 @@ router.get('/offersForNeededRidesDriver', function(req,res){
 	}
 });
 
-router.get('/offersForNeededRidesRider', function(req, res){
+router.get('/offersForNeededRidesRider', function(req, res){ // gets all in the requested collection for the current user.
 	if(!req.session && !req.session.cas_user){
 		// user does not exist
 	}
@@ -266,7 +266,7 @@ router.get('/offersForNeededRidesRider', function(req, res){
 	}
 });
 
-router.put('/join_request', function(req, res) {
+router.put('/join_request', function(req, res) { // joins the request for the ride as a driver - then emails to the current owner and updates the database.
 	var id = req.body.id;
 	var user = req.body.user;
 	var collection = db.get().collection('requested');
@@ -288,7 +288,7 @@ router.put('/join_request', function(req, res) {
 });
 
 
-router.delete('/removeRider', function(req, res){
+router.delete('/removeRider', function(req, res){ // removes a current rider from the ride - if the rider is accepted the available seats is adjusted to increase 1 otherwise the user is just removed
 	var collection = db.get().collection('offered');
 	collection.find({_id: ObjectID.createFromHexString(req.query.rideID), riders:{rcs: req.query.rcs, status: 'accepted'}}).toArray(function(err, docs){
 		if(err) throw err;
@@ -304,7 +304,7 @@ router.delete('/removeRider', function(req, res){
 				if(err) throw err;
 				res.send('Rider Removed!');
 			});
-		}
+		} // the line below pushes to the notifications and alerts the user by using the emit
 		db.get().collection('users').update({rcs: req.query.rcs}, {$push: {notifications: {rideID: ObjectID.createFromHexString(req.query.rideID), db:'offered', time: new Date(), message: req.session.cas_user + " has removed you as their passenger", seen: false}}}, function(err,results){
 			if(err) throw err;
 			io().to(req.query.rcs).emit('notification');
@@ -314,7 +314,7 @@ router.delete('/removeRider', function(req, res){
 
 });
 
-router.delete('/removePendingRider', function(req, res){
+router.delete('/removePendingRider', function(req, res){ // same as above but it only for users that are pending - this is used in the rides requested page and not the userSeetings
 	var collection = db.get().collection('offered');
 	collection.update({_id: ObjectID.createFromHexString(req.query.rideID)}, {$pull: {riders: {rcs: req.query.rcs}}}, function(err, results){
 		if(err) throw err;
@@ -326,7 +326,7 @@ router.delete('/removePendingRider', function(req, res){
 	});
 });
 
-router.delete('/removeDriver', function(req, res){
+router.delete('/removeDriver', function(req, res){ // removes the driver and alerts them that they were removed. again if the driver is accpeted then remove them, set the ride back to not accepted and
 	var collection = db.get().collection('requested');
 	collection.find({_id:ObjectID.createFromHexString(req.query.rideID), drivers: {rcs: req.query.rcs, status: 'accepted'}}).toArray(function(err,docs){
 		if(err) throw err;
@@ -349,7 +349,7 @@ router.delete('/removeDriver', function(req, res){
 	});
 });
 
-router.delete('/removeRideOffer', function(req, res){
+router.delete('/removeRideOffer', function(req, res){ // just deletes the ride offer
 	var collection = db.get().collection('offered');
 	collection.remove({_id: ObjectID.createFromHexString(req.query.rideID), owner: req.session.cas_user}, function(err, results){
 		if(err) throw err;
@@ -357,7 +357,7 @@ router.delete('/removeRideOffer', function(req, res){
 	});
 });
 
-router.delete('/removeNeededRide', function(req, res){
+router.delete('/removeNeededRide', function(req, res){ // removes the requested ride
 	var collection = db.get().collection('requested');
 	collection.remove({_id: ObjectID.createFromHexString(req.query.rideID), rcs: req.session.cas_user}, function(err, results){
 		if(err) throw(err);
@@ -365,7 +365,7 @@ router.delete('/removeNeededRide', function(req, res){
 	});
 });
 
-router.delete('/removeNeededRideOfferDriver', function(req, res){
+router.delete('/removeNeededRideOfferDriver', function(req, res){ // removes the ride where the current user is the driver -this again can be accepted or pending and will adjust the database appropriately then emits a notification.
 	var collection = db.get().collection('requested');
 	collection.find({_id: ObjectID.createFromHexString(req.query.rideID), drivers: {rcs: req.session.cas_user, status: 'accepted'}}).toArray(function(err, docs){
 		if(err) throw err;
@@ -400,7 +400,7 @@ router.delete('/removeNeededRideOfferDriver', function(req, res){
 	
 });
 
-router.delete('/removeRequestForAvailableRide', function(req, res){
+router.delete('/removeRequestForAvailableRide', function(req, res){ // does the same as above but where the user is a current or pending rider of an offered ride
 	var collection = db.get().collection('offered');
 	collection.find({_id: ObjectID.createFromHexString(req.query.rideID), riders: {rcs: req.session.cas_user, status: 'accepted'}}).toArray(function(err, docs){
 		if(err) throw err;
