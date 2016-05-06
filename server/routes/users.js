@@ -4,11 +4,11 @@ var express = require('express'),
 	db = require('../db');
 
 // Check if user is logged in
-router.get('/checkSessionStatus', function(req, res){
+router.get('/checkSessionStatus', function(req, res){ // this checks the users current session status - if the session is undefined or cookies undefined then they are not logged in.
 	if(req.session == undefined || req.cookies == undefined){
 		res.send(false);
 	}
-	else if(req.session.cas_user == req.cookies.user){
+	else if(req.session.cas_user == req.cookies.user){ // if the cookies and session don't match then the theres an error
 		res.send(true);
 	}
 	else{
