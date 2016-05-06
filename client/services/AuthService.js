@@ -1,33 +1,33 @@
 angular.module('tmht')
-.factory('AuthService', ['$http', '$cookies', '$window',  function ($http, $cookies, $window) {
+.factory('AuthService', ['$http', '$cookies', '$window',  function ($http, $cookies, $window) { // this does all of the authentication with cas
 
-    var notifications = [];
+    var notifications = []; // no notifications - is adjusted
 
-    function getUserStatus() {
+    function getUserStatus() { // gets the users status and informaiton
       return $cookies.get('user');
     }
 
-    function checkSessionStatus(){
+    function checkSessionStatus(){ // checks the users status to ensure they are in the cookie and session
       return $http({
         method: 'GET',
         url: '/user/checkSessionStatus'
       });
     };
 
-    function removeUser(){
+    function removeUser(){ // remove the user and delete the session id
       $cookies.remove('user');
       $cookies.remove('connect.sid');
     }
     
-    function getNotifications(){
+    function getNotifications(){ // return notifications
       return notifications;
     }
 
-    function setNotifications(input){
+    function setNotifications(input){ // set the notifications based on the input
       notifications = input;
     }
 
-    function logout(){
+    function logout(){ // does the basic logout - deletes the user cookie and session id cookie then sets the user back to the login
       $http({
         method: 'GET',
         url: 'logout'

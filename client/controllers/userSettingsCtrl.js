@@ -1,43 +1,43 @@
 angular.module('tmht')
 .controller('userSettingsCtrl', ['$scope', 'rideService', 'AuthService', function($scope, rideService, AuthService){
 
-	$scope.offeredRides = [];
+	$scope.offeredRides = [];//basic arrays used in the page. These are updated as more information comes in.
 	$scope.requestedRides = [];
 	$scope.neededRidesDriver = [];
 	$scope.neededRidesRider = [];
 
-	rideService.getUserSettingInfo().then(function(data){
+	rideService.getUserSettingInfo().then(function(data){ // this returns the basic user setting information, such as name and car
 		$scope.editUser = data.data;
 	}).catch(function(err){
 		sweetAlert("Error!","There was an error! "+err.data,"error");
 	});
 
-	rideService.getOfferedRidesPerUser().then(function(data){
+	rideService.getOfferedRidesPerUser().then(function(data){ // this returns all offered rides by the current users
 		$scope.offeredRides = data.data;
 	}).catch(function(err){
 		sweetAlert("Error!","There was an error! "+err.data,"error");
 	});
 
-	rideService.getOfferForNeededRidesDriver().then(function(data){
+	rideService.getOfferForNeededRidesDriver().then(function(data){ // this returns all rides where the user rquested they would drive.
 		$scope.neededRidesDriver = data.data;
 	}).catch(function(err){
 		sweetAlert("Error!","There was an error! "+err.data,"error");
 	});
 
-	rideService.getOfferForNeededRidesRider().then(function(data){
+	rideService.getOfferForNeededRidesRider().then(function(data){ // this returns all rides where the user is the rider.
 		$scope.neededRidesRider = data.data;
 	}).catch(function(err){
 		sweetAlert("Error!","There was an error! "+err.data,"error");
 	});
 
 
-	rideService.getRequestedRidesPerUser().then(function(data){
+	rideService.getRequestedRidesPerUser().then(function(data){ // this returns all rides that the current user is requesting
 		$scope.requestedRides = data.data;
 	}).catch(function(err){
 		sweetAlert("Error!","There was an error! "+err.data,"error");
 	});
 
-	$scope.save = function(formData){
+	$scope.save = function(formData){ // basic save function where it pushes the data in the fields to the databse - then alerts.
 		rideService.editUserSettings(formData).then(function(data){
 			sweetAlert("Success!","Your changes were saved successfully!","success");
 		}).catch(function(err){
@@ -45,7 +45,7 @@ angular.module('tmht')
 		});
 	};
 
-	$scope.confirmRider = function(rideID, user){
+	$scope.confirmRider = function(rideID, user){ // this confirms a user as a rider, it subtracts the available seats by 1 and adjusts the status to accpeted.
 		rideService.confirmRider(rideID, user).then(function(data){
 			for(x in $scope.offeredRides){
 				if($scope.offeredRides[x]._id == rideID){
@@ -58,14 +58,14 @@ angular.module('tmht')
 					}
 				}
 			}
-			sweetAlert("Success!","Successfully confirmed "+user,"success");
+			sweetAlert("Success!","Successfully confirmed "+user,"success"); // if everything goes well it was successful and alert - otherwise alert fail
 		}).catch(function(err){
 			sweetAlert("Error!","There was an error! "+err.data,"error");
 		});
 	};
 
-	$scope.removeRider = function(rideID, user){
-		swal({
+	$scope.removeRider = function(rideID, user){ // this will remove the selected rider from the ride offer
+		swal({ // alert to ensure that the user wants to delete the rider.
 			title: "You sure you want to delete this rider?",
 			type: 'warning',
 			showCancelButton: true,
@@ -73,12 +73,12 @@ angular.module('tmht')
 			confirmButtonText: "Yes, delete them!",
 			closeOnConfirm: false
 		},
-		function(){
-			rideService.removeRider(rideID, user).then(function(data){
+		function(){ // do the deleting
+			rideService.removeRider(rideID, user).then(function(data){ // call the rideServer remove rider function, and pass the ride id and user.
 				for(x in $scope.offeredRides){
 					if($scope.offeredRides[x]._id == rideID){
 						for(y in $scope.offeredRides[x].riders){
-							if($scope.offeredRides[x].riders[y].rcs == user){
+							if($scope.offeredRides[x].riders[y].rcs == user){ // adds a available seat and splice the user out of the array.
 								if($scope.offeredRides[x].riders[y].status == 'accepted'){
 									$scope.offeredRides[x].availableseats = $scope.offeredRides[x].availableseats + 1;
 									$scope.offeredRides[x].riders.splice(y, 1);
@@ -92,14 +92,14 @@ angular.module('tmht')
 						}
 					}
 				}
-				sweetAlert("Success!","Successfully removed "+user,"success");
+				sweetAlert("Success!","Successfully removed "+user,"success"); // if eveyrthing succeeded then alert otherwise alert there was ana error
 			}).catch(function(err){
 				sweetAlert("Error!","There was an error! "+err.data,"error");
 			});
 		})
 	};
 
-	$scope.removePendingRider = function(rideID, user){
+	$scope.removePendingRider = function(rideID, user){ // this removes a user that is pending instead of one that is accepted. The main difference is that it does not increase the amount of available users
 		rideService.removePendingRider(rideID, user).then(function(data){
 			for(x in $scope.offeredRides){
 				if($scope.offeredRides[x]._id == rideID){
@@ -111,13 +111,13 @@ angular.module('tmht')
 					}
 				}
 			}
-			sweetAlert("Success!","Successfully removed "+user,"success");
+			sweetAlert("Success!","Successfully removed "+user,"success"); // alert - must inform the user it was successful!
 		}).catch(function(err){
 			sweetAlert("Error!","There was an error! "+err.data,"error");
 		});
 	};
 	
-	$scope.removeDriver = function(rideID, user){
+	$scope.removeDriver = function(rideID, user){ // this is for requests not offers and removes the accepted driver.
 		swal({
 			title: "You sure you want to delete this driver?",
 			type: 'warning',
@@ -126,7 +126,7 @@ angular.module('tmht')
 			confirmButtonText: "Yes, delete them!",
 			closeOnConfirm: false
 		},
-		function(){
+		function(){ // basic alert to ensure and then remove the user. In the removeDriver of the rideService it sets the ride to not accpeted allowing it to be displayed for users to request to be the driver
 			rideService.removeDriver(rideID, user).then(function(data){
 				for(x in $scope.neededRidesRider){
 					if($scope.neededRidesRider[x]._id == rideID){
@@ -146,7 +146,7 @@ angular.module('tmht')
 	};
 
 
-	$scope.confirmDriver = function(rideID, user){
+	$scope.confirmDriver = function(rideID, user){ // adds a user as the confirmed driver - set the status to be accepted as well
 		rideService.confirmDriver(rideID, user).then(function(data){
 			console.log(data);
 			for(x in $scope.neededRidesRider){
@@ -166,7 +166,7 @@ angular.module('tmht')
 		});
 	};
 
-	$scope.removeRideOffer = function(rideID){
+	$scope.removeRideOffer = function(rideID){ // delete a rider offer - alert and then do it.
 		swal({
 			title: "Are you sure you want to remove this ride offer?",
 			type: 'warning',
@@ -189,7 +189,7 @@ angular.module('tmht')
 		});
 	};
 
-	$scope.removeNeededRide = function(rideID){
+	$scope.removeNeededRide = function(rideID){ // remove a request for a ride - alert and do it as well
 		swal({
 			title: "Are you sure you want to remove this ride?",
 			type: 'warning',
@@ -212,7 +212,7 @@ angular.module('tmht')
 		});
 	}
 
-	$scope.removeNeededRideOfferDriver = function(rideID){
+	$scope.removeNeededRideOfferDriver = function(rideID){  // remove the ride what was requested and where you are the driver.
 		swal({
 			title: "Are you sure you want to remove this offer?",
 			type: 'warning',
@@ -222,7 +222,7 @@ angular.module('tmht')
 			closeOnConfirm: false
 		},
 		function(){
-			rideService.removeNeededRideOfferDriver(rideID).then(function(data){
+			rideService.removeNeededRideOfferDriver(rideID).then(function(data){ //do the actual removal
 				for(x in $scope.neededRidesDriver){
 					if($scope.neededRidesDriver[x]._id == rideID){
 						$scope.neededRidesDriver.splice(x, 1);
@@ -235,7 +235,7 @@ angular.module('tmht')
 		});
 	};
 
-	$scope.removeRequestForAvailableRide = function(rideID){
+	$scope.removeRequestForAvailableRide = function(rideID){ // remove the users requst for available rides - alert and then for the removal
 		swal({
 			title: "Are you sure you want to remove this request?",
 			type: 'warning',
